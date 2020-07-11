@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import com.autoever.apay_user_app.BR;
@@ -12,6 +14,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivitySplashBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -34,18 +37,21 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     public SplashViewModel getViewModel() {
-        mSplashViewModel = ViewModelProviders.of(this,factory).get(SplashViewModel.class);
+        mSplashViewModel = ViewModelProviders.of(this, factory).get(SplashViewModel.class);
         return mSplashViewModel;
     }
 
     @Override
     public void openMainActivity() {
-
+        Log.d("debug", "MainActivity Open");
+        Intent intent = MainActivity.newIntent(SplashActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void openLoginActivity() {
-
+        Log.d("debug", "LoginActivity Open");
     }
 
     @Override

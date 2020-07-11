@@ -20,9 +20,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://api.apay.ga:8080/api/v2\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"http://api.apay.ga:8080/api/v2\"")
         }
     }
 
@@ -93,6 +97,9 @@ dependencies {
     // view model
     //noinspection LifecycleAnnotationProcessorWithJava8
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+
+    // network
+    implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'
 
 
 }

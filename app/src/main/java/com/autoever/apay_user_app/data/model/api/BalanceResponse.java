@@ -3,13 +3,25 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public final class BalanceResponse {
 
     @Expose
-    @SerializedName("balance")
-    private Integer balance;
+    @SerializedName("data")
+    private Balance data;
 
-    public Integer getBalance() {
-        return balance;
+    public Balance getData() {
+        return data;
+    }
+
+    public static class Balance {
+        @Expose
+        @SerializedName("balance")
+        private Integer balance;
+
+        public Integer getBalance() {
+            return balance;
+        }
     }
 }

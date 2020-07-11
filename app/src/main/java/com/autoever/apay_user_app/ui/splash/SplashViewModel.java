@@ -11,7 +11,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
     public void startSeeding() {
         getCompositeDisposable().add(getDataManager()
-                .getUserBalance()
+                .getUserBalance("1", "4")
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(aBoolean -> {
@@ -23,10 +23,13 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     private void decideNextActivity() {
-        if (true) {
-            getNavigator().openLoginActivity();
-        } else {
-            getNavigator().openMainActivity();
-        }
+        //TODO. 로그인 화면을 구성해야 함.
+//        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
+//            getNavigator().openLoginActivity();
+//        } else {
+//            getNavigator().openMainActivity();
+//        }
+
+        getNavigator().openMainActivity();
     }
 }

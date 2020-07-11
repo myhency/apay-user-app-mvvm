@@ -3,6 +3,8 @@ package com.autoever.apay_user_app;
 import android.app.Activity;
 import android.app.Application;
 
+//import com.autoever.apay_user_app.di.component.DaggerAppComponent;
+
 import com.autoever.apay_user_app.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;

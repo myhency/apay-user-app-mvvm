@@ -11,9 +11,12 @@ import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.local.db.AppDatabase;
 import com.autoever.apay_user_app.data.local.db.AppDbHelper;
 import com.autoever.apay_user_app.data.local.db.DbHelper;
+import com.autoever.apay_user_app.data.local.prefs.AppPreferencesHelper;
+import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.remote.ApiHelper;
 import com.autoever.apay_user_app.data.remote.AppApiHelper;
 import com.autoever.apay_user_app.di.DatabaseInfo;
+import com.autoever.apay_user_app.di.PreferenceInfo;
 import com.autoever.apay_user_app.utils.AppConstants;
 import com.autoever.apay_user_app.utils.rx.AppSchedulerProvider;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
@@ -76,5 +79,17 @@ public class AppModule {
                 .setDefaultFontPath("fonts/spoqa_han_sans_regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferenceHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
+
+    @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return AppConstants.PREF_NAME;
     }
 }
