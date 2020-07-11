@@ -47,8 +47,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<BalanceResponse> getUserBalance() {
-        return mApiHelper.getUserBalance();
+    public Single<BalanceResponse> getUserBalance(String tokenSystemId, String subscriberId) {
+        return mApiHelper.getUserBalance(tokenSystemId, subscriberId);
     }
 
     @Override
