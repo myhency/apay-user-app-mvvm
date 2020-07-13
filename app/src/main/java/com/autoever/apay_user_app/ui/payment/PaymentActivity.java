@@ -13,6 +13,8 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
@@ -55,8 +57,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         super.onCreate(savedInstanceState);
         mActivityPaymentBinding = getViewDataBinding();
         mPaymentViewModel.setNavigator(this);
-        VirtualCaptureActivity mVirtualCaptureActivity = new VirtualCaptureActivity();
-        mVirtualCaptureActivity.initializeContent();
+        IntentIntegrator integrator = new IntentIntegrator(PaymentActivity.this);
+        integrator.setOrientationLocked(false);
+        integrator.setCaptureActivity(CustomScannerActivity.class);
+        integrator.initiateScan();
+//        VirtualCaptureActivity mVirtualCaptureActivity = new VirtualCaptureActivity();
+//        mVirtualCaptureActivity.initializeContent();
     }
 
     @Override
