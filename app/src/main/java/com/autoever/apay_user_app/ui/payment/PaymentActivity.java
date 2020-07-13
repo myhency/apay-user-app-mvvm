@@ -13,6 +13,8 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.journeyapps.barcodescanner.CaptureActivity;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 import javax.inject.Inject;
 
@@ -53,10 +55,19 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         super.onCreate(savedInstanceState);
         mActivityPaymentBinding = getViewDataBinding();
         mPaymentViewModel.setNavigator(this);
+        VirtualCaptureActivity mVirtualCaptureActivity = new VirtualCaptureActivity();
+        mVirtualCaptureActivity.initializeContent();
     }
 
     @Override
     public void handleError(Throwable throwable) {
 
+    }
+
+    class VirtualCaptureActivity extends CaptureActivity {
+        @Override
+        protected DecoratedBarcodeView initializeContent() {
+            return (DecoratedBarcodeView) mActivityPaymentBinding.zxingBarcodeScanner;
+        }
     }
 }

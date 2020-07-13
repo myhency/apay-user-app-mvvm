@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import javax.inject.Inject;
 
@@ -86,8 +87,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     @Override
     public void openPaymentActivity() {
         Log.d("debug", "openPaymentActivity");
-        Intent intent = PaymentActivity.newIntent(getActivity());
-        startActivity(intent);
+//        Intent intent = PaymentActivity.newIntent(getActivity());
+//        startActivity(intent);
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setOrientationLocked(false);
+        integrator.setCaptureActivity(PaymentActivity.class);
+        integrator.initiateScan();
 //        finish();
     }
 
