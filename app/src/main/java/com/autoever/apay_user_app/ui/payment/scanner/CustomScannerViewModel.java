@@ -11,7 +11,7 @@ import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
-public class CustomScannerViewModel extends BaseViewModel<PaymentNavigator> {
+public class CustomScannerViewModel extends BaseViewModel<CustomScannerNavigator> {
 
     private final MutableLiveData<BalanceResponse.Balance> balanceLiveData;
 

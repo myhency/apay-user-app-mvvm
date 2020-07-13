@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.autoever.apay_user_app.ui.payment.PaymentViewModel" />
+            type="com.autoever.apay_user_app.ui.payment.scanner.CustomScannerViewModel" />
 
     </data>
 
