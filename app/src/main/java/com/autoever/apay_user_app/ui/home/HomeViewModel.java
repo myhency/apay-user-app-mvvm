@@ -1,10 +1,7 @@
 package com.autoever.apay_user_app.ui.home;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;

@@ -33,7 +33,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     private HomeViewModel mHomeViewModel;
 
-    FragmentHomeBinding mFragmentHomeBinding;
+    private FragmentHomeBinding mFragmentHomeBinding;
 
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -58,12 +58,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         return mHomeViewModel;
     }
 
-    private void setup() {
-        mFragmentHomeBinding.purchaseButton.setOnClickListener(v -> {
-            openPurchaseActivity();
-        });
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -78,14 +72,21 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         Log.d("debug",anError.getMessage());
     }
 
+    private void setup() {
+        mFragmentHomeBinding.paymentButton.setOnClickListener(v -> {
+            openPaymentActivity();
+        });
+    }
+
     @Override
     public void openLoginActivity() {
 
     }
 
     @Override
-    public void openPurchaseActivity() {
-        Intent intent = PaymentActivity.newIntent(getBaseActivity());
+    public void openPaymentActivity() {
+        Log.d("debug", "openPaymentActivity");
+        Intent intent = PaymentActivity.newIntent(getActivity());
         startActivity(intent);
 //        finish();
     }

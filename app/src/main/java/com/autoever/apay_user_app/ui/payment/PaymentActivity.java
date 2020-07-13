@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -15,11 +16,14 @@ import com.autoever.apay_user_app.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
-public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> {
+public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> implements PaymentNavigator{
+
+    public static final String TAG = PaymentActivity.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
 
+    private ActivityPaymentBinding mActivityPaymentBinding;
     private PaymentViewModel mPaymentViewModel;
 
     public static Intent newIntent(Context context) {
@@ -47,6 +51,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment);
+        mActivityPaymentBinding = getViewDataBinding();
+        mPaymentViewModel.setNavigator(this);
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
     }
 }

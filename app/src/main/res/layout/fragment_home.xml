@@ -20,7 +20,7 @@
         android:fitsSystemWindows="true">
 
         <Button
-            android:id="@+id/purchase_button"
+            android:id="@+id/payment_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:autoSizeMaxTextSize="22sp"
@@ -30,7 +30,7 @@
             android:background="@drawable/round_button"
             android:fontFamily="@font/notosans_medium"
             android:padding="15dp"
-            android:text="@string/purchase_button_string"
+            android:text="@string/payment_button_string"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"

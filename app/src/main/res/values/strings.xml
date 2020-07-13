@@ -15,6 +15,6 @@
     <string name="todo">todo</string>
 
     <string name="main_card_title_string">페이머니</string>
-    <string name="purchase_button_string">결제</string>
+    <string name="payment_button_string">결제</string>
     <string name="main_balance_title_text">잔액</string>
 </resources>

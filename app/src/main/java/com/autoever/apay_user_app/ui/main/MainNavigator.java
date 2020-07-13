@@ -6,7 +6,7 @@ public interface MainNavigator {
 
     void openLoginActivity();
 
-    void openPurchaseActivity();
+    void openPaymentActivity();
 
     void openCardChargeActivity();
 
