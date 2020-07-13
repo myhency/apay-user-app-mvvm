@@ -110,4 +110,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'org.mockito:mockito-core:2.15.0'
     androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+
+    //QR code
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
 }

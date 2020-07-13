@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 
 import javax.inject.Inject;
 
@@ -56,17 +58,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         return mHomeViewModel;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mHomeViewModel.setNavigator(this);
+    private void setup() {
+        mFragmentHomeBinding.purchaseButton.setOnClickListener(v -> {
+            openPurchaseActivity();
+        });
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentHomeBinding = getViewDataBinding();
-
+        mHomeViewModel.setNavigator(this);
+        setup();
     }
 
     @Override
@@ -82,7 +85,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     @Override
     public void openPurchaseActivity() {
-
+        Intent intent = PaymentActivity.newIntent(getBaseActivity());
+        startActivity(intent);
+//        finish();
     }
 
     @Override

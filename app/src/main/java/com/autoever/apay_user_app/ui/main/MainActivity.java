@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        showHomeFragment();
+//        showHomeFragment();
     }
 
     private void showHomeFragment() {

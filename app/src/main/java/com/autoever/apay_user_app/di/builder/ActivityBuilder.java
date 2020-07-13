@@ -1,8 +1,8 @@
 package com.autoever.apay_user_app.di.builder;
 
-import com.autoever.apay_user_app.ui.home.HomeFragment;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -17,4 +17,7 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             HomeFragmentProvider.class})
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector
+    abstract PaymentActivity bindPaymentActivity();
 }
