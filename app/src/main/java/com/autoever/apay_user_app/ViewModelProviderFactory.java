@@ -39,6 +39,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new PriceViewModel(dataManager, schedulerProvider);
         } else if(modelClass.isAssignableFrom(CustomScannerViewModel.class)) {
             return (T) new CustomScannerViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(PriceViewModel.class)) {
+            return (T) new PriceViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

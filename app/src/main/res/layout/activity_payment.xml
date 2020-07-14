@@ -14,124 +14,54 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="5dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:subtitleTextColor="@color/black_effective"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/black_effective">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:subtitleTextColor="@color/black_effective"
-                app:title="@string/app_name"
-                app:titleTextColor="@color/black_effective">
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
+                android:layout_gravity="center"/>
 
-            </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRootView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/top_layout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="400dp"-->
-<!--                    android:background="#ffffff"-->
-<!--                    android:orientation="vertical">-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginHorizontal="20dp"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="horizontal">-->
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:src="@drawable/logo_apay" />-->
-
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:gravity="right|center">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/balance_left"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-<!--                                android:text="@{viewModel.balanceLiveData.balance.toString()}"-->
-<!--                                android:textColor="#000000"-->
-<!--                                android:textSize="18dp" />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginRight="10dp"-->
-<!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-<!--                                android:text="P"-->
-<!--                                android:textColor="@color/colorApay"-->
-<!--                                android:textSize="16dp" />-->
-
-<!--                        </LinearLayout>-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginHorizontal="70dp"-->
-<!--                        android:src="@drawable/barcode">-->
-
-<!--                    </ImageView>-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="20dp"-->
-<!--                        android:src="@drawable/qrcode">-->
-
-<!--                    </ImageView>-->
-
-<!--                </LinearLayout>-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_below="@id/top_layout"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <com.journeyapps.barcodescanner.DecoratedBarcodeView-->
-<!--                        android:id="@+id/zxing_barcode_scanner"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="30dp"-->
-<!--                        app:zxing_preview_scaling_strategy="fitXY" />-->
-
-<!--                </RelativeLayout>-->
-
-<!--            </RelativeLayout>-->
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

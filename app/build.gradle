@@ -15,7 +15,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,6 +46,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -113,4 +113,5 @@ dependencies {
 
     //QR code
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'com.google.android.gms:play-services:9.8.0'
 }
