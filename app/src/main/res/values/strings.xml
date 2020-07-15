@@ -18,6 +18,7 @@
     <string name="payment_button_string">결제</string>
     <string name="main_balance_title_text">잔액</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm">확인</string>
+
+    <string name="easypassword_text_01"><u>간편비밀번호를 잊어버리셨나요?</u></string>
 </resources>

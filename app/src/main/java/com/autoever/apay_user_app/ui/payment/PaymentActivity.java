@@ -18,6 +18,7 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
+import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
@@ -111,33 +112,15 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                     case "PriceFragment":
                         finish();
                     case "PriceConfirmFragment":
+                    case "AuthFragment":
                         Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
                         mFragmentManager
                                 .beginTransaction()
-//                                .disallowAddToBackStack()
-//                    .setCustomAnimations(R.anim.slide_right, R.anim.slide_left)
+                                .disallowAddToBackStack()
                                 .remove(fragment)
                                 .commit();
                         break;
                 }
-//                Log.d("debug", "menu home");
-//                Intent upIntent = NavUtils.getParentActivityIntent(this);
-//                upIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-//                    Log.d("debug", "shouldUpRecreateTask true");
-//                    // This activity is NOT part of this app's task, so create a new task
-//                    // when navigating up, with a synthesized back stack.
-//                    TaskStackBuilder.create(this)
-//                            // Add all of this activity's parents to the back stack
-//                            .addNextIntentWithParentStack(upIntent)
-//                            // Navigate up to the closest parent
-//                            .startActivities();
-//                } else {
-//                    Log.d("debug", "shouldUpRecreateTask false");
-//                    // This activity is part of this app's task, so simply
-//                    // navigate up to the logical parent activity.
-//                    NavUtils.navigateUpTo(this, upIntent);
-//                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -170,6 +153,15 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 //                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.clRootView, PriceConfirmFragment.newInstance(shopCode, price), PriceConfirmFragment.TAG)
                 .addToBackStack(PriceConfirmFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void showAuthFragment() {
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, AuthFragment.newInstance(), AuthFragment.TAG)
+                .addToBackStack(AuthFragment.TAG)
                 .commitAllowingStateLoss();
     }
 
@@ -216,6 +208,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         switch (tag) {
             case "PriceFragment":
                 showPriceConfirmFragment(shopCode, price);
+                break;
+            case "PriceConfirmFragment":
+                showAuthFragment();
                 break;
         }
 

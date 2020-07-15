@@ -283,6 +283,11 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     }
 
     @Override
+    public void showAuthFragment() {
+
+    }
+
+    @Override
     public void goNext() {
         Log.d("debug", "Price confirmed");
         getBaseActivity().onReceivedMessageFromFragment(

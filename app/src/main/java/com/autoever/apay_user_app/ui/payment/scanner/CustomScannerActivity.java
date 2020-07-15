@@ -228,6 +228,11 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     @Override
+    public void showAuthFragment() {
+
+    }
+
+    @Override
     public void goNext() {
 
     }

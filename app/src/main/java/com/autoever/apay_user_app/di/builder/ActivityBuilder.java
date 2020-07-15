@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.di.builder;
 
+import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
@@ -23,7 +24,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {
             PriceFragmentProvider.class,
-            PriceConfirmFragmentProvider.class})
+            PriceConfirmFragmentProvider.class,
+            AuthFragmentProvider.class})
     abstract PaymentActivity bindPaymentActivity();
 
     @ContributesAndroidInjector

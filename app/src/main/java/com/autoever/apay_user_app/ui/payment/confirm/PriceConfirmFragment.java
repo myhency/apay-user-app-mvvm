@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,8 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
         mFragmentPriceConfirmBinding.shopName.setText(
                 getArguments().getString("shopName").substring(0, 7)
         );
+
+        mFragmentPriceConfirmBinding.finishTextview.setOnClickListener(v -> goNext());
     }
 
     @Override
@@ -107,7 +110,13 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
-    public void goNext() {
+    public void showAuthFragment() {
 
+    }
+
+    @Override
+    public void goNext() {
+        Log.d("debug", "Price confirmed, 현금영수증 신청 confirmed");
+        getBaseActivity().onFragmentDetached(TAG);
     }
 }

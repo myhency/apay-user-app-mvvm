@@ -91,11 +91,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         Log.d("debug", "openPaymentActivity");
         Intent intent = PaymentActivity.newIntent(getActivity());
         startActivity(intent);
-//        IntentIntegrator integrator = new IntentIntegrator(getActivity());
-//        integrator.setOrientationLocked(false);
-//        integrator.setCaptureActivity(PaymentActivity.class);
-//        integrator.initiateScan();
-//        finish();
     }
 
     @Override
