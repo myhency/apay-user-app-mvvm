@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
+import com.autoever.apay_user_app.utils.CommonUtils;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     public static final String TAG = PaymentActivity.class.getSimpleName();
     private final static int QR_CODE_SCANNED = 1;
     private FragmentManager mFragmentManager;
+    private int price = 0;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
@@ -182,7 +184,30 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
+    public void onFragmentDetached(String tag) {
+        Log.d("debug", "onFragmentDetached: " + tag);
+        Fragment fragment = mFragmentManager.findFragmentByTag(tag);
+        if (fragment != null) {
+            mFragmentManager
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_right,R.anim.slide_left)
+                    .remove(fragment)
+                    .commitNow();
+        }
+    }
+
+    @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onReceivedMessageFromFragment(String tag, String message) {
+        Log.d("debug", message);
+        switch (tag) {
+            case "PriceFragment":
+                price = CommonUtils.parseToInt(message);
+        }
     }
 }

@@ -13,6 +13,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -42,5 +43,16 @@ public final class CommonUtils {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
+    }
+
+    public static String formatToKRW(String number) {
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        return nf.format(Long.valueOf(number));
+    }
+
+    public static int parseToInt(String krw) {
+        String newText = krw.replaceAll(",", "");
+        return Integer.parseInt(newText);
     }
 }

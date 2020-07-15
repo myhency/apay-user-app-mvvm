@@ -49,6 +49,10 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     }
 
+    public void onReceivedMessageFromFragment(String tag, String message) {
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
