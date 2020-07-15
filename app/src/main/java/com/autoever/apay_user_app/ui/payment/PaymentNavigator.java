@@ -6,5 +6,7 @@ public interface PaymentNavigator {
 
     void openCustomScannerActivity();
 
-    void showPaymentFragment(String shopCode);
+    void showPriceFragment(String shopCode);
+
+    void showPriceConfirmFragment(String shopCode, int price);
 }

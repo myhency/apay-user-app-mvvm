@@ -19,6 +19,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.utils.CommonUtils;
@@ -36,6 +37,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     public static final String TAG = PaymentActivity.class.getSimpleName();
     private final static int QR_CODE_SCANNED = 1;
     private FragmentManager mFragmentManager;
+    private String shopCode = "";
     private int price = 0;
 
     @Inject
@@ -108,6 +110,15 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                 switch (fragmentTag) {
                     case "PriceFragment":
                         finish();
+                    case "PriceConfirmFragment":
+                        Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
+                        mFragmentManager
+                                .beginTransaction()
+//                                .disallowAddToBackStack()
+//                    .setCustomAnimations(R.anim.slide_right, R.anim.slide_left)
+                                .remove(fragment)
+                                .commit();
+                        break;
                 }
 //                Log.d("debug", "menu home");
 //                Intent upIntent = NavUtils.getParentActivityIntent(this);
@@ -140,15 +151,25 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showPaymentFragment(String shopCode) {
+    public void showPriceFragment(String shopCode) {
         //금액입력화면으로 이동.
         Log.d("debug", "showPaymentFragment");
-//        PriceFragment.newInstance(shopCode);
         mFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.clRootView, PriceFragment.newInstance(shopCode), PriceFragment.TAG)
                 .addToBackStack(PriceFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
+        Log.d("debug", "showPriceConfirmFragment");
+        mFragmentManager
+                .beginTransaction()
+//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                .add(R.id.clRootView, PriceConfirmFragment.newInstance(shopCode, price), PriceConfirmFragment.TAG)
+                .addToBackStack(PriceConfirmFragment.TAG)
                 .commitAllowingStateLoss();
     }
 
@@ -169,9 +190,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
             case QR_CODE_SCANNED: {
                 switch (resultCode) {
                     case RESULT_OK:
-                        String shopCode = data.getExtras().getString("shopCode");
+                        shopCode = data.getExtras().getString("shopCode");
                         Log.d("debug", "shopCode: " + shopCode);
-                        showPaymentFragment(shopCode);
+                        showPriceFragment(shopCode);
                         break;
                     default:
                         break;
@@ -186,15 +207,22 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     @Override
     public void onFragmentDetached(String tag) {
         Log.d("debug", "onFragmentDetached: " + tag);
-        Fragment fragment = mFragmentManager.findFragmentByTag(tag);
-        if (fragment != null) {
-            mFragmentManager
-                    .beginTransaction()
-                    .disallowAddToBackStack()
-                    .setCustomAnimations(R.anim.slide_right,R.anim.slide_left)
-                    .remove(fragment)
-                    .commitNow();
+
+        switch (tag) {
+            case "PriceFragment":
+                showPriceConfirmFragment(shopCode, price);
+                break;
         }
+
+//        if (fragment != null) {
+//            mFragmentManager
+//                    .beginTransaction()
+//                    .disallowAddToBackStack()
+////                    .setCustomAnimations(R.anim.slide_right, R.anim.slide_left)
+//                    .remove(fragment)
+//                    .commitNow();
+//        }
+
     }
 
     @Override

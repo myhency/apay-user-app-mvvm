@@ -9,14 +9,15 @@ import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
+import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
 public class PriceViewModel extends BaseViewModel<PriceNavigator> {
-    private final MutableLiveData<BalanceResponse.Balance> balanceLiveData;
+    private final MutableLiveData<String> balanceKRWLiveData;
 
     public PriceViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
         super(mDataManager, schedulerProvider);
-        balanceLiveData = new MutableLiveData<>();
+        balanceKRWLiveData = new MutableLiveData<>();
         loadUserBalance();
     }
 
@@ -29,7 +30,7 @@ public class PriceViewModel extends BaseViewModel<PriceNavigator> {
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
                     if(balanceResponse != null && balanceResponse.getData() != null) {
-                        balanceLiveData.setValue(balanceResponse.getData());
+                        balanceKRWLiveData.setValue(CommonUtils.formatToKRW(balanceResponse.getData().getBalance().toString())+" P");
                         Log.d("debug", "value: " + balanceResponse.getData().getBalance().toString());
                     }
                     setIsLoading(false);
@@ -39,7 +40,5 @@ public class PriceViewModel extends BaseViewModel<PriceNavigator> {
                 }));
     }
 
-    public LiveData<BalanceResponse.Balance> getBalanceLiveData() {
-        return balanceLiveData;
-    }
+    public LiveData<String> getBalanceKRWLiveData() { return balanceKRWLiveData; }
 }

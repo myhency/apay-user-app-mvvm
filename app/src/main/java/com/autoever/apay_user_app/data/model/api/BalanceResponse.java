@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.data.model.api;
 
+import com.autoever.apay_user_app.utils.CommonUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -23,5 +24,6 @@ public final class BalanceResponse {
         public Integer getBalance() {
             return balance;
         }
+
     }
 }

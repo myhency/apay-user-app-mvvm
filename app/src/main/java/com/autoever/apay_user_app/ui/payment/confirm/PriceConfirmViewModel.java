@@ -1,4 +1,6 @@
-package com.autoever.apay_user_app.ui.home;
+package com.autoever.apay_user_app.ui.payment.confirm;
+
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,12 +11,11 @@ import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
-public class HomeViewModel extends BaseViewModel<HomeNavigator> {
-
+public class PriceConfirmViewModel extends BaseViewModel<PriceConfirmNavigator> {
     private final MutableLiveData<String> balanceKRWLiveData;
 
-    public HomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
+    public PriceConfirmViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
+        super(mDataManager, schedulerProvider);
         balanceKRWLiveData = new MutableLiveData<>();
         loadUserBalance();
     }
@@ -28,7 +29,8 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
                     if(balanceResponse != null && balanceResponse.getData() != null) {
-                        balanceKRWLiveData.setValue(CommonUtils.formatToKRW(balanceResponse.getData().getBalance().toString()));
+                        balanceKRWLiveData.setValue(CommonUtils.formatToKRW(balanceResponse.getData().getBalance().toString())+" P");
+                        Log.d("debug", "value: " + balanceResponse.getData().getBalance().toString());
                     }
                     setIsLoading(false);
                 }, throwable -> {

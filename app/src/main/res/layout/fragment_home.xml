@@ -109,7 +109,7 @@
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 android:gravity="left|center_vertical"
                 android:minWidth="30dp"
-                android:text="@{viewModel.balanceLiveData.balance.toString()}"
+                android:text="@{viewModel.balanceKRWLiveData}"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

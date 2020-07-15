@@ -18,9 +18,11 @@ import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
+import com.autoever.apay_user_app.utils.CommonUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import javax.inject.Inject;
