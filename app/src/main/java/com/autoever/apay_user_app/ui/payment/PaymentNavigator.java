@@ -9,4 +9,6 @@ public interface PaymentNavigator {
     void showPriceFragment(String shopCode);
 
     void showPriceConfirmFragment(String shopCode, int price);
+
+    void goNext();
 }

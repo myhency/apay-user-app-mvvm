@@ -19,12 +19,14 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.databinding.FragmentPriceConfirmBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
+import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import javax.inject.Inject;
 
-public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBinding, PriceConfirmViewModel> implements PriceConfirmNavigator {
+public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBinding, PaymentViewModel> implements PaymentNavigator {
 
     public static final String TAG = PriceConfirmFragment.class.getSimpleName();
 
@@ -33,7 +35,7 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     @Inject
     ViewModelProviderFactory factory;
 
-    private PriceConfirmViewModel mPriceConfirmViewModel;
+    private PaymentViewModel mPriceConfirmViewModel;
 
     public static PriceConfirmFragment newInstance(String shopName, int price) {
         Bundle args = new Bundle();
@@ -55,8 +57,8 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
-    public PriceConfirmViewModel getViewModel() {
-        mPriceConfirmViewModel = ViewModelProviders.of(this, factory).get(PriceConfirmViewModel.class);
+    public PaymentViewModel getViewModel() {
+        mPriceConfirmViewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel.class);
         return mPriceConfirmViewModel;
     }
 
@@ -86,6 +88,21 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
 
     @Override
     public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openCustomScannerActivity() {
+
+    }
+
+    @Override
+    public void showPriceFragment(String shopCode) {
+
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
 
     }
 

@@ -34,6 +34,7 @@ import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.main.MainViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
+import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -88,12 +89,12 @@ import dagger.android.ContributesAndroidInjector;
 //    }
 //}
 
-public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBinding, CustomScannerViewModel> implements CustomScannerNavigator {
+public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBinding, PaymentViewModel> implements PaymentNavigator {
 
     @Inject
     ViewModelProviderFactory factory;
 
-    private CustomScannerViewModel mCustomScannerViewModel;
+    private PaymentViewModel mCustomScannerViewModel;
     private ActivityCustomScannerBinding mActivityCustomScannerBinding;
 
     private SurfaceView cameraPreview;
@@ -118,8 +119,8 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     @Override
-    public CustomScannerViewModel getViewModel() {
-        mCustomScannerViewModel = ViewModelProviders.of(this, factory).get(CustomScannerViewModel.class);
+    public PaymentViewModel getViewModel() {
+        mCustomScannerViewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel.class);
         return mCustomScannerViewModel;
     }
 
@@ -208,6 +209,26 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
 
     @Override
     public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openCustomScannerActivity() {
+
+    }
+
+    @Override
+    public void showPriceFragment(String shopCode) {
+
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
+
+    }
+
+    @Override
+    public void goNext() {
 
     }
 }

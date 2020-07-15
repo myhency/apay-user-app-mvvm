@@ -24,11 +24,13 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.databinding.FragmentPriceBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
+import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import javax.inject.Inject;
 
-public class PriceFragment extends BaseFragment<FragmentPriceBinding, PriceViewModel> implements PriceNavigator {
+public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentViewModel> implements PaymentNavigator {
 
     public static final String TAG = PriceFragment.class.getSimpleName();
 
@@ -36,7 +38,7 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PriceViewM
 
     @Inject
     ViewModelProviderFactory factory;
-    private PriceViewModel mPriceViewModel;
+    private PaymentViewModel mPriceViewModel;
 
     public static PriceFragment newInstance(String shopName) {
         Bundle args = new Bundle();
@@ -57,8 +59,8 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PriceViewM
     }
 
     @Override
-    public PriceViewModel getViewModel() {
-        mPriceViewModel = ViewModelProviders.of(this, factory).get(PriceViewModel.class);
+    public PaymentViewModel getViewModel() {
+        mPriceViewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel.class);
         return mPriceViewModel;
     }
 
@@ -262,6 +264,21 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PriceViewM
 
     @Override
     public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openCustomScannerActivity() {
+
+    }
+
+    @Override
+    public void showPriceFragment(String shopCode) {
+
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
 
     }
 
