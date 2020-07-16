@@ -21,4 +21,6 @@
     <string name="confirm">확인</string>
 
     <string name="easypassword_text_01"><u>간편비밀번호를 잊어버리셨나요?</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

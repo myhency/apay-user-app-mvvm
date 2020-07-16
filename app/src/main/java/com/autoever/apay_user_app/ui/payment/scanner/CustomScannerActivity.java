@@ -233,6 +233,16 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     @Override
+    public void showReceiptFragment(String paymentId) {
+
+    }
+
+    @Override
+    public void confirmPassword() {
+
+    }
+
+    @Override
     public void goNext() {
 
     }

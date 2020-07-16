@@ -1,6 +1,6 @@
 package com.autoever.apay_user_app.di.builder;
 
-import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
+import com.autoever.apay_user_app.ui.payment.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;

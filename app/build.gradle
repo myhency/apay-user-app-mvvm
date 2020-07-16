@@ -114,4 +114,8 @@ dependencies {
     //QR code
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
     implementation 'com.google.android.gms:play-services:9.8.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 }

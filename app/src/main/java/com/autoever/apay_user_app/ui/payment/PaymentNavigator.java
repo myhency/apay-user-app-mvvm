@@ -12,5 +12,10 @@ public interface PaymentNavigator {
 
     void showAuthFragment();
 
+    void showReceiptFragment(String paymentId);
+
+    void confirmPassword();
+
     void goNext();
 }
+

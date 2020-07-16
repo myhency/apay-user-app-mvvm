@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
+import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
+import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
 import com.autoever.apay_user_app.data.model.db.User;
 import com.autoever.apay_user_app.data.remote.ApiHelper;
 
@@ -13,6 +16,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import retrofit2.Call;
 
 @Singleton
 public class AppDataManager implements DataManager {
@@ -47,8 +51,18 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<BalanceResponse> getUserBalance(String tokenSystemId, String subscriberId) {
-        return mApiHelper.getUserBalance(tokenSystemId, subscriberId);
+    public Single<BalanceResponse> getUserBalance(BalanceRequest balanceRequest) {
+        return mApiHelper.getUserBalance(balanceRequest);
+    }
+
+    @Override
+    public Single<PaymentReadyResponse> doPaymentReady(PaymentReadyRequest paymentReadyRequest) {
+        return mApiHelper.doPaymentReady(paymentReadyRequest);
+    }
+
+    @Override
+    public Call<PaymentReadyResponse> doPaymentReadyCall(PaymentReadyRequest paymentReadyRequest) {
+        return mApiHelper.doPaymentReadyCall(paymentReadyRequest);
     }
 
     @Override

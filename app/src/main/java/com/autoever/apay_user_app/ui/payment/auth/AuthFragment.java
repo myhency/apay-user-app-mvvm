@@ -1,21 +1,13 @@
-package com.autoever.apay_user_app.ui.auth;
+package com.autoever.apay_user_app.ui.payment.auth;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,9 +17,8 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentAuthBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.home.HomeFragment;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.google.android.gms.iid.InstanceID;
+import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
+import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,14 +27,14 @@ import java.util.Collections;
 import javax.inject.Inject;
 
 
-public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewModel> implements AuthNavigator {
+public class AuthFragment extends BaseFragment<FragmentAuthBinding, PaymentViewModel> implements PaymentNavigator {
 
     public static final String TAG = AuthFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
 
-    private AuthViewModel mAuthViewModel;
+    private PaymentViewModel mAuthViewModel;
     private FragmentAuthBinding mFragmentAuthBinding;
 
     public static AuthFragment newInstance() {
@@ -64,8 +55,8 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
     }
 
     @Override
-    public AuthViewModel getViewModel() {
-        mAuthViewModel = ViewModelProviders.of(this, factory).get(AuthViewModel.class);
+    public PaymentViewModel getViewModel() {
+        mAuthViewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel.class);
         return mAuthViewModel;
     }
 
@@ -179,35 +170,100 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
         shuffleNumbers(numericButtons);
     }
 
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openCustomScannerActivity() {
+
+    }
+
+    @Override
+    public void showPriceFragment(String shopCode) {
+
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
+
+    }
+
+    @Override
+    public void showAuthFragment() {
+
+    }
+
+    @Override
+    public void showReceiptFragment(String paymentId) {
+
+    }
+
+    @Override
+    public void confirmPassword() {
+//        if (mFragmentAuthBinding.passwordEdit.getText().toString().length() < 6) {
+//            Toast.makeText(
+//                    getBaseActivity(),
+//                    "숫자 6자리를 입력해야 합니다.",
+//                    Toast.LENGTH_SHORT
+//            ).show();
+//            return;
+//        }
+//
+//        if (mAuthViewModel.isPasswordValid(mFragmentAuthBinding.passwordEdit.getText().toString())) {
+////            mAuthViewModel.loadPaymentId();
+//            getBaseActivity().onFragmentDetached(TAG);
+//        }
+    }
+
+    @Override
+    public void goNext() {
+
+    }
+
     //숫자키패드용 리스너
     class NumericKeypadListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if (v == mFragmentAuthBinding.buttonDelete) { //지우기 버튼을 눌렀을 때.
-                int length = mFragmentAuthBinding.passwordEdit.getText().length();
-                if (length > 0) mFragmentAuthBinding.passwordEdit.getText().delete(length - 1, length);
-                return;
-            } else if (v == mFragmentAuthBinding.buttonArrange) { //재배열 버튼을 눌렀을 때.
-                Log.d("debug", "arrange button click");
-                reArrangeButtons();
 
-            } else if (v == mFragmentAuthBinding.button0 || v == mFragmentAuthBinding.button1 || v == mFragmentAuthBinding.button2
-                    || v == mFragmentAuthBinding.button3 || v == mFragmentAuthBinding.button4 || v == mFragmentAuthBinding.button5
-                    || v == mFragmentAuthBinding.button6 || v == mFragmentAuthBinding.button7 || v == mFragmentAuthBinding.button8
-                    || v == mFragmentAuthBinding.button9) { //숫자버튼들을 눌렀을 때.
-                Button button = (Button) v;
-                mFragmentAuthBinding.passwordEdit.append(button.getText().toString());
-            } else if (v == mFragmentAuthBinding.confirmButton) { //확인버튼을 눌렀을 때.
-                //사용자가 6자리 이하의 숫자를 입력하고 확인버튼을 눌렀을 때 Toast로 알려준다.
-                if (mFragmentAuthBinding.passwordEdit.getText().toString().length() < 6) {
-                    Toast.makeText(
-                            getBaseActivity(),
-                            "숫자 6자리를 입력해야 합니다.",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    return;
-                }
+            switch (v.getId()) {
+                case R.id.button_delete:
+                    int length = mFragmentAuthBinding.passwordEdit.getText().length();
+                    if (length > 0) mFragmentAuthBinding.passwordEdit.getText().delete(length - 1, length);
+                    break;
+                case R.id.button_arrange:
+                    reArrangeButtons();
+                    break;
+                case R.id.button0:
+                case R.id.button1:
+                case R.id.button2:
+                case R.id.button3:
+                case R.id.button4:
+                case R.id.button5:
+                case R.id.button6:
+                case R.id.button7:
+                case R.id.button8:
+                case R.id.button9:
+                    Button button = (Button) v;
+                    mFragmentAuthBinding.passwordEdit.append(button.getText().toString());
+                    break;
+                case R.id.confirm_button:
+                    //사용자가 6자리 이하의 숫자를 입력하고 확인버튼을 눌렀을 때 Toast로 알려준다.
+                    if (mFragmentAuthBinding.passwordEdit.getText().toString().length() < 6) {
+                        Toast.makeText(
+                                getBaseActivity(),
+                                "숫자 6자리를 입력해야 합니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+
+                    if (mAuthViewModel.isPasswordValid(mFragmentAuthBinding.passwordEdit.getText().toString())) {
+                        getBaseActivity().onFragmentDetached(TAG);
+                    }
+            }
+
 
 //                switch (PURPOSE) {
 //                    case ActivitiesFor.ENROLLMENT:
@@ -281,7 +337,6 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
 //                            return;
 //                        }
 //                }
-            }
         }
     }
 }

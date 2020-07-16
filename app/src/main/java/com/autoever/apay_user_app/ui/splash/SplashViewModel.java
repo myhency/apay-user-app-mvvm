@@ -1,6 +1,7 @@
 package com.autoever.apay_user_app.ui.splash;
 
 import com.autoever.apay_user_app.data.DataManager;
+import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
@@ -11,7 +12,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
     public void startSeeding() {
         getCompositeDisposable().add(getDataManager()
-                .getUserBalance("1", "4")
+                .getUserBalance(new BalanceRequest("1", "4"))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(aBoolean -> {

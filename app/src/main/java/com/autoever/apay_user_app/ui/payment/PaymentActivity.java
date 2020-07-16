@@ -7,18 +7,16 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
-import androidx.core.app.TaskStackBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
-import com.autoever.apay_user_app.ui.auth.AuthFragment;
+import com.autoever.apay_user_app.ui.payment.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
@@ -32,6 +30,8 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+
+import java.sql.Timestamp;
 
 public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> implements PaymentNavigator, HasSupportFragmentInjector {
 
@@ -95,9 +95,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         }
     }
 
+
     @Override
     public void handleError(Throwable throwable) {
-
+        ANError anError = (ANError) throwable;
+        Log.d("debug", anError.getResponse().message());
+        Log.d("debug", "throwable message: " + throwable.getMessage());
     }
 
     @Override
@@ -166,6 +169,20 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
+    public void showReceiptFragment(String paymentId) {
+        Log.d("debug", "paymentId: " + paymentId);
+//        mPaymentViewModel.loadPaymentId();
+    }
+
+    @Override
+    public void confirmPassword() {
+        Log.d("debug", "confirmPassword");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp.getTime());
+        mPaymentViewModel.loadPaymentId(price, String.valueOf(timestamp.getTime()));
+    }
+
+    @Override
     public void goNext() {
 
     }
@@ -212,6 +229,13 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
             case "PriceConfirmFragment":
                 showAuthFragment();
                 break;
+            case "AuthFragment":
+//                showReceiptFragment("");
+//                getViewModel().getPaymentId().observe(this, paymentId -> {
+//                    showReceiptFragment(paymentId == null ? "" : paymentId);
+//                });
+                confirmPassword();
+                break;
         }
 
 //        if (fragment != null) {
@@ -236,6 +260,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         switch (tag) {
             case "PriceFragment":
                 price = CommonUtils.parseToInt(message);
+                break;
+            default:
+                break;
         }
     }
 }

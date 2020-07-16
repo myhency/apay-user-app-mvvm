@@ -115,6 +115,16 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
+    public void showReceiptFragment(String paymentId) {
+
+    }
+
+    @Override
+    public void confirmPassword() {
+
+    }
+
+    @Override
     public void goNext() {
         Log.d("debug", "Price confirmed, 현금영수증 신청 confirmed");
         getBaseActivity().onFragmentDetached(TAG);

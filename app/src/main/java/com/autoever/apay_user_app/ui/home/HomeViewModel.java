@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
-import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
@@ -23,7 +23,7 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??
-                .getUserBalance("1", "4")
+                .getUserBalance(new BalanceRequest("1", "4"))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
