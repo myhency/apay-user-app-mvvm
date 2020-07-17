@@ -3,6 +3,7 @@ package com.autoever.apay_user_app.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -98,6 +99,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("debug","MainActivity resume");
     }
 
     @Override

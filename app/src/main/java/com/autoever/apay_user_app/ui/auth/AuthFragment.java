@@ -205,11 +205,13 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
                                 "숫자 6자리를 입력해야 합니다.",
                                 Toast.LENGTH_SHORT
                         ).show();
+                        return;
                     }
 
                     if (mAuthViewModel.isPasswordValid(mFragmentAuthBinding.passwordEdit.getText().toString())) {
                         getBaseActivity().onFragmentDetached(TAG);
                     }
+                    break;
             }
         }
     }

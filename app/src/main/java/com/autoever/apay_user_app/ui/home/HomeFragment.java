@@ -94,6 +94,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("debug","HomeFragment resume");
+        mHomeViewModel.loadUserBalance();
+    }
+
+    @Override
     public void openCardChargeActivity() {
 
     }

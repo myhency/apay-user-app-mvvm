@@ -1,7 +1,9 @@
 package com.autoever.apay_user_app.ui.payment.receipt;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,6 +20,7 @@ import com.autoever.apay_user_app.databinding.FragmentReceiptBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
+import com.autoever.apay_user_app.utils.CommonUtils;
 
 import javax.inject.Inject;
 
@@ -39,6 +42,7 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
         args.putInt("amount", amount);
         args.putInt("userBalance", userBalance);
         ReceiptFragment fragment = new ReceiptFragment();
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -61,7 +65,12 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
@@ -72,6 +81,13 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
     }
 
     private void setup() {
+        mFragmentReceiptBinding.shopName.setText(getArguments().getString("storeName"));
+        mFragmentReceiptBinding.createdDate.setText(getArguments().getString("createdDate"));
+        mFragmentReceiptBinding.purchaseAmount.setText(CommonUtils.formatToKRW(String.valueOf(getArguments().getInt("amount"))) + " P");
+        mFragmentReceiptBinding.userBalance.setText(CommonUtils.formatToKRW(String.valueOf(getArguments().getInt("userBalance"))) + " P");
+        mFragmentReceiptBinding.finishTextview.setOnClickListener(v -> {
+            getBaseActivity().finish();
+        });
     }
 
     @Override

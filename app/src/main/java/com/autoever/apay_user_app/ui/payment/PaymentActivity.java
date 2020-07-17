@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -171,7 +172,8 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 
     @Override
     public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
-//        mPaymentViewModel.loadPaymentId();
+        mActivityPaymentBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityPaymentBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
         mFragmentManager
                 .beginTransaction()
                 .add(R.id.clRootView, ReceiptFragment.newInstance(storeName, createdDate, amount, userBalance), ReceiptFragment.TAG)
@@ -232,16 +234,6 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                 doPaymentReady();
                 break;
         }
-
-//        if (fragment != null) {
-//            mFragmentManager
-//                    .beginTransaction()
-//                    .disallowAddToBackStack()
-////                    .setCustomAnimations(R.anim.slide_right, R.anim.slide_left)
-//                    .remove(fragment)
-//                    .commitNow();
-//        }
-
     }
 
     @Override
@@ -255,7 +247,6 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     public void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
         Log.d("debug", "doPaymentReady");
         mPaymentViewModel.doPayment(userId, storeId, tokenSystemId, amount, paymentId, identifier);
-
     }
 
     @Override

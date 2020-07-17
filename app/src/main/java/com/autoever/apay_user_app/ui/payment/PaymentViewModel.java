@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
+import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
@@ -20,11 +21,23 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
 
     private final MutableLiveData<String> paymentIdLiveData;
 
+    private final MutableLiveData<String> storeNameLiveData;
+
+    private final MutableLiveData<String> createdDateLiveData;
+
+    private final MutableLiveData<String> amountLiveData;
+
+    private final MutableLiveData<String> balanceLeftKWRLiveData;
+
 
     public PaymentViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
         super(mDataManager, schedulerProvider);
         balanceKRWLiveData = new MutableLiveData<>();
         paymentIdLiveData = new MutableLiveData<>();
+        storeNameLiveData = new MutableLiveData<>();
+        createdDateLiveData = new MutableLiveData<>();
+        amountLiveData = new MutableLiveData<>();
+        balanceLeftKWRLiveData = new MutableLiveData<>();
         loadUserBalance();
     }
 
@@ -111,6 +124,10 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                 .subscribe(paymentDoResponse -> {
                     setIsLoading(false);
                     Log.d("debug", paymentDoResponse.toString());
+                    storeNameLiveData.setValue(paymentDoResponse.getData().getStoreName());
+                    createdDateLiveData.setValue(paymentDoResponse.getData().getCreatedDate());
+                    amountLiveData.setValue(CommonUtils.formatToKRW(String.valueOf(paymentDoResponse.getData().getAmount())) + " P");
+                    balanceLeftKWRLiveData.setValue(CommonUtils.formatToKRW(String.valueOf(paymentDoResponse.getData().getUserBalance())) + " P");
                     getNavigator().showReceiptFragment(
                             paymentDoResponse.getData().getStoreName(),
                             paymentDoResponse.getData().getCreatedDate(),
@@ -131,5 +148,13 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
     public LiveData<String> getPaymentIdLiveData() {
         return paymentIdLiveData;
     }
+
+    public LiveData<String> getStoreNameLiveData() { return storeNameLiveData; }
+
+    public LiveData<String> getCreatedDateLiveData() { return createdDateLiveData; }
+
+    public LiveData<String> getAmountLiveData() { return amountLiveData; }
+
+    public LiveData<String> getBalanceLeftKWRLiveData() { return balanceLeftKWRLiveData; }
 
 }

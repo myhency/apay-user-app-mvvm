@@ -19,7 +19,7 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
         loadUserBalance();
     }
 
-    private void loadUserBalance() {
+    public void loadUserBalance() {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??
