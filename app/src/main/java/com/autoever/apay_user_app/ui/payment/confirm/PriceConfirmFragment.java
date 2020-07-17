@@ -115,12 +115,17 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
-    public void showReceiptFragment(String paymentId) {
+    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
 
     }
 
     @Override
-    public void confirmPassword() {
+    public void doPaymentReady() {
+
+    }
+
+    @Override
+    public void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
 
     }
 

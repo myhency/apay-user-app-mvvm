@@ -16,10 +16,11 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
-import com.autoever.apay_user_app.ui.payment.auth.AuthFragment;
+import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
+import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
@@ -99,7 +100,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     @Override
     public void handleError(Throwable throwable) {
         ANError anError = (ANError) throwable;
-        Log.d("debug", anError.getResponse().message());
+        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
         Log.d("debug", "throwable message: " + throwable.getMessage());
     }
 
@@ -169,17 +170,13 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showReceiptFragment(String paymentId) {
-        Log.d("debug", "paymentId: " + paymentId);
+    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
 //        mPaymentViewModel.loadPaymentId();
-    }
-
-    @Override
-    public void confirmPassword() {
-        Log.d("debug", "confirmPassword");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp.getTime());
-        mPaymentViewModel.loadPaymentId(price, String.valueOf(timestamp.getTime()));
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, ReceiptFragment.newInstance(storeName, createdDate, amount, userBalance), ReceiptFragment.TAG)
+                .addToBackStack(ReceiptFragment.TAG)
+                .commitAllowingStateLoss();
     }
 
     @Override
@@ -189,8 +186,6 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-
         Log.d("debug", "requestCode: " + requestCode);
 
         //여기서부터는 QR리더기를 위한 부분.
@@ -234,7 +229,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 //                getViewModel().getPaymentId().observe(this, paymentId -> {
 //                    showReceiptFragment(paymentId == null ? "" : paymentId);
 //                });
-                confirmPassword();
+                doPaymentReady();
                 break;
         }
 
@@ -246,6 +241,20 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 //                    .remove(fragment)
 //                    .commitNow();
 //        }
+
+    }
+
+    @Override
+    public void doPaymentReady() {
+        Log.d("debug", "doPaymentReady");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        mPaymentViewModel.loadPaymentId(price, String.valueOf(timestamp.getTime()));
+    }
+
+    @Override
+    public void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
+        Log.d("debug", "doPaymentReady");
+        mPaymentViewModel.doPayment(userId, storeId, tokenSystemId, amount, paymentId, identifier);
 
     }
 

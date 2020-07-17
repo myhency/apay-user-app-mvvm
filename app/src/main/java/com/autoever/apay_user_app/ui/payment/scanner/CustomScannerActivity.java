@@ -1,93 +1,35 @@
 package com.autoever.apay_user_app.ui.payment.scanner;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
-
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityCustomScannerBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.main.MainActivity;
-import com.autoever.apay_user_app.ui.main.MainViewModel;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.journeyapps.barcodescanner.CaptureActivity;
-import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
-
-import dagger.android.ContributesAndroidInjector;
-
-//public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBinding, CustomScannerViewModel> {
-//    private ActivityCustomScannerBinding mActivityCustomScannerBinding;
-//
-//    public static IntentIntegrator newIntentIntegrator(Activity activity) {
-//        IntentIntegrator intentIntegrator = new IntentIntegrator(activity);
-//        intentIntegrator.setOrientationLocked(false);
-//        intentIntegrator.setCaptureActivity();
-//    }
-//
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        mActivityCustomScannerBinding = getViewDataBinding();
-//        VirtualCaptureActivity mVirtualCaptureActivity = new VirtualCaptureActivity();
-//        mVirtualCaptureActivity.initializeContent();
-//    }
-//
-//    @Override
-//    public int getBindingVariable() {
-//        return BR.viewModel;
-//    }
-//
-//    @Override
-//    public int getLayoutId() {
-//        return R.layout.activity_custom_scanner;
-//    }
-//
-//    @Override
-//    public CustomScannerViewModel getViewModel() {
-//        return null;
-//    }
-//
-//    class VirtualCaptureActivity extends CaptureActivity {
-//        @Override
-//        protected DecoratedBarcodeView initializeContent() {
-//            return (DecoratedBarcodeView) mActivityCustomScannerBinding.zxingBarcodeScanner;
-//        }
-//    }
-//}
 
 public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBinding, PaymentViewModel> implements PaymentNavigator {
 
@@ -233,12 +175,17 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     @Override
-    public void showReceiptFragment(String paymentId) {
+    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
 
     }
 
     @Override
-    public void confirmPassword() {
+    public void doPaymentReady() {
+
+    }
+
+    @Override
+    public void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
 
     }
 

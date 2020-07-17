@@ -4,11 +4,12 @@ package com.autoever.apay_user_app.data;
 import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.remote.ApiHelper;
+import com.autoever.apay_user_app.data.remote.RepoService;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
-public interface DataManager extends DbHelper, ApiHelper, PreferencesHelper {
+public interface DataManager extends DbHelper, ApiHelper, PreferencesHelper, RepoService {
     Observable<Boolean> seedDatabaseQuestions();
 
     Observable<Boolean> getAppAccessPermissions();

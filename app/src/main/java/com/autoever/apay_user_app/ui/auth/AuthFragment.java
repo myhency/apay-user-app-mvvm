@@ -1,4 +1,4 @@
-package com.autoever.apay_user_app.ui.payment.auth;
+package com.autoever.apay_user_app.ui.auth;
 
 import android.os.Bundle;
 
@@ -27,14 +27,14 @@ import java.util.Collections;
 import javax.inject.Inject;
 
 
-public class AuthFragment extends BaseFragment<FragmentAuthBinding, PaymentViewModel> implements PaymentNavigator {
+public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewModel> implements AuthNavigator {
 
     public static final String TAG = AuthFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
 
-    private PaymentViewModel mAuthViewModel;
+    private AuthViewModel mAuthViewModel;
     private FragmentAuthBinding mFragmentAuthBinding;
 
     public static AuthFragment newInstance() {
@@ -55,8 +55,8 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, PaymentViewM
     }
 
     @Override
-    public PaymentViewModel getViewModel() {
-        mAuthViewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel.class);
+    public AuthViewModel getViewModel() {
+        mAuthViewModel = ViewModelProviders.of(this, factory).get(AuthViewModel.class);
         return mAuthViewModel;
     }
 
@@ -170,58 +170,6 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, PaymentViewM
         shuffleNumbers(numericButtons);
     }
 
-    @Override
-    public void handleError(Throwable throwable) {
-
-    }
-
-    @Override
-    public void openCustomScannerActivity() {
-
-    }
-
-    @Override
-    public void showPriceFragment(String shopCode) {
-
-    }
-
-    @Override
-    public void showPriceConfirmFragment(String shopCode, int price) {
-
-    }
-
-    @Override
-    public void showAuthFragment() {
-
-    }
-
-    @Override
-    public void showReceiptFragment(String paymentId) {
-
-    }
-
-    @Override
-    public void confirmPassword() {
-//        if (mFragmentAuthBinding.passwordEdit.getText().toString().length() < 6) {
-//            Toast.makeText(
-//                    getBaseActivity(),
-//                    "숫자 6자리를 입력해야 합니다.",
-//                    Toast.LENGTH_SHORT
-//            ).show();
-//            return;
-//        }
-//
-//        if (mAuthViewModel.isPasswordValid(mFragmentAuthBinding.passwordEdit.getText().toString())) {
-////            mAuthViewModel.loadPaymentId();
-//            getBaseActivity().onFragmentDetached(TAG);
-//        }
-    }
-
-    @Override
-    public void goNext() {
-
-    }
-
     //숫자키패드용 리스너
     class NumericKeypadListener implements View.OnClickListener {
 
@@ -263,80 +211,6 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, PaymentViewM
                         getBaseActivity().onFragmentDetached(TAG);
                     }
             }
-
-
-//                switch (PURPOSE) {
-//                    case ActivitiesFor.ENROLLMENT:
-//                        password = mFragmentAuthBinding.passwordEdit.getText().toString();
-//                        PURPOSE = ActivitiesFor.VALID_CHECK;
-//                        initializeFragments(PURPOSE);
-//                        return;
-//                    case ActivitiesFor.VALID_CHECK:
-//                        if (password.equals(mFragmentAuthBinding.passwordEdit.getText().toString())) {
-//                            Log.d("debug", "입력한 패스워드가 일치, 패스워드를 저장하고 EasyPasswordActivity 종료");
-////                            DatabaseUtil databaseUtil = new DatabaseUtil(EasyPasswordActivity.this);
-////                            SQLiteDatabase db = databaseUtil.getWritableDatabase();
-////
-////                            String sql = "update user set easy_password = ? where instance_id = ?";
-////
-////                            String[] arg1 = {
-////                                    password,
-////                                    InstanceID.getInstance(EasyPasswordActivity.this).getId()
-////                            };
-////
-////                            db.execSQL(sql, arg1);
-////
-////                            db.close();
-//
-//                            Intent intent = new Intent();
-//                            intent.putExtra("password", password);
-//                            setResult(ActivityResult.EASY_PASSWORD_ENROLLED, intent);
-//                            finish();
-//                            return;
-//                        } else {
-//                            Toast.makeText(
-//                                    getApplicationContext(),
-//                                    "패스워드가 일치하지 않습니다. \n이전화면으로 돌아가시려면 화면상단의 돌아가기 버튼을 눌러주세요.",
-//                                    Toast.LENGTH_SHORT
-//                            ).show();
-//                            return;
-//                        }
-//                    case ActivitiesFor.REGISTER_BANK_ACCOUNT:
-//                    case ActivitiesFor.APP_LOGIN:
-//                        DatabaseUtil databaseUtil = new DatabaseUtil(getApplicationContext());
-//                        SQLiteDatabase db = databaseUtil.getWritableDatabase();
-//
-//                        String sql = "select * " +
-//                                "from user" +
-//                                " where instance_id = ? " +
-//                                "and easy_password = ?";
-//
-//                        String uniqueID = InstanceID.getInstance(getApplicationContext()).getId();
-//
-//                        String arg1[] = {
-//                                uniqueID,
-//                                mFragmentAuthBinding.passwordEdit.getText().toString()
-//                        };
-//
-//                        Cursor cursor = db.rawQuery(sql, arg1);
-//
-//                        if (cursor.getCount() > 0) {
-//                            Log.d("debug", "간편비번 인증 성공");
-//                            db.close();
-//                            setResult(RESULT_OK);
-//                            finish();
-//                            return;
-//                        } else {
-//                            Log.d("debug", "간편비번 인증 실패");
-//                            db.close();
-//                            Toast.makeText(
-//                                    getApplicationContext(),
-//                                    "패스워드가 일치하지 않습니다",
-//                                    Toast.LENGTH_SHORT
-//                            ).show();
-//                            return;
-//                        }
-//                }
         }
     }
 }

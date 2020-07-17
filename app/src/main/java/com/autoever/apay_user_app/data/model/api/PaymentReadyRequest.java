@@ -10,8 +10,8 @@ public class PaymentReadyRequest {
     private String userId;
 
     @Expose
-    @SerializedName("hashedStoreId")
-    private String hashedStoreId;
+    @SerializedName("storeId")
+    private String storeId;
 
     @Expose
     @SerializedName("tokenSystemId")
@@ -25,9 +25,9 @@ public class PaymentReadyRequest {
     @SerializedName("identifier")
     private String identifier;
 
-    public PaymentReadyRequest(String userId, String hashedStoreId, String tokenSystemId, int amount, String identifier) {
+    public PaymentReadyRequest(String userId, String storeId, String tokenSystemId, int amount, String identifier) {
         this.userId = userId;
-        this.hashedStoreId = hashedStoreId;
+        this.storeId = storeId;
         this.tokenSystemId = tokenSystemId;
         this.amount = amount;
         this.identifier = identifier;
@@ -38,7 +38,7 @@ public class PaymentReadyRequest {
     }
 
     public String getHashedStoreId() {
-        return hashedStoreId;
+        return storeId;
     }
 
     public String getTokenSystemId() {

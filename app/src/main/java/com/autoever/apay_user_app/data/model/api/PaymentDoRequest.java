@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName;
 /**
  * payment do request body
  * {
- *   "userId": 0,
- *   "storeId": 0,
- *   "tokenSystemId": 0,
- *   "amount": 0,
- *   "paymentId": 0,
- *   "identifier": "string"
+ * "userId": 0,
+ * "storeId": 0,
+ * "tokenSystemId": 0,
+ * "amount": 0,
+ * "paymentId": 0,
+ * "identifier": "string"
  * }
  */
 public class PaymentDoRequest {
@@ -41,7 +41,12 @@ public class PaymentDoRequest {
     @SerializedName("identifier")
     private String identifier;
 
-    public PaymentDoRequest(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
+    public PaymentDoRequest(String userId,
+                            String storeId,
+                            String tokenSystemId,
+                            int amount,
+                            String paymentId,
+                            String identifier) {
         this.userId = userId;
         this.storeId = storeId;
         this.tokenSystemId = tokenSystemId;

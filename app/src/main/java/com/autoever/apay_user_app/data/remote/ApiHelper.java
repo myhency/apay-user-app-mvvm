@@ -11,10 +11,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiHelper {
+
     Single<BalanceResponse> getUserBalance(BalanceRequest balanceRequest);
-
-    Single<PaymentReadyResponse> doPaymentReady(PaymentReadyRequest paymentReadyRequest);
-
-    @POST("/payment/ready")
-    Call<PaymentReadyResponse> doPaymentReadyCall(@Body PaymentReadyRequest paymentReadyRequest);
 }

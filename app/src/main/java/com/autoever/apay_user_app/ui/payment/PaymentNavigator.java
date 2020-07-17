@@ -12,9 +12,11 @@ public interface PaymentNavigator {
 
     void showAuthFragment();
 
-    void showReceiptFragment(String paymentId);
+    void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance);
 
-    void confirmPassword();
+    void doPaymentReady();
+
+    void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier);
 
     void goNext();
 }
