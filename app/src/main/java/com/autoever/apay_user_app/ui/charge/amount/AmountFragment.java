@@ -73,7 +73,7 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetBehavior.setPeekHeight(340);
+        bottomSheetBehavior.setPeekHeight(120);
         bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
