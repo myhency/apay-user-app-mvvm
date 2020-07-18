@@ -13,4 +13,5 @@
     <color name="warningColor">#cb3333</color>
     <color name="buttonPressed">#eaecf4</color>
     <color name="receiptBackgroundColor">#f8f8f8</color>
+    <color name="loadingBackgroundColor">#9A9A9A</color>
 </resources>

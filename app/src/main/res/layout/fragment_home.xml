@@ -19,6 +19,24 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+<!--        <FrameLayout-->
+<!--            android:id="@+id/progressBarHolder"-->
+<!--            android:animateLayoutChanges="true"-->
+<!--            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"-->
+<!--            android:alpha="0.4"-->
+<!--            android:background="#000000"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <ProgressBar-->
+<!--                style="?android:attr/progressBarStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:indeterminate="true"-->
+<!--                android:layout_gravity="center" />-->
+
+<!--        </FrameLayout>-->
+
         <Button
             android:id="@+id/payment_button"
             android:layout_width="0dp"
@@ -100,7 +118,7 @@
 
             <TextView
                 android:id="@+id/card_balance_number"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeMaxTextSize="35sp"
                 android:autoSizeMinTextSize="24sp"
@@ -108,8 +126,7 @@
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 android:gravity="left|center_vertical"
-                android:minWidth="30dp"
-                android:text="@{viewModel.balanceKRWLiveData}"
+                android:text="@{viewModel.balanceKRWLiveData, default=0}"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +136,25 @@
                 app:layout_constraintStart_toStartOf="@+id/card_balance_title"
                 app:layout_constraintTop_toBottomOf="@+id/card_balance_title"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintWidth_default="wrap"
+                app:layout_constraintWidth_min="30dp" />
+
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:gravity="left|center_vertical"-->
+<!--                android:minWidth="30dp"-->
+<!--                android:background="@drawable/loading_background"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHeight_default="percent"-->
+<!--                app:layout_constraintHeight_percent="0.12"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/card_balance_title"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/card_balance_title"-->
+<!--                app:layout_constraintVertical_bias="0.0"-->
+<!--                app:layout_constraintWidth_percent="0.6"-->
+<!--                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"/>-->
 
             <TextView
                 android:id="@+id/main_balance_currency"
@@ -130,6 +165,7 @@
                 android:autoSizeStepGranularity="1sp"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/spoqa_han_sans_bold"
+                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
                 android:text="P"
                 android:textColor="#5e7ae5"
                 android:textSize="20sp"
@@ -227,6 +263,18 @@
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

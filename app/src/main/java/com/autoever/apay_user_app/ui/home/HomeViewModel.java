@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.ui.home;
 
+import android.os.SystemClock;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -27,6 +29,8 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
+                    //TODO. 딜레이 삭제 해야 함.
+                    SystemClock.sleep(1000);
                     if(balanceResponse != null && balanceResponse.getData() != null) {
                         balanceKRWLiveData.setValue(CommonUtils.formatToKRW(balanceResponse.getData().getBalance().toString()));
                     }
