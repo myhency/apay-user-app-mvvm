@@ -1,6 +1,8 @@
 package com.autoever.apay_user_app.di.builder;
 
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
+import com.autoever.apay_user_app.ui.charge.ChargeActivity;
+import com.autoever.apay_user_app.ui.charge.amount.AmountFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
@@ -33,4 +35,9 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract CustomScannerActivity bindCustomScannerActivity();
+
+    @ContributesAndroidInjector(modules = {
+            AmountFragmentProvider.class
+    })
+    abstract ChargeActivity bindChargeActivity();
 }

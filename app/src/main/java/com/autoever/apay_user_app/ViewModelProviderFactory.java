@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.ui.auth.AuthViewModel;
+import com.autoever.apay_user_app.ui.charge.ChargeViewModel;
+import com.autoever.apay_user_app.ui.charge.amount.AmountViewModel;
 import com.autoever.apay_user_app.ui.home.HomeViewModel;
 import com.autoever.apay_user_app.ui.main.MainViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
@@ -36,6 +38,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new PaymentViewModel(dataManager, schedulerProvider);
         } else if(modelClass.isAssignableFrom(AuthViewModel.class)) {
             return (T) new AuthViewModel(dataManager, schedulerProvider);
+        } else if(modelClass.isAssignableFrom(AmountViewModel.class)) {
+            return (T) new AmountViewModel(dataManager, schedulerProvider);
+        } else if(modelClass.isAssignableFrom(ChargeViewModel.class)) {
+            return (T) new ChargeViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

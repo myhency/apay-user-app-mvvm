@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.charge.ChargeActivity"></activity>
         <activity
             android:name=".ui.payment.scanner.CustomScannerActivity"
             android:screenOrientation="portrait"
