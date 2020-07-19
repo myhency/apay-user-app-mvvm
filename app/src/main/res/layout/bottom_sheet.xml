@@ -39,6 +39,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/amount_100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -63,6 +64,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/amount_50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -87,6 +89,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/amount_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -111,6 +114,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/amount_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -135,6 +139,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/amount_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -159,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/amount_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

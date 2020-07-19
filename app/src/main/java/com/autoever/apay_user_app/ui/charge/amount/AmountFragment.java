@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.ui.charge.amount;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,7 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,6 +21,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentAmountBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.utils.CommonUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import javax.inject.Inject;
@@ -68,6 +73,7 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
         setup();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setup() {
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(mFragmentAmountBinding.fixedAmountBottomSheet.bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -86,6 +92,71 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
 
             }
         });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount100.setOnClickListener(v -> {
+            mFragmentAmountBinding.cardChargeEdittext.setText("1000000");
+        });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount50.setOnClickListener(v -> {
+            mFragmentAmountBinding.cardChargeEdittext.setText("500000");
+        });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount30.setOnClickListener(v -> {
+            mFragmentAmountBinding.cardChargeEdittext.setText("300000");
+        });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount10.setOnClickListener(v -> {
+            mFragmentAmountBinding.cardChargeEdittext.setText("100000");
+        });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount5.setOnClickListener(v -> {
+            mFragmentAmountBinding.cardChargeEdittext.setText("50000");
+        });
+
+        mFragmentAmountBinding.fixedAmountBottomSheet.amountMax.setOnClickListener(v -> {
+            //TODO. 최대 200만원 까지?
+        });
+
+        mFragmentAmountBinding.balanceCurrency.setOnClickListener(v -> {
+            if (mFragmentAmountBinding.balanceCurrency.getText().toString().equals("P")) return;
+
+            mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.color.colorWhite));
+            mFragmentAmountBinding.cardChargeEdittext.setText("");
+        });
+
+        mFragmentAmountBinding.cardChargeEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty()) {
+                    mFragmentAmountBinding.balanceCurrency.setText("P");
+                    return;
+                }
+
+                mFragmentAmountBinding.balanceCurrency.setText("");
+                mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.drawable.icon_clear));
+//                mFragmentAmountBinding.balanceCurrency.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+                mFragmentAmountBinding.balanceCurrency.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                //원화화폐단위로 포맷하여 보여줌
+                mFragmentAmountBinding.cardChargeEdittext.removeTextChangedListener(this);
+                String cleanString = s.toString().replaceAll("[%s,.]", "");
+                mFragmentAmountBinding.cardChargeEdittext.setText(CommonUtils.formatToKRW(cleanString));
+                mFragmentAmountBinding.cardChargeEdittext.addTextChangedListener(this);
+            }
+        });
+
+        //터치이벤트를 소모해서 키보드를 뜨지 않게 함.
+        mFragmentAmountBinding.cardChargeEdittext.setOnTouchListener((v, event) -> true);
     }
 
     @Override

@@ -110,9 +110,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/balance_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="#FFFFFF"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 android:text="P"
                 android:textColor="#848690"
