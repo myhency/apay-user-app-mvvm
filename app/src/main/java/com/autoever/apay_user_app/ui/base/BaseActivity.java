@@ -19,6 +19,8 @@ import androidx.databinding.ViewDataBinding;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.NetworkUtils;
 
+import org.json.JSONObject;
+
 import dagger.android.AndroidInjection;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 //import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -49,7 +51,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     }
 
-    public void onReceivedMessageFromFragment(String tag, String message) {
+    public void onReceivedMessageFromFragment(String tag, JSONObject message) {
 
     }
 

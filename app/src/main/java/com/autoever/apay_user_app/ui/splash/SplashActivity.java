@@ -15,6 +15,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivitySplashBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -52,6 +53,9 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     @Override
     public void openLoginActivity() {
         Log.d("debug", "LoginActivity Open");
+        Intent intent = LoginActivity.newIntent(SplashActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     @Override

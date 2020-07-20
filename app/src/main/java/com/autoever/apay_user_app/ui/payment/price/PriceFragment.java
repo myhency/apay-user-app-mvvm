@@ -20,6 +20,9 @@ import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentViewModel> implements PaymentNavigator {
@@ -297,9 +300,13 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     @Override
     public void goNext() {
         Log.d("debug", "Price confirmed");
-        getBaseActivity().onReceivedMessageFromFragment(
-                TAG,
-                mFragmentPriceBinding.cardPaymentEdittext.getText().toString());
+        JSONObject data = new JSONObject();
+        try {
+            data.put("price", mFragmentPriceBinding.cardPaymentEdittext.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        getBaseActivity().onReceivedMessageFromFragment(TAG, data);
         getBaseActivity().onFragmentDetached(TAG);
     }
 }

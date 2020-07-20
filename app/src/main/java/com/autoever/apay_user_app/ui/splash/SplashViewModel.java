@@ -1,5 +1,9 @@
 package com.autoever.apay_user_app.ui.splash;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.SystemClock;
+
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
@@ -11,26 +15,15 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     public void startSeeding() {
-        getCompositeDisposable().add(getDataManager()
-                .getUserBalance(new BalanceRequest("1", "4"))
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(aBoolean -> {
-                    decideNextActivity();
-                }, throwable -> {
-                    decideNextActivity();
-                })
-        );
+        new Handler().postDelayed(() -> decideNextActivity(), 1500);
     }
 
     private void decideNextActivity() {
         //TODO. 로그인 화면을 구성해야 함.
-//        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
-//            getNavigator().openLoginActivity();
-//        } else {
-//            getNavigator().openMainActivity();
-//        }
-
-        getNavigator().openMainActivity();
+        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
+            getNavigator().openLoginActivity();
+        } else {
+            getNavigator().openMainActivity();
+        }
     }
 }

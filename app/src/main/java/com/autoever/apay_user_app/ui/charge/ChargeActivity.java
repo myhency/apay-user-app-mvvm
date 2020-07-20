@@ -22,6 +22,9 @@ import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Timestamp;
 
 import javax.inject.Inject;
@@ -151,15 +154,19 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     }
 
     @Override
-    public void onReceivedMessageFromFragment(String tag, String message) {
+    public void onReceivedMessageFromFragment(String tag, JSONObject message) {
         Log.d("debug", "onReceivedMessageFromFragment: " + message);
 
-        switch (tag) {
-            case "AmountFragment":
-                amount = CommonUtils.parseToInt(message);
-                break;
-            default:
-                break;
+        try {
+            switch (tag) {
+                case "AmountFragment":
+                    amount = CommonUtils.parseToInt(message.getString("amount"));
+                    break;
+                default:
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

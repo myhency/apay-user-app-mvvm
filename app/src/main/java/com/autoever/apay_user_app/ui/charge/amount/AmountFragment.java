@@ -26,6 +26,9 @@ import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountViewModel> implements AmountNavigator {
@@ -183,7 +186,13 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
     @Override
     public void goNext() {
         Log.d("debug", "Amount confirmed");
-        getBaseActivity().onReceivedMessageFromFragment(mFragmentAmountBinding.cardChargeEdittext.getText().toString(), TAG);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("amount", mFragmentAmountBinding.cardChargeEdittext.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        getBaseActivity().onReceivedMessageFromFragment(TAG, data);
         getBaseActivity().onFragmentDetached(TAG);
     }
 

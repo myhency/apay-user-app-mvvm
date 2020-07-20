@@ -14,4 +14,5 @@
     <color name="buttonPressed">#eaecf4</color>
     <color name="receiptBackgroundColor">#f8f8f8</color>
     <color name="loadingBackgroundColor">#9A9A9A</color>
+    <color name="shadow">#d0d8dc</color>
 </resources>

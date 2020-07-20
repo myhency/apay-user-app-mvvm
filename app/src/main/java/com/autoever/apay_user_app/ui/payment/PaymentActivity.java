@@ -25,6 +25,9 @@ import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -255,14 +258,17 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void onReceivedMessageFromFragment(String tag, String message) {
-        Log.d("debug", message);
-        switch (tag) {
-            case "PriceFragment":
-                price = CommonUtils.parseToInt(message);
-                break;
-            default:
-                break;
+    public void onReceivedMessageFromFragment(String tag, JSONObject message) {
+        try {
+            switch (tag) {
+                case "PriceFragment":
+                    price = CommonUtils.parseToInt(message.getString("price"));
+                    break;
+                default:
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

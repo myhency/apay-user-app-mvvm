@@ -53,6 +53,12 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void updateUserInfo(String accessToken, String userId, LoggedInMode loggedInMode) {
+        setAccessToken(accessToken);
+
+    }
+
+    @Override
     public Observable<Boolean> insertUser(User user) {
         return null;
     }
@@ -75,6 +81,31 @@ public class AppDataManager implements DataManager {
     @Override
     public int getCurrentUserLoggedInMode() {
         return mPreferencesHelper.getCurrentUserLoggedInMode();
+    }
+
+    @Override
+    public void setCurrentUserLoggedInMode(LoggedInMode mode) {
+
+    }
+
+    @Override
+    public String getCurrentUserId() {
+        return null;
+    }
+
+    @Override
+    public void setCurrentUserId(String userId) {
+
+    }
+
+    @Override
+    public String getAccessToken() {
+        return mPreferencesHelper.getAccessToken();
+    }
+
+    @Override
+    public void setAccessToken(String accessToken) {
+        mPreferencesHelper.setAccessToken(accessToken);
     }
 
     @Override

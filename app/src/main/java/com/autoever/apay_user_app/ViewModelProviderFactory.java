@@ -11,6 +11,8 @@ import com.autoever.apay_user_app.ui.home.HomeViewModel;
 import com.autoever.apay_user_app.ui.main.MainViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.ui.splash.SplashViewModel;
+import com.autoever.apay_user_app.ui.user.login.LoginViewModel;
+import com.autoever.apay_user_app.ui.user.register.RegisterViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
@@ -36,12 +38,16 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new HomeViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(PaymentViewModel.class)) {
             return (T) new PaymentViewModel(dataManager, schedulerProvider);
-        } else if(modelClass.isAssignableFrom(AuthViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(AuthViewModel.class)) {
             return (T) new AuthViewModel(dataManager, schedulerProvider);
-        } else if(modelClass.isAssignableFrom(AmountViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(AmountViewModel.class)) {
             return (T) new AmountViewModel(dataManager, schedulerProvider);
-        } else if(modelClass.isAssignableFrom(ChargeViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(ChargeViewModel.class)) {
             return (T) new ChargeViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RegisterViewModel.class)) {
+            return (T) new RegisterViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+            return (T) new LoginViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

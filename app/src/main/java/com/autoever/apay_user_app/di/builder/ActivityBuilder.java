@@ -1,6 +1,5 @@
 package com.autoever.apay_user_app.di.builder;
 
-import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragmentProvider;
@@ -9,10 +8,12 @@ import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragmentProvider;
-import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
+import com.autoever.apay_user_app.ui.user.login.LoginActivity;
+import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
+import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragmentProvider;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -42,4 +43,12 @@ public abstract class ActivityBuilder {
             AuthFragmentProvider.class
     })
     abstract ChargeActivity bindChargeActivity();
+
+    @ContributesAndroidInjector(modules = {
+            TermsOfServiceFragmentProvider.class
+    })
+    abstract RegisterActivity bindRegisterActivity();
+
+    @ContributesAndroidInjector
+    abstract LoginActivity bindLoginActivity();
 }

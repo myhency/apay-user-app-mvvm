@@ -23,4 +23,10 @@
     <string name="easypassword_text_01"><u>간편비밀번호를 잊어버리셨나요?</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="a_pay_register"><u>A-Pay 에 등록하지 않으셨나요?</u></string>
+
+    <string name="jointerms_text_01">서비스 이용약관 동의</string>
+    <string name="jointerms_text_02">아래의 내용에 모두 동의합니다</string>
+    <string name="jointerms_text_03">[필수]서비스 표준 이용 약관</string>
+    <string name="jointerms_text_04">[선택]서비스 표준 이용 약관</string>
 </resources>
