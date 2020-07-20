@@ -20,7 +20,7 @@ public class AmountViewModel extends BaseViewModel<AmountNavigator> {
         balanceKRWLiveData = new MutableLiveData<>();
     }
 
-    private void loadUserBalance() {
+    public void loadUserBalance() {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??

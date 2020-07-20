@@ -275,7 +275,7 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     }
 
     @Override
-    public void showAuthFragment() {
+    public void openAuthFragment() {
 
     }
 

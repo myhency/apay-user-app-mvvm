@@ -111,7 +111,7 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
     }
 
     @Override
-    public void showAuthFragment() {
+    public void openAuthFragment() {
 
     }
 

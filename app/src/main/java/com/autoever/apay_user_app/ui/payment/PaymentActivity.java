@@ -162,7 +162,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showAuthFragment() {
+    public void openAuthFragment() {
         mFragmentManager
                 .beginTransaction()
                 .add(R.id.clRootView, AuthFragment.newInstance(), AuthFragment.TAG)
@@ -224,7 +224,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                 showPriceConfirmFragment(shopCode, price);
                 break;
             case "PriceConfirmFragment":
-                showAuthFragment();
+                openAuthFragment();
                 break;
             case "AuthFragment":
 //                showReceiptFragment("");

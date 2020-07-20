@@ -11,13 +11,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityChargeBinding;
+import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
+import com.autoever.apay_user_app.utils.CommonUtils;
+
+import java.sql.Timestamp;
 
 import javax.inject.Inject;
 
@@ -38,6 +43,8 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     private ActivityChargeBinding mActivityChargeBinding;
     private ChargeViewModel mChargeViewModel;
     private FragmentManager mFragmentManager;
+
+    private int amount = 0;
     
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, ChargeActivity.class);
@@ -80,7 +87,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-            mActivityChargeBinding.toolbarTitle.setText("충전");
+            mActivityChargeBinding.toolbarTitle.setText("카드 충전");
         }
     }
 
@@ -98,11 +105,61 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
 
     @Override
     public void handleError(Throwable throwable) {
+        ANError anError = (ANError) throwable;
+        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
+        Log.d("debug", "throwable message: " + throwable.getMessage());
+    }
 
+    @Override
+    public void openAuthFragment() {
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, AuthFragment.newInstance(), AuthFragment.TAG)
+                .addToBackStack(AuthFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void doChargeReady() {
+        Log.d("debug", "doChargeReady");
+        mChargeViewModel.doChargeReady(amount);
+    }
+
+    @Override
+    public void doChargeDo() {
+        Log.d("debug", "doChargeDo");
     }
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+//        super.onFragmentDetached(tag);
+        Log.d("debug", "onFragmentDetached: " + tag);
+
+        switch (tag) {
+            case "AmountFragment":
+                openAuthFragment();
+                break;
+            case "AuthFragment":
+                doChargeReady();
+                break;
+        }
+    }
+
+    @Override
+    public void onReceivedMessageFromFragment(String tag, String message) {
+        Log.d("debug", "onReceivedMessageFromFragment: " + message);
+
+        switch (tag) {
+            case "AmountFragment":
+                amount = CommonUtils.parseToInt(message);
+                break;
+            default:
+                break;
+        }
     }
 }

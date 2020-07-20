@@ -6,6 +6,8 @@ import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
+import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
@@ -84,4 +86,11 @@ public class AppDataManager implements DataManager {
     public Single<PaymentDoResponse> doPaymentDoCall(PaymentDoRequest paymentDoRequest) {
         return mRepoService.doPaymentDoCall(paymentDoRequest);
     }
+
+    @Override
+    public Single<ChargeReadyResponse> doChargeReadyCall(ChargeReadyRequest chargeReadyRequest) {
+        return mRepoService.doChargeReadyCall(chargeReadyRequest);
+    }
+
+
 }

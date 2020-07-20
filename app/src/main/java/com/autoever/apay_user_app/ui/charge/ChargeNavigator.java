@@ -5,4 +5,10 @@ public interface ChargeNavigator {
     void openAmountFragment();
 
     void handleError(Throwable throwable);
+
+    void openAuthFragment();
+
+    void doChargeReady();
+
+    void doChargeDo();
 }

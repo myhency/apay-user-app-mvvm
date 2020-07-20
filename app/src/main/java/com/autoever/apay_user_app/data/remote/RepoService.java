@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
+import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
+import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
@@ -17,4 +19,7 @@ public interface RepoService {
 
     @PUT("payment/do")
     Single<PaymentDoResponse> doPaymentDoCall(@Body PaymentDoRequest paymentDoRequest);
+
+    @POST("tokenSystem/charge/ready")
+    Single<ChargeReadyResponse> doChargeReadyCall(@Body ChargeReadyRequest chargeReadyRequest);
 }

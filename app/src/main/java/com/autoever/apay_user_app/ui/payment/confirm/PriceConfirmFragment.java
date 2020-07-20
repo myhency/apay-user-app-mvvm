@@ -110,7 +110,7 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
-    public void showAuthFragment() {
+    public void openAuthFragment() {
 
     }
 

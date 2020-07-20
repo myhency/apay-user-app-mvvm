@@ -10,7 +10,7 @@ public interface PaymentNavigator {
 
     void showPriceConfirmFragment(String shopCode, int price);
 
-    void showAuthFragment();
+    void openAuthFragment();
 
     void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance);
 

@@ -3,6 +3,7 @@ package com.autoever.apay_user_app.ui.charge.amount;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -64,12 +66,20 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //back button 을 눌렀을 경우 Activity 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentAmountBinding = getViewDataBinding();
+        mAmountViewModel.loadUserBalance();
         setup();
     }
 
@@ -143,16 +153,9 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().isEmpty()) {
-//                    mFragmentAmountBinding.balanceCurrency.setText("P");
                     mFragmentAmountBinding.balanceCurrency.setVisibility(View.VISIBLE);
                     return;
                 }
-
-
-//                mFragmentAmountBinding.balanceCurrency.setText("");
-//                mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.drawable.icon_clear));
-////                mFragmentAmountBinding.balanceCurrency.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-//                mFragmentAmountBinding.balanceCurrency.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 //원화화폐단위로 포맷하여 보여줌
                 mFragmentAmountBinding.cardChargeEdittext.removeTextChangedListener(this);
@@ -168,10 +171,21 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
 
         //터치이벤트를 소모해서 키보드를 뜨지 않게 함.
         mFragmentAmountBinding.cardChargeEdittext.setOnTouchListener((v, event) -> true);
+
+        mFragmentAmountBinding.finishTextview.setOnClickListener(v -> goNext());
     }
 
     @Override
     public void handleError(Throwable throwable) {
 
     }
+
+    @Override
+    public void goNext() {
+        Log.d("debug", "Amount confirmed");
+        getBaseActivity().onReceivedMessageFromFragment(mFragmentAmountBinding.cardChargeEdittext.getText().toString(), TAG);
+        getBaseActivity().onFragmentDetached(TAG);
+    }
+
+
 }
