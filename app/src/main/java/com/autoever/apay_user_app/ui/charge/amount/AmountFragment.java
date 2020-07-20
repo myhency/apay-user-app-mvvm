@@ -75,6 +75,11 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
 
     @SuppressLint("ClickableViewAccessibility")
     private void setup() {
+        //EditText 세팅.
+        mFragmentAmountBinding.clearIcon.setVisibility(View.INVISIBLE);
+        mFragmentAmountBinding.balanceCurrency.setVisibility(View.VISIBLE);
+
+        //BottomSheet 세팅.
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(mFragmentAmountBinding.fixedAmountBottomSheet.bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -93,6 +98,7 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
             }
         });
 
+        //리스너 세팅.
         mFragmentAmountBinding.fixedAmountBottomSheet.amount100.setOnClickListener(v -> {
             mFragmentAmountBinding.cardChargeEdittext.setText("1000000");
         });
@@ -117,10 +123,9 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
             //TODO. 최대 200만원 까지?
         });
 
-        mFragmentAmountBinding.balanceCurrency.setOnClickListener(v -> {
-            if (mFragmentAmountBinding.balanceCurrency.getText().toString().equals("P")) return;
-
-            mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.color.colorWhite));
+        mFragmentAmountBinding.clearIcon.setOnClickListener(v -> {
+            mFragmentAmountBinding.clearIcon.setVisibility(View.INVISIBLE);
+            mFragmentAmountBinding.balanceCurrency.setVisibility(View.VISIBLE);
             mFragmentAmountBinding.cardChargeEdittext.setText("");
         });
 
@@ -138,20 +143,26 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().isEmpty()) {
-                    mFragmentAmountBinding.balanceCurrency.setText("P");
+//                    mFragmentAmountBinding.balanceCurrency.setText("P");
+                    mFragmentAmountBinding.balanceCurrency.setVisibility(View.VISIBLE);
                     return;
                 }
 
-                mFragmentAmountBinding.balanceCurrency.setText("");
-                mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.drawable.icon_clear));
-//                mFragmentAmountBinding.balanceCurrency.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                mFragmentAmountBinding.balanceCurrency.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+
+//                mFragmentAmountBinding.balanceCurrency.setText("");
+//                mFragmentAmountBinding.balanceCurrency.setBackground(getResources().getDrawable(R.drawable.icon_clear));
+////                mFragmentAmountBinding.balanceCurrency.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+//                mFragmentAmountBinding.balanceCurrency.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 //원화화폐단위로 포맷하여 보여줌
                 mFragmentAmountBinding.cardChargeEdittext.removeTextChangedListener(this);
                 String cleanString = s.toString().replaceAll("[%s,.]", "");
                 mFragmentAmountBinding.cardChargeEdittext.setText(CommonUtils.formatToKRW(cleanString));
                 mFragmentAmountBinding.cardChargeEdittext.addTextChangedListener(this);
+
+                //전체 삭제 아이콘을 출력.
+                mFragmentAmountBinding.clearIcon.setVisibility(View.VISIBLE);
+                mFragmentAmountBinding.balanceCurrency.setVisibility(View.INVISIBLE);
             }
         });
 
