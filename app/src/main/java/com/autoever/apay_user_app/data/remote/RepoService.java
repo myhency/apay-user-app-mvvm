@@ -25,19 +25,15 @@ import retrofit2.http.PUT;
 public interface RepoService {
 
     @POST("payment/ready")
-    @Headers("No-Authentication: true")
     Single<PaymentReadyResponse> doPaymentReadyCall(@Body PaymentReadyRequest paymentReadyRequest);
 
     @PUT("payment/do")
-    @Headers("No-Authentication: true")
     Single<PaymentDoResponse> doPaymentDoCall(@Body PaymentDoRequest paymentDoRequest);
 
     @POST("tokenSystem/charge/ready")
-    @Headers("No-Authentication: true")
     Single<ChargeReadyResponse> doChargeReadyCall(@Body ChargeReadyRequest chargeReadyRequest);
 
     @POST("user/tokenSystem/1")
-    @Headers("No-Authentication: true")
     Single<UserRegisterResponse> doUserRegisterCall(@Body UserRegisterRequest userRegisterRequest);
 
     @POST("user/login")
