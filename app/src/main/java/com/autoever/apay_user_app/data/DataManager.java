@@ -16,9 +16,11 @@ public interface DataManager extends DbHelper, ApiHelper, PreferencesHelper, Rep
 
     void updateUserInfo(
             String accessToken,
-            String userId,
+            Integer userId,
             LoggedInMode loggedInMode
     );
+
+//    void updateRepoServiceInterceptor(String accessToken);
 
     enum LoggedInMode {
         LOGGED_IN_MODE_LOGGED_OUT(0),

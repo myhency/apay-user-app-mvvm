@@ -2,6 +2,7 @@ package com.autoever.apay_user_app.di.module;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -28,6 +29,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -63,6 +66,18 @@ public class AppModule {
     }
 
     @Provides
+    @Singleton
+    PreferencesHelper providePreferenceHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
+
+//    @Provides
+//    @Singleton
+//    RepoServiceInterceptor provideRepoServiceInterceptor() {
+//        return new RepoServiceInterceptor();
+//    }
+
+    @Provides
     @DatabaseInfo
     String provideDatabaseName() {
         return AppConstants.DB_NAME;
@@ -89,12 +104,6 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
-    PreferencesHelper providePreferenceHelper(AppPreferencesHelper appPreferencesHelper) {
-        return appPreferencesHelper;
-    }
-
-    @Provides
     @PreferenceInfo
     String providePreferenceName() {
         return AppConstants.PREF_NAME;
@@ -102,8 +111,10 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit() {
-        return new Retrofit.Builder().baseUrl(BASE_URL)
+    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -111,8 +122,31 @@ public class AppModule {
 
     @Provides
     @Singleton
-    RepoService provideRetrofitService(Retrofit retrofit) {
+    RepoService provideRepoService(Retrofit retrofit) {
         return retrofit.create(RepoService.class);
     }
 
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient(AppPreferencesHelper appPreferencesHelper) {
+        return new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    Request request = chain.request();
+                    Request.Builder requestBuilder = request.newBuilder();
+
+                    Log.d("debug", "token: " + appPreferencesHelper.getAccessToken());
+
+                    if (request.header("No-Authentication") == null) {
+                        // needs credentials
+                        if (appPreferencesHelper.getAccessToken() == null) {
+                            throw new RuntimeException("Session token should be defined for auth apis");
+                        } else {
+                            requestBuilder.addHeader("Authorization","Bearer " + appPreferencesHelper.getAccessToken());
+                        }
+                    }
+
+                    return chain.proceed(requestBuilder.build());
+                })
+                .build();
+    }
 }

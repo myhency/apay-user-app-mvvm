@@ -2,6 +2,7 @@ package com.autoever.apay_user_app.ui.user.register.terms;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -68,6 +69,13 @@ public class TermsOfServiceFragment extends BaseFragment<FragmentTermsOfServiceB
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //back button 을 눌렀을 경우 Activity 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
@@ -124,6 +132,26 @@ public class TermsOfServiceFragment extends BaseFragment<FragmentTermsOfServiceB
 
     @Override
     public void openRegisterFormFragment() {
+
+    }
+
+    @Override
+    public void openDialog() {
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openPasswordFragment() {
+
+    }
+
+    @Override
+    public void openMainActivity() {
 
     }
 

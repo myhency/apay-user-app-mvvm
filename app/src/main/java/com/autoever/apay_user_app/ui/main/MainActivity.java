@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-//        showHomeFragment();
+        mMainViewModel.authTest();
     }
 
     private void showHomeFragment() {
@@ -109,7 +110,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void handleError(Throwable throwable) {
-
+        //TODO. response code 에 따라서 처리해야 함.
+        ANError anError = (ANError) throwable;
+        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
+        Log.d("debug", "throwable message: " + throwable.getMessage());
     }
 
     @Override

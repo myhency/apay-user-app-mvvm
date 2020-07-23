@@ -13,6 +13,8 @@ import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
+import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragmentProvider;
+import com.autoever.apay_user_app.ui.user.register.password.PasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragmentProvider;
 
 import dagger.Module;
@@ -45,7 +47,9 @@ public abstract class ActivityBuilder {
     abstract ChargeActivity bindChargeActivity();
 
     @ContributesAndroidInjector(modules = {
-            TermsOfServiceFragmentProvider.class
+            TermsOfServiceFragmentProvider.class,
+            RegisterFormFragmentProvider.class,
+            PasswordFragmentProvider.class
     })
     abstract RegisterActivity bindRegisterActivity();
 

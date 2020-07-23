@@ -34,15 +34,15 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public String getCurrentUserId() {
-        String userId = mPrefs.getString(PREF_KEY_CURRENT_USER_ID, AppConstants.NULL_INDEX);
+    public Integer getCurrentUserId() {
+        Integer userId = mPrefs.getInt(PREF_KEY_CURRENT_USER_ID, AppConstants.NULL_INDEX);
         return userId == AppConstants.NULL_INDEX ? null : userId;
     }
 
     @Override
-    public void setCurrentUserId(String userId) {
-        String id = userId == null ? AppConstants.NULL_INDEX : userId;
-        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_ID, id).apply();
+    public void setCurrentUserId(Integer userId) {
+        Integer id = userId == null ? AppConstants.NULL_INDEX : userId;
+        mPrefs.edit().putInt(PREF_KEY_CURRENT_USER_ID, id).apply();
     }
 
     @Override

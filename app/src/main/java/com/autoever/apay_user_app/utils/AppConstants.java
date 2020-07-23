@@ -6,7 +6,7 @@ public final class AppConstants {
 
     public static final String DB_NAME = "apay.db";
 
-    public static final String NULL_INDEX = null;
+    public static final Integer NULL_INDEX = null;
 
     public static final String PREF_NAME = "apay_pref";
 

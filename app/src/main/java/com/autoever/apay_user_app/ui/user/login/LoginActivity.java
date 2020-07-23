@@ -1,21 +1,19 @@
 package com.autoever.apay_user_app.ui.user.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.lifecycle.ViewModelProviders;
+
+import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityLoginBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.main.MainActivity;
-import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 
 import javax.inject.Inject;
@@ -63,14 +61,24 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     private void setup() {
-        mActivityLoginBinding.apayRegister.setOnClickListener(v -> {
+        mActivityLoginBinding.registerButton.setOnClickListener(v -> {
             openRegisterActivity();
+            finish();
+        });
+
+        mActivityLoginBinding.loginButton.setOnClickListener(v -> {
+            mLoginViewModel.doLogin(
+                    mActivityLoginBinding.userIdInput.getText().toString(),
+                    mActivityLoginBinding.userPasswordInput.getText().toString()
+            );
         });
     }
 
     @Override
     public void openMainActivity() {
-
+        Intent intent = MainActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -83,6 +91,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void handleError(Throwable throwable) {
-
+        //TODO. response code 에 따라서 처리해야 함.
+        ANError anError = (ANError) throwable;
+        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
+        Log.d("debug", "throwable message: " + throwable.getMessage());
     }
 }

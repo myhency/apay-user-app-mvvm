@@ -4,17 +4,23 @@ import android.content.Context;
 
 import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
+import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
+import com.autoever.apay_user_app.data.model.api.LoginRequest;
+import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
+import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
+import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
 import com.autoever.apay_user_app.data.remote.ApiHelper;
 import com.autoever.apay_user_app.data.remote.RepoService;
+import com.autoever.apay_user_app.data.remote.RepoServiceInterceptor;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,6 +28,7 @@ import javax.inject.Singleton;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Call;
+import retrofit2.http.Header;
 
 @Singleton
 public class AppDataManager implements DataManager {
@@ -34,7 +41,8 @@ public class AppDataManager implements DataManager {
     private final RepoService mRepoService;
 
     @Inject
-    public AppDataManager(ApiHelper mApiHelper, Context mContext, DbHelper mDbHelper, PreferencesHelper mPreferencesHelper, RepoService mRepoService) {
+    public AppDataManager(ApiHelper mApiHelper, Context mContext, DbHelper mDbHelper,
+                          PreferencesHelper mPreferencesHelper, RepoService mRepoService) {
         this.mApiHelper = mApiHelper;
         this.mContext = mContext;
         this.mDbHelper = mDbHelper;
@@ -53,10 +61,18 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void updateUserInfo(String accessToken, String userId, LoggedInMode loggedInMode) {
+    public void updateUserInfo(String accessToken, Integer userId, LoggedInMode loggedInMode) {
         setAccessToken(accessToken);
+        setCurrentUserId(userId);
+        setCurrentUserLoggedInMode(loggedInMode);
 
+//        updateRepoServiceInterceptor(accessToken);
     }
+
+//    @Override
+//    public void updateRepoServiceInterceptor(String accessToken) {
+//        mRepoService.getRepoServiceInterceptor().setSessionToken(accessToken);
+//    }
 
     @Override
     public Observable<Boolean> insertUser(User user) {
@@ -68,16 +84,6 @@ public class AppDataManager implements DataManager {
         return mApiHelper.getUserBalance(balanceRequest);
     }
 
-//    @Override
-//    public Single<PaymentReadyResponse> doPaymentReady(PaymentReadyRequest paymentReadyRequest) {
-//        return mApiHelper.doPaymentReady(paymentReadyRequest);
-//    }
-
-//    @Override
-//    public Call<PaymentReadyResponse> doPaymentReadyCall(PaymentReadyRequest paymentReadyRequest) {
-//        return mApiHelper.doPaymentReadyCall(paymentReadyRequest);
-//    }
-
     @Override
     public int getCurrentUserLoggedInMode() {
         return mPreferencesHelper.getCurrentUserLoggedInMode();
@@ -85,17 +91,17 @@ public class AppDataManager implements DataManager {
 
     @Override
     public void setCurrentUserLoggedInMode(LoggedInMode mode) {
-
+        mPreferencesHelper.setCurrentUserLoggedInMode(mode);
     }
 
     @Override
-    public String getCurrentUserId() {
-        return null;
+    public Integer getCurrentUserId() {
+        return mPreferencesHelper.getCurrentUserId();
     }
 
     @Override
-    public void setCurrentUserId(String userId) {
-
+    public void setCurrentUserId(Integer userId) {
+        mPreferencesHelper.setCurrentUserId(userId);
     }
 
     @Override
@@ -106,7 +112,13 @@ public class AppDataManager implements DataManager {
     @Override
     public void setAccessToken(String accessToken) {
         mPreferencesHelper.setAccessToken(accessToken);
+//        mRepoService.getRepoServiceInterceptor().setSessionToken(accessToken);
     }
+
+//    @Override
+//    public RepoServiceInterceptor getRepoServiceInterceptor() {
+//        return mRepoService.getRepoServiceInterceptor();
+//    }
 
     @Override
     public Single<PaymentReadyResponse> doPaymentReadyCall(PaymentReadyRequest paymentReadyRequest) {
@@ -123,5 +135,18 @@ public class AppDataManager implements DataManager {
         return mRepoService.doChargeReadyCall(chargeReadyRequest);
     }
 
+    @Override
+    public Single<UserRegisterResponse> doUserRegisterCall(UserRegisterRequest userRegisterRequest) {
+        return mRepoService.doUserRegisterCall(userRegisterRequest);
+    }
 
+    @Override
+    public Single<LoginResponse> doLoginCall(LoginRequest loginRequest) {
+        return mRepoService.doLoginCall(loginRequest);
+    }
+
+    @Override
+    public Single<AuthTestResponse> doAuthTextCall() {
+        return mRepoService.doAuthTextCall();
+    }
 }

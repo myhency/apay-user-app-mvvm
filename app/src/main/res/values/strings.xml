@@ -29,4 +29,11 @@
     <string name="jointerms_text_02">아래의 내용에 모두 동의합니다</string>
     <string name="jointerms_text_03">[필수]서비스 표준 이용 약관</string>
     <string name="jointerms_text_04">[선택]서비스 표준 이용 약관</string>
+
+    <string name="telecom_prompt">통신사</string>
+    <string-array name="telecom_arrays">
+        <item>SKT</item>
+        <item>KT</item>
+        <item>LGT</item>
+    </string-array>
 </resources>

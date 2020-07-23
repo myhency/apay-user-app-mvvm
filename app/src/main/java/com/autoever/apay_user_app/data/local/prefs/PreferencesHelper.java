@@ -8,9 +8,9 @@ public interface PreferencesHelper {
 
     void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
 
-    String getCurrentUserId();
+    Integer getCurrentUserId();
 
-    void setCurrentUserId(String userId);
+    void setCurrentUserId(Integer userId);
 
     String getAccessToken();
 
