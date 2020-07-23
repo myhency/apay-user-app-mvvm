@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -85,6 +87,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //menu 우측에 아이콘 삽입.
+        for (int i = 0; i < navigationView.getMenu().size(); i++) {
+            navigationView.getMenu().getItem(i).setActionView(R.layout.menu_image);
+        }
+
+//        navigationView.setNavigationItemSelectedListener(this);
+
+        //home menu 는 보이지 않게 설정.
+        Menu menu = navigationView.getMenu();
+        MenuItem target = menu.findItem(R.id.nav_home);
+        target.setVisible(false);
+
         mMainViewModel.authTest();
     }
 
@@ -105,7 +119,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("debug","MainActivity resume");
+        Log.d("debug", "MainActivity resume");
     }
 
     @Override
