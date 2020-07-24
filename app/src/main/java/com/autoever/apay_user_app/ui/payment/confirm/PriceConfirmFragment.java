@@ -25,6 +25,8 @@ import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBinding, PaymentViewModel> implements PaymentNavigator {
@@ -115,7 +117,7 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     }
 
     @Override
-    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
 
     }
 

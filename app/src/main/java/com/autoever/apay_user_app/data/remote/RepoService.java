@@ -1,6 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
+import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
@@ -42,4 +43,7 @@ public interface RepoService {
 
     @GET("authTest/hello")
     Single<AuthTestResponse> doAuthTextCall();
+
+    @GET("tokenSystem/1/tokenHistories?subscriberId=4")
+    Single<CardUseHistoryResponse> doHistoryTestCall();
 }

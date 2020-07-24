@@ -28,6 +28,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -175,7 +176,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     @Override
-    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
 
     }
 

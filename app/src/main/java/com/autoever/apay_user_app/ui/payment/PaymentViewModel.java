@@ -125,7 +125,6 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                     setIsLoading(false);
                     Log.d("debug", paymentDoResponse.toString());
                     storeNameLiveData.setValue(paymentDoResponse.getData().getStoreName());
-                    createdDateLiveData.setValue(paymentDoResponse.getData().getCreatedDate());
                     amountLiveData.setValue(CommonUtils.formatToKRW(String.valueOf(paymentDoResponse.getData().getAmount())) + " P");
                     balanceLeftKWRLiveData.setValue(CommonUtils.formatToKRW(String.valueOf(paymentDoResponse.getData().getUserBalance())) + " P");
                     getNavigator().showReceiptFragment(

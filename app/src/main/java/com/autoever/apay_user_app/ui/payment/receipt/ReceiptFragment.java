@@ -22,6 +22,9 @@ import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 
@@ -35,10 +38,12 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
     ViewModelProviderFactory factory;
     private PaymentViewModel mReceiptViewModel;
 
-    public static ReceiptFragment newInstance(String storeName, String createdDate, int amount, int userBalance) {
+    public static ReceiptFragment newInstance(String storeName, Date createdDate, int amount, int userBalance) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+
         Bundle args = new Bundle();
         args.putString("storeName", storeName);
-        args.putString("createdDate", createdDate);
+        args.putString("createdDate", simpleDateFormat.format(createdDate));
         args.putInt("amount", amount);
         args.putInt("userBalance", userBalance);
         ReceiptFragment fragment = new ReceiptFragment();
@@ -116,7 +121,7 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
     }
 
     @Override
-    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
 
     }
 

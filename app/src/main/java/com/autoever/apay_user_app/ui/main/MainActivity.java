@@ -133,12 +133,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         });
     }
 
-    private void showHomeFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.content_main, HomeFragment.newInstance(), HomeFragment.TAG)
-                .commit();
-    }
+//    private void showHomeFragment() {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.content_main, HomeFragment.newInstance(), HomeFragment.TAG)
+//                .commit();
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {

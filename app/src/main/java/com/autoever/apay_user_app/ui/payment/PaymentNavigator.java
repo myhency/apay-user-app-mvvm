@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.ui.payment;
 
+import java.util.Date;
+
 public interface PaymentNavigator {
 
     void handleError(Throwable throwable);
@@ -12,7 +14,7 @@ public interface PaymentNavigator {
 
     void openAuthFragment();
 
-    void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance);
+    void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance);
 
     void doPaymentReady();
 

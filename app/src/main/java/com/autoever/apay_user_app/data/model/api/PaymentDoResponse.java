@@ -3,6 +3,8 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * {
  * "data": {
@@ -73,7 +75,7 @@ public class PaymentDoResponse {
 
         @Expose
         @SerializedName("createdDate")
-        private String createdDate;
+        private Date createdDate;
 
         public PaymentDo(String paymentHistoryId,
                          String paymentId,
@@ -85,7 +87,7 @@ public class PaymentDoResponse {
                          int userBalance,
                          String paymentStatus,
                          String identifier,
-                         String createdDate) {
+                         Date createdDate) {
             this.paymentHistoryId = paymentHistoryId;
             this.paymentId = paymentId;
             this.userId = userId;
@@ -139,7 +141,7 @@ public class PaymentDoResponse {
             return identifier;
         }
 
-        public String getCreatedDate() {
+        public Date getCreatedDate() {
             return createdDate;
         }
     }

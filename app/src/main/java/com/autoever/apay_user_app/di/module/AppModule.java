@@ -23,6 +23,8 @@ import com.autoever.apay_user_app.di.PreferenceInfo;
 import com.autoever.apay_user_app.utils.AppConstants;
 import com.autoever.apay_user_app.utils.rx.AppSchedulerProvider;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
 
@@ -112,11 +114,15 @@ public class AppModule {
     @Provides
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.zzz")
+                .create();
+
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
 

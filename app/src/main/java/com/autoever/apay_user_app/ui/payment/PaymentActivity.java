@@ -28,6 +28,7 @@ import com.autoever.apay_user_app.utils.CommonUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -174,7 +175,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
         mActivityPaymentBinding.toolbar.setVisibility(View.INVISIBLE);
         mActivityPaymentBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
         mFragmentManager

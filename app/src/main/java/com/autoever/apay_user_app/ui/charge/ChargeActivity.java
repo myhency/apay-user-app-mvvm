@@ -1,15 +1,13 @@
 package com.autoever.apay_user_app.ui.charge;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
@@ -19,13 +17,10 @@ import com.autoever.apay_user_app.databinding.ActivityChargeBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
-import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Timestamp;
 
 import javax.inject.Inject;
 

@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.utils.CommonUtils;
@@ -84,6 +85,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mFragmentHomeBinding.mainCardChargeButton.setOnClickListener(v -> {
             openCardChargeActivity();
         });
+
+        mFragmentHomeBinding.mainCardInfoButton.setOnClickListener(v -> {
+            openCardInfoActivity();
+        });
     }
 
     @Override
@@ -114,7 +119,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     @Override
     public void openCardInfoActivity() {
-
+        Log.d("debug", "openCardInfoActivity");
+        Intent intent = CardInfoActivity.newIntent(getActivity());
+        startActivity(intent);
     }
 
     @Override

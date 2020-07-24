@@ -23,6 +23,8 @@ import com.autoever.apay_user_app.utils.CommonUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentViewModel> implements PaymentNavigator {
@@ -283,7 +285,7 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     }
 
     @Override
-    public void showReceiptFragment(String storeName, String createdDate, int amount, int userBalance) {
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
 
     }
 
