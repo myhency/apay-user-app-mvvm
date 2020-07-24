@@ -14,9 +14,11 @@ public interface DataManager extends DbHelper, ApiHelper, PreferencesHelper, Rep
 
     Observable<Boolean> getAppAccessPermissions();
 
+    void setUserAsLoggedOut();
+
     void updateUserInfo(
             String accessToken,
-            Integer userId,
+            Long userId,
             LoggedInMode loggedInMode
     );
 

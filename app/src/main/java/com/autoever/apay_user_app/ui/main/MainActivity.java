@@ -23,6 +23,8 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityMainBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
+import com.autoever.apay_user_app.ui.splash.SplashActivity;
+import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import javax.inject.Inject;
@@ -71,6 +73,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mActivityMainBinding = getViewDataBinding();
         mMainViewModel.setNavigator(this);
 
+        setup();
+
+
+    }
+
+    private void setup() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -100,6 +108,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         target.setVisible(false);
 
         mMainViewModel.authTest();
+
+        mActivityMainBinding.logout.setOnClickListener(v -> {
+            mMainViewModel.logout();
+        });
     }
 
     private void showHomeFragment() {
@@ -132,7 +144,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openLoginActivity() {
-
+        Log.d("debug", "LoginActivity Open");
+        Intent intent = LoginActivity.newIntent(MainActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     @Override

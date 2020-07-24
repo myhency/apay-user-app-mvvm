@@ -22,7 +22,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                 .doOnSuccess(response -> getDataManager()
                         .updateUserInfo(
                                 response.getData().getJwtToken(),
-                                Integer.valueOf(response.getData().getUserId()),
+                                Long.valueOf(response.getData().getUserId()),
                                 DataManager.LoggedInMode.LOGGED_IN_MODE_SERVER
                         ))
                 .subscribeOn(getSchedulerProvider().io())

@@ -14,6 +14,11 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
         super(mDataManager, schedulerProvider);
     }
 
+    public void logout() {
+        getDataManager().setUserAsLoggedOut();
+        getNavigator().openLoginActivity();
+    }
+
     public void authTest() {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
