@@ -164,4 +164,9 @@ public class AppDataManager implements DataManager {
     public Single<CardUseHistoryResponse> doHistoryTestCall() {
         return mRepoService.doHistoryTestCall();
     }
+
+    @Override
+    public Single<CardUseHistoryResponse> doCardUseHistoryCall(int tokenSystemId, int subscriberId, int pageNo, int pageSize) {
+        return mRepoService.doCardUseHistoryCall(tokenSystemId, subscriberId, pageNo, pageSize);
+    }
 }

@@ -26,6 +26,8 @@ import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -33,6 +35,7 @@ import dagger.Provides;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -116,6 +119,7 @@ public class AppModule {
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.zzz")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
 
         return new Retrofit.Builder()
@@ -135,6 +139,9 @@ public class AppModule {
     @Provides
     @Singleton
     OkHttpClient provideOkHttpClient(AppPreferencesHelper appPreferencesHelper) {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         return new OkHttpClient.Builder()
                 .addInterceptor(chain -> {
                     Request request = chain.request();
@@ -153,6 +160,7 @@ public class AppModule {
 
                     return chain.proceed(requestBuilder.build());
                 })
+                .addInterceptor(logging)
                 .build();
     }
 }

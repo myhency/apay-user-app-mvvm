@@ -76,7 +76,12 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
 
         setup();
 
-        mCardInfoViewModel.getHistoryTest();
+        mCardInfoViewModel.fetchCardUseHistoryContents(
+                1,
+                4,
+                1,
+                1
+        );
     }
 
     private void setup() {

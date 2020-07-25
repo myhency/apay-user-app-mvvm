@@ -22,6 +22,8 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RepoService {
 
@@ -46,4 +48,12 @@ public interface RepoService {
 
     @GET("tokenSystem/1/tokenHistories?subscriberId=4")
     Single<CardUseHistoryResponse> doHistoryTestCall();
+
+    @GET("user/tokenSystem/{tokenSystemId}/paymentHistories")
+    Single<CardUseHistoryResponse> doCardUseHistoryCall(
+            @Path("tokenSystemId") int tokenSystemId,
+            @Query("userId") int userId,
+            @Query("pageNo") int pageNo,
+            @Query("pageSize") int pageSize
+    );
 }
