@@ -2,6 +2,7 @@ package com.autoever.apay_user_app.ui.card.info;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
@@ -32,8 +33,12 @@ public class CardInfoViewModel extends BaseViewModel<CardInfoNavigator> {
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(cardUseHistoryResponse -> {
-                    Log.d("debug", cardUseHistoryResponse.getData().getContents().get(0).getIdentifier());
+                    if(cardUseHistoryResponse != null && cardUseHistoryResponse.getData() != null) {
+                        cardUseHistoryContentLiveData.setValue(cardUseHistoryResponse.getData().getContents());
+                    }
+                    setIsLoading(false);
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
@@ -53,4 +58,8 @@ public class CardInfoViewModel extends BaseViewModel<CardInfoNavigator> {
 //                    getNavigator().handleError(throwable);
 //                }));
 //    }
+
+    public LiveData<List<CardUseHistoryResponse.CardUseHistory.Content>> getCardUseHistoryContentLiveData() {
+        return cardUseHistoryContentLiveData;
+    }
 }

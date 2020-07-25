@@ -1,17 +1,14 @@
 package com.autoever.apay_user_app.ui.card.info;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.ItemCardUseEmptyViewBinding;
 import com.autoever.apay_user_app.databinding.ItemCardUseHistoryBinding;
 import com.autoever.apay_user_app.ui.base.BaseViewHolder;
-import com.autoever.apay_user_app.ui.base.BaseViewModel;
 
 import java.util.List;
 
@@ -57,13 +54,17 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
-                ItemCardUseHistoryBinding cardUseHistoryBinding = ItemCardUseHistoryBinding.inflate(LayoutInflater.from(parent.getContext()),
-                        parent, false);
+                ItemCardUseHistoryBinding cardUseHistoryBinding = ItemCardUseHistoryBinding.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        parent,
+                        false);
                 return new CardUseHistoryViewHolder(cardUseHistoryBinding);
             case VIEW_TYPE_EMPTY:
             default:
-                ItemCardUseEmptyViewBinding emptyViewBinding = ItemCardUseEmptyViewBinding.inflate(LayoutInflater.from(parent.getContext()),
-                        parent, false);
+                ItemCardUseEmptyViewBinding emptyViewBinding = ItemCardUseEmptyViewBinding.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        parent,
+                        false);
                 return new EmptyViewHolder(emptyViewBinding);
         }
     }

@@ -1,31 +1,28 @@
 package com.autoever.apay_user_app.ui.card.info;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardInfoBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 
-public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, CardInfoViewModel> implements CardInfoNavigator {
+public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, CardInfoViewModel>
+        implements CardInfoNavigator, CardInfoAdapter.CardUseHistoryListener {
 
     public static final String TAG = CardInfoFragment.class.getSimpleName();
 
@@ -67,15 +64,15 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCardInfoViewModel.setNavigator(this);
+        mCardInfoAdapter.setListener(this);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentCardInfoBinding = getViewDataBinding();
-
         setup();
-
         mCardInfoViewModel.fetchCardUseHistoryContents(
                 1,
                 4,
@@ -95,5 +92,15 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
         ANError anError = (ANError) throwable;
         Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
         Log.d("debug", "throwable message: " + throwable.getMessage());
+    }
+
+    @Override
+    public void updateCardUseHistoryContent(List<CardUseHistoryResponse.CardUseHistory.Content> contentList) {
+        mCardInfoAdapter.addItems(contentList);
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }
