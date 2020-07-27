@@ -9,4 +9,10 @@ public interface CardInfoNavigator {
     void handleError(Throwable throwable);
 
     void updateCardUseHistoryContent(List<CardUseHistoryResponse.CardUseHistory.Content> contentList);
+
+    void onCompleteUpdatePaymentHistoryList();
+
+    void openChargeActivity();
+
+    void openRefundActivity();
 }

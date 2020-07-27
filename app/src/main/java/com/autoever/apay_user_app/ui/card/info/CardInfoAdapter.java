@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.ui.card.info;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -87,7 +88,8 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onRetryClick();
     }
 
-    public class CardUseHistoryViewHolder extends BaseViewHolder implements HistoryItemViewModel.CardUseHistoryListener {
+    public class CardUseHistoryViewHolder extends BaseViewHolder
+            implements HistoryItemViewModel.CardUseHistoryListener {
 
         private ItemCardUseHistoryBinding mBinding;
 
@@ -105,6 +107,8 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mBinding.setViewModel(mHistoryItemViewModel);
 
             mBinding.executePendingBindings();
+
+            Log.d("debug", "current position: " + position);
         }
 
         @Override

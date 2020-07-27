@@ -5,4 +5,5 @@ public interface CardInfoNavigator {
     void handleError(Throwable throwable);
 
     void openCardInfoFragment();
+
 }

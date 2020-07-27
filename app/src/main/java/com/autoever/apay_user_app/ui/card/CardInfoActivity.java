@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -79,6 +80,13 @@ public class CardInfoActivity extends BaseActivity<ActivityCardInfoBinding, Card
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             mActivityCardInfoBinding.toolbarTitle.setText("카드 정보");
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("debug", "onOptionsItemSelected:" + item.toString());
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
