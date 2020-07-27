@@ -165,7 +165,6 @@
                 android:autoSizeStepGranularity="1sp"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/spoqa_han_sans_bold"
-                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
                 android:text="P"
                 android:textColor="#5e7ae5"
                 android:textSize="20sp"
