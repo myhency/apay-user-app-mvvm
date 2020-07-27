@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openMainActivity() {
+        hideKeyboard();
         Intent intent = MainActivity.newIntent(LoginActivity.this);
         startActivity(intent);
         finish();

@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,6 +27,7 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityMainBinding;
+import com.autoever.apay_user_app.databinding.NavHeaderMainBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
@@ -45,6 +50,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     private ActivityMainBinding mActivityMainBinding;
     private MainViewModel mMainViewModel;
+    private DrawerLayout mDrawer;
+    private NavigationView mNavigationView;
+    private Toolbar mToolbar;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -76,40 +84,66 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mMainViewModel.setNavigator(this);
 
         setup();
-
-
     }
 
     private void setup() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mDrawer = mActivityMainBinding.drawerLayout;
+        mToolbar = mActivityMainBinding.toolbar;
+        mNavigationView = mActivityMainBinding.navView;
+
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawer,
+                mToolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        ) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hideKeyboard();
+            }
+        };
+
+        mDrawer.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        setupNavMenu();
+    }
+
+    private void setupNavMenu() {
+        NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
+                R.layout.nav_header_main, mActivityMainBinding.navView, false);
+        mActivityMainBinding.navView.addHeaderView(navHeaderMainBinding.getRoot());
+        navHeaderMainBinding.setViewModel(mMainViewModel);
 
         //menu 우측에 아이콘 삽입.
-        for (int i = 0; i < navigationView.getMenu().size(); i++) {
-            navigationView.getMenu().getItem(i).setActionView(R.layout.menu_image);
+        for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+            mNavigationView.getMenu().getItem(i).setActionView(R.layout.menu_image);
         }
 
 //        navigationView.setNavigationItemSelectedListener(this);
 
         //home menu 는 보이지 않게 설정.
-        Menu menu = navigationView.getMenu();
+        Menu menu = mNavigationView.getMenu();
         MenuItem target = menu.findItem(R.id.nav_home);
         target.setVisible(false);
 
-        mMainViewModel.authTest();
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setDrawerLayout(mDrawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(mNavigationView, navController);
 
         mActivityMainBinding.logout.setOnClickListener(v -> {
             //여기서 다이얼로그를 띄워준다.
@@ -131,14 +165,29 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
             dialog.show();
         });
-    }
 
-//    private void showHomeFragment() {
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.content_main, HomeFragment.newInstance(), HomeFragment.TAG)
-//                .commit();
-//    }
+        mNavigationView.setNavigationItemSelectedListener(item -> {
+            mDrawer.closeDrawer(GravityCompat.START);
+            switch (item.getItemId()) {
+                case R.id.nav_payment:
+                    openPaymentActivity();
+                    return true;
+                case R.id.nav_charge:
+                    openCardChargeActivity();
+                    return true;
+                case R.id.nav_account_management:
+                    openBankAccountManagementActivity();
+                    return true;
+                case R.id.nav_find_store:
+                    return true;
+                case R.id.nav_faq:
+                    openFaqActivity();
+                    return true;
+                default:
+                    return false;
+            }
+        });
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
