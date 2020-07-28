@@ -3,6 +3,9 @@ package com.autoever.apay_user_app.di.builder;
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentProvider;
+import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
+import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
+import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragmentProvider;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
@@ -62,4 +65,9 @@ public abstract class ActivityBuilder {
             CardInfoFragmentProvider.class
     })
     abstract CardInfoActivity bindCardInfoActivity();
+
+    @ContributesAndroidInjector(modules = {
+            CardUseHistoryFragmentProvider.class
+    })
+    abstract CardUseActivity bindCardUseActivity();
 }

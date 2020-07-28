@@ -29,6 +29,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityMainBinding;
 import com.autoever.apay_user_app.databinding.NavHeaderMainBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
@@ -116,6 +117,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         setupNavMenu();
+
     }
 
     private void setupNavMenu() {
@@ -123,6 +125,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 R.layout.nav_header_main, mActivityMainBinding.navView, false);
         mActivityMainBinding.navView.addHeaderView(navHeaderMainBinding.getRoot());
         navHeaderMainBinding.setViewModel(mMainViewModel);
+
+        navHeaderMainBinding.drawerUseList.setOnClickListener(v -> {
+            openCardUseHistoryActivity();
+        });
 
         //menu 우측에 아이콘 삽입.
         for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
@@ -138,7 +144,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home)
                 .setDrawerLayout(mDrawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -240,7 +246,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openCardUseHistoryActivity() {
-
+        Log.d("debug", "openCardUseHistoryActivity");
+        Intent intent = CardUseActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override

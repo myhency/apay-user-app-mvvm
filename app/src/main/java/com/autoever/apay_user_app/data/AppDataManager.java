@@ -166,7 +166,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<CardUseHistoryResponse> doCardUseHistoryCall(int tokenSystemId, int subscriberId, int pageNo, int pageSize) {
-        return mRepoService.doCardUseHistoryCall(tokenSystemId, subscriberId, pageNo, pageSize);
+    public Single<CardUseHistoryResponse> doCardUseHistoryCall(int tokenSystemId, int subscriberId, int pageNo, int pageSize, String date, String filter) {
+        return mRepoService.doCardUseHistoryCall(tokenSystemId, subscriberId, pageNo, pageSize, date, filter);
     }
 }

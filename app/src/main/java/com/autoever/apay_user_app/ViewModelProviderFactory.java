@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.ui.auth.AuthViewModel;
 import com.autoever.apay_user_app.ui.card.CardInfoViewModel;
+import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentViewModel;
+import com.autoever.apay_user_app.ui.card.use.CardUseViewModel;
+import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
 import com.autoever.apay_user_app.ui.charge.ChargeViewModel;
 import com.autoever.apay_user_app.ui.charge.amount.AmountViewModel;
 import com.autoever.apay_user_app.ui.home.HomeViewModel;
@@ -51,8 +54,12 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new LoginViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(CardInfoViewModel.class)) {
             return (T) new CardInfoViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(com.autoever.apay_user_app.ui.card.info.CardInfoViewModel.class)) {
-            return (T) new com.autoever.apay_user_app.ui.card.info.CardInfoViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CardInfoFragmentViewModel.class)) {
+            return (T) new CardInfoFragmentViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CardUseViewModel.class)) {
+            return (T) new CardUseViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CardUseHistoryViewModel.class)) {
+            return (T) new CardUseHistoryViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

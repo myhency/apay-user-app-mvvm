@@ -1,12 +1,12 @@
-package com.autoever.apay_user_app.ui.card.info;
+package com.autoever.apay_user_app.ui.card.item;
 
 import androidx.databinding.ObservableField;
 
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
+import com.autoever.apay_user_app.ui.card.common.PaymentStatus;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class HistoryItemViewModel {
 

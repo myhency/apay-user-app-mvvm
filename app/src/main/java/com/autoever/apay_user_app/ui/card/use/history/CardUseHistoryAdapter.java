@@ -1,12 +1,14 @@
-package com.autoever.apay_user_app.ui.card.info;
+package com.autoever.apay_user_app.ui.card.use.history;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
+import com.autoever.apay_user_app.data.model.api.UseHistoryResponse;
 import com.autoever.apay_user_app.databinding.ItemCardUseEmptyViewBinding;
 import com.autoever.apay_user_app.databinding.ItemCardUseHistoryBinding;
 import com.autoever.apay_user_app.ui.base.BaseViewHolder;
@@ -15,19 +17,17 @@ import com.autoever.apay_user_app.ui.card.item.HistoryItemViewModel;
 
 import java.util.List;
 
-
-public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
-
+public class CardUseHistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public static final int VIEW_TYPE_EMPTY = 0;
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private List<CardUseHistoryResponse.CardUseHistory.Content> mCardUseHistoryResponseList;
+    private List<UseHistoryResponse.CardUseHistory.Content> mCardUseHistoryResponseList;
 
     private CardUseHistoryListener mListener;
 
-    public CardInfoAdapter(List<CardUseHistoryResponse.CardUseHistory.Content> cardUseHistoryResponseList) {
-        this.mCardUseHistoryResponseList = cardUseHistoryResponseList;
+    public CardUseHistoryAdapter(List<UseHistoryResponse.CardUseHistory.Content> mCardUseHistoryResponseList) {
+        this.mCardUseHistoryResponseList = mCardUseHistoryResponseList;
     }
 
     @Override
@@ -53,8 +53,9 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         holder.OnBind(position);
     }
 
+    @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
                 ItemCardUseHistoryBinding cardUseHistoryBinding = ItemCardUseHistoryBinding.inflate(
@@ -85,11 +86,6 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         this.mListener = listener;
     }
 
-    public interface CardUseHistoryListener {
-
-        void onRetryClick();
-    }
-
     public class CardUseHistoryViewHolder extends BaseViewHolder
             implements HistoryItemViewModel.CardUseHistoryListener {
 
@@ -104,7 +100,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void OnBind(int position) {
-            final CardUseHistoryResponse.CardUseHistory.Content content = mCardUseHistoryResponseList.get(position);
+            final UseHistoryResponse.CardUseHistory.Content content = mCardUseHistoryResponseList.get(position);
             mHistoryItemViewModel = new HistoryItemViewModel(content, this);
             mBinding.setViewModel(mHistoryItemViewModel);
 
@@ -138,5 +134,10 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onRetryClick() {
             mListener.onRetryClick();
         }
+    }
+
+    public interface CardUseHistoryListener {
+
+        void onRetryClick();
     }
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.autoever.apay_user_app.ui.card.info.CardInfoViewModel" />
+            type="com.autoever.apay_user_app.ui.card.info.CardInfoFragmentViewModel" />
 
     </data>
 

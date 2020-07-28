@@ -3,16 +3,13 @@ package com.autoever.apay_user_app.ui.card.info;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
@@ -28,7 +25,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, CardInfoViewModel>
+public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, CardInfoFragmentViewModel>
         implements CardInfoNavigator, CardInfoAdapter.CardUseHistoryListener {
 
     public static final String TAG = CardInfoFragment.class.getSimpleName();
@@ -45,7 +42,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     @Inject
     LinearLayoutManager mLayoutManager;
 
-    private CardInfoViewModel mCardInfoViewModel;
+    private CardInfoFragmentViewModel mCardInfoFragmentViewModel;
 
     public static CardInfoFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,16 +62,16 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     }
 
     @Override
-    public CardInfoViewModel getViewModel() {
-        mCardInfoViewModel = ViewModelProviders.of(this, factory)
-                .get(CardInfoViewModel.class);
-        return mCardInfoViewModel;
+    public CardInfoFragmentViewModel getViewModel() {
+        mCardInfoFragmentViewModel = ViewModelProviders.of(this, factory)
+                .get(CardInfoFragmentViewModel.class);
+        return mCardInfoFragmentViewModel;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCardInfoViewModel.setNavigator(this);
+        mCardInfoFragmentViewModel.setNavigator(this);
         mCardInfoAdapter.setListener(this);
         //back button 을 눌렀을 경우 Activity 를 종료한다.
         getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -96,7 +93,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     }
 
     private void callCardUseHistoryContents(int pageNo) {
-        mCardInfoViewModel.fetchCardUseHistoryContents(
+        mCardInfoFragmentViewModel.fetchCardUseHistoryContents(
                 1,
                 4,
                 pageNo,

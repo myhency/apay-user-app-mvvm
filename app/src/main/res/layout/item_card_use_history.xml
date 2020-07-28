@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.autoever.apay_user_app.ui.card.info.HistoryItemViewModel" />
+            type="com.autoever.apay_user_app.ui.card.item.HistoryItemViewModel" />
 
     </data>
 

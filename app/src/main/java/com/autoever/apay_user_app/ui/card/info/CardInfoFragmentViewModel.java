@@ -15,13 +15,13 @@ import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardInfoViewModel extends BaseViewModel<CardInfoNavigator> {
+public class CardInfoFragmentViewModel extends BaseViewModel<CardInfoNavigator> {
 
     private final MutableLiveData<String> balanceKRWLiveData;
     private final MutableLiveData<List<CardUseHistoryResponse.CardUseHistory.Content>> cardUseHistoryContentLiveData;
     private List<CardUseHistoryResponse.CardUseHistory.Content> previousContents = new ArrayList<>();
 
-    public CardInfoViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
+    public CardInfoFragmentViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
         super(mDataManager, schedulerProvider);
         cardUseHistoryContentLiveData = new MutableLiveData<>();
         balanceKRWLiveData = new MutableLiveData<>();
@@ -60,7 +60,9 @@ public class CardInfoViewModel extends BaseViewModel<CardInfoNavigator> {
                         tokenSystemId,
                         subscriberId,
                         pageNo,
-                        pageSize)
+                        pageSize,
+                        null,
+                        null)
                 .doOnSuccess(response -> getNavigator().onCompleteUpdatePaymentHistoryList())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

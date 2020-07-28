@@ -1,4 +1,4 @@
-package com.autoever.apay_user_app.ui.card.info;
+package com.autoever.apay_user_app.ui.card.item;
 
 public class HistoryEmptyItemViewModel {
 

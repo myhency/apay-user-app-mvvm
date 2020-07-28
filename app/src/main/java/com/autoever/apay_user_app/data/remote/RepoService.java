@@ -54,6 +54,8 @@ public interface RepoService {
             @Path("tokenSystemId") int tokenSystemId,
             @Query("userId") int userId,
             @Query("pageNo") int pageNo,
-            @Query("pageSize") int pageSize
+            @Query("pageSize") int pageSize,
+            @Query("date") String date,
+            @Query("filter") String filter
     );
 }
