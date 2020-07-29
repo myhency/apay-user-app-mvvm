@@ -209,6 +209,8 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                         Log.d("debug", "shopCode: " + shopCode);
                         showPriceFragment(shopCode);
                         break;
+                    case RESULT_CANCELED:
+                        finish();
                     default:
                         break;
                 }

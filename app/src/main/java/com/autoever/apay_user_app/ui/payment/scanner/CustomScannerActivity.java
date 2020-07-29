@@ -194,4 +194,11 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     public void goNext() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
+        finish();
+    }
 }

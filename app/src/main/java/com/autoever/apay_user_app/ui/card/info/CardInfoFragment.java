@@ -105,6 +105,11 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentCardInfoBinding.paymentHistoryList.setLayoutManager(mLayoutManager);
         mFragmentCardInfoBinding.paymentHistoryList.setAdapter(mCardInfoAdapter);
+
+        mCardInfoAdapter.onItemClick(paymentHistoryId -> {
+            // Nothing to do.
+        });
+
         mFragmentCardInfoBinding.paymentHistoryList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
