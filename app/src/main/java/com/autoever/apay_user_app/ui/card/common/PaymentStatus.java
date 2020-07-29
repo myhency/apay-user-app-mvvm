@@ -7,16 +7,17 @@ import java.util.List;
 
 public enum PaymentStatus {
 
-    PAY_COMPLETE("결제", "PAY_COMPLETE"),
-    PAY_READY("결제대기", "PAY_READY"),
-    PAY_READY_CANCEL("결제대기취소", "PAY_READY_CANCEL"),
-    PAY_CANCEL("결제취소", "PAY_CANCEL"),
-    REFUND_COMPLETE("환전완료", "REFUND_COMPLETE");
+    PAY_COMPLETE("결제", "PAY_COMPLETE", false),
+    PAY_READY("결제대기", "PAY_READY", false),
+    PAY_READY_CANCEL("결제대기취소", "PAY_READY_CANCEL",false),
+    PAY_CANCEL("결제취소", "PAY_CANCEL", true),
+    REFUND_COMPLETE("환전완료", "REFUND_COMPLETE", false);
 
     private String displayValue;
     private String status;
+    private boolean isIncome;
 
-    PaymentStatus(String displayValue, String status) {
+    PaymentStatus(String displayValue, String status, boolean isIncome) {
         this.displayValue = displayValue;
         this.status = status;
     }
@@ -29,15 +30,6 @@ public enum PaymentStatus {
                 .filter(value -> value.getStatus().equals(status))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
-//        for(PaymentStatus value : values) {
-//            if(value.getStatus().equals(status)) {
-//                return value;
-//            } else {
-//                throw new IllegalArgumentException("Error: " + status);
-//            }
-//        }
-//
-//        throw new IllegalArgumentException("Error: " + status);
     }
 
     public String getDisplayValue() {
@@ -46,5 +38,9 @@ public enum PaymentStatus {
 
     public String getStatus() {
         return status;
+    }
+
+    public boolean isIncome() {
+        return isIncome;
     }
 }

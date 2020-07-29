@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 android:text="@{viewModel.amount.toString()}"
-                android:textColor="#304db9"
+                android:textColor="@{viewModel.isIncome ? @color/warningColor : @color/colorPrimaryDark}"
                 android:textSize="17sp" />
 
         </LinearLayout>

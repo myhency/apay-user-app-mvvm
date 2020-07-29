@@ -18,6 +18,8 @@ public class HistoryItemViewModel {
 
     public final ObservableField<String> paymentStatus;
 
+    public final ObservableField<Boolean> isIncome;
+
     public final CardUseHistoryListener mListener;
 
     private final CardUseHistoryResponse.CardUseHistory.Content mHistory;
@@ -31,6 +33,7 @@ public class HistoryItemViewModel {
         amount = new ObservableField<>(CommonUtils.formatToKRW(String.valueOf(mHistory.getAmount())) + " P");
         date = new ObservableField<>(simpleDateFormat.format(mHistory.getCreatedDate()));
         paymentStatus = new ObservableField<>(PaymentStatus.find(mHistory.getPaymentStatus()).getDisplayValue());
+        isIncome = new ObservableField<>(PaymentStatus.find(mHistory.getPaymentStatus()).isIncome());
     }
 
     public void onItemClick() {

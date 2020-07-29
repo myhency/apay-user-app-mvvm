@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -21,6 +22,8 @@ import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -106,6 +109,27 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
                     e.printStackTrace();
                 }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("debug", "onOptionsItemSelected:" + item.toString());
+        List<Fragment> fragments = mFragmentManager.getFragments();
+        String fragmentTag = fragments.get(fragments.size() - 1).getTag();
+        switch (fragmentTag) {
+            case "CardUseHistoryFragment":
+                finish();
+            case "CardUseDetailFragment":
+                Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
+                mFragmentManager
+                        .beginTransaction()
+                        .disallowAddToBackStack()
+                        .remove(fragment)
+                        .commit();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
