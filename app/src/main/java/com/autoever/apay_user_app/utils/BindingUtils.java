@@ -4,9 +4,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
-import com.autoever.apay_user_app.data.model.api.UseHistoryResponse;
 import com.autoever.apay_user_app.ui.card.info.CardInfoAdapter;
-import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryAdapter;
 
 import java.util.List;
 
@@ -19,15 +17,6 @@ public final class BindingUtils {
     @BindingAdapter({"adapter"})
     public static void addCardInfoItems(RecyclerView recyclerView, List<CardUseHistoryResponse.CardUseHistory.Content> contentList) {
         CardInfoAdapter adapter = (CardInfoAdapter) recyclerView.getAdapter();
-        if(adapter != null) {
-            adapter.clearItems();
-            adapter.addItems(contentList);
-        }
-    }
-
-    @BindingAdapter({"adapter"})
-    public static void addUseHistoryItems(RecyclerView recyclerView, List<UseHistoryResponse.CardUseHistory.Content> contentList) {
-        CardUseHistoryAdapter adapter = (CardUseHistoryAdapter) recyclerView.getAdapter();
         if(adapter != null) {
             adapter.clearItems();
             adapter.addItems(contentList);

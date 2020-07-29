@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardUseHistoryBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.card.info.CardInfoAdapter;
 import com.autoever.apay_user_app.ui.card.use.CardUseNavigator;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +34,7 @@ import javax.inject.Inject;
 
 
 public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryBinding, CardUseHistoryViewModel>
-        implements CardUseHistoryNavigator, CardUseHistoryAdapter.CardUseHistoryListener {
+        implements CardUseHistoryNavigator, CardInfoAdapter.CardUseHistoryListener {
 
     public static final String TAG = CardUseHistoryFragment.class.getSimpleName();
 
@@ -47,7 +48,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
     @Inject
     ViewModelProviderFactory factory;
     @Inject
-    CardUseHistoryAdapter mCardUseHistoryAdapter;
+    CardInfoAdapter mCardUseHistoryAdapter;
     @Inject
     LinearLayoutManager mLayoutManager;
 

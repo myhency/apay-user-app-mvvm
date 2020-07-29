@@ -2,6 +2,8 @@ package com.autoever.apay_user_app.ui.card.use.history;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.autoever.apay_user_app.ui.card.info.CardInfoAdapter;
+
 import java.util.ArrayList;
 
 import dagger.Module;
@@ -12,8 +14,8 @@ import dagger.Provides;
 public class CardUseHistoryFragmentModule {
 
     @Provides
-    CardUseHistoryAdapter provideCardUseHistoryAdapter() {
-        return new CardUseHistoryAdapter(new ArrayList<>());
+    CardInfoAdapter provideCardUseHistoryAdapter() {
+        return new CardInfoAdapter(new ArrayList<>());
     }
 
     @Provides
