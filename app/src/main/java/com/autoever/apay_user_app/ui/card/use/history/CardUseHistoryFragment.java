@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.ui.card.use.history;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -23,6 +24,9 @@ import com.autoever.apay_user_app.databinding.FragmentCardUseHistoryBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.info.CardInfoAdapter;
 import com.autoever.apay_user_app.ui.card.use.CardUseNavigator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -96,10 +100,10 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentCardUseHistoryBinding = getViewDataBinding();
+
         setup();
 
         callCardUseHistoryContents(PAGE_NO);
-
     }
 
     private void callCardUseHistoryContents(int pageNo) {
@@ -117,7 +121,20 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentCardUseHistoryBinding.useHistoryList.setLayoutManager(mLayoutManager);
         mFragmentCardUseHistoryBinding.useHistoryList.setAdapter(mCardUseHistoryAdapter);
+
+        mCardUseHistoryAdapter.onItemClick(paymentHistoryId -> {
+            try {
+                JSONObject data = new JSONObject();
+                data.put("paymentHistoryId", paymentHistoryId);
+                getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
         mFragmentCardUseHistoryBinding.useHistoryList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -131,13 +148,13 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
                         .findLastCompletelyVisibleItemPosition();
                 int itemTotalCount = recyclerView.getAdapter().getItemCount();
 
-                int firstVisibleItemPosition =((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+                int firstVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
 
                 Log.d("debug", "firstVisibleItemPosition: " + firstVisibleItemPosition);
                 Log.d("debug", "lastVisibleItemPosition: " + lastVisibleItemPosition);
                 Log.d("debug", "itemTotalCount: " + itemTotalCount);
 
-                if(lastVisibleItemPosition + 1 == itemTotalCount) {
+                if (lastVisibleItemPosition + 1 == itemTotalCount) {
                     PAGE_NO = PAGE_NO + 1;
 //                    callCardUseHistoryContents(PAGE_NO);
                     callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
@@ -180,7 +197,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
                             .toInstant());
 
             Date now = new Date();
-            if(now.compareTo(date) < 0) {
+            if (now.compareTo(date) < 0) {
                 date = now;
                 return;
             }
@@ -213,7 +230,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
     @Override
     public void onCompleteUpdatePaymentHistoryList() {
 
-        if(mFragmentCardUseHistoryBinding.swipeContainer.isRefreshing()) {
+        if (mFragmentCardUseHistoryBinding.swipeContainer.isRefreshing()) {
             mFragmentCardUseHistoryBinding.swipeContainer.setRefreshing(false);
         }
     }

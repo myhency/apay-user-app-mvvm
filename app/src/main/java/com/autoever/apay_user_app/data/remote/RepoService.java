@@ -1,6 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
+import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
@@ -57,5 +58,11 @@ public interface RepoService {
             @Query("pageSize") int pageSize,
             @Query("date") String date,
             @Query("filter") String filter
+    );
+
+    @GET("paymentHistory/{paymentHistoryId}")
+    Single<CardUseDetailResponse> doCardUseDetailCall(
+            @Path("paymentHistoryId") int paymentHistoryId,
+            @Query("target") String target
     );
 }

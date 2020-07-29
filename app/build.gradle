@@ -65,6 +65,7 @@ dependencies {
 
     // database
     implementation 'androidx.room:room-rxjava2:2.2.5'
+    implementation 'androidx.wear:wear:1.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
     // reactive
@@ -110,6 +111,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     testImplementation 'org.mockito:mockito-core:2.15.0'
+    compileOnly 'com.google.android.wearable:wearable:2.5.0'
     testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.16'
 
     // UI Testing

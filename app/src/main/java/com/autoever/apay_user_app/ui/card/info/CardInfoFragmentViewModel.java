@@ -80,22 +80,6 @@ public class CardInfoFragmentViewModel extends BaseViewModel<CardInfoNavigator> 
                 }));
     }
 
-//    public void getHistoryTest() {
-//        setIsLoading(true);
-//        getCompositeDisposable().add(getDataManager()
-//                //TODO. subscriberId 는 어떤걸 쓸지??
-//                .doHistoryTestCall()
-//                .subscribeOn(getSchedulerProvider().io())
-//                .observeOn(getSchedulerProvider().ui())
-//                .subscribe(response -> {
-//                    Log.d("debug", "alsdkjflsakjflaksjflaksdjf:" + response.getData().getPageable().getSort().isSorted());
-//                    setIsLoading(false);
-//                }, throwable -> {
-//                    setIsLoading(false);
-//                    getNavigator().handleError(throwable);
-//                }));
-//    }
-
     public LiveData<List<CardUseHistoryResponse.CardUseHistory.Content>> getCardUseHistoryContentLiveData() {
         return cardUseHistoryContentLiveData;
     }

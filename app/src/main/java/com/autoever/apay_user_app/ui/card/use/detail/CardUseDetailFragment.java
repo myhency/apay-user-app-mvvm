@@ -2,65 +2,84 @@ package com.autoever.apay_user_app.ui.card.use.detail;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
+import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.databinding.FragmentCardUseDetailBinding;
+import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
+import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CardUseDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class CardUseDetailFragment extends Fragment {
+import javax.inject.Inject;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBinding, CardUseDetailViewModel>
+        implements CardUseDetailNavigator {
 
-    public CardUseDetailFragment() {
-        // Required empty public constructor
-    }
+    public static final String TAG = CardUseDetailFragment.class.getSimpleName();
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CardUseDetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CardUseDetailFragment newInstance(String param1, String param2) {
-        CardUseDetailFragment fragment = new CardUseDetailFragment();
+    private FragmentCardUseDetailBinding mFragmentCardUseDetailBinding;
+
+    @Inject
+    ViewModelProviderFactory factory;
+
+    private CardUseDetailViewModel mCardUseDetailViewModel;
+
+    public static CardUseDetailFragment newInstance(Long paymentHistoryId) {
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putLong("paymentHistoryId", paymentHistoryId);
+        CardUseDetailFragment fragment = new CardUseDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public int getBindingVariable() {
+        return BR.viewModel;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_use_detail, container, false);
+    public int getLayoutId() {
+        return R.layout.fragment_card_use_detail;
+    }
+
+    @Override
+    public CardUseDetailViewModel getViewModel() {
+        mCardUseDetailViewModel = ViewModelProviders.of(this, factory)
+                .get(CardUseDetailViewModel.class);
+        return mCardUseDetailViewModel;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCardUseDetailViewModel.setNavigator(this);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragmentCardUseDetailBinding = getViewDataBinding();
+
+        setup();
+    }
+
+    private void setup() {
+        mCardUseDetailViewModel.fetchUseHistoryContentsDetail(
+                getArguments().getLong("paymentHistoryId"));
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
     }
 }

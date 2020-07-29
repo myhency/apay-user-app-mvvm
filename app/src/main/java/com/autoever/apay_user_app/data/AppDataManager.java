@@ -7,6 +7,7 @@ import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
@@ -168,5 +169,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<CardUseHistoryResponse> doCardUseHistoryCall(int tokenSystemId, int subscriberId, int pageNo, int pageSize, String date, String filter) {
         return mRepoService.doCardUseHistoryCall(tokenSystemId, subscriberId, pageNo, pageSize, date, filter);
+    }
+
+    @Override
+    public Single<CardUseDetailResponse> doCardUseDetailCall(int paymentHistoryId, String target) {
+        return mRepoService.doCardUseDetailCall(paymentHistoryId, target);
     }
 }

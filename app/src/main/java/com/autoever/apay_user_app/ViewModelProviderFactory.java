@@ -8,6 +8,7 @@ import com.autoever.apay_user_app.ui.auth.AuthViewModel;
 import com.autoever.apay_user_app.ui.card.CardInfoViewModel;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentViewModel;
 import com.autoever.apay_user_app.ui.card.use.CardUseViewModel;
+import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailViewModel;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
 import com.autoever.apay_user_app.ui.charge.ChargeViewModel;
 import com.autoever.apay_user_app.ui.charge.amount.AmountViewModel;
@@ -60,6 +61,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new CardUseViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(CardUseHistoryViewModel.class)) {
             return (T) new CardUseHistoryViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CardUseDetailViewModel.class)) {
+            return (T) new CardUseDetailViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

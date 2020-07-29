@@ -26,6 +26,8 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private CardUseHistoryListener mListener;
 
+    private OnItemClickInterface onItemClickInterface;
+
     public CardInfoAdapter(List<CardUseHistoryResponse.CardUseHistory.Content> cardUseHistoryResponseList) {
         this.mCardUseHistoryResponseList = cardUseHistoryResponseList;
     }
@@ -43,6 +45,8 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public int getItemViewType(int position) {
         if(mCardUseHistoryResponseList != null && !mCardUseHistoryResponseList.isEmpty()) {
             return VIEW_TYPE_NORMAL;
+        } else if(mCardUseHistoryResponseList.size() == 0){
+            return VIEW_TYPE_EMPTY;
         } else {
             return VIEW_TYPE_EMPTY;
         }
@@ -90,6 +94,14 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onRetryClick();
     }
 
+    public void onItemClick(OnItemClickInterface onItemClickInterface) {
+        this.onItemClickInterface = onItemClickInterface;
+    }
+
+    public interface OnItemClickInterface {
+        void execute(Long paymentHistoryId);
+    }
+
     public class CardUseHistoryViewHolder extends BaseViewHolder
             implements HistoryItemViewModel.CardUseHistoryListener {
 
@@ -109,14 +121,14 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mBinding.setViewModel(mHistoryItemViewModel);
 
             mBinding.executePendingBindings();
-
-            Log.d("debug", "current position: " + position);
         }
 
         @Override
-        public void onItemClick() {
-
+        public void onItemClick(Long paymentHistoryId) {
+            onItemClickInterface.execute(paymentHistoryId);
         }
+
+
     }
 
     public class EmptyViewHolder extends BaseViewHolder implements HistoryEmptyItemViewModel.HistoryEmptyItemViewModelListener {

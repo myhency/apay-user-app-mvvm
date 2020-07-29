@@ -16,7 +16,11 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityCardUseBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -83,7 +87,7 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     private void setup() {
         this.mFragmentManager = getSupportFragmentManager();
         setSupportActionBar(mActivityCardUseBinding.toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -92,8 +96,32 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     }
 
     @Override
+    public void onReceivedMessageFromFragment(String tag, JSONObject message) {
+        super.onReceivedMessageFromFragment(tag, message);
+        switch (tag) {
+            case "CardUseHistoryFragment":
+                try {
+                    openCardUseDetailFragment(message.getLong("paymentHistoryId"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
+
+    @Override
     public void handleError(Throwable throwable) {
 
+    }
+
+    @Override
+    public void openCardUseDetailFragment(Long paymentHistoryId) {
+        //사용내역화면으로 이동.
+        Log.d("debug", "openCardUseDetailFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, CardUseDetailFragment.newInstance(paymentHistoryId), CardUseDetailFragment.TAG)
+                .addToBackStack(CardUseDetailFragment.TAG)
+                .commit();
     }
 
     @Override
