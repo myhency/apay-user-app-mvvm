@@ -10,6 +10,7 @@ import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentViewModel;
 import com.autoever.apay_user_app.ui.card.use.CardUseViewModel;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailViewModel;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
+import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptViewModel;
 import com.autoever.apay_user_app.ui.charge.ChargeViewModel;
 import com.autoever.apay_user_app.ui.charge.amount.AmountViewModel;
 import com.autoever.apay_user_app.ui.home.HomeViewModel;
@@ -63,6 +64,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new CardUseHistoryViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(CardUseDetailViewModel.class)) {
             return (T) new CardUseDetailViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(PaymentRefundReadyReceiptViewModel.class)) {
+            return (T) new PaymentRefundReadyReceiptViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

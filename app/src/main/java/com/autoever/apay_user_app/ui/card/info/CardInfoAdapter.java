@@ -1,6 +1,5 @@
 package com.autoever.apay_user_app.ui.card.info;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -99,7 +98,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public interface OnItemClickInterface {
-        void execute(Long paymentHistoryId);
+        void execute(Long paymentHistoryId, String paymentStatus);
     }
 
     public class CardUseHistoryViewHolder extends BaseViewHolder
@@ -124,11 +123,9 @@ public class CardInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
 
         @Override
-        public void onItemClick(Long paymentHistoryId) {
-            onItemClickInterface.execute(paymentHistoryId);
+        public void onItemClick(Long paymentHistoryId, String paymentStatus) {
+            onItemClickInterface.execute(paymentHistoryId, paymentStatus);
         }
-
-
     }
 
     public class EmptyViewHolder extends BaseViewHolder implements HistoryEmptyItemViewModel.HistoryEmptyItemViewModelListener {

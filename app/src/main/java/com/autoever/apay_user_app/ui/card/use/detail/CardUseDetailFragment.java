@@ -6,17 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardUseDetailBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -33,9 +39,10 @@ public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBin
 
     private CardUseDetailViewModel mCardUseDetailViewModel;
 
-    public static CardUseDetailFragment newInstance(Long paymentHistoryId) {
+    public static CardUseDetailFragment newInstance(Long paymentHistoryId, String paymentStatus) {
         Bundle args = new Bundle();
         args.putLong("paymentHistoryId", paymentHistoryId);
+        args.putString("paymentStatus", paymentStatus);
         CardUseDetailFragment fragment = new CardUseDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -74,12 +81,80 @@ public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBin
     }
 
     private void setup() {
-        mCardUseDetailViewModel.fetchUseHistoryContentsDetail(
-                getArguments().getLong("paymentHistoryId"));
+        Long paymentHistoryId = getArguments().getLong("paymentHistoryId");
+        String paymentStatus = getArguments().getString("paymentStatus");
+        mCardUseDetailViewModel.fetchUseHistoryContentsDetail(paymentHistoryId);
+//        mFragmentCardUseDetailBinding.confirmButton.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+//        if (paymentStatus.equals("PAY_COMPLETE")) {
+//            mFragmentCardUseDetailBinding.finishTextview.setText("결제 취소");
+//            mFragmentCardUseDetailBinding.finishTextview.setOnClickListener(v -> mCardUseDetailViewModel.doPaymentRefundReadyCall());
+//        } else {
+//            mFragmentCardUseDetailBinding.finishTextview.setText("확인");
+//            mFragmentCardUseDetailBinding.finishTextview.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+//        }
     }
 
     @Override
     public void handleError(Throwable throwable) {
+        ANError anError = (ANError) throwable;
+        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
+        Log.d("debug", "throwable message: " + throwable.getMessage());
+    }
 
+//    @Override
+//    public void openPaymentCancelFragment(Long paymentHistoryId) {
+//        try {
+//            JSONObject data = new JSONObject();
+//            data.put("paymentHistoryId", paymentHistoryId);
+//            getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void userConfirm(View view) {
+        Log.d("debug", "userConfirm");
+    }
+
+    @Override
+    public void openPaymentRefundReadyReceiptFragment(PaymentRefundReadyResponse paymentRefundReadyResponse) {
+        try {
+            JSONObject data = new JSONObject();
+            data.putOpt("paymentRefundReadyResponse", paymentRefundReadyResponse);
+            getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setBottomButton(String paymentStatus, boolean refundRequested) {
+        switch (paymentStatus) {
+            case "PAY_COMPLETE":
+                if(refundRequested) {
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setBackgroundColor(getResources().getColor(R.color.borderColor));
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setText("결제 취소 요청중");
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+                } else {
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setBackgroundColor(getResources().getColor(R.color.colorApay));
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setText("결제 취소");
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setOnClickListener(v -> mCardUseDetailViewModel.doPaymentRefundReadyCall());
+                }
+                break;
+            default:
+                mFragmentCardUseDetailBinding.paymentRefundButton
+                        .setBackgroundColor(getResources().getColor(R.color.colorApay));
+                mFragmentCardUseDetailBinding.paymentRefundButton
+                        .setText("확인");
+                mFragmentCardUseDetailBinding.paymentRefundButton
+                        .setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+                break;
+        }
     }
 }

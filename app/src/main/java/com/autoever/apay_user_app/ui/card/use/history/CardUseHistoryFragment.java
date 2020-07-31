@@ -1,20 +1,15 @@
 package com.autoever.apay_user_app.ui.card.use.history;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -23,13 +18,11 @@ import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardUseHistoryBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.info.CardInfoAdapter;
-import com.autoever.apay_user_app.ui.card.use.CardUseNavigator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -122,10 +115,11 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
         mFragmentCardUseHistoryBinding.useHistoryList.setLayoutManager(mLayoutManager);
         mFragmentCardUseHistoryBinding.useHistoryList.setAdapter(mCardUseHistoryAdapter);
 
-        mCardUseHistoryAdapter.onItemClick(paymentHistoryId -> {
+        mCardUseHistoryAdapter.onItemClick((paymentHistoryId, paymentStatus) -> {
             try {
                 JSONObject data = new JSONObject();
                 data.put("paymentHistoryId", paymentHistoryId);
+                data.put("paymentStatus", paymentStatus);
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
             } catch (JSONException e) {
                 e.printStackTrace();

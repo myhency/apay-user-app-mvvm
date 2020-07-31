@@ -11,6 +11,8 @@ import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
@@ -65,4 +67,7 @@ public interface RepoService {
             @Path("paymentHistoryId") int paymentHistoryId,
             @Query("target") String target
     );
+
+    @PUT("payment/refund/ready")
+    Single<PaymentRefundReadyResponse> doPaymentRefundReadyCall(@Body PaymentRefundReadyRequest paymentRefundReadyRequest);
 }

@@ -106,7 +106,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
         mFragmentCardInfoBinding.paymentHistoryList.setLayoutManager(mLayoutManager);
         mFragmentCardInfoBinding.paymentHistoryList.setAdapter(mCardInfoAdapter);
 
-        mCardInfoAdapter.onItemClick(paymentHistoryId -> {
+        mCardInfoAdapter.onItemClick((paymentHistoryId, paymentStatus) -> {
             // Nothing to do.
         });
 

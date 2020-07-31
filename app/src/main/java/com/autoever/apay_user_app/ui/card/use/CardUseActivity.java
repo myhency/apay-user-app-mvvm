@@ -15,10 +15,13 @@ import android.view.MenuItem;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityCardUseBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+//import com.autoever.apay_user_app.ui.card.use.cancel.PaymentCancelFragment;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
+import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,10 +107,18 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
         switch (tag) {
             case "CardUseHistoryFragment":
                 try {
-                    openCardUseDetailFragment(message.getLong("paymentHistoryId"));
+                    openCardUseDetailFragment(message.getLong("paymentHistoryId"), message.getString("paymentStatus"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                break;
+            case "CardUseDetailFragment":
+                try {
+                    openPaymentRefundReadyReceiptFragment((PaymentRefundReadyResponse) message.get("paymentRefundReadyResponse"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 
@@ -138,12 +149,23 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     }
 
     @Override
-    public void openCardUseDetailFragment(Long paymentHistoryId) {
+    public void openCardUseDetailFragment(Long paymentHistoryId, String paymentStatus) {
         //사용내역화면으로 이동.
         Log.d("debug", "openCardUseDetailFragment");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, CardUseDetailFragment.newInstance(paymentHistoryId), CardUseDetailFragment.TAG)
+                .add(R.id.clRootView, CardUseDetailFragment.newInstance(paymentHistoryId, paymentStatus), CardUseDetailFragment.TAG)
+                .addToBackStack(CardUseDetailFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void openPaymentRefundReadyReceiptFragment(PaymentRefundReadyResponse paymentRefundReadyResponse) {
+        //결제취소요청 완료 화면으로 이동.
+        Log.d("debug", "openCardUseDetailFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, PaymentRefundReadyReceiptFragment.newInstance(paymentRefundReadyResponse), CardUseDetailFragment.TAG)
                 .addToBackStack(CardUseDetailFragment.TAG)
                 .commit();
     }

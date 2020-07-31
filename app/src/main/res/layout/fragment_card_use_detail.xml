@@ -39,10 +39,7 @@
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:text="결제금액"
                     android:textColor="#000000"
-                    android:textSize="14sp">
-
-                </TextView>
-
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/purchase_amount"
@@ -51,10 +48,7 @@
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:text="@{viewModel.amountLiveData}"
                     android:textColor="#304db9"
-                    android:textSize="45sp">
-
-
-                </TextView>
+                    android:textSize="45sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -116,23 +110,20 @@
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
-
             </LinearLayout>
-
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/finish_textview"
+        <Button
+            android:id="@+id/payment_refund_button"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_alignParentBottom="true"
-            android:background="#304db9"
             android:fontFamily="@font/spoqa_han_sans_regular"
             android:gravity="center"
-            android:text="결제 취소 요청"
             android:textColor="#ffffff"
             android:textSize="18sp" />
+
     </RelativeLayout>
+
 </layout>

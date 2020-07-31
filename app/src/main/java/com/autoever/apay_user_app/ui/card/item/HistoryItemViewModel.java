@@ -37,11 +37,11 @@ public class HistoryItemViewModel {
     }
 
     public void onItemClick() {
-        mListener.onItemClick(mHistory.getPaymentHistoryId());
+        mListener.onItemClick(mHistory.getPaymentHistoryId(), mHistory.getPaymentStatus());
     }
 
     public interface CardUseHistoryListener {
 
-        void onItemClick(Long paymentHistoryId);
+        void onItemClick(Long paymentHistoryId, String paymentStatus);
     }
 }

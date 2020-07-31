@@ -19,6 +19,9 @@
     <string name="main_balance_title_text">잔액</string>
 
     <string name="confirm">확인</string>
+    <string name="pay_complete">PAY_COMPLETE</string>
+    <string name="payment_cancel">결제취소</string>
+    <string name="payment_cancel_requested">결제취소 요청중</string>
 
     <string name="easypassword_text_01"><u>간편비밀번호를 잊어버리셨나요?</u></string>
     <!-- TODO: Remove or change this placeholder text -->
