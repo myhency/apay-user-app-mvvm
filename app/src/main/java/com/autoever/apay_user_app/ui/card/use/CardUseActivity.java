@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -123,6 +124,17 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     }
 
     @Override
+    public void onFragmentDetached(String tag) {
+        super.onFragmentDetached(tag);
+        switch (tag) {
+            case "PaymentRefundReadyReceiptFragment":
+                finish();
+            default:
+                break;
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("debug", "onOptionsItemSelected:" + item.toString());
         List<Fragment> fragments = mFragmentManager.getFragments();
@@ -162,7 +174,9 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     @Override
     public void openPaymentRefundReadyReceiptFragment(PaymentRefundReadyResponse paymentRefundReadyResponse) {
         //결제취소요청 완료 화면으로 이동.
-        Log.d("debug", "openCardUseDetailFragment");
+        Log.d("debug", "openPaymentRefundReadyReceiptFragment");
+        mActivityCardUseBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
         mFragmentManager
                 .beginTransaction()
                 .add(R.id.clRootView, PaymentRefundReadyReceiptFragment.newInstance(paymentRefundReadyResponse), CardUseDetailFragment.TAG)
