@@ -1,11 +1,5 @@
 package com.autoever.apay_user_app.ui.card.use;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +7,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityCardUseBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-//import com.autoever.apay_user_app.ui.card.use.cancel.PaymentCancelFragment;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
 import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptFragment;
@@ -34,6 +31,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+
 
 public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUseViewModel> implements CardUseNavigator, HasSupportFragmentInjector {
 

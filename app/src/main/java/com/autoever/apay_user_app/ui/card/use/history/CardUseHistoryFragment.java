@@ -96,7 +96,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
 
         setup();
 
-        callCardUseHistoryContents(PAGE_NO);
+        callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
     }
 
     private void callCardUseHistoryContents(int pageNo) {
@@ -128,7 +128,6 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
 
         mFragmentCardUseHistoryBinding.useHistoryList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -150,7 +149,6 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
 
                 if (lastVisibleItemPosition + 1 == itemTotalCount) {
                     PAGE_NO = PAGE_NO + 1;
-//                    callCardUseHistoryContents(PAGE_NO);
                     callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
                 }
             }
