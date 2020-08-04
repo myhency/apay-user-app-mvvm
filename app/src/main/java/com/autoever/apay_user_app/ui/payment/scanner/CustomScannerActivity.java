@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.SparseArray;
@@ -26,6 +27,11 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.oned.MultiFormatOneDReader;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.IOException;
 import java.util.Date;
@@ -72,9 +78,12 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
         super.onCreate(savedInstanceState);
         mActivityCustomScannerBinding = getViewDataBinding();
         mCustomScannerViewModel.setNavigator(this);
-
         mActivityCustomScannerBinding = getViewDataBinding();
 
+        setup();
+    }
+
+    private void setup() {
         cameraPreview = mActivityCustomScannerBinding.barcodeScanner;
 
         mBarcodeDetector = new BarcodeDetector.Builder(this)
@@ -129,6 +138,23 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 }
             }
         });
+
+        //QR 생성부분
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            //TODO. QR 에 들어갈 내용은 별로도 백앤드에 요청해야 함.
+            //token, tokenSystemId 들을 post 로 보내면 됨.
+            BitMatrix bitMatrix = multiFormatWriter.encode(
+                    "TEXT",
+                    BarcodeFormat.QR_CODE,
+                    3000,
+                    3000);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            mActivityCustomScannerBinding.qrImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+
+        }
     }
 
     @Override

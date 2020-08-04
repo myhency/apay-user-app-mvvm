@@ -61,34 +61,14 @@
                             android:textColor="#000000"
                             android:textSize="18dp" />
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginRight="10dp"-->
-<!--                            android:fontFamily="@font/spoqa_han_sans_regular"-->
-<!--                            android:text="P"-->
-<!--                            android:textColor="@color/colorApay"-->
-<!--                            android:textSize="16dp" />-->
-
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/qr_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="70dp"
-                    android:src="@drawable/barcode">
-
-                </ImageView>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/qrcode">
-
-                </ImageView>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -98,19 +78,11 @@
                 android:layout_below="@id/top_layout"
                 android:orientation="vertical">
 
-<!--                <com.journeyapps.barcodescanner.DecoratedBarcodeView-->
-<!--                    android:id="@+id/zxing_barcode_scanner"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="30dp"-->
-<!--                    app:zxing_preview_scaling_strategy="fitXY" />-->
-
                 <SurfaceView
                     android:id="@+id/barcode_scanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true" />
-
 
             </RelativeLayout>
 
