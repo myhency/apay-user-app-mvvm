@@ -15,6 +15,7 @@ import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
@@ -181,5 +182,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<PaymentRefundReadyResponse> doPaymentRefundReadyCall(PaymentRefundReadyRequest paymentRefundReadyRequest) {
         return mRepoService.doPaymentRefundReadyCall(paymentRefundReadyRequest);
+    }
+
+    @Override
+    public Single<PaymentReadyResponse> doPaymentQrReadyCall(PaymentQrReadyRequest paymentQrReadyRequest) {
+        return mRepoService.doPaymentQrReadyCall(paymentQrReadyRequest);
     }
 }

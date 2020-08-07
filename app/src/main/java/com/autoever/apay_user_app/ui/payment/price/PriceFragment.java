@@ -94,139 +94,69 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
         mFragmentPriceBinding.cardPaymentEdittext.setOnTouchListener((v, event) -> true);
 
         //가맹점 명 출력.
-        String shopName = getArguments().getString("shopName").substring(0, 7);
+        String shopName = getArguments().getString("shopName");
         mFragmentPriceBinding.shopName.setText(shopName);
 
-        mFragmentPriceBinding.numericKeyPad.buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int length = mFragmentPriceBinding.cardPaymentEdittext.getText().length();
-                if (length > 0)
-                    mFragmentPriceBinding.cardPaymentEdittext.getText().delete(length - 1, length);
-            }
+        mFragmentPriceBinding.numericKeyPad.buttonDelete.setOnClickListener(v -> {
+            int length = mFragmentPriceBinding.cardPaymentEdittext.getText().length();
+            if (length > 0)
+                mFragmentPriceBinding.cardPaymentEdittext.getText().delete(length - 1, length);
         });
 
-        mFragmentPriceBinding.numericKeyPad.button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("0");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("1");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("2");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("3");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("4");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("5");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("6");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("7");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("8");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("9");
-            }
-        });
-        mFragmentPriceBinding.numericKeyPad.button00.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFragmentPriceBinding.cardPaymentEdittext.append("00");
-            }
+        mFragmentPriceBinding.numericKeyPad.button0.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("0"));
+        mFragmentPriceBinding.numericKeyPad.button1.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("1"));
+        mFragmentPriceBinding.numericKeyPad.button2.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("2"));
+        mFragmentPriceBinding.numericKeyPad.button3.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("3"));
+        mFragmentPriceBinding.numericKeyPad.button4.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("4"));
+        mFragmentPriceBinding.numericKeyPad.button5.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("5"));
+        mFragmentPriceBinding.numericKeyPad.button6.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("6"));
+        mFragmentPriceBinding.numericKeyPad.button7.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("7"));
+        mFragmentPriceBinding.numericKeyPad.button8.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("8"));
+        mFragmentPriceBinding.numericKeyPad.button9.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("9"));
+        mFragmentPriceBinding.numericKeyPad.button00.setOnClickListener(v -> mFragmentPriceBinding.cardPaymentEdittext.append("00"));
+
+        mFragmentPriceBinding.numericKeyPad.price1000.setOnClickListener(v -> {
+
+            Long currentInputBalance;
+            if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
+                currentInputBalance = 0L;
+            else
+                currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
+            currentInputBalance = currentInputBalance + 1000L;
+            mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
         });
 
-        mFragmentPriceBinding.numericKeyPad.price1000.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mFragmentPriceBinding.numericKeyPad.price5000.setOnClickListener(v -> {
 
-                Long currentInputBalance;
-                if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
-                    currentInputBalance = 0L;
-                else
-                    currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
-                currentInputBalance = currentInputBalance + 1000L;
-                mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
-            }
+            Long currentInputBalance;
+            if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
+                currentInputBalance = 0L;
+            else
+                currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
+            currentInputBalance = currentInputBalance + 5000L;
+            mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
         });
 
-        mFragmentPriceBinding.numericKeyPad.price5000.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mFragmentPriceBinding.numericKeyPad.price10000.setOnClickListener(v -> {
 
-                Long currentInputBalance;
-                if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
-                    currentInputBalance = 0L;
-                else
-                    currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
-                currentInputBalance = currentInputBalance + 5000L;
-                mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
-            }
+            Long currentInputBalance;
+            if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
+                currentInputBalance = 0L;
+            else
+                currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
+            currentInputBalance = currentInputBalance + 10000L;
+            mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
         });
 
-        mFragmentPriceBinding.numericKeyPad.price10000.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mFragmentPriceBinding.numericKeyPad.price50000.setOnClickListener(v -> {
 
-                Long currentInputBalance;
-                if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
-                    currentInputBalance = 0L;
-                else
-                    currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
-                currentInputBalance = currentInputBalance + 10000L;
-                mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
-            }
-        });
-
-        mFragmentPriceBinding.numericKeyPad.price50000.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Long currentInputBalance;
-                if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
-                    currentInputBalance = 0L;
-                else
-                    currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
-                currentInputBalance = currentInputBalance + 50000L;
-                mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
-            }
+            Long currentInputBalance;
+            if (mFragmentPriceBinding.cardPaymentEdittext.getText().toString().equals(""))
+                currentInputBalance = 0L;
+            else
+                currentInputBalance = Long.valueOf(mFragmentPriceBinding.cardPaymentEdittext.getText().toString().replaceAll("[%s,.]", ""));
+            currentInputBalance = currentInputBalance + 50000L;
+            mFragmentPriceBinding.cardPaymentEdittext.setText(String.valueOf(currentInputBalance));
         });
 
         mFragmentPriceBinding.balanceCurrency.setOnClickListener(v -> {

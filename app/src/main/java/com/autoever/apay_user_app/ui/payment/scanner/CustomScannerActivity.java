@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -27,6 +29,8 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -90,6 +94,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build();
         mCameraSource = new CameraSource.Builder(this, mBarcodeDetector)
+                .setAutoFocusEnabled(true)
                 .build();
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -132,6 +137,11 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                     Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(200);
                     Intent data = new Intent();
+                    Log.d("debug", "shopCode:" + qrcodes.valueAt(0).displayValue);
+                    JsonObject convertedObject = new Gson().fromJson(qrcodes.valueAt(0).displayValue, JsonObject.class);
+
+                    Log.d("debug", "qrType:" + convertedObject.get("qrType").getAsString());
+
                     data.putExtra("shopCode", qrcodes.valueAt(0).displayValue);
                     setResult(RESULT_OK, data);
                     finish();
@@ -153,7 +163,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             mActivityCustomScannerBinding.qrImage.setImageBitmap(bitmap);
         } catch (Exception e) {
-
+            Log.d("debug", e.getMessage());
         }
     }
 

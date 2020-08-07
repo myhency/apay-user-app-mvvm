@@ -24,6 +24,8 @@ import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.utils.CommonUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,8 +46,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     public static final String TAG = PaymentActivity.class.getSimpleName();
     private final static int QR_CODE_SCANNED = 1;
     private FragmentManager mFragmentManager;
-    private String shopCode = "";
+    private String storeName = "";
     private int price = 0;
+    private JsonObject staticQrData;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
@@ -143,24 +146,23 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showPriceFragment(String shopCode) {
+    public void showPriceFragment(String storeName) {
         //금액입력화면으로 이동.
         Log.d("debug", "showPaymentFragment");
         mFragmentManager
                 .beginTransaction()
 //                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.clRootView, PriceFragment.newInstance(shopCode), PriceFragment.TAG)
+                .add(R.id.clRootView, PriceFragment.newInstance(storeName), PriceFragment.TAG)
                 .addToBackStack(PriceFragment.TAG)
                 .commitAllowingStateLoss();
     }
 
     @Override
-    public void showPriceConfirmFragment(String shopCode, int price) {
+    public void showPriceConfirmFragment(String storeName, int price) {
         Log.d("debug", "showPriceConfirmFragment");
         mFragmentManager
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.clRootView, PriceConfirmFragment.newInstance(shopCode, price), PriceConfirmFragment.TAG)
+                .add(R.id.clRootView, PriceConfirmFragment.newInstance(storeName, price), PriceConfirmFragment.TAG)
                 .addToBackStack(PriceConfirmFragment.TAG)
                 .commitAllowingStateLoss();
     }
@@ -205,9 +207,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
             case QR_CODE_SCANNED: {
                 switch (resultCode) {
                     case RESULT_OK:
-                        shopCode = data.getExtras().getString("shopCode");
-                        Log.d("debug", "shopCode: " + shopCode);
-                        showPriceFragment(shopCode);
+                        staticQrData = new Gson().fromJson(data.getExtras().getString("shopCode"), JsonObject.class);
+                        storeName = staticQrData.get("storeName").getAsString();
+                        showPriceFragment(storeName);
                         break;
                     case RESULT_CANCELED:
                         finish();
@@ -227,16 +229,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 
         switch (tag) {
             case "PriceFragment":
-                showPriceConfirmFragment(shopCode, price);
+                showPriceConfirmFragment(storeName, price);
                 break;
             case "PriceConfirmFragment":
                 openAuthFragment();
                 break;
             case "AuthFragment":
-//                showReceiptFragment("");
-//                getViewModel().getPaymentId().observe(this, paymentId -> {
-//                    showReceiptFragment(paymentId == null ? "" : paymentId);
-//                });
                 doPaymentReady();
                 break;
         }
@@ -246,7 +244,8 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     public void doPaymentReady() {
         Log.d("debug", "doPaymentReady");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        mPaymentViewModel.loadPaymentId(price, String.valueOf(timestamp.getTime()));
+        mPaymentViewModel.loadPaymentId(price, String.valueOf(timestamp.getTime()), staticQrData);
+        Log.d("debug", "identifier:" + String.valueOf(timestamp.getTime()));
     }
 
     @Override

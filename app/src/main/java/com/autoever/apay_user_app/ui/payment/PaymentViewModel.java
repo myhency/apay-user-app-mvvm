@@ -9,10 +9,12 @@ import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
+import com.google.gson.JsonObject;
 
 
 public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
@@ -70,16 +72,45 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
      * "identifier": "string"
      * }
      */
-    public void loadPaymentId(int amount, String identifier) {
+    public void loadPaymentId(int amount, String identifier, JsonObject staticQrData) {
         Log.d("debug", "loadPaymentId started");
         setIsLoading(true);
+//        getCompositeDisposable().add(getDataManager()
+//                .doPaymentReadyCall(new PaymentReadyRequest(
+//                        "4",
+//                        "2",
+//                        "1",
+//                        amount,
+//                        identifier))
+//                .subscribeOn(getSchedulerProvider().io())
+//                .observeOn(getSchedulerProvider().ui())
+//                .subscribe(paymentReadyResponse -> {
+//                    setIsLoading(false);
+//                    getNavigator().doPaymentDo(
+//                            paymentReadyResponse.getData().getUserId(),
+//                            paymentReadyResponse.getData().getStoreId(),
+//                            paymentReadyResponse.getData().getTokenSystemId(),
+//                            paymentReadyResponse.getData().getAmount(),
+//                            paymentReadyResponse.getData().getPaymentId(),
+//                            paymentReadyResponse.getData().getIdentifier());
+//                }, throwable -> {
+//                    setIsLoading(false);
+//                    getNavigator().handleError(throwable);
+//                }));
         getCompositeDisposable().add(getDataManager()
-                .doPaymentReadyCall(new PaymentReadyRequest(
-                        "4",
-                        "2",
-                        "1",
-                        amount,
-                        identifier))
+                .doPaymentQrReadyCall(new PaymentQrReadyRequest(
+                        Long.valueOf(amount),
+                        identifier,
+                        4L,
+                        new PaymentQrReadyRequest.StoreStaticQrInfo(
+                                staticQrData.get("qrType").getAsLong(),
+                                staticQrData.get("hashedStoreId").getAsString(),
+                                staticQrData.get("storeName").getAsString(),
+                                staticQrData.get("hashedPaymentSystemId").getAsString(),
+                                staticQrData.get("paymentDeviceId").getAsString(),
+                                staticQrData.get("signature").getAsString()
+                        )
+                ))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(paymentReadyResponse -> {
@@ -92,7 +123,6 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                             paymentReadyResponse.getData().getPaymentId(),
                             paymentReadyResponse.getData().getIdentifier());
                 }, throwable -> {
-                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
@@ -100,12 +130,12 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
     /**
      * PaymentDoRequest Body
      * {
-     *   "userId": 0,
-     *   "storeId": 0,
-     *   "tokenSystemId": 0,
-     *   "amount": 0,
-     *   "paymentId": 0,
-     *   "identifier": "string"
+     * "userId": 0,
+     * "storeId": 0,
+     * "tokenSystemId": 0,
+     * "amount": 0,
+     * "paymentId": 0,
+     * "identifier": "string"
      * }
      */
     public void doPayment(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
@@ -148,12 +178,20 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
         return paymentIdLiveData;
     }
 
-    public LiveData<String> getStoreNameLiveData() { return storeNameLiveData; }
+    public LiveData<String> getStoreNameLiveData() {
+        return storeNameLiveData;
+    }
 
-    public LiveData<String> getCreatedDateLiveData() { return createdDateLiveData; }
+    public LiveData<String> getCreatedDateLiveData() {
+        return createdDateLiveData;
+    }
 
-    public LiveData<String> getAmountLiveData() { return amountLiveData; }
+    public LiveData<String> getAmountLiveData() {
+        return amountLiveData;
+    }
 
-    public LiveData<String> getBalanceLeftKWRLiveData() { return balanceLeftKWRLiveData; }
+    public LiveData<String> getBalanceLeftKWRLiveData() {
+        return balanceLeftKWRLiveData;
+    }
 
 }

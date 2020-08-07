@@ -85,7 +85,7 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
 
         //가맹점 명을 출력.
         mFragmentPriceConfirmBinding.shopName.setText(
-                getArguments().getString("shopName").substring(0, 7)
+                getArguments().getString("shopName")
         );
 
         mFragmentPriceConfirmBinding.finishTextview.setOnClickListener(v -> goNext());
