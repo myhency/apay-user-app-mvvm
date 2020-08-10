@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.ui.payment;
 
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
+
 import java.util.Date;
 
 public interface PaymentNavigator {
@@ -21,5 +23,7 @@ public interface PaymentNavigator {
     void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier);
 
     void goNext();
+
+    void getQrUserDynamicData(String parsedQrString);
 }
 

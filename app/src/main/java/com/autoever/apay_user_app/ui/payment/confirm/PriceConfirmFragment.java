@@ -18,6 +18,7 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.databinding.FragmentPriceConfirmBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
@@ -135,5 +136,10 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
     public void goNext() {
         Log.d("debug", "Price confirmed, 현금영수증 신청 confirmed");
         getBaseActivity().onFragmentDetached(TAG);
+    }
+
+    @Override
+    public void getQrUserDynamicData(String parsedQrString) {
+
     }
 }

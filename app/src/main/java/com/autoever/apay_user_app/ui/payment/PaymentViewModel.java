@@ -11,6 +11,7 @@ import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
@@ -29,6 +30,8 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
 
     private final MutableLiveData<String> amountLiveData;
 
+    private final MutableLiveData<String> qrUserDynamicLiveData;
+
     private final MutableLiveData<String> balanceLeftKWRLiveData;
 
 
@@ -40,6 +43,7 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
         createdDateLiveData = new MutableLiveData<>();
         amountLiveData = new MutableLiveData<>();
         balanceLeftKWRLiveData = new MutableLiveData<>();
+        qrUserDynamicLiveData = new MutableLiveData<>();
         loadUserBalance();
     }
 
@@ -47,7 +51,7 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??
-                .getUserBalance(new BalanceRequest("1", "4"))
+                .doGetBalanceCall(1, 4)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
@@ -75,28 +79,6 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
     public void loadPaymentId(int amount, String identifier, JsonObject staticQrData) {
         Log.d("debug", "loadPaymentId started");
         setIsLoading(true);
-//        getCompositeDisposable().add(getDataManager()
-//                .doPaymentReadyCall(new PaymentReadyRequest(
-//                        "4",
-//                        "2",
-//                        "1",
-//                        amount,
-//                        identifier))
-//                .subscribeOn(getSchedulerProvider().io())
-//                .observeOn(getSchedulerProvider().ui())
-//                .subscribe(paymentReadyResponse -> {
-//                    setIsLoading(false);
-//                    getNavigator().doPaymentDo(
-//                            paymentReadyResponse.getData().getUserId(),
-//                            paymentReadyResponse.getData().getStoreId(),
-//                            paymentReadyResponse.getData().getTokenSystemId(),
-//                            paymentReadyResponse.getData().getAmount(),
-//                            paymentReadyResponse.getData().getPaymentId(),
-//                            paymentReadyResponse.getData().getIdentifier());
-//                }, throwable -> {
-//                    setIsLoading(false);
-//                    getNavigator().handleError(throwable);
-//                }));
         getCompositeDisposable().add(getDataManager()
                 .doPaymentQrReadyCall(new PaymentQrReadyRequest(
                         Long.valueOf(amount),
@@ -168,6 +150,23 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                     getNavigator().handleError(throwable);
                 }));
 
+    }
+
+    public void loadQrUserDynamic() {
+        Log.d("debug", "loadQrUserDynamic started");
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doQrUserDynamicCall(new QrUserDynamicRequest(
+                        1L
+                ))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(qrUserDynamicResponse -> {
+                    Log.d("debug", qrUserDynamicResponse.toString());
+                    getNavigator().getQrUserDynamicData(qrUserDynamicResponse.parseToQrString());
+                }, throwable -> {
+                    getNavigator().handleError(throwable);
+                }));
     }
 
     public LiveData<String> getBalanceKRWLiveData() {

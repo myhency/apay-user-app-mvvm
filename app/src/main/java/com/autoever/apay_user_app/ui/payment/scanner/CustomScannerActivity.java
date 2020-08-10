@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.databinding.ActivityCustomScannerBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
@@ -84,10 +85,12 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
         mCustomScannerViewModel.setNavigator(this);
         mActivityCustomScannerBinding = getViewDataBinding();
 
-        setup();
+//        setup();
+
+        mCustomScannerViewModel.loadQrUserDynamic();
     }
 
-    private void setup() {
+    private void setup(String parsedQrString) {
         cameraPreview = mActivityCustomScannerBinding.barcodeScanner;
 
         mBarcodeDetector = new BarcodeDetector.Builder(this)
@@ -155,7 +158,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
             //TODO. QR 에 들어갈 내용은 별로도 백앤드에 요청해야 함.
             //token, tokenSystemId 들을 post 로 보내면 됨.
             BitMatrix bitMatrix = multiFormatWriter.encode(
-                    "TEXT",
+                    parsedQrString,
                     BarcodeFormat.QR_CODE,
                     3000,
                     3000);
@@ -229,6 +232,12 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     @Override
     public void goNext() {
 
+    }
+
+    @Override
+    public void getQrUserDynamicData(String parsedQrString) {
+        Log.d("debug", parsedQrString);
+        setup(parsedQrString);
     }
 
     @Override

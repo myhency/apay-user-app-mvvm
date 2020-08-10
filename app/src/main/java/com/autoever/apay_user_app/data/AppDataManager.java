@@ -20,6 +20,8 @@ import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
@@ -187,5 +189,15 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<PaymentReadyResponse> doPaymentQrReadyCall(PaymentQrReadyRequest paymentQrReadyRequest) {
         return mRepoService.doPaymentQrReadyCall(paymentQrReadyRequest);
+    }
+
+    @Override
+    public Single<QrUserDynamicResponse> doQrUserDynamicCall(QrUserDynamicRequest qrUserDynamicRequest) {
+        return mRepoService.doQrUserDynamicCall(qrUserDynamicRequest);
+    }
+
+    @Override
+    public Single<BalanceResponse> doGetBalanceCall(int tokenSystemId, int subscriberId) {
+        return mRepoService.doGetBalanceCall(tokenSystemId, subscriberId);
     }
 }

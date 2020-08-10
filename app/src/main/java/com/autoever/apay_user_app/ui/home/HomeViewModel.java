@@ -25,7 +25,7 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??
-                .getUserBalance(new BalanceRequest("1", "4"))
+                .doGetBalanceCall(1,4)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {

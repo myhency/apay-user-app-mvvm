@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.databinding.FragmentReceiptBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
@@ -137,6 +138,11 @@ public class ReceiptFragment extends BaseFragment<FragmentReceiptBinding, Paymen
 
     @Override
     public void goNext() {
+
+    }
+
+    @Override
+    public void getQrUserDynamicData(String parsedQrString) {
 
     }
 }

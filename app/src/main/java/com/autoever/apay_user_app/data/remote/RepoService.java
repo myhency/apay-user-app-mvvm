@@ -1,6 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
+import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
@@ -14,6 +15,8 @@ import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
+import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
@@ -31,29 +34,29 @@ import retrofit2.http.Query;
 
 public interface RepoService {
 
-    @POST("payment/ready")
+    @POST("api/v2/payment/ready")
     Single<PaymentReadyResponse> doPaymentReadyCall(@Body PaymentReadyRequest paymentReadyRequest);
 
-    @PUT("payment/do")
+    @PUT("api/v2/payment/do")
     Single<PaymentDoResponse> doPaymentDoCall(@Body PaymentDoRequest paymentDoRequest);
 
-    @POST("tokenSystem/charge/ready")
+    @POST("api/v2/tokenSystem/charge/ready")
     Single<ChargeReadyResponse> doChargeReadyCall(@Body ChargeReadyRequest chargeReadyRequest);
 
-    @POST("user/tokenSystem/1")
+    @POST("api/v2/user/tokenSystem/1")
     Single<UserRegisterResponse> doUserRegisterCall(@Body UserRegisterRequest userRegisterRequest);
 
-    @POST("user/login")
+    @POST("api/v2/user/login")
     @Headers("No-Authentication: true")
     Single<LoginResponse> doLoginCall(@Body LoginRequest loginRequest);
 
-    @GET("authTest/hello")
+    @GET("api/v2/authTest/hello")
     Single<AuthTestResponse> doAuthTextCall();
 
-    @GET("tokenSystem/1/tokenHistories?subscriberId=4")
+    @GET("api/v2/tokenSystem/1/tokenHistories?subscriberId=4")
     Single<CardUseHistoryResponse> doHistoryTestCall();
 
-    @GET("user/tokenSystem/{tokenSystemId}/paymentHistories")
+    @GET("api/v2/user/tokenSystem/{tokenSystemId}/paymentHistories")
     Single<CardUseHistoryResponse> doCardUseHistoryCall(
             @Path("tokenSystemId") int tokenSystemId,
             @Query("userId") int userId,
@@ -63,15 +66,24 @@ public interface RepoService {
             @Query("filter") String filter
     );
 
-    @GET("paymentHistory/{paymentHistoryId}")
+    @GET("api/v2/paymentHistory/{paymentHistoryId}")
     Single<CardUseDetailResponse> doCardUseDetailCall(
             @Path("paymentHistoryId") int paymentHistoryId,
             @Query("target") String target
     );
 
-    @PUT("payment/refund/ready")
+    @PUT("api/v2/payment/refund/ready")
     Single<PaymentRefundReadyResponse> doPaymentRefundReadyCall(@Body PaymentRefundReadyRequest paymentRefundReadyRequest);
 
-    @POST("payment/ready/storeStatic")
+    @POST("api/v2/payment/ready/storeStatic")
     Single<PaymentReadyResponse> doPaymentQrReadyCall(@Body PaymentQrReadyRequest paymentQrReadyRequest);
+
+    @POST("qr/userDynamic")
+    Single<QrUserDynamicResponse> doQrUserDynamicCall(@Body QrUserDynamicRequest qrUserDynamicRequest);
+
+    @GET("api/v2/tokenSystem/{tokenSystemId}/balance")
+    Single<BalanceResponse> doGetBalanceCall(
+            @Path("tokenSystemId") int tokenSystemId,
+            @Query("subscriberId") int subscriberId
+    );
 }
