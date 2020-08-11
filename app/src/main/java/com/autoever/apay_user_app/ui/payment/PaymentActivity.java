@@ -105,7 +105,6 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         }
     }
 
-
     @Override
     public void handleError(Throwable throwable) {
         ANError anError = (ANError) throwable;

@@ -85,24 +85,27 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
         mCustomScannerViewModel.setNavigator(this);
         mActivityCustomScannerBinding = getViewDataBinding();
 
-//        setup();
+        setup();
 
         mCustomScannerViewModel.loadQrUserDynamic();
     }
 
-    private void setup(String parsedQrString) {
+    private void setup() {
         cameraPreview = mActivityCustomScannerBinding.barcodeScanner;
 
         mBarcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build();
+
         mCameraSource = new CameraSource.Builder(this, mBarcodeDetector)
                 .setAutoFocusEnabled(true)
                 .build();
+
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    Log.d("debug", "Camera Permission Not Granted");
                     ActivityCompat.requestPermissions(CustomScannerActivity.this,
                             new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
                     return;
@@ -110,6 +113,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
 
                 try {
                     mCameraSource.start(cameraPreview.getHolder());
+                    Log.d("debug", "Camera Permission Granted");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -136,7 +140,6 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> qrcodes = detections.getDetectedItems();
                 if (qrcodes.size() != 0) {
-//                    Log.d("debug", "qr value: " + qrcodes.valueAt(0).displayValue);
                     Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(200);
                     Intent data = new Intent();
@@ -151,23 +154,6 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 }
             }
         });
-
-        //QR 생성부분
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            //TODO. QR 에 들어갈 내용은 별로도 백앤드에 요청해야 함.
-            //token, tokenSystemId 들을 post 로 보내면 됨.
-            BitMatrix bitMatrix = multiFormatWriter.encode(
-                    parsedQrString,
-                    BarcodeFormat.QR_CODE,
-                    3000,
-                    3000);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            mActivityCustomScannerBinding.qrImage.setImageBitmap(bitmap);
-        } catch (Exception e) {
-            Log.d("debug", e.getMessage());
-        }
     }
 
     @Override
@@ -237,7 +223,22 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     @Override
     public void getQrUserDynamicData(String parsedQrString) {
         Log.d("debug", parsedQrString);
-        setup(parsedQrString);
+        //QR 생성부분
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            //TODO. QR 에 들어갈 내용은 별로도 백앤드에 요청해야 함.
+            //token, tokenSystemId 들을 post 로 보내면 됨.
+            BitMatrix bitMatrix = multiFormatWriter.encode(
+                    parsedQrString,
+                    BarcodeFormat.QR_CODE,
+                    3000,
+                    3000);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            mActivityCustomScannerBinding.qrImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            Log.d("debug", e.getMessage());
+        }
     }
 
     @Override
