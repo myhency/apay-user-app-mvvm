@@ -7,6 +7,8 @@ import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
+import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
@@ -18,6 +20,7 @@ import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyCancelResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
@@ -187,6 +190,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<PaymentRefundReadyCancelResponse> doPaymentRefundReadyCancelCall(PaymentRefundReadyRequest paymentRefundReadyRequest) {
+        return mRepoService.doPaymentRefundReadyCancelCall(paymentRefundReadyRequest);
+    }
+
+    @Override
     public Single<PaymentReadyResponse> doPaymentQrReadyCall(PaymentQrReadyRequest paymentQrReadyRequest) {
         return mRepoService.doPaymentQrReadyCall(paymentQrReadyRequest);
     }
@@ -199,5 +207,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<BalanceResponse> doGetBalanceCall(int tokenSystemId, int subscriberId) {
         return mRepoService.doGetBalanceCall(tokenSystemId, subscriberId);
+    }
+
+    @Override
+    public Single<BankAccountListResponse> doGetAccountListCall(BankAccountListRequest bankAccountListRequest) {
+        return mRepoService.doGetAccountListCall(bankAccountListRequest);
     }
 }

@@ -2,6 +2,7 @@ package com.autoever.apay_user_app.ui.card.use.detail;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -69,6 +70,13 @@ public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBin
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCardUseDetailViewModel.setNavigator(this);
+        //back button 을 눌렀을 경우 Fragment 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().onFragmentDetached(TAG);
+            }
+        });
     }
 
 
@@ -128,25 +136,53 @@ public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBin
     }
 
     @Override
-    public void setBottomButton(String paymentStatus, boolean refundRequested) {
+    public void setBottomButton(String paymentStatus, boolean refundRequested, boolean canceled) {
         switch (paymentStatus) {
             case "PAY_COMPLETE":
-                if(refundRequested) {
-                    mFragmentCardUseDetailBinding.paymentRefundButton
-                            .setBackgroundColor(getResources().getColor(R.color.borderColor));
-                    mFragmentCardUseDetailBinding.paymentRefundButton
-                            .setText("결제 취소 요청중");
-                    mFragmentCardUseDetailBinding.paymentRefundButton
-                            .setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
-                } else {
+                if (!refundRequested && !canceled) {
                     mFragmentCardUseDetailBinding.paymentRefundButton
                             .setBackgroundColor(getResources().getColor(R.color.colorApay));
                     mFragmentCardUseDetailBinding.paymentRefundButton
                             .setText("결제 취소");
                     mFragmentCardUseDetailBinding.paymentRefundButton
                             .setOnClickListener(v -> mCardUseDetailViewModel.doPaymentRefundReadyCall());
+                } else if (refundRequested && !canceled) {
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setBackgroundColor(getResources().getColor(R.color.colorApay));
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setText("결제 취소 요청 취소");
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setOnClickListener(v -> {
+                                mCardUseDetailViewModel.doPaymentRefundReadyCancelCall();
+                                getBaseActivity().onFragmentDetached(TAG);
+                            });
+                } else if (!refundRequested && canceled) {
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setBackgroundColor(getResources().getColor(R.color.colorApay));
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setText("확인");
+                    mFragmentCardUseDetailBinding.paymentRefundButton
+                            .setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
                 }
+//
+//
+//                if(refundRequested) {
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setBackgroundColor(getResources().getColor(R.color.borderColor));
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setText("결제 취소 요청중");
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+//                } else {
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setBackgroundColor(getResources().getColor(R.color.colorApay));
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setText("결제 취소");
+//                    mFragmentCardUseDetailBinding.paymentRefundButton
+//                            .setOnClickListener(v -> mCardUseDetailViewModel.doPaymentRefundReadyCall());
+//                }
                 break;
+
             default:
                 mFragmentCardUseDetailBinding.paymentRefundButton
                         .setBackgroundColor(getResources().getColor(R.color.colorApay));

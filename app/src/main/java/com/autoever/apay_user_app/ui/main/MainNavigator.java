@@ -12,7 +12,7 @@ public interface MainNavigator {
 
     void openCardInfoActivity();
 
-    void openBankAccountManagementActivity();
+    void openAccountActivity();
 
     void openCardUseHistoryActivity();
 

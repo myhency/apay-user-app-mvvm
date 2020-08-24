@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.autoever.apay_user_app.data.DataManager;
+import com.autoever.apay_user_app.ui.account.AccountViewModel;
+import com.autoever.apay_user_app.ui.account.list.AccountListViewModel;
+import com.autoever.apay_user_app.ui.account.register.AccountRegisterViewModel;
+import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsViewModel;
 import com.autoever.apay_user_app.ui.auth.AuthViewModel;
 import com.autoever.apay_user_app.ui.card.CardInfoViewModel;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentViewModel;
@@ -66,6 +70,14 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new CardUseDetailViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(PaymentRefundReadyReceiptViewModel.class)) {
             return (T) new PaymentRefundReadyReceiptViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(AccountViewModel.class)) {
+            return (T) new AccountViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(AccountListViewModel.class)) {
+            return (T) new AccountListViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(AccountRegisterViewModel.class)) {
+            return (T) new AccountRegisterViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(AccountRegisterTermsViewModel.class)) {
+            return (T) new AccountRegisterTermsViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

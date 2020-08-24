@@ -126,7 +126,11 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
         super.onFragmentDetached(tag);
         switch (tag) {
             case "PaymentRefundReadyReceiptFragment":
-                finish();
+                setup();
+                removeFragment("CardUseDetailFragment");
+                removeFragment(tag);
+            case "CardUseDetailFragment":
+                removeFragment(tag);
             default:
                 break;
         }
@@ -141,16 +145,20 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
             case "CardUseHistoryFragment":
                 finish();
             case "CardUseDetailFragment":
-                Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
-                mFragmentManager
-                        .beginTransaction()
-                        .disallowAddToBackStack()
-                        .remove(fragment)
-                        .commit();
+                removeFragment(fragmentTag);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void removeFragment(String tag) {
+        Fragment fragment = mFragmentManager.findFragmentByTag(tag);
+        mFragmentManager
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .remove(fragment)
+                .commit();
     }
 
     @Override
@@ -177,8 +185,8 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
         mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, PaymentRefundReadyReceiptFragment.newInstance(paymentRefundReadyResponse), CardUseDetailFragment.TAG)
-                .addToBackStack(CardUseDetailFragment.TAG)
+                .add(R.id.clRootView, PaymentRefundReadyReceiptFragment.newInstance(paymentRefundReadyResponse), PaymentRefundReadyReceiptFragment.TAG)
+                .addToBackStack(PaymentRefundReadyReceiptFragment.TAG)
                 .commit();
     }
 

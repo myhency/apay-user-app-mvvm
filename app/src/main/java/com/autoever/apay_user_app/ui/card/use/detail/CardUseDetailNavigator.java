@@ -10,5 +10,5 @@ public interface CardUseDetailNavigator {
 
     void openPaymentRefundReadyReceiptFragment(PaymentRefundReadyResponse paymentRefundReadyResponse);
 
-    void setBottomButton(String paymentStatus, boolean refundRequested);
+    void setBottomButton(String paymentStatus, boolean refundRequested, boolean canceled);
 }

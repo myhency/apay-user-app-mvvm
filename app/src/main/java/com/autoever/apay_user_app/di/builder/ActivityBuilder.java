@@ -1,5 +1,9 @@
 package com.autoever.apay_user_app.di.builder;
 
+import com.autoever.apay_user_app.ui.account.AccountActivity;
+import com.autoever.apay_user_app.ui.account.list.AccountListFragmentProvider;
+import com.autoever.apay_user_app.ui.account.register.AccountRegisterActivity;
+import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentProvider;
@@ -73,4 +77,14 @@ public abstract class ActivityBuilder {
             PaymentRefundReadyReceiptProvider.class
     })
     abstract CardUseActivity bindCardUseActivity();
+
+    @ContributesAndroidInjector(modules = {
+            AccountListFragmentProvider.class
+    })
+    abstract AccountActivity bindAccountActivity();
+
+    @ContributesAndroidInjector(modules = {
+            AccountRegisterTermsFragmentProvider.class
+    })
+    abstract AccountRegisterActivity bindAccountRegisterActivity();
 }

@@ -46,7 +46,8 @@ public class CardUseDetailViewModel extends BaseViewModel<CardUseDetailNavigator
                     storeNameLiveData.setValue(cardUseDetailResponse.getData().getStoreName());
                     getNavigator().setBottomButton(
                             cardUseDetailResponse.getData().getPaymentStatus()
-                            , cardUseDetailResponse.getData().isRefundRequested());
+                            , cardUseDetailResponse.getData().isRefundRequested()
+                    , cardUseDetailResponse.getData().isCanceled());
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -70,6 +71,27 @@ public class CardUseDetailViewModel extends BaseViewModel<CardUseDetailNavigator
                 .subscribe(paymentRefundReadyResponse -> {
                     setIsLoading(false);
                     getNavigator().openPaymentRefundReadyReceiptFragment(paymentRefundReadyResponse);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
+    public void doPaymentRefundReadyCancelCall() {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+        .doPaymentRefundReadyCancelCall(new PaymentRefundReadyRequest(
+                mCardUseDetailResponse.getData().getUserId(),
+                mCardUseDetailResponse.getData().getStoreId(),
+                mCardUseDetailResponse.getData().getTokenSystemId(),
+                mCardUseDetailResponse.getData().getAmount(),
+                mCardUseDetailResponse.getData().getPaymentId(),
+                mCardUseDetailResponse.getData().getIdentifier()
+        ))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(paymentRefundReadyResponse -> {
+                    setIsLoading(false);
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);

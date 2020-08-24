@@ -151,7 +151,6 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         Log.d("debug", "showPaymentFragment");
         mFragmentManager
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.clRootView, PriceFragment.newInstance(storeName), PriceFragment.TAG)
                 .addToBackStack(PriceFragment.TAG)
                 .commitAllowingStateLoss();

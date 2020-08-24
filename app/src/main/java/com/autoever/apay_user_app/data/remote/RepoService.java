@@ -2,6 +2,8 @@ package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
+import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
+import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
@@ -13,6 +15,7 @@ import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyCancelResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
@@ -75,6 +78,9 @@ public interface RepoService {
     @PUT("api/v2/payment/refund/ready")
     Single<PaymentRefundReadyResponse> doPaymentRefundReadyCall(@Body PaymentRefundReadyRequest paymentRefundReadyRequest);
 
+    @PUT("api/v2/payment/refund/ready/cancel")
+    Single<PaymentRefundReadyCancelResponse> doPaymentRefundReadyCancelCall(@Body PaymentRefundReadyRequest paymentRefundReadyRequest);
+
     @POST("api/v2/payment/ready/storeStatic")
     Single<PaymentReadyResponse> doPaymentQrReadyCall(@Body PaymentQrReadyRequest paymentQrReadyRequest);
 
@@ -86,4 +92,7 @@ public interface RepoService {
             @Path("tokenSystemId") int tokenSystemId,
             @Query("subscriberId") int subscriberId
     );
+
+    @POST("api/v2/settleBank/list/account")
+    Single<BankAccountListResponse> doGetAccountListCall(@Body BankAccountListRequest bankAccountListRequest);
 }

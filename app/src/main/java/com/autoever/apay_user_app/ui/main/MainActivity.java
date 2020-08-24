@@ -28,6 +28,7 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityMainBinding;
 import com.autoever.apay_user_app.databinding.NavHeaderMainBinding;
+import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
@@ -182,7 +183,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                     openCardChargeActivity();
                     return true;
                 case R.id.nav_account_management:
-                    openBankAccountManagementActivity();
+                    openAccountActivity();
                     return true;
                 case R.id.nav_find_store:
                     return true;
@@ -240,8 +241,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void openBankAccountManagementActivity() {
-
+    public void openAccountActivity() {
+        Log.d("debug", "openAccountActivity");
+        Intent intent = AccountActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override
