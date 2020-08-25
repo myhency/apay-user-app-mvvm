@@ -3,6 +3,9 @@ package com.autoever.apay_user_app.di.builder;
 import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.account.list.AccountListFragmentProvider;
 import com.autoever.apay_user_app.ui.account.register.AccountRegisterActivity;
+import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragmentProvider;
+import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragmentProvider;
+import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragmentProvider;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
@@ -84,7 +87,10 @@ public abstract class ActivityBuilder {
     abstract AccountActivity bindAccountActivity();
 
     @ContributesAndroidInjector(modules = {
-            AccountRegisterTermsFragmentProvider.class
+            AccountRegisterTermsFragmentProvider.class,
+            CellPhoneAuthFragmentProvider.class,
+            BankSelectFragmentProvider.class,
+            BankAccountNumberFragmentProvider.class
     })
     abstract AccountRegisterActivity bindAccountRegisterActivity();
 }

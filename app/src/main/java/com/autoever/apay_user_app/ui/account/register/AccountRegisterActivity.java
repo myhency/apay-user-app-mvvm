@@ -14,6 +14,9 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
+import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
+import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragment;
+import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragment;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
@@ -25,7 +28,6 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegisterBinding, AccountRegisterViewModel> implements AccountRegisterNavigator, HasSupportFragmentInjector {
-
 
     @Inject
     ViewModelProviderFactory factory;
@@ -95,5 +97,68 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 .add(R.id.clRootView, AccountRegisterTermsFragment.newInstance(), AccountRegisterTermsFragment.TAG)
                 .addToBackStack(AccountRegisterTermsFragment.TAG)
                 .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void openCellPhoneAuthFragment() {
+        //휴대전화인증화면으로 이동.
+        Log.d("debug", "openCellPhoneAuthFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, CellPhoneAuthFragment.newInstance(), CellPhoneAuthFragment.TAG)
+                .addToBackStack(CellPhoneAuthFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void openBankSelectFragment() {
+        //은행선택화면으로 이동.
+        Log.d("debug", "openBankSelectFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, BankSelectFragment.newInstance(), BankSelectFragment.TAG)
+                .addToBackStack(BankSelectFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void openBankAccountNumberFragment() {
+        //계좌번호입력화면으로 이동.
+        Log.d("debug", "openBankAccountNumberFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, BankAccountNumberFragment.newInstance(), BankAccountNumberFragment.TAG)
+                .addToBackStack(BankAccountNumberFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+        super.onFragmentDetached(tag);
+        switch (tag) {
+            case "AccountRegisterTermsFragment":
+                removeFragment(tag);
+                openCellPhoneAuthFragment();
+                break;
+            case "CellPhoneAuthFragment":
+                removeFragment(tag);
+                openBankSelectFragment();
+                break;
+            case "BankSelectFragment":
+                removeFragment(tag);
+                openBankAccountNumberFragment();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void removeFragment(String tag) {
+        Fragment fragment = mFragmentManager.findFragmentByTag(tag);
+        mFragmentManager
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .remove(fragment)
+                .commit();
     }
 }

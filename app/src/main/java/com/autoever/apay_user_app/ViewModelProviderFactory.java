@@ -7,6 +7,9 @@ import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.ui.account.AccountViewModel;
 import com.autoever.apay_user_app.ui.account.list.AccountListViewModel;
 import com.autoever.apay_user_app.ui.account.register.AccountRegisterViewModel;
+import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberViewModel;
+import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthViewModel;
+import com.autoever.apay_user_app.ui.account.register.bank.BankSelectViewModel;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsViewModel;
 import com.autoever.apay_user_app.ui.auth.AuthViewModel;
 import com.autoever.apay_user_app.ui.card.CardInfoViewModel;
@@ -78,6 +81,12 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new AccountRegisterViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(AccountRegisterTermsViewModel.class)) {
             return (T) new AccountRegisterTermsViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CellPhoneAuthViewModel.class)) {
+            return (T) new CellPhoneAuthViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(BankSelectViewModel.class)) {
+            return (T) new BankSelectViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(BankAccountNumberViewModel.class)) {
+            return (T) new BankAccountNumberViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

@@ -63,7 +63,8 @@
             android:id="@+id/card_title"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:autoSizeMaxTextSize="30sp"
+            android:layout_marginTop="60dp"
+            android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
@@ -76,7 +77,7 @@
             app:layout_constraintHeight_percent="0.055"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent="0.4" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

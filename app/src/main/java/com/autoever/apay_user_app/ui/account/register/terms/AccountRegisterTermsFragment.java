@@ -1,30 +1,25 @@
 package com.autoever.apay_user_app.ui.account.register.terms;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.databinding.FragmentAccountRegistertTermsBinding;
+import com.autoever.apay_user_app.databinding.FragmentAccountRegisterTermsBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 
 import javax.inject.Inject;
 
 
-public class AccountRegisterTermsFragment extends BaseFragment<FragmentAccountRegistertTermsBinding, AccountRegisterTermsViewModel> implements
- AccountRegisterTermsNavigator {
+public class AccountRegisterTermsFragment extends BaseFragment<FragmentAccountRegisterTermsBinding, AccountRegisterTermsViewModel> implements AccountRegisterTermsNavigator {
 
     public static final String TAG = AccountRegisterTermsFragment.class.getSimpleName();
     
-    private FragmentAccountRegistertTermsBinding mFragmentAccountRegistertTermsBinding;
+    private FragmentAccountRegisterTermsBinding mFragmentAccountRegisterTermsBinding;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -44,7 +39,7 @@ public class AccountRegisterTermsFragment extends BaseFragment<FragmentAccountRe
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_account_registert_terms;
+        return R.layout.fragment_account_register_terms;
     }
 
     @Override
@@ -57,16 +52,19 @@ public class AccountRegisterTermsFragment extends BaseFragment<FragmentAccountRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragmentAccountRegistertTermsBinding = getViewDataBinding();
+        mFragmentAccountRegisterTermsBinding = getViewDataBinding();
         setup();
     }
 
     private void setup() {
+        mFragmentAccountRegisterTermsBinding.finishTextview.setOnClickListener(v -> {
+            getBaseActivity().onFragmentDetached(TAG);
+        });
     }
 }

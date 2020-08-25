@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="38dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:text="은행"
+                    android:textColor="@color/colorblack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/bank_name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_regular"
+                    android:gravity="right"
+                    android:text="bank"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:text="계좌번호"
+                    android:textColor="@color/colorblack"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
+                android:text="현금카드나 체크카드로 출금할 수 있는 본인 명의의 \n계좌만 등록할 수 있습니다."
+                android:textColor="#a5a8b9"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="38dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_background2"
+            android:layout_below="@id/id"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/spoqa_han_sans_regular"
+                android:hint="이름"
+                android:inputType="number"
+                android:textColor="#304db9"
+                android:textColorHint="#d0d0d0"
+                android:layout_marginVertical="20dp"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/account_number_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/spoqa_han_sans_regular"
+                android:hint="- 없이 계좌번호 입력"
+                android:inputType="number"
+                android:textColor="#304db9"
+                android:textColorHint="#d0d0d0"
+                android:layout_marginVertical="20dp"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/complete_auth_button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304db9"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:gravity="center"
+            android:text="ARS 인증하기"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</layout>
