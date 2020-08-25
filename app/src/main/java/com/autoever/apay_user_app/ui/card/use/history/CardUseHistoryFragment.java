@@ -241,4 +241,11 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
     public void onRetryClick() {
 
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("debug", "CardUseHistoryFragment onDetach");
+        PAGE_NO = 0;
+    }
 }

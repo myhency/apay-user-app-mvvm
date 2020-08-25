@@ -16,14 +16,14 @@
         <item
             android:id="@+id/nav_account_management"
             android:title="계좌관리" />
-        <item
-            android:id="@+id/nav_find_store"
-            android:title="가맹점 찾기" />
-        <item
-            android:id="@+id/nav_notice"
-            android:title="공지사항" />
-        <item
-            android:id="@+id/nav_faq"
-            android:title="FAQ" />
+<!--        <item-->
+<!--            android:id="@+id/nav_find_store"-->
+<!--            android:title="가맹점 찾기" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_notice"-->
+<!--            android:title="공지사항" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_faq"-->
+<!--            android:title="FAQ" />-->
     </group>
 </menu>

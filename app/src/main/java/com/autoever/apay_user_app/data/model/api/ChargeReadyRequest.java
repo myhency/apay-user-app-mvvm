@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * {
- *   "userId": 4,
+ *   "subscriberId": 4,
  *   "tokenSystemId": 1,
  *   "trPrice": 10000
  * }
@@ -14,32 +14,32 @@ import com.google.gson.annotations.SerializedName;
 public class ChargeReadyRequest {
 
     @Expose
-    @SerializedName("userId")
-    private String userId;
+    @SerializedName("subscriberId")
+    private String subscriberId;
 
     @Expose
     @SerializedName("tokenSystemId")
     private String tokenSystemId;
 
     @Expose
-    @SerializedName("trPrice")
-    private int trPrice;
+    @SerializedName("amount")
+    private int amount;
 
-    public ChargeReadyRequest(String userId, String tokenSystemId, int trPrice) {
-        this.userId = userId;
+    public ChargeReadyRequest(String subscriberId, String tokenSystemId, int amount) {
+        this.subscriberId = subscriberId;
         this.tokenSystemId = tokenSystemId;
-        this.trPrice = trPrice;
+        this.amount = amount;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSubscriberId() {
+        return subscriberId;
     }
 
     public String getTokenSystemId() {
         return tokenSystemId;
     }
 
-    public int getTrPrice() {
-        return trPrice;
+    public int getAmount() {
+        return amount;
     }
 }

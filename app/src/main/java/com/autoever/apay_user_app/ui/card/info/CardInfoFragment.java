@@ -1,5 +1,6 @@
 package com.autoever.apay_user_app.ui.card.info;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +72,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("debug", "CardInfoFragment onCreate");
         super.onCreate(savedInstanceState);
         mCardInfoFragmentViewModel.setNavigator(this);
         mCardInfoAdapter.setListener(this);
@@ -85,6 +88,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("debug", "CardInfoFragment onViewCreated");
         mFragmentCardInfoBinding = getViewDataBinding();
         setup();
 
@@ -182,5 +186,61 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     @Override
     public void onRetryClick() {
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d("debug", "CardInfoFragment onAttach");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d("debug", "CardInfoFragment onActivityCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("debug", "CardInfoFragment onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("debug", "CardInfoFragment onResume");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("debug", "CardInfoFragment onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("debug", "CardInfoFragment onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("debug", "CardInfoFragment onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("debug", "CardInfoFragment onDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("debug", "CardInfoFragment onDetach");
+        PAGE_NO = 0;
     }
 }

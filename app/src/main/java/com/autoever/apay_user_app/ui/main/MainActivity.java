@@ -185,11 +185,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 case R.id.nav_account_management:
                     openAccountActivity();
                     return true;
-                case R.id.nav_find_store:
-                    return true;
-                case R.id.nav_faq:
-                    openFaqActivity();
-                    return true;
+//                case R.id.nav_find_store:
+//                    return true;
+//                case R.id.nav_faq:
+//                    openFaqActivity();
+//                    return true;
                 default:
                     return false;
             }
