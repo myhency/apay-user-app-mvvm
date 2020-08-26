@@ -11,6 +11,8 @@ import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
 import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
+import com.autoever.apay_user_app.data.model.api.ChargeDoRequest;
+import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
@@ -152,6 +154,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<ChargeReadyResponse> doChargeReadyCall(ChargeReadyRequest chargeReadyRequest) {
         return mRepoService.doChargeReadyCall(chargeReadyRequest);
+    }
+
+    @Override
+    public Single<ChargeDoResponse> doChargeDoCall(ChargeDoRequest chargeDoRequest) {
+        return mRepoService.doChargeDoCall(chargeDoRequest);
     }
 
     @Override

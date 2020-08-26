@@ -24,114 +24,50 @@ import com.google.gson.annotations.SerializedName;
 public class ChargeDoRequest {
 
     @Expose
-    @SerializedName("resultCd")
-    private String resultCd;
+    @SerializedName("chargeId")
+    private Long chargeId;
 
     @Expose
-    @SerializedName("errCd")
-    private String errCd;
+    @SerializedName("bankCode")
+    private String bankCode;
 
     @Expose
-    @SerializedName("resultMsg")
-    private String resultMsg;
+    @SerializedName("subscriberId")
+    private Long subscriberId;
 
     @Expose
-    @SerializedName("mercntId")
-    private String mercntId;
+    @SerializedName("tokenSystemId")
+    private Long tokenSystemId;
 
     @Expose
-    @SerializedName("ordNo")
-    private int ordNo;
+    @SerializedName("amount")
+    private Long amount;
 
-    @Expose
-    @SerializedName("authNo")
-    private String authNo;
-
-    @Expose
-    @SerializedName("trPrice")
-    private String trPrice;
-
-    @Expose
-    @SerializedName("trDay")
-    private String trDay;
-
-    @Expose
-    @SerializedName("trTime")
-    private String trTime;
-
-
-    @Expose
-    @SerializedName("mercntParam1")
-    private String mercntParam1;
-
-    @Expose
-    @SerializedName("mercntParam2")
-    private String mercntParam2;
-
-    @Expose
-    @SerializedName("signatureString")
-    private String signatureString;
-
-    public ChargeDoRequest(String resultCd, String errCd, String resultMsg, String mercntId, int ordNo, String authNo, String trPrice, String trDay, String trTime, String mercntParam1, String mercntParam2, String signatureString) {
-        this.resultCd = resultCd;
-        this.errCd = errCd;
-        this.resultMsg = resultMsg;
-        this.mercntId = mercntId;
-        this.ordNo = ordNo;
-        this.authNo = authNo;
-        this.trPrice = trPrice;
-        this.trDay = trDay;
-        this.trTime = trTime;
-        this.mercntParam1 = mercntParam1;
-        this.mercntParam2 = mercntParam2;
-        this.signatureString = signatureString;
+    public ChargeDoRequest(Long chargeId, String bankCode, Long subscriberId, Long tokenSystemId, Long amount) {
+        this.chargeId = chargeId;
+        this.bankCode = bankCode;
+        this.subscriberId = subscriberId;
+        this.tokenSystemId = tokenSystemId;
+        this.amount = amount;
     }
 
-    public String getResultCd() {
-        return resultCd;
+    public Long getChargeId() {
+        return chargeId;
     }
 
-    public String getErrCd() {
-        return errCd;
+    public String getBankCode() {
+        return bankCode;
     }
 
-    public String getResultMsg() {
-        return resultMsg;
+    public Long getSubscriberId() {
+        return subscriberId;
     }
 
-    public String getMercntId() {
-        return mercntId;
+    public Long getTokenSystemId() {
+        return tokenSystemId;
     }
 
-    public int getOrdNo() {
-        return ordNo;
-    }
-
-    public String getAuthNo() {
-        return authNo;
-    }
-
-    public String getTrPrice() {
-        return trPrice;
-    }
-
-    public String getTrDay() {
-        return trDay;
-    }
-
-    public String getTrTime() {
-        return trTime;
-    }
-
-    public String getMercntParam1() {
-        return mercntParam1;
-    }
-
-    public String getMercntParam2() {
-        return mercntParam2;
-    }
-
-    public String getSignatureString() {
-        return signatureString;
+    public Long getAmount() {
+        return amount;
     }
 }

@@ -6,6 +6,8 @@ import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
 import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
+import com.autoever.apay_user_app.data.model.api.ChargeDoRequest;
+import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
@@ -45,6 +47,9 @@ public interface RepoService {
 
     @POST("api/v2/tokenSystem/charge/ready")
     Single<ChargeReadyResponse> doChargeReadyCall(@Body ChargeReadyRequest chargeReadyRequest);
+
+    @PUT("api/v2/tokenSystem/charge/do")
+    Single<ChargeDoResponse> doChargeDoCall(@Body ChargeDoRequest chargeDoRequest);
 
     @POST("api/v2/user/tokenSystem/1")
     Single<UserRegisterResponse> doUserRegisterCall(@Body UserRegisterRequest userRegisterRequest);

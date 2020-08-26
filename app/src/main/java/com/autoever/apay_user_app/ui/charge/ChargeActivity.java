@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,10 +14,13 @@ import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
+import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityChargeBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
+import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
@@ -29,7 +33,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeViewModel> implements ChargeNavigator, HasSupportFragmentInjector {
-    
+
     public static final String TAG = ChargeActivity.class.getSimpleName();
 
     @Inject
@@ -37,13 +41,13 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
 
     @Inject
     ViewModelProviderFactory factory;
-    
+
     private ActivityChargeBinding mActivityChargeBinding;
     private ChargeViewModel mChargeViewModel;
     private FragmentManager mFragmentManager;
 
-    private int amount = 0;
-    
+    private Long amount = 0L;
+
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, ChargeActivity.class);
         return intent;
@@ -72,7 +76,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
         Log.d("debug", "ChargeActivity onCreate");
         mActivityChargeBinding = getViewDataBinding();
         mChargeViewModel.setNavigator(this);
-        
+
         setup();
 
         openAmountFragment();
@@ -81,7 +85,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     private void setup() {
         this.mFragmentManager = getSupportFragmentManager();
         setSupportActionBar(mActivityChargeBinding.toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -124,8 +128,22 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     }
 
     @Override
-    public void doChargeDo() {
+    public void doChargeDo(ChargeReadyResponse chargeReadyResponse) {
         Log.d("debug", "doChargeDo");
+        mChargeViewModel.doChargeDo(chargeReadyResponse);
+    }
+
+    @Override
+    public void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse) {
+        //충전금액 영수증 화면으로 이동.
+        Log.d("debug", "openChargeReceiptFragment");
+        mActivityChargeBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityChargeBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, ChargeReceiptFragment.newInstance(chargeDoResponse), ChargeReceiptFragment.TAG)
+                .addToBackStack(ChargeReceiptFragment.TAG)
+                .commit();
     }
 
     @Override
@@ -145,6 +163,11 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
             case "AuthFragment":
                 doChargeReady();
                 break;
+            case "ChargeReceiptFragment":
+                finish();
+                break;
+            default:
+                break;
         }
     }
 
@@ -155,7 +178,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
         try {
             switch (tag) {
                 case "AmountFragment":
-                    amount = CommonUtils.parseToInt(message.getString("amount"));
+                    amount = (long) CommonUtils.parseToInt(message.getString("amount"));
                     break;
                 default:
                     break;

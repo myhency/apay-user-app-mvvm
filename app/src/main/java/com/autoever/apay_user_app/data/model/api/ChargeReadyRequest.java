@@ -15,31 +15,31 @@ public class ChargeReadyRequest {
 
     @Expose
     @SerializedName("subscriberId")
-    private String subscriberId;
+    private Long subscriberId;
 
     @Expose
     @SerializedName("tokenSystemId")
-    private String tokenSystemId;
+    private Long tokenSystemId;
 
     @Expose
     @SerializedName("amount")
-    private int amount;
+    private Long amount;
 
-    public ChargeReadyRequest(String subscriberId, String tokenSystemId, int amount) {
+    public ChargeReadyRequest(Long subscriberId, Long tokenSystemId, Long amount) {
         this.subscriberId = subscriberId;
         this.tokenSystemId = tokenSystemId;
         this.amount = amount;
     }
 
-    public String getSubscriberId() {
+    public Long getSubscriberId() {
         return subscriberId;
     }
 
-    public String getTokenSystemId() {
+    public Long getTokenSystemId() {
         return tokenSystemId;
     }
 
-    public int getAmount() {
+    public Long getAmount() {
         return amount;
     }
 }

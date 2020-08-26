@@ -3,6 +3,8 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * {
  *   "data": {
@@ -31,105 +33,60 @@ public class ChargeReadyResponse {
     public static class ChargeReady {
 
         @Expose
-        @SerializedName("hdInfo")
-        private String hdInfo;
+        @SerializedName("chargeId")
+        private Long chargeId;
 
         @Expose
-        @SerializedName("apiVer")
-        private String apiVer;
+        @SerializedName("subscriberId")
+        private Long subscriberId;
 
         @Expose
-        @SerializedName("processType")
-        private String processType;
+        @SerializedName("tokenSystemId")
+        private Long tokenSystemId;
 
         @Expose
-        @SerializedName("mercntId")
-        private String mercntId;
+        @SerializedName("amount")
+        private Long amount;
 
         @Expose
-        @SerializedName("productNm")
-        private String productNm;
+        @SerializedName("chargeStatus")
+        private String chargeStatus;
 
         @Expose
-        @SerializedName("dutyFreeYn")
-        private String dutyFreeYn;
+        @SerializedName("createdDate")
+        private Date createdDate;
 
-        @Expose
-        @SerializedName("ordNo")
-        private int ordNo;
-
-        @Expose
-        @SerializedName("trDay")
-        private String trDay;
-
-        @Expose
-        @SerializedName("trTime")
-        private String trTime;
-
-        @Expose
-        @SerializedName("trPrice")
-        private String trPrice;
-
-        @Expose
-        @SerializedName("signature")
-        private String signature;
-
-        public ChargeReady(String hdInfo, String apiVer, String processType, String mercntId, String productNm, String dutyFreeYn, int ordNo, String trDay, String trTime, String trPrice, String signature) {
-            this.hdInfo = hdInfo;
-            this.apiVer = apiVer;
-            this.processType = processType;
-            this.mercntId = mercntId;
-            this.productNm = productNm;
-            this.dutyFreeYn = dutyFreeYn;
-            this.ordNo = ordNo;
-            this.trDay = trDay;
-            this.trTime = trTime;
-            this.trPrice = trPrice;
-            this.signature = signature;
+        public ChargeReady(Long chargeId, Long subscriberId, Long tokenSystemId, Long amount, String chargeStatus, Date createdDate) {
+            this.chargeId = chargeId;
+            this.subscriberId = subscriberId;
+            this.tokenSystemId = tokenSystemId;
+            this.amount = amount;
+            this.chargeStatus = chargeStatus;
+            this.createdDate = createdDate;
         }
 
-        public String getHdInfo() {
-            return hdInfo;
+        public Long getChargeId() {
+            return chargeId;
         }
 
-        public String getApiVer() {
-            return apiVer;
+        public Long getSubscriberId() {
+            return subscriberId;
         }
 
-        public String getProcessType() {
-            return processType;
+        public Long getTokenSystemId() {
+            return tokenSystemId;
         }
 
-        public String getMercntId() {
-            return mercntId;
+        public Long getAmount() {
+            return amount;
         }
 
-        public String getProductNm() {
-            return productNm;
+        public String getChargeStatus() {
+            return chargeStatus;
         }
 
-        public String getDutyFreeYn() {
-            return dutyFreeYn;
-        }
-
-        public int getOrdNo() {
-            return ordNo;
-        }
-
-        public String getTrDay() {
-            return trDay;
-        }
-
-        public String getTrTime() {
-            return trTime;
-        }
-
-        public String getTrPrice() {
-            return trPrice;
-        }
-
-        public String getSignature() {
-            return signature;
+        public Date getCreatedDate() {
+            return createdDate;
         }
     }
 }
