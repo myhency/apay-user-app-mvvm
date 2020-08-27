@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +17,8 @@ import com.autoever.apay_user_app.databinding.ActivityAccountBinding;
 import com.autoever.apay_user_app.ui.account.list.AccountListFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -93,5 +96,22 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                 .add(R.id.clRootView, AccountListFragment.newInstance(), AccountListFragment.TAG)
                 .addToBackStack(AccountListFragment.TAG)
                 .commitAllowingStateLoss();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("debug", "onOptionsItemSelected:" + item.toString());
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                List<Fragment> fragments = mFragmentManager.getFragments();
+                String fragmentTag = fragments.get(fragments.size() - 1).getTag();
+                switch (fragmentTag) {
+                    case "AccountListFragment":
+                        finish();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

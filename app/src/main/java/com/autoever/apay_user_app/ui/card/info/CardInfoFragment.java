@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardInfoBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
+import com.autoever.apay_user_app.ui.refund.RefundActivity;
 
 import java.util.List;
 
@@ -151,6 +152,10 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
             getBaseActivity().finish();
             openChargeActivity();
         });
+
+        mFragmentCardInfoBinding.paybackButton.setOnClickListener(v -> {
+            openRefundActivity();
+        });
     }
 
     @Override
@@ -180,7 +185,8 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
 
     @Override
     public void openRefundActivity() {
-
+        Intent intent = RefundActivity.newIntent(getActivity());
+        startActivity(intent);
     }
 
     @Override

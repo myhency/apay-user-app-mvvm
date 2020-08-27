@@ -42,7 +42,7 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         getCompositeDisposable().add(getDataManager()
         .doChargeDoCall(new ChargeDoRequest(
                 chargeReadyResponse.getData().getChargeId(),
-                chargeReadyResponse.getData().getChargeStatus(),
+                "002",
                 chargeReadyResponse.getData().getSubscriberId(),
                 chargeReadyResponse.getData().getTokenSystemId(),
                 chargeReadyResponse.getData().getAmount()

@@ -24,6 +24,9 @@ import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptViewModel;
 import com.autoever.apay_user_app.ui.home.HomeViewModel;
 import com.autoever.apay_user_app.ui.main.MainViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
+import com.autoever.apay_user_app.ui.refund.RefundViewModel;
+import com.autoever.apay_user_app.ui.refund.amount.RefundAmountViewModel;
+import com.autoever.apay_user_app.ui.refund.terms.RefundTermsViewModel;
 import com.autoever.apay_user_app.ui.splash.SplashViewModel;
 import com.autoever.apay_user_app.ui.user.login.LoginViewModel;
 import com.autoever.apay_user_app.ui.user.register.RegisterViewModel;
@@ -90,6 +93,12 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new BankAccountNumberViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(ChargeReceiptViewModel.class)) {
             return (T) new ChargeReceiptViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RefundViewModel.class)) {
+            return (T) new RefundViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RefundTermsViewModel.class)) {
+            return (T) new RefundTermsViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RefundAmountViewModel.class)) {
+            return (T) new RefundAmountViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

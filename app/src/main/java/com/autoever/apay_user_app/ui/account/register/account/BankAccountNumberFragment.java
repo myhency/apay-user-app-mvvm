@@ -18,6 +18,9 @@ import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTerms
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsViewModel;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 
@@ -32,8 +35,10 @@ public class BankAccountNumberFragment extends BaseFragment<FragmentBankAccountN
 
     private BankAccountNumberViewModel mBankAccountNumberViewModel;
 
-    public static BankAccountNumberFragment newInstance() {
+    public static BankAccountNumberFragment newInstance(String selectedBankId, String selectedBankName) {
         Bundle args = new Bundle();
+        args.putString("selectedBankId", selectedBankId);
+        args.putString("selectedBankName", selectedBankName);
         BankAccountNumberFragment fragment = new BankAccountNumberFragment();
         fragment.setArguments(args);
         return fragment;
@@ -69,6 +74,16 @@ public class BankAccountNumberFragment extends BaseFragment<FragmentBankAccountN
     }
 
     private void setup() {
-
+        mFragmentBankAccountNumberBinding.finishTextview.setOnClickListener(v -> {
+            try {
+                JSONObject data = new JSONObject();
+                data.put("withdrawBankCode", getArguments().get("selectedBankId"));
+                data.put("withdrawAccountNumber", mFragmentBankAccountNumberBinding.accountNumberEdittext.getText().toString());
+                getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            getBaseActivity().onFragmentDetached(TAG);
+        });
     }
 }

@@ -13,6 +13,9 @@ import com.autoever.apay_user_app.databinding.FragmentAccountRegisterTermsBindin
 import com.autoever.apay_user_app.databinding.FragmentCellPhoneAuthBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 
@@ -64,7 +67,16 @@ public class CellPhoneAuthFragment extends BaseFragment<FragmentCellPhoneAuthBin
     }
 
     private void setup() {
-        mFragmentCellPhoneAuthBinding.completeAuthButton.setOnClickListener(v -> {
+        mFragmentCellPhoneAuthBinding.finishTextview.setOnClickListener(v -> {
+            try {
+                JSONObject data = new JSONObject();
+                data.put("authenticationCode", "123456");
+                data.put("phoneNumber", mFragmentCellPhoneAuthBinding.cellPhoneInput.getText());
+                data.put("subscriberName", mFragmentCellPhoneAuthBinding.nameInput.getText());
+                getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             getBaseActivity().onFragmentDetached(TAG);
         });
     }

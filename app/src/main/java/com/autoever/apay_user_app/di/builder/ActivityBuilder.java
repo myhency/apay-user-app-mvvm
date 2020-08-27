@@ -24,6 +24,9 @@ import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragmentProvide
 import com.autoever.apay_user_app.ui.payment.price.PriceFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
+import com.autoever.apay_user_app.ui.refund.RefundActivity;
+import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragmentProvider;
+import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
@@ -95,4 +98,11 @@ public abstract class ActivityBuilder {
             BankAccountNumberFragmentProvider.class
     })
     abstract AccountRegisterActivity bindAccountRegisterActivity();
+
+    @ContributesAndroidInjector(modules = {
+            RefundTermsFragmentProvider.class,
+            RefundAmountFragmentProvider.class,
+            AuthFragmentProvider.class
+    })
+    abstract RefundActivity bindRefundActivity();
 }

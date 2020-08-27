@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
+import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
+import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
@@ -10,6 +12,8 @@ import com.autoever.apay_user_app.data.model.api.ChargeDoRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
+import com.autoever.apay_user_app.data.model.api.IdentityCheckRequest;
+import com.autoever.apay_user_app.data.model.api.IdentityCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
@@ -22,6 +26,10 @@ import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
+import com.autoever.apay_user_app.data.model.api.RefundDoRequest;
+import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
+import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
+import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
@@ -100,4 +108,16 @@ public interface RepoService {
 
     @POST("api/v2/settleBank/list/account")
     Single<BankAccountListResponse> doGetAccountListCall(@Body BankAccountListRequest bankAccountListRequest);
+
+    @POST("api/v2/settleBank/identity/check")
+    Single<IdentityCheckResponse> doIdentityCheckCall(@Body IdentityCheckRequest identityCheckRequest);
+
+    @POST("api/v2/settleBank/ars/check")
+    Single<ArsCheckResponse> doArsCheckCall(@Body ArsCheckRequest arsCheckRequest);
+
+    @PUT("api/v2/tokenSystem/refund/ready")
+    Single<RefundReadyResponse> doRefundReadyCall(@Body RefundReadyRequest refundReadyRequest);
+
+    @PUT("api/v2/tokenSystem/refund/do")
+    Single<RefundDoResponse> doRefundDoCall(@Body RefundDoRequest refundDoRequest);
 }

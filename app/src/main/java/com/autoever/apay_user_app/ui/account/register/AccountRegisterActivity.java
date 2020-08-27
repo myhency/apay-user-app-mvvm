@@ -13,6 +13,7 @@ import android.util.Log;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
 import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
 import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragment;
@@ -20,6 +21,9 @@ import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragment;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -38,6 +42,15 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
     private ActivityAccountRegisterBinding mActivityAccountRegisterBinding;
     private AccountRegisterViewModel mAccountRegisterViewModel;
     private FragmentManager mFragmentManager;
+
+    //TODO. 확정되면 preference 에서 관리하는 것이 좋을 것 같음.
+    private String settleBankUniqueId = "uniqueId";
+    private String phoneNumber;
+    private String subscriberName;
+    private String withdrawBankCode;
+    private String withdrawAccountNumber;
+    private String authenticationCode;
+    private Long subscriberId;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, AccountRegisterActivity.class);
@@ -122,12 +135,12 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
     }
 
     @Override
-    public void openBankAccountNumberFragment() {
+    public void openBankAccountNumberFragment(String selectedBankId, String selectedBankName) {
         //계좌번호입력화면으로 이동.
         Log.d("debug", "openBankAccountNumberFragment");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, BankAccountNumberFragment.newInstance(), BankAccountNumberFragment.TAG)
+                .add(R.id.clRootView, BankAccountNumberFragment.newInstance(selectedBankId, selectedBankName), BankAccountNumberFragment.TAG)
                 .addToBackStack(BankAccountNumberFragment.TAG)
                 .commitAllowingStateLoss();
     }
@@ -142,11 +155,56 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 break;
             case "CellPhoneAuthFragment":
                 removeFragment(tag);
-                openBankSelectFragment();
+                //TODO. 백엔드 제대로 구현되면 구현해야 함.
+                mAccountRegisterViewModel.doIdentityCheckCall();
                 break;
             case "BankSelectFragment":
                 removeFragment(tag);
-                openBankAccountNumberFragment();
+//                openBankAccountNumberFragment();
+                break;
+            case "BankAccountNumberFragment":
+                removeFragment(tag);
+                mAccountRegisterViewModel.doArsCheckCall(
+                        settleBankUniqueId,
+                        phoneNumber,
+                        subscriberName,
+                        withdrawBankCode,
+                        withdrawAccountNumber,
+                        authenticationCode,
+                        4L
+                );
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onReceivedMessageFromFragment(String tag, JSONObject message) {
+        super.onReceivedMessageFromFragment(tag, message);
+        switch (tag) {
+            case "CellPhoneAuthFragment":
+                try {
+                    phoneNumber = message.getString("phoneNumber");
+                    subscriberName = message.getString("subscriberName");
+                    authenticationCode = message.getString("authenticationCode");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "BankSelectFragment":
+                try {
+                    openBankAccountNumberFragment(message.getString("selectedBankId"), message.getString("selectedBankName"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "BankAccountNumberFragment":
+                try {
+                    withdrawBankCode = message.getString("withdrawBankCode");
+                    withdrawAccountNumber = message.getString("withdrawAccountNumber");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;

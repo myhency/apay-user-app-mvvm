@@ -8,5 +8,5 @@ public interface AccountRegisterNavigator {
 
     void openBankSelectFragment();
 
-    void openBankAccountNumberFragment();
+    void openBankAccountNumberFragment(String selectedBankId, String selectedBankName);
 }

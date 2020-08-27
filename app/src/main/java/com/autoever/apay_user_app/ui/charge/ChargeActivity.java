@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,8 @@ import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -186,5 +189,36 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("debug", "onOptionsItemSelected:" + mFragmentManager.getBackStackEntryCount());
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                List<Fragment> fragments = mFragmentManager.getFragments();
+                String fragmentTag = fragments.get(fragments.size() - 1).getTag();
+                switch (fragmentTag) {
+                    case "AmountFragment":
+                        finish();
+                    case "AuthFragment":
+                        removeFragment(fragmentTag);
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void removeFragment(String tag) {
+        Fragment fragment = mFragmentManager.findFragmentByTag(tag);
+        mFragmentManager
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .remove(fragment)
+                .commit();
     }
 }

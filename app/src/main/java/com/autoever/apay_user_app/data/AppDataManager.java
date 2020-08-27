@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
+import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
+import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
@@ -15,6 +17,8 @@ import com.autoever.apay_user_app.data.model.api.ChargeDoRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
+import com.autoever.apay_user_app.data.model.api.IdentityCheckRequest;
+import com.autoever.apay_user_app.data.model.api.IdentityCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
@@ -27,6 +31,10 @@ import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
+import com.autoever.apay_user_app.data.model.api.RefundDoRequest;
+import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
+import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
+import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
@@ -219,5 +227,25 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<BankAccountListResponse> doGetAccountListCall(BankAccountListRequest bankAccountListRequest) {
         return mRepoService.doGetAccountListCall(bankAccountListRequest);
+    }
+
+    @Override
+    public Single<IdentityCheckResponse> doIdentityCheckCall(IdentityCheckRequest identityCheckRequest) {
+        return mRepoService.doIdentityCheckCall(identityCheckRequest);
+    }
+
+    @Override
+    public Single<ArsCheckResponse> doArsCheckCall(ArsCheckRequest arsCheckRequest) {
+        return mRepoService.doArsCheckCall(arsCheckRequest);
+    }
+
+    @Override
+    public Single<RefundReadyResponse> doRefundReadyCall(RefundReadyRequest refundReadyRequest) {
+        return mRepoService.doRefundReadyCall(refundReadyRequest);
+    }
+
+    @Override
+    public Single<RefundDoResponse> doRefundDoCall(RefundDoRequest refundDoRequest) {
+        return mRepoService.doRefundDoCall(refundDoRequest);
     }
 }
