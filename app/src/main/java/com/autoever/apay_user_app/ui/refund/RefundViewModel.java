@@ -24,6 +24,7 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
         .observeOn(getSchedulerProvider().ui())
         .subscribe(refundReadyResponse -> {
             setIsLoading(false);
+            Log.d("debug", "amount" + refundReadyResponse.getData().getAmount());
             doRefundDoCall(refundReadyResponse);
         }, throwable -> {
             setIsLoading(false);
@@ -32,6 +33,7 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
 
     private void doRefundDoCall(RefundReadyResponse refundReadyResponse) {
         Log.d("debug", "doRefundDoCall started");
+        Log.d("debug", "amount" + refundReadyResponse.getData().getAmount());
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doRefundDoCall(new RefundDoRequest(
@@ -45,7 +47,7 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
         .observeOn(getSchedulerProvider().ui())
         .subscribe(refundDoResponse -> {
             setIsLoading(false);
-//            getNavigator()
+            getNavigator().openRefundReceiptFragment(refundDoResponse);
         }, throwable -> {
             setIsLoading(false);
         }));

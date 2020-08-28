@@ -2,65 +2,92 @@ package com.autoever.apay_user_app.ui.refund.receipt;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
+import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.databinding.FragmentRefundReceiptBinding;
+import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragment;
+import com.autoever.apay_user_app.utils.CommonUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RefundReceiptFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class RefundReceiptFragment extends Fragment {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import javax.inject.Inject;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public RefundReceiptFragment() {
-        // Required empty public constructor
-    }
+public class RefundReceiptFragment extends BaseFragment<FragmentRefundReceiptBinding, RefundReceiptViewModel> implements RefundReceiptNavigator {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RefundReceiptFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RefundReceiptFragment newInstance(String param1, String param2) {
-        RefundReceiptFragment fragment = new RefundReceiptFragment();
+    public static final String TAG = RefundReceiptFragment.class.getSimpleName();
+
+    private FragmentRefundReceiptBinding mFragmentRefundReceiptBinding;
+
+    @Inject
+    ViewModelProviderFactory factory;
+
+    private RefundReceiptViewModel mRefundReceiptViewModel;
+
+    public static RefundReceiptFragment newInstance(Long amount, Date createdDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd(E) HH:mm:ss");
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("createdDate", simpleDateFormat.format(createdDate));
+        args.putString("amount", CommonUtils.formatToKRW(String.valueOf(amount)) + " P");
+        RefundReceiptFragment fragment = new RefundReceiptFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public int getBindingVariable() {
+        return BR.viewModel;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_refund_receipt, container, false);
+    public int getLayoutId() {
+        return R.layout.fragment_refund_receipt;
+    }
+
+    @Override
+    public RefundReceiptViewModel getViewModel() {
+        mRefundReceiptViewModel = ViewModelProviders.of(this, factory)
+                .get(RefundReceiptViewModel.class);
+        return mRefundReceiptViewModel;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragmentRefundReceiptBinding = getViewDataBinding();
+        mRefundReceiptViewModel.setNavigator(this);
+        setup();
+    }
+
+    private void setup() {
+        mFragmentRefundReceiptBinding.finishTextview.setOnClickListener(v -> {
+            getBaseActivity().finish();
+        });
+
+        mFragmentRefundReceiptBinding.refundDate.setText(getArguments().getString("createdDate"));
+        mFragmentRefundReceiptBinding.refundAmount.setText(getArguments().getString("amount"));
     }
 }

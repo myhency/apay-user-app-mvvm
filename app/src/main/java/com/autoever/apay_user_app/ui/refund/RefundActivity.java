@@ -10,16 +10,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.databinding.ActivityRefundBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragment;
+import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragment;
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
@@ -132,6 +135,19 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
     }
 
     @Override
+    public void openRefundReceiptFragment(RefundDoResponse refundDoResponse) {
+        mActivityRefundBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityRefundBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, RefundReceiptFragment.newInstance(
+                        refundDoResponse.getData().getAmount(),
+                        refundDoResponse.getData().getCreatedDate()), RefundReceiptFragment.TAG)
+                .addToBackStack(RefundReceiptFragment.TAG)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
     public void onFragmentDetached(String tag) {
         switch (tag) {
             case "RefundTermsFragment":
@@ -139,6 +155,7 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
                 break;
             case "RefundAmountFragment":
                 openAuthFragment();
+                break;
             case "AuthFragment":
                 doRefundReady();
                 break;
