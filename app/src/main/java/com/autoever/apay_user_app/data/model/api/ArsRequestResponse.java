@@ -3,13 +3,13 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ArsCheckResponse {
+public class ArsRequestResponse {
 
     @Expose
     @SerializedName("data")
-    private ArsCheck data;
+    private ArsCheckResponse.ArsCheck data;
 
-    public ArsCheck getData() { return data; }
+    public ArsCheckResponse.ArsCheck getData() { return data; }
 
     public static class ArsCheck {
 

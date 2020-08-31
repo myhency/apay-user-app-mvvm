@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
@@ -33,11 +34,11 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-    
+
     private ActivityAccountBinding mActivityAccountBinding;
     private AccountViewModel mAccountViewModel;
     private FragmentManager mFragmentManager;
-    
+
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, AccountActivity.class);
         return intent;
@@ -65,7 +66,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
         super.onCreate(savedInstanceState);
         mActivityAccountBinding = getViewDataBinding();
         mAccountViewModel.setNavigator(this);
-        
+
         setup();
 
         openAccountListFragment();
@@ -113,5 +114,21 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("debug", "AccountRegisterActivity resultCode: " + resultCode);
+        switch (resultCode) {
+            case RESULT_FIRST_USER:
+                setResult(RESULT_FIRST_USER);
+                finish();
+            case RESULT_OK:
+                setResult(RESULT_OK);
+                finish();
+            default:
+                finish();
+        }
     }
 }

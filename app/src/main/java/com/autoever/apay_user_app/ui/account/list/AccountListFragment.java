@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,10 +25,15 @@ import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 
 import javax.inject.Inject;
 
+import static android.app.Activity.RESULT_FIRST_USER;
+import static android.app.Activity.RESULT_OK;
+
 
 public class AccountListFragment extends BaseFragment<FragmentAccountListBinding, AccountListViewModel> implements AccountListNavigator {
 
     public static String TAG = AccountListFragment.class.getSimpleName();
+
+    private static final int ACCOUNT_REGISTER_ACTIVITY_RESULT = 102;
 
     private FragmentAccountListBinding mFragmentAccountListBinding;
 
@@ -86,6 +92,22 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
     public void openAccountRegisterActivity() {
         Log.d("debug", "openAccountRegisterActivity");
         Intent intent = AccountRegisterActivity.newIntent(getBaseActivity());
-        startActivity(intent);
+        startActivityForResult(intent, ACCOUNT_REGISTER_ACTIVITY_RESULT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("debug", "AccountRegisterActivity resultCode: " + resultCode);
+        switch (resultCode) {
+            case RESULT_FIRST_USER:
+                getBaseActivity().setResult(RESULT_FIRST_USER);
+                getBaseActivity().finish();
+            case RESULT_OK:
+                getBaseActivity().setResult(RESULT_OK);
+                getBaseActivity().finish();
+            default:
+                getBaseActivity().finish();
+        }
     }
 }

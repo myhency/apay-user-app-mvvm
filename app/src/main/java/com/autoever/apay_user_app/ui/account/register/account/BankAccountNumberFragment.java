@@ -74,10 +74,11 @@ public class BankAccountNumberFragment extends BaseFragment<FragmentBankAccountN
     }
 
     private void setup() {
+        mFragmentBankAccountNumberBinding.bankNameText.setText(getArguments().getString("selectedBankName"));
         mFragmentBankAccountNumberBinding.finishTextview.setOnClickListener(v -> {
             try {
                 JSONObject data = new JSONObject();
-                data.put("withdrawBankCode", getArguments().get("selectedBankId"));
+                data.put("withdrawBankCode", getArguments().getString("selectedBankId"));
                 data.put("withdrawAccountNumber", mFragmentBankAccountNumberBinding.accountNumberEdittext.getText().toString());
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
             } catch (JSONException e) {

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -31,6 +32,7 @@ import com.autoever.apay_user_app.databinding.NavHeaderMainBinding;
 import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
+import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
@@ -43,6 +45,8 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, HasSupportFragmentInjector {
+
+    private static final int ACCOUNT_ACTIVITY_RESULT = 101;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
@@ -232,7 +236,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openCardChargeActivity() {
-
+        Log.d("debug", "openCardChargeActivity");
+        Intent intent = ChargeActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override
@@ -244,7 +250,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public void openAccountActivity() {
         Log.d("debug", "openAccountActivity");
         Intent intent = AccountActivity.newIntent(MainActivity.this);
-        startActivity(intent);
+        startActivityForResult(intent,ACCOUNT_ACTIVITY_RESULT);
     }
 
     @Override
@@ -282,5 +288,21 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("debug", "AccountActivity resultCode: " + resultCode);
+        Log.d("debug", "AccountActivity requestCode: " + requestCode);
+        if(requestCode == ACCOUNT_ACTIVITY_RESULT) {
+            switch (resultCode) {
+                case RESULT_FIRST_USER:
+                    openCardChargeActivity();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -19,6 +20,7 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentBankSelectBinding;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.common.Bank;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,6 +72,13 @@ public class BankSelectFragment extends BaseFragment<FragmentBankSelectBinding, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //back button 을 눌렀을 경우 Activity 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
@@ -124,19 +133,19 @@ public class BankSelectFragment extends BaseFragment<FragmentBankSelectBinding, 
             switch (v.getId()) {
                 case R.id.nonghyub:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "001";
+                    selectedBankId = "011";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.woori:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "002";
+                    selectedBankId = "020";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.shinhan:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "003";
+                    selectedBankId = "088";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
@@ -148,31 +157,31 @@ public class BankSelectFragment extends BaseFragment<FragmentBankSelectBinding, 
                     break;
                 case R.id.hana:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "005";
+                    selectedBankId = "081";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.city:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "006";
+                    selectedBankId = "027";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.ibk:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "007";
+                    selectedBankId = "003";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.kbank:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "008";
+                    selectedBankId = "089";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
                 case R.id.kakao:
                     v.setBackgroundResource(R.drawable.bg_bank_radius_with_border);
-                    selectedBankId = "009";
+                    selectedBankId = "090";
                     selectedBankName = getBankName(selectedBankId);
                     mFragmentBankSelectBinding.textView4.setText(selectedBankName);
                     break;
@@ -183,22 +192,6 @@ public class BankSelectFragment extends BaseFragment<FragmentBankSelectBinding, 
     }
 
     private String getBankName(String selectedBankId) {
-//        DatabaseUtil databaseUtil = new DatabaseUtil(getActivity());
-//        SQLiteDatabase db = databaseUtil.getWritableDatabase();
-//        String sql = "select bank_name from bank_master where bank_id = ?";
-//
-//        String[] arg1 = {selectedBankId};
-//
-//        Cursor cursor = db.rawQuery(sql, arg1);
-//
-//        cursor.moveToFirst();
-//
-//        selectedBankName = cursor.getString(cursor.getColumnIndex("bank_name"));
-//        db.close();
-//
-//        cursor.close();
-//
-//        return selectedBankName;
-        return "bank";
+        return Bank.find(selectedBankId).getBankName();
     }
 }

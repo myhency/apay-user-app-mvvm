@@ -1,21 +1,27 @@
 package com.autoever.apay_user_app.ui.account.register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
 import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
+import com.autoever.apay_user_app.ui.account.register.ars.ArsAuthFragment;
 import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragment;
 import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragment;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
@@ -24,6 +30,8 @@ import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -50,6 +58,7 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
     private String withdrawBankCode;
     private String withdrawAccountNumber;
     private String authenticationCode;
+    private String identificationNumber;
     private Long subscriberId;
 
     public static Intent newIntent(Context context) {
@@ -79,14 +88,14 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
         super.onCreate(savedInstanceState);
         mActivityAccountRegisterBinding = getViewDataBinding();
         mAccountRegisterViewModel.setNavigator(this);
-
-        setup();
+        this.mFragmentManager = getSupportFragmentManager();
 
         openAccountRegisterTermsFragment();
+        setup();
     }
 
     private void setup() {
-        this.mFragmentManager = getSupportFragmentManager();
+
         setSupportActionBar(mActivityAccountRegisterBinding.toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,6 +103,109 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             mActivityAccountRegisterBinding.toolbarTitle.setText("결제계좌 등록");
         }
+
+        layoutInitiate(1);
+
+    }
+
+    private void layoutInitiate(int step) {
+        switch (step) {
+            case 1:
+                Log.d("debug", "step1");
+                mActivityAccountRegisterBinding.step01.setBackgroundResource(R.drawable.ic_bluecircle);
+                mActivityAccountRegisterBinding.step01.setText("1");
+                mActivityAccountRegisterBinding.step01.setTextColor(Color.parseColor("#ffffff"));
+                mActivityAccountRegisterBinding.step02.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step02.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step03.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step03.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step04.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step05.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step01Text.setTextColor(Color.parseColor("#000000"));
+                mActivityAccountRegisterBinding.step02Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step03Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05Text.setTextColor(Color.parseColor("#a5a8b9"));
+                break;
+            case 2:
+                Log.d("debug", "step2");
+                mActivityAccountRegisterBinding.step01.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step01.setText("");
+                mActivityAccountRegisterBinding.step02.setBackgroundResource(R.drawable.ic_bluecircle);
+                mActivityAccountRegisterBinding.step02.setTextColor(Color.parseColor("#ffffff"));
+                mActivityAccountRegisterBinding.step03.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step03.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step04.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step05.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step01Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step02Text.setTextColor(Color.parseColor("#000000"));
+                mActivityAccountRegisterBinding.step03Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05Text.setTextColor(Color.parseColor("#a5a8b9"));
+                break;
+            case 3:
+                Log.d("debug", "step3");
+                mActivityAccountRegisterBinding.step01.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step01.setText("");
+                mActivityAccountRegisterBinding.step02.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step02.setText("");
+                mActivityAccountRegisterBinding.step03.setBackgroundResource(R.drawable.ic_bluecircle);
+                mActivityAccountRegisterBinding.step03.setTextColor(Color.parseColor("#ffffff"));
+                mActivityAccountRegisterBinding.step04.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step04.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step05.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step01Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step02Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step03Text.setTextColor(Color.parseColor("#000000"));
+                mActivityAccountRegisterBinding.step04Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05Text.setTextColor(Color.parseColor("#a5a8b9"));
+                break;
+            case 4:
+                Log.d("debug", "step4");
+                mActivityAccountRegisterBinding.step01.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step01.setText("");
+                mActivityAccountRegisterBinding.step02.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step02.setText("");
+                mActivityAccountRegisterBinding.step03.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step03.setText("");
+                mActivityAccountRegisterBinding.step04.setBackgroundResource(R.drawable.ic_bluecircle);
+                mActivityAccountRegisterBinding.step04.setTextColor(Color.parseColor("#ffffff"));
+                mActivityAccountRegisterBinding.step05.setBackgroundResource(R.drawable.grey_empty_circle);
+                mActivityAccountRegisterBinding.step05.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step01Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step02Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step03Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04Text.setTextColor(Color.parseColor("#000000"));
+                mActivityAccountRegisterBinding.step05Text.setTextColor(Color.parseColor("#a5a8b9"));
+                break;
+            case 5:
+                Log.d("debug", "step5");
+                mActivityAccountRegisterBinding.step01.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step01.setText("");
+                mActivityAccountRegisterBinding.step02.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step02.setText("");
+                mActivityAccountRegisterBinding.step03.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step03.setText("");
+                mActivityAccountRegisterBinding.step04.setBackgroundResource(R.drawable.step_complete);
+                mActivityAccountRegisterBinding.step04.setText("");
+                mActivityAccountRegisterBinding.step05.setBackgroundResource(R.drawable.ic_bluecircle);
+                mActivityAccountRegisterBinding.step05.setTextColor(Color.parseColor("#ffffff"));
+                mActivityAccountRegisterBinding.step01Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step02Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step03Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step04Text.setTextColor(Color.parseColor("#a5a8b9"));
+                mActivityAccountRegisterBinding.step05Text.setTextColor(Color.parseColor("#000000"));
+                break;
+            default:
+                Log.d("debug", "default");
+                break;
+        }
+
     }
 
     @Override
@@ -109,7 +221,7 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 .beginTransaction()
                 .add(R.id.clRootView, AccountRegisterTermsFragment.newInstance(), AccountRegisterTermsFragment.TAG)
                 .addToBackStack(AccountRegisterTermsFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
     }
 
     @Override
@@ -120,7 +232,8 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 .beginTransaction()
                 .add(R.id.clRootView, CellPhoneAuthFragment.newInstance(), CellPhoneAuthFragment.TAG)
                 .addToBackStack(CellPhoneAuthFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
+        layoutInitiate(2);
     }
 
     @Override
@@ -131,7 +244,8 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 .beginTransaction()
                 .add(R.id.clRootView, BankSelectFragment.newInstance(), BankSelectFragment.TAG)
                 .addToBackStack(BankSelectFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
+        layoutInitiate(3);
     }
 
     @Override
@@ -142,7 +256,45 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 .beginTransaction()
                 .add(R.id.clRootView, BankAccountNumberFragment.newInstance(selectedBankId, selectedBankName), BankAccountNumberFragment.TAG)
                 .addToBackStack(BankAccountNumberFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
+        layoutInitiate(4);
+    }
+
+    @Override
+    public void openArsAuthFragment(ArsCheckResponse arsCheckResponse) {
+        //ARS 인증화면으로 이동.
+        Log.d("debug", "openCellPhoneAuthFragment");
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, ArsAuthFragment.newInstance(), ArsAuthFragment.TAG)
+                .addToBackStack(ArsAuthFragment.TAG)
+                .commit();
+        layoutInitiate(5);
+    }
+
+    @Override
+    public void openDialog() {
+        //여기서 다이얼로그를 띄워준다.
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.go_charge_dialog);
+
+        Button okButton = dialog.findViewById(R.id.ok_button);
+        Button cancelButton = dialog.findViewById(R.id.cancel_button);
+
+        okButton.setOnClickListener(v1 -> {
+            dialog.dismiss();
+            setResult(RESULT_FIRST_USER);
+            finish();
+        });
+
+        cancelButton.setOnClickListener(v2 -> {
+            dialog.dismiss();
+            setResult(RESULT_OK);
+            finish();
+        });
+
+        dialog.show();
     }
 
     @Override
@@ -160,7 +312,6 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 break;
             case "BankSelectFragment":
                 removeFragment(tag);
-//                openBankAccountNumberFragment();
                 break;
             case "BankAccountNumberFragment":
                 removeFragment(tag);
@@ -173,6 +324,19 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                         authenticationCode,
                         4L
                 );
+                break;
+            case "ArsAuthFragment":
+                removeFragment(tag);
+                mAccountRegisterViewModel.doArsRequestCall(
+                        phoneNumber,
+                        subscriberName,
+                        withdrawBankCode,
+                        withdrawAccountNumber,
+                        identificationNumber,
+                        authenticationCode,
+                        4L
+                );
+                break;
             default:
                 break;
         }
@@ -187,6 +351,7 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                     phoneNumber = message.getString("phoneNumber");
                     subscriberName = message.getString("subscriberName");
                     authenticationCode = message.getString("authenticationCode");
+                    identificationNumber = message.getString("identificationNumber");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -202,6 +367,13 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 try {
                     withdrawBankCode = message.getString("withdrawBankCode");
                     withdrawAccountNumber = message.getString("withdrawAccountNumber");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "ArsAuthFragment":
+                try {
+                    authenticationCode = message.getString("authenticationCode");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

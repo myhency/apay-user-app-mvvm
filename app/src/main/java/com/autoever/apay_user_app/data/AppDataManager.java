@@ -6,6 +6,8 @@ import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
+import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
+import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
@@ -237,6 +239,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<ArsCheckResponse> doArsCheckCall(ArsCheckRequest arsCheckRequest) {
         return mRepoService.doArsCheckCall(arsCheckRequest);
+    }
+
+    @Override
+    public Single<ArsRequestResponse> doArsRequestCall(ArsRequestRequest arsRequestRequest) {
+        return mRepoService.doArsRequestCall(arsRequestRequest);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.autoever.apay_user_app.ui.account.register.auth;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -56,6 +57,13 @@ public class CellPhoneAuthFragment extends BaseFragment<FragmentCellPhoneAuthBin
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //back button 을 눌렀을 경우 Activity 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
@@ -73,6 +81,7 @@ public class CellPhoneAuthFragment extends BaseFragment<FragmentCellPhoneAuthBin
                 data.put("authenticationCode", "123456");
                 data.put("phoneNumber", mFragmentCellPhoneAuthBinding.cellPhoneInput.getText());
                 data.put("subscriberName", mFragmentCellPhoneAuthBinding.nameInput.getText());
+                data.put("identificationNumber", mFragmentCellPhoneAuthBinding.fssnInput.getText().toString() + mFragmentCellPhoneAuthBinding.rssnInput.getText().toString());
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
             } catch (JSONException e) {
                 e.printStackTrace();

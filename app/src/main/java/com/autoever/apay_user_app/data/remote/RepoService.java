@@ -2,6 +2,8 @@ package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
+import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
+import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
@@ -114,6 +116,9 @@ public interface RepoService {
 
     @POST("api/v2/settleBank/ars/check")
     Single<ArsCheckResponse> doArsCheckCall(@Body ArsCheckRequest arsCheckRequest);
+
+    @POST("api/v2/settleBank/ars/request")
+    Single<ArsRequestResponse> doArsRequestCall(@Body ArsRequestRequest arsRequestRequest);
 
     @PUT("api/v2/tokenSystem/refund/ready")
     Single<RefundReadyResponse> doRefundReadyCall(@Body RefundReadyRequest refundReadyRequest);

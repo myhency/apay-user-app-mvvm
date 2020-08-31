@@ -1,4 +1,4 @@
-package com.autoever.apay_user_app.ui.card.common;
+package com.autoever.apay_user_app.ui.common;
 
 import android.util.Log;
 
