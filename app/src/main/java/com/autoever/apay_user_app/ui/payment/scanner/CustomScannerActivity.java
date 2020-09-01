@@ -1,12 +1,14 @@
 package com.autoever.apay_user_app.ui.payment.scanner;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseArray;
@@ -151,6 +153,22 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 }
             }
         });
+
+        new CountDownTimer(60000, 1000) {
+
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mActivityCustomScannerBinding.timeLeft.setText("아래 QR 코드는 "+ millisUntilFinished/1000 +"초 이후에 만료됩니다.");
+            }
+
+            @Override
+            public void onFinish() {
+                mCustomScannerViewModel.loadQrUserDynamic();
+                this.start();
+            }
+        }.start();
     }
 
     @Override

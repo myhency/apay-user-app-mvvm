@@ -162,9 +162,11 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(qrUserDynamicResponse -> {
+                    setIsLoading(false);
                     Log.d("debug", qrUserDynamicResponse.toString());
                     getNavigator().getQrUserDynamicData(qrUserDynamicResponse.parseToQrString());
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
