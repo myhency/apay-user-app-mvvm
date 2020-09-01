@@ -138,19 +138,16 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> qrcodes = detections.getDetectedItems();
-                if (qrcodes.size() != 0) {
-                    Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(200);
+                final SparseArray<Barcode> qrCodes = detections.getDetectedItems();
+                if (qrCodes.size() != 0) {
                     Intent data = new Intent();
-                    Log.d("debug", "shopCode:" + qrcodes.valueAt(0).displayValue);
-                    JsonObject convertedObject = new Gson().fromJson(qrcodes.valueAt(0).displayValue, JsonObject.class);
-
-                    Log.d("debug", "qrType:" + convertedObject.get("qrType").getAsString());
-
-                    data.putExtra("shopCode", qrcodes.valueAt(0).displayValue);
+                    JsonObject convertedObject = new Gson().fromJson(qrCodes.valueAt(0).displayValue, JsonObject.class);
+                    Log.d("debug", "shopCode:" + qrCodes.valueAt(0).displayValue);
+                    data.putExtra("shopCode", qrCodes.valueAt(0).displayValue);
                     setResult(RESULT_OK, data);
                     finish();
+                    Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(20);
                 }
             }
         });
