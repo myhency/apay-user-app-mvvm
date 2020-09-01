@@ -17,6 +17,7 @@ import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragmentProv
 import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptProvider;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragmentProvider;
+import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragmentProvider;
 import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
@@ -62,7 +63,8 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             AmountFragmentProvider.class,
             AuthFragmentProvider.class,
-            ChargeReceiptFragmentProvider.class
+            ChargeReceiptFragmentProvider.class,
+            ChargeFailFragmentProvider.class
     })
     abstract ChargeActivity bindChargeActivity();
 

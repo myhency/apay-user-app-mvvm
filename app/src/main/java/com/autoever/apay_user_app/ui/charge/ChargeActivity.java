@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +22,7 @@ import com.autoever.apay_user_app.databinding.ActivityChargeBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.charge.amount.AmountFragment;
+import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
@@ -34,6 +36,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import retrofit2.HttpException;
 
 public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeViewModel> implements ChargeNavigator, HasSupportFragmentInjector {
 
@@ -110,9 +113,13 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
 
     @Override
     public void handleError(Throwable throwable) {
-        ANError anError = (ANError) throwable;
-        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-        Log.d("debug", "throwable message: " + throwable.getMessage());
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            default:
+                openChargeFailFragment();
+                break;
+        }
     }
 
     @Override
@@ -150,6 +157,19 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     }
 
     @Override
+    public void openChargeFailFragment() {
+        //충전금액 영수증 화면으로 이동.
+        Log.d("debug", "openChargeFailFragment");
+        mActivityChargeBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityChargeBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.clRootView, ChargeFailFragment.newInstance(), ChargeFailFragment.TAG)
+                .addToBackStack(ChargeFailFragment.TAG)
+                .commit();
+    }
+
+    @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
     }
@@ -167,6 +187,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
                 doChargeReady();
                 break;
             case "ChargeReceiptFragment":
+            case "ChargeFailFragment":
                 finish();
                 break;
             default:

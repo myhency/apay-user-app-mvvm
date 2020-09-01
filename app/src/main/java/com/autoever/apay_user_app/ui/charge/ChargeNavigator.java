@@ -16,4 +16,6 @@ public interface ChargeNavigator {
     void doChargeDo(ChargeReadyResponse chargeReadyResponse);
 
     void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse);
+
+    void openChargeFailFragment();
 }
