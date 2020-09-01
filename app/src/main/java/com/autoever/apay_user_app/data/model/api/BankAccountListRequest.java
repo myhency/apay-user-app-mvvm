@@ -6,14 +6,14 @@ import com.google.gson.annotations.SerializedName;
 public class BankAccountListRequest {
 
     @Expose
-    @SerializedName("userId")
-    private Long userId;
+    @SerializedName("subscriberId")
+    private Long subscriberId;
 
-    public BankAccountListRequest(Long userId) {
-        this.userId = userId;
+    public BankAccountListRequest(Long subscriberId) {
+        this.subscriberId = subscriberId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getSubscriberId() {
+        return subscriberId;
     }
 }

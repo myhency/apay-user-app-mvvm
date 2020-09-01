@@ -7,6 +7,8 @@ import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
+import retrofit2.HttpException;
+
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public LoginViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
@@ -32,7 +34,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     Log.d("debug", "loginResponse userId : " + loginResponse.getData().getUserId());
                     getNavigator().openMainActivity();
                 }, throwable -> {
-                    getNavigator().handleError(throwable);
+                    getNavigator().handleError((HttpException)throwable);
                 }));
     }
 }

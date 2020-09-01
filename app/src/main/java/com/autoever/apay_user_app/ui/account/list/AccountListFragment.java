@@ -82,6 +82,7 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
         super.onViewCreated(view, savedInstanceState);
         mFragmentAccountListBinding = getViewDataBinding();
         setup();
+        mAccountListViewModel.doListAccountCall(4L);
     }
 
     private void setup() {

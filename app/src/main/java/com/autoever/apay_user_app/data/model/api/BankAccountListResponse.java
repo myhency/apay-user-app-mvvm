@@ -7,25 +7,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * {
- *   "data": {
- *     "accountCnt": "0",
- *     "historyId": 4359,
- *     "accountList": [
- *     {
- * 			"registerDatetime": "14 : numeric string. 등록 일시. yyyyMMddHHmmss",
- * 		  "withdrawBankCode": "3 : 은행코드. numeric string",
- * 		  "maskingAccountNumber": "15 : 마스킹된 계좌번호. alpha-numeric",
- * 			"settleAccountKey": "50 : alpha-numeric. [/account/register] 에서 리턴으로 받은 값을 사용"
- * 			"terminationDatetime": "14 : numeric string. 해지 일시. yyyyMMddHHmmss"
- *                },
- *      ],
- *     "withdrawBankCode": "004",
+ *   "date": {
  *     "settleBankUniqueId": "uniqueId",
- *     "responseMessage": "0021",
- *     "userId": "4",
- *     "requestStatus": "0021",
- *     "responseCode": "0021"
+ *     "subscriberId": "4",
+ *     "accountCnt": "0",
+ *     "accountList": [
+ *       {
+ *         "registerDatetime": "20200901101000",
+ *         "bankCode": "002",
+ *         "maskingAccountNumber": "0010******1123",
+ *         "settleAccountKey": "settleAccountKey",
+ *         "terminationDatetime": "20200901101000"
+ *       }
+ *     ]
  *   }
  * }
  */
@@ -39,12 +33,16 @@ public class BankAccountListResponse {
 
     public static class AccountList {
         @Expose
-        @SerializedName("accountCnt")
-        private String accountCnt;
+        @SerializedName("settleBankUniqueId")
+        private String settleBankUniqueId;
 
         @Expose
-        @SerializedName("historyId")
-        private Long historyId;
+        @SerializedName("subscriberId")
+        private Long subscriberId;
+
+        @Expose
+        @SerializedName("accountCnt")
+        private Long accountCnt;
 
         @Expose
         @SerializedName("accountList")
@@ -59,8 +57,8 @@ public class BankAccountListResponse {
             private String registerDatetime;
 
             @Expose
-            @SerializedName("withdrawBankCode")
-            private String withdrawBankCode;
+            @SerializedName("bankCode")
+            private String bankCode;
 
             @Expose
             @SerializedName("maskingAccountNumber")
@@ -78,8 +76,8 @@ public class BankAccountListResponse {
                 return registerDatetime;
             }
 
-            public String getWithdrawBankCode() {
-                return withdrawBankCode;
+            public String getBankCode() {
+                return bankCode;
             }
 
             public String getMaskingAccountNumber() {
@@ -95,60 +93,23 @@ public class BankAccountListResponse {
             }
         }
 
-        @Expose
-        @SerializedName("withdrawBankCode")
-        private String withdrawBankCode;
-
-        @Expose
-        @SerializedName("settleBankUniqueId")
-        private String settleBankUniqueId;
-
-        @Expose
-        @SerializedName("responseMessage")
-        private String responseMessage;
-
-        @Expose
-        @SerializedName("userId")
-        private String userId;
-
-        @Expose
-        @SerializedName("requestStatus")
-        private String requestStatus;
-
-        @Expose
-        @SerializedName("responseCode")
-        private String responseCode;
-
-        public String getAccountCnt() {
-            return accountCnt;
-        }
-
-        public Long getHistoryId() {
-            return historyId;
-        }
-
-        public String getWithdrawBankCode() {
-            return withdrawBankCode;
+        public AccountList(String settleBankUniqueId, Long subscriberId, Long accountCnt, List<Account> accountList) {
+            this.settleBankUniqueId = settleBankUniqueId;
+            this.subscriberId = subscriberId;
+            this.accountCnt = accountCnt;
+            this.accountList = accountList;
         }
 
         public String getSettleBankUniqueId() {
             return settleBankUniqueId;
         }
 
-        public String getResponseMessage() {
-            return responseMessage;
+        public Long getSubscriberId() {
+            return subscriberId;
         }
 
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getRequestStatus() {
-            return requestStatus;
-        }
-
-        public String getResponseCode() {
-            return responseCode;
+        public Long getAccountCnt() {
+            return accountCnt;
         }
     }
 }

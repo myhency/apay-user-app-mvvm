@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -17,6 +18,8 @@ import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 
 import javax.inject.Inject;
+
+import retrofit2.HttpException;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
 
@@ -67,6 +70,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         });
 
         mActivityLoginBinding.loginButton.setOnClickListener(v -> {
+            hideKeyboard();
             mLoginViewModel.doLogin(
                     mActivityLoginBinding.userIdInput.getText().toString(),
                     mActivityLoginBinding.userPasswordInput.getText().toString()
@@ -93,8 +97,22 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void handleError(Throwable throwable) {
         //TODO. response code 에 따라서 처리해야 함.
-        ANError anError = (ANError) throwable;
-        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-        Log.d("debug", "throwable message: " + throwable.getMessage());
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            case 404:
+            case 400:
+                Toast.makeText(this, "로그인에 실패하였습니다.\n아이디와 비밀번호를 다시 확인바랍니다.", Toast.LENGTH_SHORT).show();
+                break;
+            case 500:
+                Toast.makeText(this, "시스템에 문제가 발생하였습니다.\n관리자에게 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+//        ANError anError = (ANError) throwable;
+//        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
+//        Log.d("debug", "throwable message: " + throwable.getMessage());
+
     }
 }

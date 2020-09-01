@@ -69,7 +69,7 @@
                         android:layout_toRightOf="@+id/bank_logo"
                         android:layout_centerVertical="true"
                         android:textColor="@color/colorblack"
-                        android:text="bank-name"/>
+                        android:text="@{viewModel.bankNameLiveData}"/>
 
                     <TextView
                         android:id="@+id/bank_account_number"
@@ -80,7 +80,7 @@
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         android:textSize="16sp"
                         android:textColor="@color/colorblack"
-                        android:text="100********031" />
+                        android:text="@{viewModel.maskingAccountNumberLiveData}" />
 
                 </RelativeLayout>
 
@@ -93,7 +93,7 @@
                         android:id="@+id/bank_account_added_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="등록일시 2020.06.14 14:23:45" />
+                        android:text="@{viewModel.registerDateTimeLiveData}" />
 
                 </LinearLayout>
 
