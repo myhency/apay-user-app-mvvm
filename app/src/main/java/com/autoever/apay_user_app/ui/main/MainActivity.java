@@ -34,6 +34,7 @@ import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.home.HomeFragment;
+import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -231,7 +232,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openPaymentActivity() {
-
+        Log.d("debug", "openPaymentActivity");
+        Intent intent = PaymentActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override
