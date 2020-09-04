@@ -62,6 +62,7 @@ public interface RepoService {
     Single<ChargeDoResponse> doChargeDoCall(@Body ChargeDoRequest chargeDoRequest);
 
     @POST("api/v2/user/tokenSystem/1")
+    @Headers("No-Authentication: true")
     Single<UserRegisterResponse> doUserRegisterCall(@Body UserRegisterRequest userRegisterRequest);
 
     @POST("api/v2/user/login")

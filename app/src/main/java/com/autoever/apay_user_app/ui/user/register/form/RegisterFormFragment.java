@@ -114,17 +114,17 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
     }
 
     @Override
+    public void openLoginActivity() {
+
+    }
+
+    @Override
     public void handleError(Throwable throwable) {
 
     }
 
     @Override
     public void openPasswordFragment() {
-
-    }
-
-    @Override
-    public void openMainActivity() {
 
     }
 }

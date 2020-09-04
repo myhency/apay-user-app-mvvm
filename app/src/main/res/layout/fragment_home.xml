@@ -226,7 +226,7 @@
                     android:autoSizeTextType="uniform"
                     android:background="@drawable/button_hover_effect_v2"
                     android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="카드 충전"
+                    android:text="MONEY 충전"
                     android:textColor="#FFFFFF" />
             </RelativeLayout>
 
@@ -259,7 +259,7 @@
                     android:autoSizeTextType="uniform"
                     android:background="@drawable/button_hover_effect_v3"
                     android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="카드 정보"
+                    android:text="결제 정보"
                     android:textColor="#FFFFFF" />
             </RelativeLayout>
 

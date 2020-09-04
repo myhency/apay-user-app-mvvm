@@ -23,6 +23,7 @@ import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
+import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragment;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragment;
 import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragment;
@@ -161,9 +162,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     }
 
     @Override
-    public void openMainActivity() {
-        Log.d("debug", "MainActivity Open");
-        Intent intent = MainActivity.newIntent(RegisterActivity.this);
+    public void openLoginActivity() {
+        Log.d("debug", "LoginActivity Open");
+        Intent intent = LoginActivity.newIntent(RegisterActivity.this);
         startActivity(intent);
         finish();
     }
@@ -198,7 +199,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
                 //password 가 메세지랑 같을 때는 간편비번을 preps 에 저장하고 종료한다.
                 if (isPasswordValid(message) || password != null) {
-                    openMainActivity();
+                    openLoginActivity();
                 }
 
                 break;

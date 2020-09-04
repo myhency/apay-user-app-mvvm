@@ -248,6 +248,11 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
     }
 
     @Override
+    public void openLoginActivity() {
+
+    }
+
+    @Override
     public void handleError(Throwable throwable) {
 
     }
@@ -257,8 +262,4 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
 
     }
 
-    @Override
-    public void openMainActivity() {
-
-    }
 }

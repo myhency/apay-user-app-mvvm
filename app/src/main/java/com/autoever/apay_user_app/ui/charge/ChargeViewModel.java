@@ -20,7 +20,7 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doChargeReadyCall(new ChargeReadyRequest(
-                4000L,
+                4L,
                 1L,
                 amount
         ))

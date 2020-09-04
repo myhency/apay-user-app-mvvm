@@ -86,9 +86,9 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                         4L,
                         new PaymentQrReadyRequest.StoreStaticQrInfo(
                                 staticQrData.get("qrType").getAsLong(),
-                                staticQrData.get("hashedStoreId").getAsString(),
+                                staticQrData.get("storeId").getAsString(),
                                 staticQrData.get("storeName").getAsString(),
-                                staticQrData.get("hashedPaymentSystemId").getAsString(),
+                                staticQrData.get("paymentSystemId").getAsString(),
                                 staticQrData.get("paymentDeviceId").getAsString(),
                                 staticQrData.get("signature").getAsString()
                         )

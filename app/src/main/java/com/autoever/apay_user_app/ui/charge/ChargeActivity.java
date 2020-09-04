@@ -95,7 +95,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-            mActivityChargeBinding.toolbarTitle.setText("카드 충전");
+            mActivityChargeBinding.toolbarTitle.setText("MONEY 충전");
         }
     }
 
