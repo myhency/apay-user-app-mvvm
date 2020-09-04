@@ -28,6 +28,7 @@ import com.autoever.apay_user_app.ui.main.MainViewModel;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 import com.autoever.apay_user_app.ui.refund.RefundViewModel;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountViewModel;
+import com.autoever.apay_user_app.ui.refund.fail.RefundFailViewModel;
 import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptViewModel;
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsViewModel;
 import com.autoever.apay_user_app.ui.splash.SplashViewModel;
@@ -108,6 +109,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new ArsAuthViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(ChargeFailViewModel.class)) {
             return (T) new ChargeFailViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RefundFailViewModel.class)) {
+            return (T) new RefundFailViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

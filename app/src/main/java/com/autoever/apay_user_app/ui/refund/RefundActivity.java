@@ -18,7 +18,9 @@ import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.databinding.ActivityRefundBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragment;
+import com.autoever.apay_user_app.ui.refund.fail.RefundFailFragment;
 import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragment;
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragment;
 
@@ -32,6 +34,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import retrofit2.HttpException;
 
 public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundViewModel> implements RefundNavigator, HasSupportFragmentInjector {
 
@@ -144,6 +147,31 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
     }
 
     @Override
+    public void handleError(Throwable throwable) {
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            default:
+                openRefundFailFragment();
+                break;
+        }
+
+    }
+
+    @Override
+    public void openRefundFailFragment() {
+        //충전금액 영수증 화면으로 이동.
+        Log.d("debug", "openChargeFailFragment");
+        mActivityRefundBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityRefundBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.clRootView, RefundFailFragment.newInstance(), RefundFailFragment.TAG)
+                .addToBackStack(RefundFailFragment.TAG)
+                .commit();
+    }
+
+    @Override
     public void onFragmentDetached(String tag) {
         switch (tag) {
             case "RefundTermsFragment":
@@ -154,6 +182,9 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
                 break;
             case "AuthFragment":
                 doRefundReady();
+                break;
+            case "RefundFailFragment":
+                finish();
                 break;
             default:
                 break;

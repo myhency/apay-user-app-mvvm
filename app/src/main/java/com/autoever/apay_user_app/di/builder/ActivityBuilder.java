@@ -28,6 +28,7 @@ import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.ui.refund.RefundActivity;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragmentProvider;
+import com.autoever.apay_user_app.ui.refund.fail.RefundFailFragmentProvider;
 import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
@@ -108,7 +109,8 @@ public abstract class ActivityBuilder {
             RefundTermsFragmentProvider.class,
             RefundAmountFragmentProvider.class,
             AuthFragmentProvider.class,
-            RefundReceiptFragmentProvider.class
+            RefundReceiptFragmentProvider.class,
+            RefundFailFragmentProvider.class
     })
     abstract RefundActivity bindRefundActivity();
 }

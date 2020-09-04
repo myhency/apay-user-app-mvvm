@@ -13,4 +13,8 @@ public interface RefundNavigator {
     void doRefundReady();
 
     void openRefundReceiptFragment(RefundDoResponse refundDoResponse);
+
+    void handleError(Throwable throwable);
+
+    void openRefundFailFragment();
 }

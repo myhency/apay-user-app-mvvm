@@ -156,7 +156,7 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
 
     @Override
     public void openChargeFailFragment() {
-        //충전금액 영수증 화면으로 이동.
+        //충전실패 화면으로 이동.
         Log.d("debug", "openChargeFailFragment");
         mActivityChargeBinding.toolbar.setVisibility(View.INVISIBLE);
         mActivityChargeBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
