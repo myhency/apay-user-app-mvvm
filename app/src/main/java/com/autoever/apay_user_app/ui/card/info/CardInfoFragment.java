@@ -20,7 +20,9 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardInfoBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
+import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.refund.RefundActivity;
 
 import java.util.List;
@@ -129,13 +131,13 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
                         .findLastCompletelyVisibleItemPosition();
                 int itemTotalCount = recyclerView.getAdapter().getItemCount();
 
-                int firstVisibleItemPosition =((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+                int firstVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
 
                 Log.d("debug", "firstVisibleItemPosition: " + firstVisibleItemPosition);
                 Log.d("debug", "lastVisibleItemPosition: " + lastVisibleItemPosition);
                 Log.d("debug", "itemTotalCount: " + itemTotalCount);
 
-                if(lastVisibleItemPosition + 1 == itemTotalCount) {
+                if (lastVisibleItemPosition + 1 == itemTotalCount) {
                     PAGE_NO = PAGE_NO + 1;
                     callCardUseHistoryContents(PAGE_NO);
                 }
@@ -156,6 +158,12 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
         mFragmentCardInfoBinding.paybackButton.setOnClickListener(v -> {
             openRefundActivity();
         });
+
+        mFragmentCardInfoBinding.useListTextview.setOnClickListener(v -> {
+            Log.d("debug", "openCardUseHistoryActivity");
+            Intent intent = CardUseActivity.newIntent(getBaseActivity());
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -172,7 +180,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
 
     @Override
     public void onCompleteUpdatePaymentHistoryList() {
-        if(mFragmentCardInfoBinding.swipeContainer.isRefreshing()) {
+        if (mFragmentCardInfoBinding.swipeContainer.isRefreshing()) {
             mFragmentCardInfoBinding.swipeContainer.setRefreshing(false);
         }
     }

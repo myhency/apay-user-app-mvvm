@@ -78,7 +78,7 @@ public class CardInfoActivity extends BaseActivity<ActivityCardInfoBinding, Card
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-            mActivityCardInfoBinding.toolbarTitle.setText("카드 정보");
+            mActivityCardInfoBinding.toolbarTitle.setText("결제 정보");
         }
     }
 

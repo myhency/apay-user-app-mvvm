@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/spoqa_han_sans_regular"
-                        android:text="카드충전"
+                        android:text="MONEY 충전"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
@@ -212,7 +212,7 @@
             android:fontFamily="@font/spoqa_han_sans_regular"
             android:gravity="center"
             android:text="확인버튼을 누르시면 이전화면으로 돌아가며\n
-결제 내역은 카드 정보 혹은 메뉴 > 사용내역에서\n
+결제 내역은 결제 정보 혹은 메뉴 > 사용내역에서\n
 확인하실 수 있습니다"
             android:textColor="#a5a8b9"
             android:textSize="12sp"
