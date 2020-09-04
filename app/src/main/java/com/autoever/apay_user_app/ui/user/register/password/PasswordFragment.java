@@ -1,30 +1,23 @@
 package com.autoever.apay_user_app.ui.user.register.password;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.library.baseAdapters.BR;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentPasswordBinding;
-import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.user.register.RegisterNavigator;
 import com.autoever.apay_user_app.ui.user.register.RegisterViewModel;
-import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;

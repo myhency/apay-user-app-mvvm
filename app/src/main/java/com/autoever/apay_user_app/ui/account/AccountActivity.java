@@ -17,7 +17,6 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityAccountBinding;
 import com.autoever.apay_user_app.ui.account.list.AccountListFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 
 import java.util.List;
 

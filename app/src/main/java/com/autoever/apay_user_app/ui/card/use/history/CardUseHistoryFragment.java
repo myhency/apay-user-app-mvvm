@@ -1,15 +1,14 @@
 package com.autoever.apay_user_app.ui.card.use.history;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.View;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;

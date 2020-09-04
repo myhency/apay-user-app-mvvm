@@ -1,16 +1,12 @@
 package com.autoever.apay_user_app.ui.card.use.detail;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
@@ -19,8 +15,6 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.FragmentCardUseDetailBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
-import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;

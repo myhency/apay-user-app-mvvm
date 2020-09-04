@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.databinding.FragmentAccountRegisterTermsBinding;
 import com.autoever.apay_user_app.databinding.FragmentCellPhoneAuthBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 

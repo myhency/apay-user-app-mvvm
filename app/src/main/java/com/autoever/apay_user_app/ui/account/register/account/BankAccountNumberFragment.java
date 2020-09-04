@@ -1,21 +1,15 @@
 package com.autoever.apay_user_app.ui.account.register.account;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentBankAccountNumberBinding;
-import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
-import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsViewModel;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 
 import org.json.JSONException;

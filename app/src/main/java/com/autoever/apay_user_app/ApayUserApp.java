@@ -3,8 +3,6 @@ package com.autoever.apay_user_app;
 import android.app.Activity;
 import android.app.Application;
 
-//import com.autoever.apay_user_app.di.component.DaggerAppComponent;
-
 import com.autoever.apay_user_app.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;
@@ -14,6 +12,8 @@ import dagger.android.HasActivityInjector;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
+
+//import com.autoever.apay_user_app.di.component.DaggerAppComponent;
 
 public class ApayUserApp extends Application implements HasActivityInjector {
 

@@ -1,11 +1,5 @@
 package com.autoever.apay_user_app.ui.account.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
-import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
 import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
 import com.autoever.apay_user_app.ui.account.register.ars.ArsAuthFragment;
@@ -26,12 +23,9 @@ import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragment
 import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragment;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

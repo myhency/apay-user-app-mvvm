@@ -3,29 +3,21 @@ package com.autoever.apay_user_app.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.data.model.api.BalanceResponse;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.autoever.apay_user_app.utils.CommonUtils;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import javax.inject.Inject;
 

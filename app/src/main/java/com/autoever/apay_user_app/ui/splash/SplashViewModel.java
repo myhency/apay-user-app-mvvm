@@ -1,11 +1,8 @@
 package com.autoever.apay_user_app.ui.splash;
 
-import android.content.Intent;
 import android.os.Handler;
-import android.os.SystemClock;
 
 import com.autoever.apay_user_app.data.DataManager;
-import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 

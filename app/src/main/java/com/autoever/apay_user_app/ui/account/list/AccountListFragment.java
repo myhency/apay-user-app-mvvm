@@ -2,17 +2,13 @@ package com.autoever.apay_user_app.ui.account.list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -20,8 +16,6 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentAccountListBinding;
 import com.autoever.apay_user_app.ui.account.register.AccountRegisterActivity;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 
 import javax.inject.Inject;
 

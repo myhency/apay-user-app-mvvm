@@ -35,12 +35,9 @@ import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
-import javax.inject.Inject;
-
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;

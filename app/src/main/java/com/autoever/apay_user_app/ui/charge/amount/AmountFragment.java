@@ -2,21 +2,14 @@ package com.autoever.apay_user_app.ui.charge.amount;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;

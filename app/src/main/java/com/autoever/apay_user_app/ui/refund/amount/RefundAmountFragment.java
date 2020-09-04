@@ -2,26 +2,18 @@ package com.autoever.apay_user_app.ui.refund.amount;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentRefundAmountBinding;
-import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

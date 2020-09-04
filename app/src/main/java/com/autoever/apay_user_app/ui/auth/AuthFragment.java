@@ -1,10 +1,6 @@
 package com.autoever.apay_user_app.ui.auth;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,13 +8,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentAuthBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
-import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

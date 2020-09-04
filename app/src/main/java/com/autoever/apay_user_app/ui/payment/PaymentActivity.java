@@ -16,7 +16,6 @@ import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
@@ -31,6 +30,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -39,8 +39,6 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-
-import java.sql.Timestamp;
 
 public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> implements PaymentNavigator, HasSupportFragmentInjector {
 

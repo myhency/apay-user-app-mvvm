@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.data.model.api.QrUserDynamicResponse;
 import com.autoever.apay_user_app.databinding.FragmentPriceBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;

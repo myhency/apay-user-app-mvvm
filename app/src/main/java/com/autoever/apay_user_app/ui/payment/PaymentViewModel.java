@@ -6,11 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
-import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
-import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
-import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;

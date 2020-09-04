@@ -42,15 +42,12 @@ import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
 import com.autoever.apay_user_app.data.remote.ApiHelper;
 import com.autoever.apay_user_app.data.remote.RepoService;
-import com.autoever.apay_user_app.data.remote.RepoServiceInterceptor;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import retrofit2.Call;
-import retrofit2.http.Header;
 
 @Singleton
 public class AppDataManager implements DataManager {

@@ -1,16 +1,15 @@
 package com.autoever.apay_user_app.ui.refund;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -19,12 +18,9 @@ import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.databinding.ActivityRefundBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragment;
 import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragment;
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragment;
-import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

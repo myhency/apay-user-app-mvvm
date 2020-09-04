@@ -1,18 +1,15 @@
 package com.autoever.apay_user_app.ui.user.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
@@ -20,14 +17,10 @@ import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityRegisterBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.main.MainActivity;
-import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
-import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragment;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragment;
 import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragment;
-import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
