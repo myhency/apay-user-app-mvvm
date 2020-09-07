@@ -143,6 +143,16 @@ public class AppDataManager implements DataManager {
 //        mRepoService.getRepoServiceInterceptor().setSessionToken(accessToken);
     }
 
+    @Override
+    public void setEasyPassword(String easyPassword) {
+        mPreferencesHelper.setEasyPassword(easyPassword);
+    }
+
+    @Override
+    public String getEasyPassword() {
+        return mPreferencesHelper.getEasyPassword();
+    }
+
 //    @Override
 //    public RepoServiceInterceptor getRepoServiceInterceptor() {
 //        return mRepoService.getRepoServiceInterceptor();

@@ -11,6 +11,6 @@ public class AuthViewModel extends BaseViewModel<AuthNavigator> {
     }
 
     public boolean isPasswordValid(String password) {
-        return true;
+        return getDataManager().getEasyPassword().equals(password);
     }
 }

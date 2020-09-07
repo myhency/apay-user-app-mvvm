@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -197,6 +199,8 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
                 case R.id.confirm_button:
                     //사용자가 6자리 이하의 숫자를 입력하고 확인버튼을 눌렀을 때 Toast로 알려준다.
                     if (mFragmentAuthBinding.passwordEdit.getText().toString().length() < 6) {
+                        Animation animationShake = AnimationUtils.loadAnimation(getBaseActivity(), R.anim.shake);
+                        mFragmentAuthBinding.passwordInput.startAnimation(animationShake);
                         Toast.makeText(
                                 getBaseActivity(),
                                 "숫자 6자리를 입력해야 합니다.",
@@ -207,6 +211,15 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
 
                     if (mAuthViewModel.isPasswordValid(mFragmentAuthBinding.passwordEdit.getText().toString())) {
                         getBaseActivity().onFragmentDetached(TAG);
+                    } else {
+                        Animation animationShake = AnimationUtils.loadAnimation(getBaseActivity(), R.anim.shake);
+                        mFragmentAuthBinding.passwordInput.startAnimation(animationShake);
+                        Toast.makeText(
+                                getBaseActivity(),
+                                "패스워드가 일치하지 않습니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        mFragmentAuthBinding.passwordEdit.setText("");
                     }
                     break;
             }

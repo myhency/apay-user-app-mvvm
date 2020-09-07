@@ -125,8 +125,9 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
             mFragmentAmountBinding.cardChargeEdittext.setText("50000");
         });
 
-        mFragmentAmountBinding.fixedAmountBottomSheet.amountMax.setOnClickListener(v -> {
+        mFragmentAmountBinding.fixedAmountBottomSheet.amount3.setOnClickListener(v -> {
             //TODO. 최대 200만원 까지?
+            mFragmentAmountBinding.cardChargeEdittext.setText("30000");
         });
 
         mFragmentAmountBinding.clearIcon.setOnClickListener(v -> {

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -204,6 +206,8 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
                 case R.id.confirm_button:
                     //사용자가 6자리 이하의 숫자를 입력하고 확인버튼을 눌렀을 때 Toast로 알려준다.
                     if (mFragmentPasswordBinding.passwordEdit.getText().toString().length() < 6) {
+                        Animation animationShake = AnimationUtils.loadAnimation(getBaseActivity(), R.anim.shake);
+                        mFragmentPasswordBinding.passwordInput.startAnimation(animationShake);
                         Toast.makeText(
                                 getBaseActivity(),
                                 "숫자 6자리를 입력해야 합니다.",

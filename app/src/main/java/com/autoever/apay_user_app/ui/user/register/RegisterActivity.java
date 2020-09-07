@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -178,7 +181,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 registerForm = message;
                 break;
             case "PasswordFragment":
-                //password 가 메세지랑 다를 때는 확인을 띄우고 password 에 message 를 저장한다.
+                //password 가 null 일 때는 확인을 띄우고 password 에 message 를 저장한다.
                 if (password == null) {
                     mActivityRegisterBinding.toolbarTitle.setText("간편비밀번호 확인");
                     mFragmentManager
@@ -191,10 +194,40 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 }
 
                 //password 가 메세지랑 같을 때는 간편비번을 preps 에 저장하고 종료한다.
-                if (isPasswordValid(message) || password != null) {
-                    openLoginActivity();
-                }
+                if (isPasswordValid(message) && password != null) {
+                    try {
+                        mRegisterViewModel.setEasyPassword((password.getString("password")));
+                        //여기서 다이얼로그를 띄워준다.
+                        // custom dialog
+                        final Dialog dialog = new Dialog(this);
+                        dialog.setContentView(R.layout.go_login_dialog);
 
+                        Button okButton = dialog.findViewById(R.id.ok_button);
+
+                        okButton.setOnClickListener(v1 -> {
+                            dialog.dismiss();
+                            openLoginActivity();
+                        });
+
+                        dialog.show();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(
+                            RegisterActivity.this,
+                            "패스워드가 일치하지 않습니다.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    mActivityRegisterBinding.toolbarTitle.setText("간편비밀번호 등록");
+                    mFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.clRootView, PasswordFragment.newInstance(), PasswordFragment.TAG)
+                            .addToBackStack(RegisterFormFragment.TAG)
+                            .commitAllowingStateLoss();
+                    password = null;
+                }
                 break;
         }
     }
@@ -248,12 +281,18 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
     private boolean isPasswordValid(JSONObject message) {
         try {
-            if (password.getString("password").equals(message.getString("password"))) return true;
+            if (password.getString("password").equals(message.getString("password"))) {
+                Log.d("debug", "패스워드 등록:" + password.getString("password"));
+                Log.d("debug", "패스워드 확인:" + message.getString("password"));
+                return true;
+            } else {
+                Log.d("debug", "패스워드 등록:" + password.getString("password"));
+                Log.d("debug", "패스워드 확인:" + message.getString("password"));
+                return false;
+            }
         } catch (JSONException e) {
             return false;
 //            e.printStackTrace();
         }
-
-        return false;
     }
 }

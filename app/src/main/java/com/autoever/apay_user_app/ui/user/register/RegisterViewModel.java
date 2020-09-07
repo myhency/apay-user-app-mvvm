@@ -5,6 +5,8 @@ import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
+import org.json.JSONObject;
+
 public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
 
     public RegisterViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
@@ -34,5 +36,10 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
             setIsLoading(false);
             getNavigator().handleError(throwable);
         }));
+    }
+
+    public void setEasyPassword(String password) {
+        setIsLoading(true);
+        getDataManager().setEasyPassword(password);
     }
 }
