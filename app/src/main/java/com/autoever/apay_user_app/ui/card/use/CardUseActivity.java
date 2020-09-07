@@ -18,6 +18,7 @@ import com.autoever.apay_user_app.data.model.api.PaymentRefundReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityCardUseBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragment;
+import com.autoever.apay_user_app.ui.card.use.fail.PaymentRefundReadyFailFragment;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragment;
 import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptFragment;
 
@@ -113,7 +114,12 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
                 break;
             case "CardUseDetailFragment":
                 try {
-                    openPaymentRefundReadyReceiptFragment((PaymentRefundReadyResponse) message.get("paymentRefundReadyResponse"));
+                    if (message.has("fail")) {
+
+                        openPaymentRefundReadyFailFragment(message.getString("fail"));
+                    } else {
+                        openPaymentRefundReadyReceiptFragment((PaymentRefundReadyResponse) message.get("paymentRefundReadyResponse"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -126,11 +132,17 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
         super.onFragmentDetached(tag);
         switch (tag) {
             case "PaymentRefundReadyReceiptFragment":
-                setup();
                 removeFragment("CardUseDetailFragment");
                 removeFragment(tag);
+                break;
             case "CardUseDetailFragment":
                 removeFragment(tag);
+                break;
+            case "PaymentRefundReadyFailFragment":
+                removeFragment(tag);
+                mActivityCardUseBinding.toolbar.setVisibility(View.VISIBLE);
+                mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+                break;
             default:
                 break;
         }
@@ -187,6 +199,19 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
                 .beginTransaction()
                 .add(R.id.clRootView, PaymentRefundReadyReceiptFragment.newInstance(paymentRefundReadyResponse), PaymentRefundReadyReceiptFragment.TAG)
                 .addToBackStack(PaymentRefundReadyReceiptFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void openPaymentRefundReadyFailFragment(String state) {
+        //결제취소요청 실패 화면으로 이동.
+        Log.d("debug", "openPaymentRefundReadyFailFragment");
+        mActivityCardUseBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
+        mFragmentManager
+                .beginTransaction()
+                .add(R.id.clRootView, PaymentRefundReadyFailFragment.newInstance(state), PaymentRefundReadyFailFragment.TAG)
+                .addToBackStack(PaymentRefundReadyFailFragment.TAG)
                 .commit();
     }
 

@@ -86,7 +86,7 @@ public class CardUseDetailViewModel extends BaseViewModel<CardUseDetailNavigator
                 mCardUseDetailResponse.getData().getTokenSystemId(),
                 mCardUseDetailResponse.getData().getAmount(),
                 mCardUseDetailResponse.getData().getPaymentId(),
-                mCardUseDetailResponse.getData().getIdentifier()
+                mCardUseDetailResponse.getData().getIdentifier() + "aaaaaa"
         ))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

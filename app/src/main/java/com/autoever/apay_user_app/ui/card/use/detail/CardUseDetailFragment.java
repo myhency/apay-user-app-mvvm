@@ -21,6 +21,8 @@ import org.json.JSONObject;
 
 import javax.inject.Inject;
 
+import retrofit2.HttpException;
+
 
 public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBinding, CardUseDetailViewModel>
         implements CardUseDetailNavigator {
@@ -98,9 +100,20 @@ public class CardUseDetailFragment extends BaseFragment<FragmentCardUseDetailBin
 
     @Override
     public void handleError(Throwable throwable) {
-        ANError anError = (ANError) throwable;
-        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-        Log.d("debug", "throwable message: " + throwable.getMessage());
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            default:
+                try {
+                    JSONObject data = new JSONObject();
+                    data.put("fail", mFragmentCardUseDetailBinding.paymentRefundButton.getText().toString());
+                    getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+                    getBaseActivity().onFragmentDetached(TAG);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 
 //    @Override

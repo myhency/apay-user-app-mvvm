@@ -1,0 +1,11 @@
+package com.autoever.apay_user_app.ui.card.use.fail;
+
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
+
+@Module
+public abstract class PaymentRefundReadyFailFragmentProvider {
+
+    @ContributesAndroidInjector
+    abstract PaymentRefundReadyFailFragment providePaymentRefundReadyFailFragmentFactory();
+}

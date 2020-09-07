@@ -13,6 +13,8 @@ import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragmentProvider;
+import com.autoever.apay_user_app.ui.card.use.fail.PaymentRefundReadyFailFragment;
+import com.autoever.apay_user_app.ui.card.use.fail.PaymentRefundReadyFailFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptProvider;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
@@ -87,7 +89,8 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             CardUseHistoryFragmentProvider.class,
             CardUseDetailFragmentProvider.class,
-            PaymentRefundReadyReceiptProvider.class
+            PaymentRefundReadyReceiptProvider.class,
+            PaymentRefundReadyFailFragmentProvider.class
     })
     abstract CardUseActivity bindCardUseActivity();
 

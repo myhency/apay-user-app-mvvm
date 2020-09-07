@@ -11,4 +11,6 @@ public interface CardUseNavigator {
 //    void openPaymentCancelFragment(Long paymentHistoryId);
 
     void openPaymentRefundReadyReceiptFragment(PaymentRefundReadyResponse paymentRefundReadyResponse);
+
+    void openPaymentRefundReadyFailFragment(String state);
 }
