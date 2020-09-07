@@ -33,6 +33,7 @@ import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
+import com.autoever.apay_user_app.ui.main.settings.SettingsActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -132,6 +133,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         navHeaderMainBinding.drawerUseList.setOnClickListener(v -> {
             openCardUseHistoryActivity();
+        });
+
+        navHeaderMainBinding.settings.setOnClickListener(v -> {
+            openSettingsActivity();
         });
 
         //menu 우측에 아이콘 삽입.
@@ -263,7 +268,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openSettingsActivity() {
-
+        Log.d("debug", "openSettingsActivity");
+        Intent intent = SettingsActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override
