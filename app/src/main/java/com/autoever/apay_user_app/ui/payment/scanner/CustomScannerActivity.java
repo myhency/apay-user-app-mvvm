@@ -53,6 +53,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     private SurfaceView cameraPreview;
     private BarcodeDetector mBarcodeDetector;
     private CameraSource mCameraSource;
+    private CountDownTimer countDownTimer;
 
     final int RequestCameraPermissionID = 1001;
 
@@ -90,7 +91,28 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     }
 
     private void setup() {
+        countDownTimer = new CountDownTimer(60000, 1000) {
+
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mActivityCustomScannerBinding.timeLeft.setText("아래 QR 코드는 "+ millisUntilFinished/1000 +"초 이후에 만료됩니다.");
+            }
+
+            @Override
+            public void onFinish() {
+                mCustomScannerViewModel.loadQrUserDynamic();
+                this.start();
+            }
+        }.start();
+
         cameraPreview = mActivityCustomScannerBinding.barcodeScanner;
+
+        mActivityCustomScannerBinding.refreshQr.setOnClickListener(v -> {
+            countDownTimer.onFinish();
+            countDownTimer.start();
+        });
 
         mBarcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -151,21 +173,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
             }
         });
 
-        new CountDownTimer(60000, 1000) {
 
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mActivityCustomScannerBinding.timeLeft.setText("아래 QR 코드는 "+ millisUntilFinished/1000 +"초 이후에 만료됩니다.");
-            }
-
-            @Override
-            public void onFinish() {
-                mCustomScannerViewModel.loadQrUserDynamic();
-                this.start();
-            }
-        }.start();
     }
 
     @Override
