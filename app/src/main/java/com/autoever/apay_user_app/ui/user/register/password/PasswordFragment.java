@@ -1,8 +1,11 @@
 package com.autoever.apay_user_app.ui.user.register.password;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -42,8 +45,9 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
 
     private RegisterViewModel mPasswordViewModel;
 
-    public static PasswordFragment newInstance() {
+    public static PasswordFragment newInstance(String whatToDo) {
         Bundle args = new Bundle();
+        args.putString("whatToDo", whatToDo);
         PasswordFragment fragment = new PasswordFragment();
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +83,23 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
         setup();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setup() {
+        //하단 버튼 설정
+        if(getArguments().getString("whatToDo").equals("check")) mFragmentPasswordBinding.skipButton.setVisibility(View.GONE);
+
+        //건너뛰기 버튼 설정
+        mFragmentPasswordBinding.skipButton.setOnClickListener(v -> {
+            JSONObject data = new JSONObject();
+            try {
+                data.put("whatToDo", "skip");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+            getBaseActivity().onFragmentDetached(TAG);
+        });
+
         //numeric keypad 리스너 설정
         PasswordFragment.NumericKeypadListener listener = new PasswordFragment.NumericKeypadListener();
         final ArrayList<Button> numericButtons = new ArrayList<Button>(Arrays.asList(
@@ -144,6 +164,15 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
                 for (int i = passwordLength; i < passwordCharList.size(); i++) {
                     passwordCharList.get(i).setImageResource(R.drawable.ic_greycircle);
                 }
+            }
+        });
+
+        mFragmentPasswordBinding.passwordEdit.setKeyListener(null);
+        mFragmentPasswordBinding.passwordEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d("debug", "event:" + event.getAction());
+                return false;
             }
         });
     }

@@ -152,7 +152,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         mActivityRegisterBinding.toolbarTitle.setText("간편비밀번호 등록");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, PasswordFragment.newInstance(), PasswordFragment.TAG)
+                .add(R.id.clRootView, PasswordFragment.newInstance("register"), PasswordFragment.TAG)
                 .addToBackStack(RegisterFormFragment.TAG)
                 .commitAllowingStateLoss();
     }
@@ -181,12 +181,29 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 registerForm = message;
                 break;
             case "PasswordFragment":
+                //건너뛰기 버튼을 눌렀을 때는 종료한다.
+                if(message.has("whatToDo")) {
+                    //여기서 다이얼로그를 띄워준다.
+                    // custom dialog
+                    final Dialog dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.go_login_dialog);
+
+                    Button okButton = dialog.findViewById(R.id.ok_button);
+
+                    okButton.setOnClickListener(v1 -> {
+                        dialog.dismiss();
+                        openLoginActivity();
+                    });
+
+                    dialog.show();
+                }
+
                 //password 가 null 일 때는 확인을 띄우고 password 에 message 를 저장한다.
                 if (password == null) {
                     mActivityRegisterBinding.toolbarTitle.setText("간편비밀번호 확인");
                     mFragmentManager
                             .beginTransaction()
-                            .replace(R.id.clRootView, PasswordFragment.newInstance(), PasswordFragment.TAG)
+                            .replace(R.id.clRootView, PasswordFragment.newInstance("check"), PasswordFragment.TAG)
                             .addToBackStack(RegisterFormFragment.TAG)
                             .commitAllowingStateLoss();
                     password = message;
@@ -223,7 +240,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                     mActivityRegisterBinding.toolbarTitle.setText("간편비밀번호 등록");
                     mFragmentManager
                             .beginTransaction()
-                            .replace(R.id.clRootView, PasswordFragment.newInstance(), PasswordFragment.TAG)
+                            .replace(R.id.clRootView, PasswordFragment.newInstance("register"), PasswordFragment.TAG)
                             .addToBackStack(RegisterFormFragment.TAG)
                             .commitAllowingStateLoss();
                     password = null;

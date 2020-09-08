@@ -79,7 +79,7 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
         mFragmentRegisterFormBinding.completeRegisterButton.setOnClickListener(v -> {
             JSONObject data = new JSONObject();
             try {
-                data.put("userName", mFragmentRegisterFormBinding.userName.getText().toString());
+                data.put("userName", "홍길동"); //TODO. 사용자 이름 입력은 없는 걸로 변경됨.
                 data.put("userId", mFragmentRegisterFormBinding.userId.getText().toString());
                 data.put("password", mFragmentRegisterFormBinding.password.getText().toString());
                 data.put("phoneNumber", mFragmentRegisterFormBinding.phoneNumberInput.getText().toString());

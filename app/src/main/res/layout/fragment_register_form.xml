@@ -25,33 +25,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="42dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="65dp"
                 android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/user_name"
-                        style="@style/TextStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/input_border_bottom"
-                        android:cursorVisible="true"
-                        android:gravity="center|left|bottom"
-                        android:hint="사용하실 유저명을 입력하세요"
-                        android:inputType="textEmailAddress"
-                        android:maxLength="50"
-                        android:paddingBottom="10dp"
-                        android:textColor="@color/black_effective"
-                        android:textSize="18sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -69,8 +45,8 @@
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="center|left|bottom"
-                            android:hint="사용하실 아이디를 입력하세요"
-                            android:inputType="textEmailAddress"
+                            android:hint="아이디 입력"
+                            android:inputType="text"
                             android:maxLength="50"
                             android:paddingBottom="10dp"
                             android:textColor="@color/black_effective"
@@ -105,7 +81,7 @@
                         android:background="@drawable/input_border_bottom"
                         android:cursorVisible="true"
                         android:gravity="center|left|bottom"
-                        android:hint="패스워드를 입력하세요"
+                        android:hint="패스워드 입력"
                         android:inputType="textPassword"
                         android:maxLength="50"
                         android:paddingBottom="10dp"
@@ -114,26 +90,31 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--                    <EditText-->
-                <!--                        android:id="@+id/user_id"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-                <!--                        android:hint="사용할 아이디를 입력하세요"-->
-                <!--                        android:padding="10dp"-->
-                <!--                        android:textColor="#000000"-->
-                <!--                        android:textSize="18dp" />-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
 
-                <!--                    <EditText-->
-                <!--                        android:id="@+id/password"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-                <!--                        android:hint="패스워드를 입력하세요"-->
-                <!--                        android:inputType="textPassword"-->
-                <!--                        android:padding="10dp"-->
-                <!--                        android:textColor="#000000"-->
-                <!--                        android:textSize="18dp" />-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_confirm"
+                        style="@style/TextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/input_border_bottom"
+                        android:cursorVisible="true"
+                        android:gravity="center|left|bottom"
+                        android:hint="패스워드 확인"
+                        android:inputType="textPassword"
+                        android:maxLength="50"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/black_effective"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/birthdayInputWarningMessage"
@@ -148,7 +129,7 @@
                     android:id="@+id/text_id_02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="휴대폰 인증"
                     android:textColor="#94a0ce"
@@ -198,9 +179,221 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/text_id_04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_regular"
+                    android:text="이름(실명을 입력하세요)"
+                    android:textColor="#94a0ce"
+                    android:textSize="14dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_name"
+                        style="@style/TextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_border_bottom"
+                        android:cursorVisible="true"
+                        android:gravity="center|left|bottom"
+                        android:hint="사용자 이름"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/black_effective"
+                        android:textSize="18sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/text_id_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_regular"
+                    android:text="생년월일(예. 990301-1)"
+                    android:textColor="#94a0ce"
+                    android:textSize="14dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="-"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background2"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="1dp"
+                        android:paddingVertical="1dp">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:inputType="number"
+                            android:textColor="#304db9"
+                            android:textColorHint="#d0d0d0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -240,37 +433,7 @@
 
                 </LinearLayout>
 
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginTop="40dp"-->
-                <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-                <!--                        android:text="이메일 (선택)"-->
-                <!--                        android:textColor="#94a0ce"-->
-                <!--                        android:textSize="14dp" />-->
-
-                <!--                    <EditText-->
-                <!--                        android:id="@+id/email_input"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-                <!--                        android:hint="이메일 입력"-->
-                <!--                        android:inputType="textEmailAddress"-->
-                <!--                        android:padding="10dp"-->
-                <!--                        android:textColor="#000000"-->
-                <!--                        android:textSize="18dp" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/emailInputWarningMessage"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="10dp"-->
-                <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-                <!--                        android:textColor="@color/warningColor"-->
-                <!--                        android:textSize="9sp" />-->
-
             </LinearLayout>
-
 
         </RelativeLayout>
 
