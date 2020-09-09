@@ -226,7 +226,7 @@
                     android:autoSizeTextType="uniform"
                     android:background="@drawable/button_hover_effect_v2"
                     android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="MONEY 충전"
+                    android:text="머니 충전"
                     android:textColor="#FFFFFF" />
             </RelativeLayout>
 

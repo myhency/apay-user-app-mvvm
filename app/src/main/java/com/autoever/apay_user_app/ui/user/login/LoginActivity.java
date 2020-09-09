@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
@@ -14,10 +16,15 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityLoginBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.user.login.find.FindMyIdActivity;
+import com.autoever.apay_user_app.ui.user.login.init.InitMyPasswordActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import retrofit2.HttpException;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
@@ -29,6 +36,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     private ActivityLoginBinding mActivityLoginBinding;
     private LoginViewModel mLoginViewModel;
+    private FragmentManager mFragmentManager;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -63,6 +71,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     private void setup() {
+        this.mFragmentManager = getSupportFragmentManager();
+
         mActivityLoginBinding.registerButton.setOnClickListener(v -> {
             openRegisterActivity();
             finish();
@@ -74,6 +84,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
                     mActivityLoginBinding.userIdInput.getText().toString(),
                     mActivityLoginBinding.userPasswordInput.getText().toString()
             );
+        });
+
+        mActivityLoginBinding.findId.setOnClickListener(v -> {
+            openFindMyIdActivity();
+        });
+
+        mActivityLoginBinding.passwordInit.setOnClickListener(v -> {
+            openInitMyPasswordActivity();
         });
     }
 
@@ -94,6 +112,20 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
+    public void openFindMyIdActivity() {
+        Log.d("debug", "openFindMyIdActivity");
+        Intent intent = FindMyIdActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openInitMyPasswordActivity() {
+        Log.d("debug", "openInitMyPasswordActivity");
+        Intent intent = InitMyPasswordActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+    }
+
+    @Override
     public void handleError(Throwable throwable) {
         //TODO. response code 에 따라서 처리해야 함.
         HttpException httpException = (HttpException) throwable;
@@ -109,9 +141,5 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             default:
                 break;
         }
-//        ANError anError = (ANError) throwable;
-//        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-//        Log.d("debug", "throwable message: " + throwable.getMessage());
-
     }
 }

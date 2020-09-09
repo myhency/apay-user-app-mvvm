@@ -13,7 +13,6 @@ import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.card.info.CardInfoFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.card.use.detail.CardUseDetailFragmentProvider;
-import com.autoever.apay_user_app.ui.card.use.fail.PaymentRefundReadyFailFragment;
 import com.autoever.apay_user_app.ui.card.use.fail.PaymentRefundReadyFailFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.history.CardUseHistoryFragmentProvider;
 import com.autoever.apay_user_app.ui.card.use.receipt.PaymentRefundReadyReceiptProvider;
@@ -35,6 +34,8 @@ import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragmentProvide
 import com.autoever.apay_user_app.ui.refund.terms.RefundTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.splash.SplashActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
+import com.autoever.apay_user_app.ui.user.login.find.FindMyIdActivity;
+import com.autoever.apay_user_app.ui.user.login.init.InitMyPasswordActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragmentProvider;
@@ -80,6 +81,12 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();
+
+    @ContributesAndroidInjector
+    abstract FindMyIdActivity bindFindMyIdActivity();
+
+    @ContributesAndroidInjector
+    abstract InitMyPasswordActivity bindInitMyPasswordActivity();
 
     @ContributesAndroidInjector(modules = {
             CardInfoFragmentProvider.class

@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 android:gravity="center"
-                android:text="MONEY 충전 오류가 발생하여\n요청하신 처리를 완료할 수 없습니다."
+                android:text="머니 충전 오류가 발생하여\n요청하신 처리를 완료할 수 없습니다."
                 android:textColor="#a5a8b9"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

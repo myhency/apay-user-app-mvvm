@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.settings.SettingsActivity"></activity>
+        <activity android:name=".ui.user.login.init.InitMyPasswordActivity"></activity>
+        <activity android:name=".ui.user.login.find.FindMyIdActivity" />
+        <activity android:name=".ui.main.settings.SettingsActivity" />
         <activity android:name=".ui.refund.RefundActivity" />
         <activity android:name=".ui.account.register.AccountRegisterActivity" />
         <activity android:name=".ui.account.AccountActivity" />
