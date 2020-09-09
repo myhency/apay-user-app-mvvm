@@ -1,6 +1,8 @@
 package com.autoever.apay_user_app.ui.account.register.ars;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
@@ -16,6 +18,8 @@ import com.autoever.apay_user_app.ui.base.BaseFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 
@@ -24,6 +28,7 @@ public class ArsAuthFragment extends BaseFragment<FragmentArsAuthBinding, ArsAut
     public static final String TAG = ArsAuthFragment.class.getSimpleName();
 
     private FragmentArsAuthBinding mFragmentArsAuthBinding;
+    private CountDownTimer countDownTimer;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -75,6 +80,27 @@ public class ArsAuthFragment extends BaseFragment<FragmentArsAuthBinding, ArsAut
     }
 
     private void setup() {
+        countDownTimer = new CountDownTimer(180000, 1000) {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                @SuppressLint("DefaultLocale") String timerValue = String.format("%02d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) -
+                                TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)), // The change is in this line
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
+                @SuppressLint("DefaultLocale") String timerValue1 = String.format("%02d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
+                mFragmentArsAuthBinding.waitingTime.setText("대기시간 " + timerValue);
+            }
+
+            @Override
+            public void onFinish() {
+                mFragmentArsAuthBinding.waitingTime.setText("입력시간이 초과되었습니다.");
+            }
+        }.start();
 
         mFragmentArsAuthBinding.finishTextview.setOnClickListener(v -> {
             try {
