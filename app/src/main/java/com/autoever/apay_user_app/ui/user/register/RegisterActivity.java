@@ -153,7 +153,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         mFragmentManager
                 .beginTransaction()
                 .add(R.id.clRootView, PasswordFragment.newInstance("register"), PasswordFragment.TAG)
-                .addToBackStack(RegisterFormFragment.TAG)
+                .addToBackStack(PasswordFragment.TAG)
                 .commitAllowingStateLoss();
     }
 
@@ -204,7 +204,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                     mFragmentManager
                             .beginTransaction()
                             .replace(R.id.clRootView, PasswordFragment.newInstance("check"), PasswordFragment.TAG)
-                            .addToBackStack(RegisterFormFragment.TAG)
+                            .addToBackStack(PasswordFragment.TAG)
                             .commitAllowingStateLoss();
                     password = message;
                     return;
@@ -241,7 +241,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                     mFragmentManager
                             .beginTransaction()
                             .replace(R.id.clRootView, PasswordFragment.newInstance("register"), PasswordFragment.TAG)
-                            .addToBackStack(RegisterFormFragment.TAG)
+                            .addToBackStack(PasswordFragment.TAG)
                             .commitAllowingStateLoss();
                     password = null;
                 }

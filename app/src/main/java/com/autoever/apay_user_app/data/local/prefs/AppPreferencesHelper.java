@@ -64,6 +64,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getEasyPassword() {
         //TODO. default 값은 설정하면 안됨.
-        return mPrefs.getString(PREF_KEY_EASY_PASSWORD, "111111");
+        return mPrefs.getString(PREF_KEY_EASY_PASSWORD, null);
     }
 }

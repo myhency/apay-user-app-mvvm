@@ -14,8 +14,8 @@
 
         <Preference
             android:key="modify_easy_pass"
-            android:summary="설정된 간편비밀번호를 수정합니다."
-            android:title="간편비밀번호 수정"/>
+            android:summary="설정된 간편비밀번호를 재등록합니다."
+            android:title="간편비밀번호 재등록"/>
 
     </PreferenceCategory>
 

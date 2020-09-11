@@ -86,7 +86,9 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
     @SuppressLint("ClickableViewAccessibility")
     private void setup() {
         //하단 버튼 설정
-        if(getArguments().getString("whatToDo").equals("check")) mFragmentPasswordBinding.skipButton.setVisibility(View.GONE);
+        if(getArguments().getString("whatToDo").equals("check")
+                || getArguments().getString("whatToDo").equals("register_new"))
+            mFragmentPasswordBinding.skipButton.setVisibility(View.GONE);
 
         //건너뛰기 버튼 설정
         mFragmentPasswordBinding.skipButton.setOnClickListener(v -> {
@@ -177,6 +179,7 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void shuffleNumbers(ArrayList<Button> numericButtons) {
         Integer[] randomNumbers = new Integer[10];
         for (int i = 0; i < randomNumbers.length; i++) {

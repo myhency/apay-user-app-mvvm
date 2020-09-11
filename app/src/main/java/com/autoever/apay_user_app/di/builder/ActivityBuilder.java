@@ -22,6 +22,7 @@ import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragmentProvider;
 import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.main.settings.register.RegisterEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragmentProvider;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragmentProvider;
@@ -123,4 +124,9 @@ public abstract class ActivityBuilder {
             RefundFailFragmentProvider.class
     })
     abstract RefundActivity bindRefundActivity();
+
+    @ContributesAndroidInjector(modules = {
+            PasswordFragmentProvider.class
+    })
+    abstract RegisterEasyPasswordActivity bindRegisterEasyPasswordActivity();
 }
