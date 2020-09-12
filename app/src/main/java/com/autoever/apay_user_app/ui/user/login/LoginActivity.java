@@ -36,7 +36,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     private ActivityLoginBinding mActivityLoginBinding;
     private LoginViewModel mLoginViewModel;
-    private FragmentManager mFragmentManager;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -71,11 +70,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     private void setup() {
-        this.mFragmentManager = getSupportFragmentManager();
 
         mActivityLoginBinding.registerButton.setOnClickListener(v -> {
             openRegisterActivity();
-            finish();
         });
 
         mActivityLoginBinding.loginButton.setOnClickListener(v -> {
@@ -108,7 +105,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         Log.d("debug", "MainActivity Open");
         Intent intent = RegisterActivity.newIntent(LoginActivity.this);
         startActivity(intent);
-        finish();
     }
 
     @Override

@@ -52,7 +52,6 @@
                             android:textColor="@color/black_effective"
                             android:textSize="18sp" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -120,10 +119,10 @@
                     android:id="@+id/birthdayInputWarningMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:textColor="@color/warningColor"
-                    android:textSize="9sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/text_id_02"
@@ -133,7 +132,7 @@
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="휴대폰 인증"
                     android:textColor="#94a0ce"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -161,19 +160,20 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:hint="휴대폰 번호 입력"
-                            android:inputType="number"
+                            android:inputType="phone"
                             android:padding="10dp"
+                            android:maxLength="11"
                             android:textColor="#000000"
-                            android:textSize="18dp" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/phoneNumberInputWarningMessage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:textColor="@color/warningColor"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
 
@@ -186,7 +186,7 @@
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="이름(실명을 입력하세요)"
                     android:textColor="#94a0ce"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -219,7 +219,7 @@
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="생년월일(예. 990301-1)"
                     android:textColor="#94a0ce"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,6 +243,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -265,6 +267,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -287,6 +291,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -309,6 +315,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -331,6 +339,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -353,6 +363,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -383,6 +395,8 @@
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:inputType="number"
                             android:textColor="#304db9"
+                            android:gravity="center"
+                            android:maxLength="1"
                             android:textColorHint="#d0d0d0"
                             android:textSize="18sp" />
 
@@ -409,17 +423,18 @@
                             android:hint="6자리 인증번호"
                             android:inputType="number"
                             android:padding="10dp"
+                            android:maxLength="6"
                             android:textColor="#000000"
-                            android:textSize="18dp" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/authNumberInputWarningMessage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:fontFamily="@font/spoqa_han_sans_regular"
                             android:textColor="@color/warningColor"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <Button
