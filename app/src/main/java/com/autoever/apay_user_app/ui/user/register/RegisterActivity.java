@@ -112,13 +112,12 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     @Override
     public void openRegisterFormFragment() {
         Log.d("debug", "openRegisterFormFragment");
-        mActivityRegisterBinding.toolbarTitle.setText("회원가입");
         mFragmentManager
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.clRootView, RegisterFormFragment.newInstance(), RegisterFormFragment.TAG)
                 .addToBackStack(RegisterFormFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
+        mActivityRegisterBinding.toolbarTitle.setText("회원가입");
     }
 
     @Override

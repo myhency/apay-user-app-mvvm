@@ -44,6 +44,7 @@
             bind:layout_constraintVertical_bias="0.03">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_id_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/colorWhite"
@@ -59,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="아이디 입력"
-                    android:inputType="text"
+                    android:inputType="textPersonName"
                     android:maxLength="50"
                     android:maxLines="1"
                     android:textSize="16sp" />
@@ -79,6 +80,7 @@
             bind:layout_constraintVertical_bias="0">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/colorWhite"
@@ -91,7 +93,7 @@
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_confirm"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="패스워드 입력"
@@ -115,6 +117,7 @@
             bind:layout_constraintVertical_bias="0">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_confirm_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/colorWhite"
@@ -127,7 +130,7 @@
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
+                    android:id="@+id/password_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:cursorVisible="true"
@@ -196,6 +199,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telephone_number_text_input_layout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"

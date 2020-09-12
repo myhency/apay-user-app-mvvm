@@ -1,8 +1,10 @@
 package com.autoever.apay_user_app.ui.user.register.form;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import com.autoever.apay_user_app.databinding.FragmentRegisterFormBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.user.register.RegisterNavigator;
 import com.autoever.apay_user_app.ui.user.register.RegisterViewModel;
+import com.autoever.apay_user_app.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +82,7 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
     private void setup() {
 
         //통신사 선택 dropdown 박스 세팅
-        String[] TELECOM_FIRMS = new String[] {"SKT","KT","LGT","알뜰폰"};
+        String[] TELECOM_FIRMS = new String[]{"SKT", "KT", "LGT", "알뜰폰"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getContext(),
                 R.layout.dropdown_menu_popup_item,
@@ -87,10 +90,65 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
         );
         mFragmentRegisterFormBinding.filledExposedDropdown.setAdapter(adapter);
 
-        //
+        //사용자 아이디 중복체크
+        mFragmentRegisterFormBinding.userId.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (mRegisterFormViewModel.isUserIdDuplicated(mFragmentRegisterFormBinding.userId.getText().toString())) {
+                    mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
+                    mFragmentRegisterFormBinding.userIdTextInputLayout.setError("중복된 아이디가 있습니다.");
+                } else if(mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()) {
+                    mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
+                    mFragmentRegisterFormBinding.userIdTextInputLayout.setError("아이디를 입력해 주세요.");
+                }
+            } else {
+                mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(false);
+            }
+        });
 
+        //패스워드 입력 규칙 확인
+        mFragmentRegisterFormBinding.password.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (!CommonUtils.isPasswordValid(mFragmentRegisterFormBinding.password.getText().toString())) {
+                    mFragmentRegisterFormBinding.passwordTextInputLayout.setErrorEnabled(true);
+                    mFragmentRegisterFormBinding.passwordTextInputLayout.setError("최소 8자리이상의 대소문자, 숫자, 특수문자를 혼용해 주세요.");
+                }
+            } else {
+                mFragmentRegisterFormBinding.passwordTextInputLayout.setErrorEnabled(false);
+            }
+        });
+
+        //패스워드 확인
+        mFragmentRegisterFormBinding.passwordConfirm.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if(!mFragmentRegisterFormBinding.password.getText().toString().equals(mFragmentRegisterFormBinding.passwordConfirm.getText().toString())) {
+                    mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.setErrorEnabled(true);
+                    mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.setError("입력하신 패스워드와 일치하지 않습니다.");
+                }
+            } else {
+                mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.setErrorEnabled(false);
+            }
+        });
+
+        //휴대폰 번호 입력 확인
+        mFragmentRegisterFormBinding.telephoneNumber.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (mFragmentRegisterFormBinding.telephoneNumber.getText().toString().isEmpty()) {
+                    mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.setErrorEnabled(true);
+                    mFragmentRegisterFormBinding.telephoneNumber.setError("휴대폰 번호를 입력해 주세요.");
+                }
+            } else {
+                mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.setErrorEnabled(false);
+            }
+        });
+
+        //가입완료 버튼을 누르면 회원가입 양식에 오류가 있는지 확인하고 오류가 없을 시 다음단계를 진행한다.
         mFragmentRegisterFormBinding.finishTextview.setOnClickListener(v -> {
-            if(isIdInputValid() && isPasswordInputValid() && isPhoneAuthValid()) {
+            if (mFragmentRegisterFormBinding.userIdTextInputLayout.isErrorEnabled() ||
+                    mFragmentRegisterFormBinding.passwordTextInputLayout.isErrorEnabled() ||
+                    mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.isErrorEnabled() ||
+                    mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.isErrorEnabled()) {
+                    Toast.makeText(getBaseActivity(), "회원가입 양식에 오류가 있어 가입을 완료할 수 없습니다.", Toast.LENGTH_SHORT).show();
+            } else {
                 JSONObject data = new JSONObject();
                 try {
                     data.put("userName", "홍길동"); //TODO. 사용자 이름 입력은 없는 걸로 변경됨.
@@ -101,26 +159,10 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
                     e.printStackTrace();
                 }
 
-                //서비스 이용약관 동의가 완료되어 회원가입 화면으로 이동.
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
                 getBaseActivity().onFragmentDetached(TAG);
-            } else {
-
             }
-
         });
-    }
-
-    private boolean isPhoneAuthValid() {
-        return true;
-    }
-
-    private boolean isPasswordInputValid() {
-        return true;
-    }
-
-    private boolean isIdInputValid() {
-        return true;
     }
 
     @Override
