@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -311,6 +312,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 default:
                     break;
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mActivityMainBinding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mActivityMainBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+        } else {
+            super.onBackPressed();
+            Log.d("debug", "MainActivity backPressed");
         }
     }
 }
