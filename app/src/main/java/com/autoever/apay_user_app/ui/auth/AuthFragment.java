@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -75,7 +76,7 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
     private void setup() {
         //numeric keypad 리스너 설정
         NumericKeypadListener listener = new NumericKeypadListener();
-        final ArrayList<Button> numericButtons = new ArrayList<Button>(Arrays.asList(
+        final ArrayList<TextView> numericButtons = new ArrayList<>(Arrays.asList(
                 mFragmentAuthBinding.button0,
                 mFragmentAuthBinding.button1,
                 mFragmentAuthBinding.button2,
@@ -88,17 +89,17 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
                 mFragmentAuthBinding.button9
         ));
 
-        for (Button button : numericButtons) {
+        for (TextView button : numericButtons) {
             button.setOnClickListener(listener);
         }
 
-        final ArrayList<Button> functionButtons = new ArrayList<>(Arrays.asList(
+        final ArrayList<TextView> functionButtons = new ArrayList<>(Arrays.asList(
                 mFragmentAuthBinding.buttonDelete,
                 mFragmentAuthBinding.buttonArrange,
                 mFragmentAuthBinding.confirmButton
         ));
 
-        for (Button button : functionButtons) {
+        for (TextView button : functionButtons) {
             button.setOnClickListener(listener);
         }
 
@@ -141,7 +142,7 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
         });
     }
 
-    private void shuffleNumbers(ArrayList<Button> numericButtons) {
+    private void shuffleNumbers(ArrayList<TextView> numericButtons) {
         Integer[] randomNumbers = new Integer[10];
         for (int i = 0; i < randomNumbers.length; i++) {
             randomNumbers[i] = i;
@@ -154,7 +155,7 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
     }
 
     private void reArrangeButtons () {
-        final ArrayList<Button> numericButtons = new ArrayList<Button>(Arrays.asList(
+        final ArrayList<TextView> numericButtons = new ArrayList<>(Arrays.asList(
                 mFragmentAuthBinding.button0,
                 mFragmentAuthBinding.button1,
                 mFragmentAuthBinding.button2,
@@ -193,7 +194,7 @@ public class AuthFragment extends BaseFragment<FragmentAuthBinding, AuthViewMode
                 case R.id.button7:
                 case R.id.button8:
                 case R.id.button9:
-                    Button button = (Button) v;
+                    TextView button = (TextView) v;
                     mFragmentAuthBinding.passwordEdit.append(button.getText().toString());
                     break;
                 case R.id.confirm_button:

@@ -67,7 +67,7 @@
                 android:id="@+id/amount_50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="10dp">
 
@@ -92,7 +92,7 @@
                 android:id="@+id/amount_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="10dp">
 
@@ -117,7 +117,7 @@
                 android:id="@+id/amount_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="10dp">
 
@@ -142,7 +142,7 @@
                 android:id="@+id/amount_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="10dp">
 
@@ -167,7 +167,7 @@
                 android:id="@+id/amount_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="50dp"
                 android:paddingHorizontal="10dp">
