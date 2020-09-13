@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="controlBackground">@color/colorWhite</item>
@@ -15,6 +16,18 @@
     <style name="MaterialTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
 
+    </style>
+
+    <style name="KeyPadButtonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="controlBackground">@color/colorWhite</item>
+        <item name="android:windowBackground">@color/bg_color</item>
+        <item name="android:textColorSecondary">@color/borderColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
