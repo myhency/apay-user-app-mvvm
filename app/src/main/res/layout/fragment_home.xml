@@ -38,6 +38,7 @@
 <!--        </FrameLayout>-->
 
         <Button
+            style="@style/MainPaymentButton"
             android:id="@+id/payment_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -206,7 +207,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.48"
+                app:layout_constraintHeight_percent="0.58"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -216,15 +217,13 @@
 
                 <Button
                     android:id="@+id/main_card_charge_button"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
-                    android:autoSizeMaxTextSize="19sp"
+                    android:autoSizeMaxTextSize="16sp"
                     android:autoSizeMinTextSize="9sp"
                     android:autoSizeStepGranularity="1sp"
                     android:autoSizeTextType="uniform"
-                    android:background="@drawable/button_hover_effect_v2"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="머니 충전"
                     android:textColor="#FFFFFF" />
@@ -238,7 +237,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.48"
+                app:layout_constraintHeight_percent="0.58"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/main_card_charge_button_relative"
                 app:layout_constraintStart_toStartOf="parent"
@@ -249,15 +248,14 @@
 
                 <Button
                     android:id="@+id/main_card_info_button"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:autoSizeMaxTextSize="19sp"
+                    android:autoSizeMaxTextSize="16sp"
                     android:autoSizeMinTextSize="9sp"
                     android:autoSizeStepGranularity="1sp"
                     android:autoSizeTextType="uniform"
-                    android:background="@drawable/button_hover_effect_v3"
+                    android:backgroundTint="@color/borderColor"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:text="결제 정보"
                     android:textColor="#FFFFFF" />

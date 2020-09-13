@@ -18,16 +18,10 @@
 
     </style>
 
-    <style name="KeyPadButtonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="MainPaymentButton" parent="Widget.MaterialComponents.Button">
         <!-- Customize your theme here. -->
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="colorPrimary">@color/colorWhite</item>
-        <item name="colorOnPrimary">@color/colorOnPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/colorWhite</item>
-        <item name="colorAccent">@color/colorWhite</item>
-        <item name="controlBackground">@color/colorWhite</item>
-        <item name="android:windowBackground">@color/bg_color</item>
-        <item name="android:textColorSecondary">@color/borderColor</item>
+        <item name="backgroundTint">@color/colorblack</item>
+        <item name="rippleColor">@color/borderColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
