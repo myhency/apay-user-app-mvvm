@@ -47,4 +47,7 @@
     <string name="input_password_for_register">패스워드 입력 <font fgcolor="#FF0000">*</font></string>
     <string name="input_password_confirm_for_register">패스워드 확인 <font fgcolor="#FF0000">*</font></string>
     <string name="input_phone_number_for_register">휴대폰 인증 <font fgcolor="#FF0000">*</font></string>
+    <string name="payment_amount_title_text"><b>결제금액</b></string>
+    <string name="payment_date_title_text"><b>결제일시</b></string>
+    <string name="payment_shop_name_title_text"><b>가맹점</b></string>
 </resources>

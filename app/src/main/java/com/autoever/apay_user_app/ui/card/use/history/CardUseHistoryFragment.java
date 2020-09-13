@@ -3,6 +3,7 @@ package com.autoever.apay_user_app.ui.card.use.history;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -110,6 +111,15 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
     }
 
     private void setup() {
+        //통신사 선택 dropdown 박스 세팅
+        String[] FILTERS = new String[]{"전체","충전", "결제", "결제취소"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                R.layout.dropdown_menu_popup_item,
+                FILTERS
+        );
+        mFragmentCardUseHistoryBinding.filledExposedDropdown.setAdapter(adapter);
+
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentCardUseHistoryBinding.useHistoryList.setLayoutManager(mLayoutManager);
         mFragmentCardUseHistoryBinding.useHistoryList.setAdapter(mCardUseHistoryAdapter);

@@ -134,14 +134,19 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
             case "PaymentRefundReadyReceiptFragment":
                 removeFragment("CardUseDetailFragment");
                 removeFragment(tag);
+                mActivityCardUseBinding.toolbar.setVisibility(View.VISIBLE);
+                mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+                mActivityCardUseBinding.toolbarTitle.setText("사용내역");
                 break;
             case "CardUseDetailFragment":
+                mActivityCardUseBinding.toolbarTitle.setText("사용내역");
                 removeFragment(tag);
                 break;
             case "PaymentRefundReadyFailFragment":
                 removeFragment(tag);
                 mActivityCardUseBinding.toolbar.setVisibility(View.VISIBLE);
                 mActivityCardUseBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+                mActivityCardUseBinding.toolbarTitle.setText("사용내역");
                 break;
             default:
                 break;
@@ -157,6 +162,7 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
             case "CardUseHistoryFragment":
                 finish();
             case "CardUseDetailFragment":
+                mActivityCardUseBinding.toolbarTitle.setText("사용내역");
                 removeFragment(fragmentTag);
                 break;
         }
@@ -182,6 +188,7 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
     public void openCardUseDetailFragment(Long paymentHistoryId, String paymentStatus) {
         //사용내역화면으로 이동.
         Log.d("debug", "openCardUseDetailFragment");
+        mActivityCardUseBinding.toolbarTitle.setText("상세 내역");
         mFragmentManager
                 .beginTransaction()
                 .add(R.id.clRootView, CardUseDetailFragment.newInstance(paymentHistoryId, paymentStatus), CardUseDetailFragment.TAG)
