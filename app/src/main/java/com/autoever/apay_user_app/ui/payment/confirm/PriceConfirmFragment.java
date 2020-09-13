@@ -75,6 +75,9 @@ public class PriceConfirmFragment extends BaseFragment<FragmentPriceConfirmBindi
                 CommonUtils.formatToKRW(String.valueOf(getArguments().getInt("price"))) + " P"
         );
 
+        //확인버튼 명 변경
+        mFragmentPriceConfirmBinding.finishTextview.setText(CommonUtils.formatToKRW(String.valueOf(getArguments().getInt("price"))) + "P 결제");
+
         //가맹점 명을 출력.
         mFragmentPriceConfirmBinding.shopName.setText(
                 getArguments().getString("shopName")

@@ -102,6 +102,7 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                             paymentReadyResponse.getData().getPaymentId(),
                             paymentReadyResponse.getData().getIdentifier());
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
