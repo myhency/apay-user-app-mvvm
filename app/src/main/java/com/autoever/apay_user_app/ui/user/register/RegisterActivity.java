@@ -28,11 +28,14 @@ import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import retrofit2.HttpException;
 
 public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, RegisterViewModel> implements RegisterNavigator, HasSupportFragmentInjector {
 
@@ -103,10 +106,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         mActivityRegisterBinding.toolbarTitle.setText("서비스 이용약관 동의");
         mFragmentManager
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.clRootView, TermsOfServiceFragment.newInstance(), TermsOfServiceFragment.TAG)
                 .addToBackStack(TermsOfServiceFragment.TAG)
-                .commitAllowingStateLoss();
+                .commit();
     }
 
     @Override
@@ -114,7 +116,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         Log.d("debug", "openRegisterFormFragment");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, RegisterFormFragment.newInstance(), RegisterFormFragment.TAG)
+                .replace(R.id.clRootView, RegisterFormFragment.newInstance(), RegisterFormFragment.TAG)
                 .addToBackStack(RegisterFormFragment.TAG)
                 .commit();
         mActivityRegisterBinding.toolbarTitle.setText("회원가입");
@@ -139,10 +141,35 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
     @Override
     public void handleError(Throwable throwable) {
-        //TODO. response code 에 따라서 처리해야 함.
-        ANError anError = (ANError) throwable;
-        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-        Log.d("debug", "throwable message: " + throwable.getMessage());
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            case 400:
+                try {
+                    if(httpException.response().errorBody().string().contains("AlreadyExistPhoneNumberException")) {
+                        //여기서 다이얼로그를 띄워준다.
+                        // custom dialog
+                        final Dialog dialog = new Dialog(this);
+                        dialog.setContentView(R.layout.phone_number_exists_dialog);
+
+                        Button okButton = dialog.findViewById(R.id.ok_button);
+
+                        okButton.setOnClickListener(v1 -> {
+                            dialog.dismiss();
+                            finish();
+                        });
+
+                        dialog.show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            default:
+                Toast.makeText(this, "시스템오류로 인해 회원가입을 진행할 수 없습니다.\n관리자에게 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override

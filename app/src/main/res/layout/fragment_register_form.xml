@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/spoqa_han_sans_regular"
-            android:text="휴대폰 인증"
+            android:text="@string/input_phone_number_for_register"
             android:textColor="#94a0ce"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

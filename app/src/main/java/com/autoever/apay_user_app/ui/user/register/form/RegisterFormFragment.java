@@ -1,9 +1,11 @@
 package com.autoever.apay_user_app.ui.user.register.form;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -23,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
+
+import retrofit2.HttpException;
 
 public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBinding, RegisterViewModel> implements RegisterNavigator {
 
@@ -96,7 +100,7 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
                 if (mRegisterFormViewModel.isUserIdDuplicated(mFragmentRegisterFormBinding.userId.getText().toString())) {
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setError("중복된 아이디가 있습니다.");
-                } else if(mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()) {
+                } else if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()) {
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setError("아이디를 입력해 주세요.");
                 }
@@ -120,7 +124,7 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
         //패스워드 확인
         mFragmentRegisterFormBinding.passwordConfirm.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                if(!mFragmentRegisterFormBinding.password.getText().toString().equals(mFragmentRegisterFormBinding.passwordConfirm.getText().toString())) {
+                if (!mFragmentRegisterFormBinding.password.getText().toString().equals(mFragmentRegisterFormBinding.passwordConfirm.getText().toString())) {
                     mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.setErrorEnabled(true);
                     mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.setError("입력하신 패스워드와 일치하지 않습니다.");
                 }
@@ -143,15 +147,17 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
 
         //가입완료 버튼을 누르면 회원가입 양식에 오류가 있는지 확인하고 오류가 없을 시 다음단계를 진행한다.
         mFragmentRegisterFormBinding.finishTextview.setOnClickListener(v -> {
-            if (mFragmentRegisterFormBinding.userIdTextInputLayout.isErrorEnabled() ||
-                    mFragmentRegisterFormBinding.passwordTextInputLayout.isErrorEnabled() ||
-                    mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.isErrorEnabled() ||
-                    mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.isErrorEnabled()
-                    ) {
-                    Toast.makeText(getBaseActivity(), "회원가입 양식에 오류가 있어 가입을 완료할 수 없습니다.", Toast.LENGTH_SHORT).show();
-            } else if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty() ||
-            mFragmentRegisterFormBinding.password.getText().toString().isEmpty() ||
-            mFragmentRegisterFormBinding.passwordConfirm.toString().isEmpty()) {
+            if (mFragmentRegisterFormBinding.userIdTextInputLayout.isErrorEnabled()
+                    || mFragmentRegisterFormBinding.passwordTextInputLayout.isErrorEnabled()
+                    || mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.isErrorEnabled()
+                    || mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.isErrorEnabled()
+            ) {
+                Toast.makeText(getBaseActivity(), "회원가입 양식에 오류가 있어 가입을 완료할 수 없습니다.", Toast.LENGTH_SHORT).show();
+            } else if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()
+                    || mFragmentRegisterFormBinding.password.getText().toString().isEmpty()
+                    || mFragmentRegisterFormBinding.passwordConfirm.toString().isEmpty()
+                    || mFragmentRegisterFormBinding.telephoneNumber.getText().toString().isEmpty()
+            ) {
                 Toast.makeText(getBaseActivity(), "필수입력항목을 모두 작성바랍니다.", Toast.LENGTH_SHORT).show();
             } else {
                 JSONObject data = new JSONObject();

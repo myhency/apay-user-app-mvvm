@@ -55,7 +55,7 @@ public final class CommonUtils {
     }
 
     public static boolean isPasswordValid(String password) {
-        Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+        Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+={}|?/<>])(?=\\S+$).{8,}$");
         Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
