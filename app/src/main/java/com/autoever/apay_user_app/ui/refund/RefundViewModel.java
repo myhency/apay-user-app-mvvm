@@ -19,7 +19,7 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
         Log.d("debug", "doRefundReadyCall started");
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-        .doRefundReadyCall(new RefundReadyRequest(4000L, 1L))
+        .doRefundReadyCall(new RefundReadyRequest(4L, 1L))
         .subscribeOn(getSchedulerProvider().io())
         .observeOn(getSchedulerProvider().ui())
         .subscribe(refundReadyResponse -> {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -18,261 +19,235 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
+            android:id="@+id/right_guide_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/textView5"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/spoqa_han_sans_regular"-->
-<!--            android:text="현금카드나 체크카드로 출금할 수 있는 본인 명의의 \n계좌만 등록할 수 있습니다."-->
-<!--            android:textColor="#a5a8b9"-->
-<!--            android:textSize="12sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toEndOf="@id/guideline6"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.01" />-->
-
-        <LinearLayout
-            android:id="@+id/agree_all"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_01"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <CheckBox
-                android:id="@+id/agree_all_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/icon_check_dis"
-                android:button="@null" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:text="@string/jointerms_text_02"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/dash_line"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layerType="software"
-            android:src="@drawable/dashed_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toBottomOf="@id/agree_all"
-            app:layout_constraintVertical_bias="0.05" />
-
-        <RelativeLayout
-            android:id="@+id/term_01"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toBottomOf="@id/dash_line"
-            app:layout_constraintVertical_bias="0.05">
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toTopOf="parent"
+            bind:layout_constraintVertical_bias="0.03">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent">
 
-                <CheckBox
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/agree_all_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jointerms_text_02" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/sep_line"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="20dp"
+            android:layerType="software"
+            android:src="@drawable/dashed_line"
+            app:layout_constraintVertical_bias="0"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_01" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintVertical_bias="0"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/sep_line">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_bias="0.0"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/agree_term01_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_check_dis"
-                    android:button="@null" />
+                    android:text="@string/jointerms_text_03" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="@string/jointerms_text_03"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/agree_term01_detail"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/arrow_r" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/agree_term01_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_weight="1"
-                android:src="@drawable/arrow_r" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/term_02"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_03"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toBottomOf="@id/term_01"
-            app:layout_constraintVertical_bias="0.05">
+            android:layout_marginTop="10dp"
+            app:layout_constraintVertical_bias="0"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_02">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_bias="0.0"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent">
 
-                <CheckBox
+                <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/agree_term02_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_check_dis"
-                    android:button="@null" />
+                    android:text="@string/jointerms_text_03" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="@string/jointerms_text_03"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/agree_term02_detail"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/arrow_r" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/agree_term02_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_weight="1"
-                android:src="@drawable/arrow_r" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/term_03"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_04"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toBottomOf="@id/term_02"
-            app:layout_constraintVertical_bias="0.05">
+            android:layout_marginTop="10dp"
+            app:layout_constraintVertical_bias="0"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_03">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_bias="0.0"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent">
 
-                <CheckBox
+                <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/agree_term03_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_check_dis"
-                    android:button="@null" />
+                    android:text="@string/jointerms_text_04" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="@string/jointerms_text_03"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/agree_term03_detail"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/arrow_r" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/agree_term03_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_weight="1"
-                android:src="@drawable/arrow_r" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/term_04"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_05"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline7"
-            app:layout_constraintStart_toStartOf="@id/guideline6"
-            app:layout_constraintTop_toBottomOf="@id/term_03"
-            app:layout_constraintVertical_bias="0.05">
+            android:layout_marginTop="10dp"
+            app:layout_constraintVertical_bias="0"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_04">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_bias="0.0"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent">
 
-                <CheckBox
+                <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/agree_term04_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_check_dis"
-                    android:button="@null" />
+                    android:text="@string/jointerms_text_04" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_regular"
-                    android:text="@string/jointerms_text_03"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/agree_term04_detail"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/arrow_r" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
-
-            <ImageView
-                android:id="@+id/agree_term04_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_weight="1"
-                android:src="@drawable/arrow_r" />
-
-
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/finish_textview"
@@ -280,8 +255,9 @@
             android:layout_height="52dp"
             android:layout_alignParentBottom="true"
             android:background="#304db9"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             android:gravity="center"
-            android:text="확인"
+            android:text="다음"
             android:textColor="#ffffff"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -291,4 +267,283 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_constraintGuide_percent="0.1" />-->
+
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline7"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_constraintGuide_percent="0.9" />-->
+
+
+<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/textView5"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:fontFamily="@font/spoqa_han_sans_regular"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="현금카드나 체크카드로 출금할 수 있는 본인 명의의 \n계좌만 등록할 수 있습니다."&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textColor="#a5a8b9"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textSize="12sp"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintHorizontal_bias="0.0"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintStart_toEndOf="@id/guideline6"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintVertical_bias="0.01" />&ndash;&gt;-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/agree_all"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="48dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0">-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/agree_all_checkbox"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@drawable/icon_check_dis"-->
+<!--                android:button="@null" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                android:text="@string/jointerms_text_02"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="16sp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/dash_line"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:layerType="software"-->
+<!--            android:src="@drawable/dashed_line"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/agree_all"-->
+<!--            app:layout_constraintVertical_bias="0.05" />-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/term_01"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/dash_line"-->
+<!--            app:layout_constraintVertical_bias="0.05">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/agree_term01_checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:background="@drawable/icon_check_dis"-->
+<!--                    android:button="@null" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                    android:text="@string/jointerms_text_03"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--            </LinearLayout>-->
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/agree_term01_detail"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/arrow_r" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/term_02"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/term_01"-->
+<!--            app:layout_constraintVertical_bias="0.05">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/agree_term02_checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:background="@drawable/icon_check_dis"-->
+<!--                    android:button="@null" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                    android:text="@string/jointerms_text_03"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--            </LinearLayout>-->
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/agree_term02_detail"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/arrow_r" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/term_03"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/term_02"-->
+<!--            app:layout_constraintVertical_bias="0.05">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/agree_term03_checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:background="@drawable/icon_check_dis"-->
+<!--                    android:button="@null" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                    android:text="@string/jointerms_text_03"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--            </LinearLayout>-->
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/agree_term03_detail"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/arrow_r" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/term_04"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideline6"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/term_03"-->
+<!--            app:layout_constraintVertical_bias="0.05">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/agree_term04_checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:background="@drawable/icon_check_dis"-->
+<!--                    android:button="@null" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                    android:text="@string/jointerms_text_03"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--            </LinearLayout>-->
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/agree_term04_detail"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/arrow_r" />-->
+
+
+<!--        </RelativeLayout>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/finish_textview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="52dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:background="#304db9"-->
+<!--            android:gravity="center"-->
+<!--            android:text="확인"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="18sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="1.0" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </layout>
