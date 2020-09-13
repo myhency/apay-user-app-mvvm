@@ -115,7 +115,6 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
             case "CardUseDetailFragment":
                 try {
                     if (message.has("fail")) {
-
                         openPaymentRefundReadyFailFragment(message.getString("fail"));
                     } else {
                         openPaymentRefundReadyReceiptFragment((PaymentRefundReadyResponse) message.get("paymentRefundReadyResponse"));
