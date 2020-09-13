@@ -146,8 +146,13 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
             if (mFragmentRegisterFormBinding.userIdTextInputLayout.isErrorEnabled() ||
                     mFragmentRegisterFormBinding.passwordTextInputLayout.isErrorEnabled() ||
                     mFragmentRegisterFormBinding.passwordConfirmTextInputLayout.isErrorEnabled() ||
-                    mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.isErrorEnabled()) {
+                    mFragmentRegisterFormBinding.telephoneNumberTextInputLayout.isErrorEnabled()
+                    ) {
                     Toast.makeText(getBaseActivity(), "회원가입 양식에 오류가 있어 가입을 완료할 수 없습니다.", Toast.LENGTH_SHORT).show();
+            } else if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty() ||
+            mFragmentRegisterFormBinding.password.getText().toString().isEmpty() ||
+            mFragmentRegisterFormBinding.passwordConfirm.toString().isEmpty()) {
+                Toast.makeText(getBaseActivity(), "필수입력항목을 모두 작성바랍니다.", Toast.LENGTH_SHORT).show();
             } else {
                 JSONObject data = new JSONObject();
                 try {

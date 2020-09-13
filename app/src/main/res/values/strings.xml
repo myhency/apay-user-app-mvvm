@@ -43,4 +43,7 @@
     <string name="add_bank_account"><u>계좌 추가하기</u></string>
     <string name="skip">건너뛰기</string>
     <string name="refresh"><u>새로고침</u></string>
+    <string name="input_id_for_register">아이디 입력 <font fgcolor="#FF0000">*</font></string>
+    <string name="input_password_for_register">패스워드 입력 <font fgcolor="#FF0000">*</font></string>
+    <string name="input_password_confirm_for_register">패스워드 확인 <font fgcolor="#FF0000">*</font></string>
 </resources>
