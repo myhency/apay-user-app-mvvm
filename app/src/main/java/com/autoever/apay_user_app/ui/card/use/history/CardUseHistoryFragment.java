@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -94,21 +95,22 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
         super.onViewCreated(view, savedInstanceState);
         mFragmentCardUseHistoryBinding = getViewDataBinding();
 
+        callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
+
         setup();
 
-        callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
     }
 
-    private void callCardUseHistoryContents(int pageNo) {
-        mCardUseHistoryViewModel.fetchUseHistoryContents(
-                1,
-                4,
-                pageNo,
-                PAGE_SIZE,
-                null,
-                null
-        );
-    }
+//    private void callCardUseHistoryContents(int pageNo) {
+//        mCardUseHistoryViewModel.fetchUseHistoryContents(
+//                1,
+//                4,
+//                pageNo,
+//                PAGE_SIZE,
+//                null,
+//                null
+//        );
+//    }
 
     private void setup() {
         //통신사 선택 dropdown 박스 세팅
@@ -140,26 +142,35 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    Log.d("debug", "Last");
+                    PAGE_NO = PAGE_NO + 1;
+                    callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
+                }
             }
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager())
-                        .findLastCompletelyVisibleItemPosition();
-                int itemTotalCount = recyclerView.getAdapter().getItemCount();
-
-                int firstVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-
-                Log.d("debug", "firstVisibleItemPosition: " + firstVisibleItemPosition);
-                Log.d("debug", "lastVisibleItemPosition: " + lastVisibleItemPosition);
-                Log.d("debug", "itemTotalCount: " + itemTotalCount);
-
-                if (lastVisibleItemPosition + 1 == itemTotalCount) {
-                    PAGE_NO = PAGE_NO + 1;
-                    callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
-                }
+//                int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager())
+//                        .findLastCompletelyVisibleItemPosition();
+//                int itemTotalCount = recyclerView.getAdapter().getItemCount();
+//
+//                int firstVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+//
+////                Log.d("debug", "firstVisibleItemPosition: " + firstVisibleItemPosition);
+////                Log.d("debug", "lastVisibleItemPosition: " + lastVisibleItemPosition);
+////                Log.d("debug", "itemTotalCount: " + itemTotalCount);
+////                Log.d("debug", "dx:" + dx);
+////                Log.d("debug", "dy:" + dy);
+//
+//
+////                if (lastVisibleItemPosition + 1 == itemTotalCount) {
+////                    Log.d("debug","lastVisibleItemPosition + 1 == itemTotalCount :"+ lastVisibleItemPosition + "   " + itemTotalCount);
+////                    PAGE_NO = PAGE_NO + 1;
+////                    callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
+////                }
             }
         });
 
@@ -186,6 +197,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
             mFragmentCardUseHistoryBinding.currentMonth.setText(simpleDateFormat.format(date));
             PAGE_NO = 0;
             callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
+            mFragmentCardUseHistoryBinding.useHistoryList.setVerticalScrollbarPosition(0);
         });
 
         mFragmentCardUseHistoryBinding.postMonth.setOnClickListener(v -> {

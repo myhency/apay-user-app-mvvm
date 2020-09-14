@@ -65,6 +65,14 @@ public class CardUseHistoryResponse {
     public static class CardUseHistory {
 
         @Expose
+        @SerializedName("totalPages")
+        private int totalPages;
+
+        public int getTotalPages() {
+            return totalPages;
+        }
+
+        @Expose
         @SerializedName("content")
         private List<Content> contents;
 
@@ -184,20 +192,18 @@ public class CardUseHistoryResponse {
     private Pageable pageable;
 
     public static class Pageable {
-            /*
-            "pageable": {
-              "sort": {
-                "sorted": true,
-                "unsorted": false,
-                "empty": false
-              },
-              "offset": 10,
-              "pageNumber": 1,
-              "pageSize": 10,
-              "paged": true,
-              "unpaged": false
-            },
-                     */
+//            "pageable":{
+//            "sort":{
+//                "sorted":true,
+//                        "unsorted":false,
+//                        "empty":false
+//            },
+//            "pageNumber":0,
+//            "pageSize":20,
+//            "offset":0,
+//            "paged":true,
+//            "unpaged":false
+//        },
 
         @Expose
         @SerializedName("offset")
@@ -275,4 +281,39 @@ public class CardUseHistoryResponse {
             }
         }
     }
+
+
 }
+
+//{
+//        "data":{
+//            "content":[
+//
+//            ],
+//            "pageable":{
+//             "sort":{
+//                "sorted":true,
+//                "unsorted":false,
+//                "empty":false
+//             },
+//            "pageNumber":0,
+//            "pageSize":20,
+//            "offset":0,
+//            "paged":true,
+//            "unpaged":false
+//            },
+//            "totalPages":1,
+//            "totalElements":18,
+//            "last":true,
+//            "sort":{
+//                "sorted":true,
+//                "unsorted":false,
+//                "empty":false
+//            },
+//            "numberOfElements":18,
+//            "first":true,
+//            "size":20,
+//            "number":0,
+//            "empty":false
+//        }
+//}

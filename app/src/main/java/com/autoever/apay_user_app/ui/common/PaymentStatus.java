@@ -25,7 +25,7 @@ public enum PaymentStatus {
     }
 
     public static PaymentStatus find(String status) {
-        Log.d("debug","Error: " + status);
+//        Log.d("debug","Error: " + status);
         List<PaymentStatus> values = Arrays.asList(PaymentStatus.values());
 
         return values.stream()

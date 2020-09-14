@@ -48,6 +48,8 @@ public class CardUseHistoryViewModel extends BaseViewModel<CardUseHistoryNavigat
                             cardUseHistoryResponse.getData().getContents().size() > 0) {
                         Log.d("debug", "contents");
                         previousContents.addAll(cardUseHistoryResponse.getData().getContents());
+                    } else if (cardUseHistoryResponse.getData().getTotalPages() <= pageNo) {
+                        Log.d("debug", "last item");
                     } else {
                         Log.d("debug", "no contents");
                         previousContents = new ArrayList<>();
