@@ -15,4 +15,8 @@ public interface AccountRegisterNavigator {
     void openArsAuthFragment(ArsCheckResponse arsCheckResponse);
 
     void openDialog();
+
+    void handleError(Throwable throwable);
+
+    void openRegisterAccountFailFragment();
 }

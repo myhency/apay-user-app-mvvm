@@ -7,6 +7,7 @@ import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberF
 import com.autoever.apay_user_app.ui.account.register.ars.ArsAuthFragmentProvider;
 import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthFragmentProvider;
 import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragmentProvider;
+import com.autoever.apay_user_app.ui.account.register.fail.RegisterAccountFailFragmentProvider;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragmentProvider;
 import com.autoever.apay_user_app.ui.auth.AuthFragmentProvider;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
@@ -112,7 +113,9 @@ public abstract class ActivityBuilder {
             CellPhoneAuthFragmentProvider.class,
             BankSelectFragmentProvider.class,
             BankAccountNumberFragmentProvider.class,
-            ArsAuthFragmentProvider.class
+            ArsAuthFragmentProvider.class,
+            RegisterAccountFailFragmentProvider.class
+
     })
     abstract AccountRegisterActivity bindAccountRegisterActivity();
 

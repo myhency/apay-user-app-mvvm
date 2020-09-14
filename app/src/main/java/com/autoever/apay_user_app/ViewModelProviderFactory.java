@@ -11,6 +11,7 @@ import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberV
 import com.autoever.apay_user_app.ui.account.register.ars.ArsAuthViewModel;
 import com.autoever.apay_user_app.ui.account.register.auth.CellPhoneAuthViewModel;
 import com.autoever.apay_user_app.ui.account.register.bank.BankSelectViewModel;
+import com.autoever.apay_user_app.ui.account.register.fail.RegisterAccountFailViewModel;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsViewModel;
 import com.autoever.apay_user_app.ui.auth.AuthViewModel;
 import com.autoever.apay_user_app.ui.card.CardInfoViewModel;
@@ -123,6 +124,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new InitMyPasswordViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(RegisterEasyPasswordViewModel.class)) {
             return (T) new RegisterEasyPasswordViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RegisterAccountFailViewModel.class)) {
+            return (T) new RegisterAccountFailViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

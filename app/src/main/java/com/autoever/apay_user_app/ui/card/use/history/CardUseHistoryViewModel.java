@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.ui.card.use.history;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -25,7 +27,7 @@ public class CardUseHistoryViewModel extends BaseViewModel<CardUseHistoryNavigat
         setIsLoading(true);
         if (pageNo == 0) { //처음업데이트 하는 경우, 또는 onRefresh called from SwipeRefreshLayout 경우 item list 를 초기화 해 줌.
             previousContents = new ArrayList<>();
-            setIsLoading(false);
+//            setIsLoading(false);
         }
 
         getCompositeDisposable().add(getDataManager()
@@ -44,9 +46,13 @@ public class CardUseHistoryViewModel extends BaseViewModel<CardUseHistoryNavigat
                     if (cardUseHistoryResponse != null &&
                             cardUseHistoryResponse.getData() != null &&
                             cardUseHistoryResponse.getData().getContents().size() > 0) {
+                        Log.d("debug", "contents");
                         previousContents.addAll(cardUseHistoryResponse.getData().getContents());
-                        useHistoryContentLiveData.setValue(previousContents);
+                    } else {
+                        Log.d("debug", "no contents");
+                        previousContents = new ArrayList<>();
                     }
+                    useHistoryContentLiveData.setValue(previousContents);
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);

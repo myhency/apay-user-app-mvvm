@@ -34,7 +34,7 @@
                 style="@style/Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/controlBackground"
                 app:subtitleTextColor="@color/black_effective"
                 app:title="@string/app_name"
                 app:titleTextColor="@color/black_effective">
@@ -72,279 +72,220 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/step_01"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_bluecircle"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@color/colorWhite"
-                android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.066666666666667" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layerType="none"
-                android:src="@drawable/dashed_line"
-                app:layout_constraintBottom_toBottomOf="@id/step_02"
-                app:layout_constraintEnd_toStartOf="@+id/step_02"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintStart_toEndOf="@id/step_01"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintWidth_percent="1" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
 
-            <TextView
-                android:id="@+id/step_02"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_bluecircle"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="2"
-                android:textColor="@color/colorWhite"
-                android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.066666666666667" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layerType="none"
-                android:src="@drawable/dashed_line"
-                app:layout_constraintBottom_toBottomOf="@id/step_03"
-                app:layout_constraintEnd_toStartOf="@+id/step_03"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintStart_toEndOf="@id/step_02"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintWidth_percent="1" />
-
-            <TextView
-                android:id="@+id/step_03"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_bluecircle"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="3"
-                android:textColor="@color/colorWhite"
-                android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.066666666666667" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layerType="none"
-                android:src="@drawable/dashed_line"
-                app:layout_constraintBottom_toBottomOf="@id/step_04"
-                app:layout_constraintEnd_toStartOf="@+id/step_04"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintStart_toEndOf="@id/step_03"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintWidth_percent="1" />
-
-            <TextView
-                android:id="@+id/step_04"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_bluecircle"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="4"
-                android:textColor="@color/colorWhite"
-                android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.066666666666667" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layerType="none"
-                android:src="@drawable/dashed_line"
-                app:layout_constraintBottom_toBottomOf="@id/step_05"
-                app:layout_constraintEnd_toStartOf="@+id/step_05"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintStart_toEndOf="@id/step_04"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintWidth_percent="1" />
-
-            <TextView
-                android:id="@+id/step_05"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_bluecircle"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/colorWhite"
-                android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.066666666666667" />
-
-
-
-            <TextView
-                android:id="@+id/step_01_text"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/const_layout_01"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="12sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="약관동의"
-                android:textColor="@color/colorblack"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.226415094339623"
-                app:layout_constraintHorizontal_bias="0.05"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/step_01"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.166666666666667" />
+                app:layout_constraintEnd_toEndOf="@id/right_guide_line"
+                app:layout_constraintStart_toStartOf="@id/left_guide_line"
+                app:layout_constraintTop_toTopOf="@id/guideline4"
+                app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/step_02_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="12sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="본인인증"
-                android:textColor="@color/colorblack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.226415094339623"
-                app:layout_constraintHorizontal_bias="0.25"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step_02"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.244444444444444" />
+                <ImageView
+                    android:layout_width="280dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layerType="none"
+                    android:src="@drawable/dashed_line"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.24" />
 
-            <TextView
-                android:id="@+id/step_03_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="12sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="은행선택"
-                android:textColor="@color/colorblack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.226415094339623"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step_03"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.166666666666667" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/step_04_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="12sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="계좌입력"
-                android:textColor="@color/colorblack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.226415094339623"
-                app:layout_constraintHorizontal_bias="0.73"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step_04"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.166666666666667" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="20">
 
-            <TextView
-                android:id="@+id/step_05_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="12sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:gravity="center"
-                android:text="ARS인증"
-                android:textColor="@color/colorblack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.226415094339623"
-                app:layout_constraintHorizontal_bias="0.946"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step_05"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.166666666666667" />
+                        <TextView
+                            android:id="@+id/step_01"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_bluecircle"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/step_01_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="약관동의"
+                            android:textColor="@color/colorblack" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="20">
+
+                        <TextView
+                            android:id="@+id/step_02"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_bluecircle"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/step_02_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="본인인증"
+                            android:textColor="@color/colorblack" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="20">
+
+                        <TextView
+                            android:id="@+id/step_03"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_bluecircle"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/step_03_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="은행선택"
+                            android:textColor="@color/colorblack" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="20">
+
+                        <TextView
+                            android:id="@+id/step_04"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_bluecircle"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:text="4"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/step_04_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="계좌입력"
+                            android:textColor="@color/colorblack" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="20">
+
+                        <TextView
+                            android:id="@+id/step_05"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_bluecircle"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/step_05_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="ARS 인증"
+                            android:textColor="@color/colorblack" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clRootView"
@@ -354,7 +295,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step_03_text" />
+                app:layout_constraintTop_toBottomOf="@id/const_layout_01" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -17,245 +18,496 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
         <TextView
-            android:id="@+id/textView01"
-            android:layout_width="match_parent"
+            android:id="@+id/text_id_02"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqa_han_sans_regular"
-            android:paddingHorizontal="30dp"
             android:text="기본정보"
             android:textColor="#94a0ce"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/right_guide_line"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/left_guide_line"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
-
-        <EditText
-            android:id="@+id/name_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="30dp"
-            android:fontFamily="@font/spoqa_han_sans_regular"
-            android:hint="이름 입력"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView01"
             app:layout_constraintVertical_bias="0" />
 
-        <LinearLayout
-            android:id="@+id/baseInfo"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_01"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_input"
-            app:layout_constraintVertical_bias="0">
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/text_id_02"
+            bind:layout_constraintVertical_bias="0">
 
-            <EditText
-                android:id="@+id/fssn_input"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_id_text_input_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="300"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:hint="주민번호 앞자리"
-                android:padding="10dp"
-                android:textColor="#000000"
-                android:textSize="17sp" />
+                app:boxBackgroundColor="@color/colorWhite"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="#cb3333"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:text="-"
-                android:textColor="#94a0ce"
-                android:textSize="14sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/input_user_name_for_register_account"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/rssn_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:padding="10dp"
-                android:textColor="#000000"
-                android:textSize="17sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/dot" />
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView02"
-            android:layout_width="match_parent"
+            android:id="@+id/text_id_04"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/spoqa_han_sans_regular"
-            android:paddingHorizontal="30dp"
-            android:text="본인인증"
+            android:text="@string/ssn"
             android:textColor="#94a0ce"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/baseInfo"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintEnd_toStartOf="@+id/right_guide_line"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/left_guide_line"
+            app:layout_constraintTop_toBottomOf="@id/const_layout_01"
+            app:layout_constraintVertical_bias="0" />
 
-        <LinearLayout
-            android:id="@+id/cellphoneAuth"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_02"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView02"
-            app:layout_constraintVertical_bias="0">
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/text_id_04"
+            bind:layout_constraintVertical_bias="0">
 
-            <Spinner
-                android:id="@+id/phone_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:background="@drawable/spinner_background"
-                android:entries="@array/telecom_arrays"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:prompt="@string/telecom_prompt"
-                android:spinnerMode="dropdown" />
-
-            <EditText
-                android:id="@+id/cellPhone_input"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:fontFamily="@font/spoqa_han_sans_regular"
-                android:hint="휴대전화번호(- 없이 입력)"
-                android:padding="10dp"
-                android:textColor="#000000"
-                android:textSize="17sp" />
+                android:orientation="horizontal"
+                android:weightSum="140"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--            android:id="@+id/nameTextField"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:hint="이름 입력"-->
-        <!--            android:paddingLeft="40dp"-->
-        <!--            android:paddingRight="30dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/textView01"-->
-        <!--            app:layout_constraintVertical_bias="0.0">-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_01"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:layout_gravity="center_vertical"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
 
-        <!--            <com.google.android.material.textfield.TextInputEditText-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content" />-->
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/nameTextField"-->
-        <!--            app:layout_constraintVertical_bias="0.0">-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_02"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
 
-        <!--            <com.google.android.material.textfield.TextInputLayout-->
-        <!--                android:id="@+id/fssnTextField"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:hint="주민번호 앞자리"-->
-        <!--                android:paddingLeft="40dp"-->
-        <!--                android:paddingRight="30dp"-->
-        <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <!--                <com.google.android.material.textfield.TextInputEditText-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content" />-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_03"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
 
-        <!--            <com.google.android.material.textfield.TextInputLayout-->
-        <!--                android:id="@+id/rssnTextField"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="3"-->
-        <!--                android:paddingLeft="40dp"-->
-        <!--                android:paddingRight="30dp">-->
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <!--                <com.google.android.material.textfield.TextInputEditText-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content" />-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_04"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
 
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <!--        </LinearLayout>-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_05"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_06"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/spoqa_han_sans_regular"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textColor="#94a0ce"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="17"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ssnf_07"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/dot" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text_id_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:text="@string/input_phone_number_for_register"
+            android:textColor="#94a0ce"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/right_guide_line"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/left_guide_line"
+            app:layout_constraintTop_toBottomOf="@+id/const_layout_02"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_03"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/text_id_03"
+            bind:layout_constraintVertical_bias="0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telecom_dropdown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="45"
+                    android:hint="통신사 선택"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/filled_exposed_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telephone_number_text_input_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="55"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#cb3333"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/telephone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="휴대폰 번호 입력"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_05"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_03"
+            bind:layout_constraintVertical_bias="0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/authentic_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="6자리 인증번호"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/authentic_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="40"
+                    android:backgroundTint="@color/colorApay"
+                    android:fontFamily="@font/spoqa_han_sans_regular"
+                    android:text="인증확인"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_06"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="@id/right_guide_line"
+            bind:layout_constraintStart_toStartOf="@id/left_guide_line"
+            bind:layout_constraintTop_toBottomOf="@id/const_layout_05"
+            bind:layout_constraintVertical_bias="0">
+
+            <TextView
+                android:id="@+id/authentic_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/finish_textview"
@@ -264,7 +516,7 @@
             android:layout_alignParentBottom="true"
             android:background="#304db9"
             android:gravity="center"
-            android:text="인증받기"
+            android:text="다음"
             android:textColor="#ffffff"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -275,274 +527,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content">-->
-
-    <!--        <ScrollView-->
-    <!--            android:id="@+id/join_user_scrollview"-->
-    <!--            android:layout_width="fill_parent"-->
-    <!--            android:layout_height="fill_parent"-->
-    <!--            android:focusableInTouchMode="true">-->
-
-    <!--            <RelativeLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:background="#ffffff">-->
-
-    <!--                <LinearLayout-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_marginHorizontal="42dp"-->
-    <!--                    android:layout_marginTop="65dp"-->
-    <!--                    android:layout_marginBottom="65dp"-->
-    <!--                    android:orientation="vertical">-->
-
-    <!--                    <TextView-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:text="기본정보"-->
-    <!--                        android:textColor="#94a0ce"-->
-    <!--                        android:textSize="14dp" />-->
-
-    <!--                    <EditText-->
-    <!--                        android:id="@+id/name_input"-->
-    <!--                        android:layout_width="match_parent"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:hint="이름 입력"-->
-    <!--                        android:padding="5dp"-->
-    <!--                        android:textColor="#000000"-->
-    <!--                        android:textSize="18dp" />-->
-
-    <!--                <LinearLayout-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:orientation="horizontal">-->
-
-    <!--                    <EditText-->
-    <!--                        android:id="@+id/birthday_input"-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:hint="주민번호 앞자리"-->
-    <!--                        android:inputType="number"-->
-    <!--                        android:padding="10dp"-->
-    <!--                        android:textColor="#000000"-->
-    <!--                        android:textSize="18dp" />-->
-
-    <!--                    <EditText-->
-    <!--                        android:id="@+id/ssn_input"-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:hint="  "-->
-    <!--                        android:inputType="number"-->
-    <!--                        android:padding="10dp"-->
-    <!--                        android:textColor="#000000"-->
-    <!--                        android:layout_marginLeft="15dp"-->
-    <!--                        android:textSize="18dp" />-->
-
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="10dp"-->
-    <!--                        android:layout_height="10dp"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginHorizontal="5dp"-->
-    <!--                        android:src="@drawable/dot" />-->
-
-
-    <!--                </LinearLayout>-->
-
-    <!--                    <TextView-->
-    <!--                        android:id="@+id/birthdayInputWarningMessage"-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:layout_marginLeft="10dp"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:textColor="@color/warningColor"-->
-    <!--                        android:textSize="9sp" />-->
-
-    <!--                    <TextView-->
-    <!--                        android:id="@+id/text_id_02"-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:layout_marginTop="40dp"-->
-    <!--                        android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                        android:text="휴대폰 인증"-->
-    <!--                        android:textColor="#94a0ce"-->
-    <!--                        android:textSize="14dp" />-->
-
-    <!--                    <LinearLayout-->
-    <!--                        android:layout_width="match_parent"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:layout_below="@+id/text_id_02"-->
-    <!--                        android:orientation="horizontal">-->
-
-    <!--                        <Spinner-->
-    <!--                            android:id="@+id/phone_spinner"-->
-    <!--                            android:layout_width="120dp"-->
-    <!--                            android:layout_height="match_parent"-->
-    <!--                            android:background="@drawable/spinner_background"-->
-    <!--                            android:entries="@array/telecom_arrays"-->
-    <!--                            android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                            android:prompt="@string/telecom_prompt"-->
-    <!--                            android:spinnerMode="dropdown" />-->
-
-    <!--                        <LinearLayout-->
-    <!--                            android:layout_width="match_parent"-->
-    <!--                            android:layout_height="wrap_content"-->
-    <!--                            android:orientation="vertical">-->
-
-    <!--                            <EditText-->
-    <!--                                android:id="@+id/phone_number_input"-->
-    <!--                                android:layout_width="match_parent"-->
-    <!--                                android:layout_height="wrap_content"-->
-    <!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                                android:hint="휴대폰 번호 입력"-->
-    <!--                                android:inputType="number"-->
-    <!--                                android:padding="10dp"-->
-    <!--                                android:textColor="#000000"-->
-    <!--                                android:textSize="18dp" />-->
-
-    <!--                            <TextView-->
-    <!--                                android:id="@+id/phoneNumberInputWarningMessage"-->
-    <!--                                android:layout_width="wrap_content"-->
-    <!--                                android:layout_height="wrap_content"-->
-    <!--                                android:layout_marginLeft="10dp"-->
-    <!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                                android:textColor="@color/warningColor"-->
-    <!--                                android:textSize="9sp" />-->
-    <!--                        </LinearLayout>-->
-
-
-    <!--                    </LinearLayout>-->
-
-    <!--                    <LinearLayout-->
-    <!--                        android:layout_width="match_parent"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:orientation="horizontal">-->
-
-    <!--                        <LinearLayout-->
-    <!--                            android:layout_width="wrap_content"-->
-    <!--                            android:layout_height="wrap_content"-->
-    <!--                            android:orientation="vertical">-->
-
-    <!--                            <EditText-->
-    <!--                                android:id="@+id/auth_number_input"-->
-    <!--                                android:layout_width="200dp"-->
-    <!--                                android:layout_height="wrap_content"-->
-    <!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                                android:hint="6자리 인증번호"-->
-    <!--                                android:inputType="number"-->
-    <!--                                android:padding="10dp"-->
-    <!--                                android:textColor="#000000"-->
-    <!--                                android:textSize="18dp" />-->
-
-    <!--                            <TextView-->
-    <!--                                android:id="@+id/authNumberInputWarningMessage"-->
-    <!--                                android:layout_width="wrap_content"-->
-    <!--                                android:layout_height="wrap_content"-->
-    <!--                                android:layout_marginLeft="10dp"-->
-    <!--                                android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                                android:textColor="@color/warningColor"-->
-    <!--                                android:textSize="9sp" />-->
-    <!--                        </LinearLayout>-->
-
-    <!--                        <Button-->
-    <!--                            android:layout_width="match_parent"-->
-    <!--                            android:layout_height="35dp"-->
-    <!--                            android:background="@drawable/button_background"-->
-    <!--                            android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                            android:stateListAnimator="@null"-->
-    <!--                            android:text="인증확인"-->
-    <!--                            android:textColor="#d0d0d0" />-->
-
-    <!--                    </LinearLayout>-->
-
-    <!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_marginTop="40dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:fontFamily="@font/spoqa_han_sans_regular"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:text="이메일 (선택)"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textColor="#94a0ce"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textSize="14dp" />&ndash;&gt;-->
-
-    <!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:id="@+id/email_input"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:fontFamily="@font/spoqa_han_sans_regular"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:hint="이메일 입력"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:inputType="textEmailAddress"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:padding="10dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textColor="#000000"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textSize="18dp" />&ndash;&gt;-->
-
-    <!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:id="@+id/emailInputWarningMessage"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:layout_marginLeft="10dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:fontFamily="@font/spoqa_han_sans_regular"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textColor="@color/warningColor"&ndash;&gt;-->
-    <!--&lt;!&ndash;                        android:textSize="9sp" />&ndash;&gt;-->
-
-    <!--                </LinearLayout>-->
-
-
-    <!--            </RelativeLayout>-->
-
-    <!--        </ScrollView>-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_alignParentBottom="true">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/complete_auth_button"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="52dp"-->
-    <!--                android:layout_alignParentBottom="true"-->
-    <!--                android:background="#304db9"-->
-    <!--                android:fontFamily="@font/spoqa_han_sans_regular"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="인증받기"-->
-    <!--                android:textColor="#ffffff"-->
-    <!--                android:textSize="18sp" />-->
-    <!--        </RelativeLayout>-->
-
-    <!--    </RelativeLayout>-->
 </layout>

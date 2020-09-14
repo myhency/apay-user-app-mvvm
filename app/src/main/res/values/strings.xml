@@ -50,4 +50,6 @@
     <string name="payment_amount_title_text"><b>결제금액</b></string>
     <string name="payment_date_title_text"><b>결제일시</b></string>
     <string name="payment_shop_name_title_text"><b>가맹점</b></string>
+    <string name="input_user_name_for_register_account">이름 입력 <font fgcolor="#FF0000">*</font></string>
+    <string name="ssn">주민번호 앞자리(예. 990101 - 1) <font fgcolor="#FF0000">*</font></string>
 </resources>

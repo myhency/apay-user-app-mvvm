@@ -1,6 +1,10 @@
 package com.autoever.apay_user_app.ui.account.register.auth;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
@@ -75,17 +79,224 @@ public class CellPhoneAuthFragment extends BaseFragment<FragmentCellPhoneAuthBin
 
     private void setup() {
         mFragmentCellPhoneAuthBinding.finishTextview.setOnClickListener(v -> {
+            String identificationNumber = mFragmentCellPhoneAuthBinding.ssnf01.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf02.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf03.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf04.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf05.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf06.getText().toString()
+                    + mFragmentCellPhoneAuthBinding.ssnf07.getText().toString();
             try {
                 JSONObject data = new JSONObject();
                 data.put("authenticationCode", "123456");
-                data.put("phoneNumber", mFragmentCellPhoneAuthBinding.cellPhoneInput.getText());
-                data.put("subscriberName", mFragmentCellPhoneAuthBinding.nameInput.getText());
-                data.put("identificationNumber", mFragmentCellPhoneAuthBinding.fssnInput.getText().toString() + mFragmentCellPhoneAuthBinding.rssnInput.getText().toString());
+                data.put("phoneNumber", mFragmentCellPhoneAuthBinding.telephoneNumber.getText());
+                data.put("subscriberName", mFragmentCellPhoneAuthBinding.userName.getText());
+                data.put("identificationNumber", identificationNumber);
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             getBaseActivity().onFragmentDetached(TAG);
         });
+
+        mFragmentCellPhoneAuthBinding.ssnf02.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf02.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf01.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf02.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf03.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf03.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf02.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf03.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf04.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf04.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf03.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf04.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf05.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf05.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf04.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf05.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf06.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf06.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf05.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf06.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf07.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("debug", "keyCode:" + keyCode);
+                if(mFragmentCellPhoneAuthBinding.ssnf07.getText().toString().length() == 0 && keyCode == 67) {
+                    mFragmentCellPhoneAuthBinding.ssnf06.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf07.clearFocus();
+                }
+
+                return false;
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf01.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf02.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf01.clearFocus();
+                }
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf02.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf03.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf02.clearFocus();
+                }
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf03.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf04.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf03.clearFocus();
+                }
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf04.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf05.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf04.clearFocus();
+                }
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf05.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf06.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf05.clearFocus();
+                }
+            }
+        });
+
+        mFragmentCellPhoneAuthBinding.ssnf06.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 1) {
+                    mFragmentCellPhoneAuthBinding.ssnf07.requestFocus();
+                    mFragmentCellPhoneAuthBinding.ssnf06.clearFocus();
+                }
+            }
+        });
     }
+
+
 }

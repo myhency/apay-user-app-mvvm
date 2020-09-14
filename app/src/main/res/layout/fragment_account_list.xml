@@ -32,14 +32,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/select_account"
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/agree_all_checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_check_dis"
-                    android:button="@null" />
+                    android:layout_height="wrap_content" />
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/select_account"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:background="@drawable/icon_check_dis"-->
+<!--                    android:button="@null" />-->
 
             </LinearLayout>
 
@@ -57,19 +62,18 @@
                         android:id="@+id/bank_logo"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_alignParentLeft="true"
-                        />
+                        android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:id="@+id/bank_name_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:fontFamily="@font/spoqa_han_sans_light"
-                        android:layout_toRightOf="@+id/bank_logo"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/colorblack"
-                        android:text="@{viewModel.bankNameLiveData}"/>
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/bank_logo"
+                        android:fontFamily="@font/spoqa_han_sans_light"
+                        android:text="@{viewModel.bankNameLiveData}"
+                        android:textColor="@color/colorblack" />
 
                     <TextView
                         android:id="@+id/bank_account_number"
@@ -78,9 +82,9 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/spoqa_han_sans_bold"
-                        android:textSize="16sp"
+                        android:text="@{viewModel.maskingAccountNumberLiveData}"
                         android:textColor="@color/colorblack"
-                        android:text="@{viewModel.maskingAccountNumberLiveData}" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
