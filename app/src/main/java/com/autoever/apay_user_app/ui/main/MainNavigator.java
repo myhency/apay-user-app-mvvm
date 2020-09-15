@@ -25,4 +25,6 @@ public interface MainNavigator {
     void openFaqActivity();
 
     void openUserProfileActivity();
+
+    void openMyPageActivity();
 }

@@ -37,6 +37,7 @@ import com.autoever.apay_user_app.ui.charge.ChargeActivity;
 import com.autoever.apay_user_app.ui.main.settings.SettingsActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
+import com.autoever.apay_user_app.ui.user.mypage.MyPageActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import javax.inject.Inject;
@@ -131,6 +132,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 R.layout.nav_header_main, mActivityMainBinding.navView, false);
         mActivityMainBinding.navView.addHeaderView(navHeaderMainBinding.getRoot());
         navHeaderMainBinding.setViewModel(mMainViewModel);
+
+        navHeaderMainBinding.mypageLayout.setOnClickListener(v -> {
+            openMyPageActivity();
+        });
 
         navHeaderMainBinding.drawerUseList.setOnClickListener(v -> {
             openCardUseHistoryActivity();
@@ -292,6 +297,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     public void openUserProfileActivity() {
 
+    }
+
+    @Override
+    public void openMyPageActivity() {
+        Log.d("debug", "openMyPageActivity");
+        Intent intent = MyPageActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override

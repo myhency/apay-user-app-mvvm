@@ -38,13 +38,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/spoqa_han_sans_regular"
-            android:text="전화를 받은 후, 생년월일 6자리를 입력하세요."
+            android:text="전화를 받은 후, 아래 두 자리 숫자를 입력하세요."
             android:textColor="#a5a8b9"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_msg01"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/text_msg04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:text="2 3"
+            android:textColor="@color/colorblack"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_msg02"
             app:layout_constraintVertical_bias="0.05" />
 
         <ImageView

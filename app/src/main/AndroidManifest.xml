@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.settings.modify.ModifyEasyPasswordActivity"></activity>
+        <activity android:name=".ui.user.mypage.MyPageActivity"></activity>
+        <activity android:name=".ui.main.settings.modify.ModifyEasyPasswordActivity" />
         <activity android:name=".ui.main.settings.register.RegisterEasyPasswordActivity" />
         <activity android:name=".ui.user.login.init.InitMyPasswordActivity" />
         <activity android:name=".ui.user.login.find.FindMyIdActivity" />
