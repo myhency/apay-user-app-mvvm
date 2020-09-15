@@ -116,7 +116,6 @@ public abstract class ActivityBuilder {
             BankAccountNumberFragmentProvider.class,
             ArsAuthFragmentProvider.class,
             RegisterAccountFailFragmentProvider.class
-
     })
     abstract AccountRegisterActivity bindAccountRegisterActivity();
 
