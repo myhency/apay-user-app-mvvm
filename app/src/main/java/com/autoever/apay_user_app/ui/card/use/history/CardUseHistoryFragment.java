@@ -120,7 +120,7 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
                 R.layout.dropdown_menu_popup_item,
                 FILTERS
         );
-        mFragmentCardUseHistoryBinding.filledExposedDropdown.setAdapter(adapter);
+//        mFragmentCardUseHistoryBinding.filledExposedDropdown.setAdapter(adapter);
 
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentCardUseHistoryBinding.useHistoryList.setLayoutManager(mLayoutManager);

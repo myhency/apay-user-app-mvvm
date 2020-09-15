@@ -27,7 +27,6 @@ public class CardUseHistoryViewModel extends BaseViewModel<CardUseHistoryNavigat
         setIsLoading(true);
         if (pageNo == 0) { //처음업데이트 하는 경우, 또는 onRefresh called from SwipeRefreshLayout 경우 item list 를 초기화 해 줌.
             previousContents = new ArrayList<>();
-//            setIsLoading(false);
         }
 
         getCompositeDisposable().add(getDataManager()
