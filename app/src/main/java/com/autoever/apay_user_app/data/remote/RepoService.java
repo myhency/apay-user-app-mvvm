@@ -35,6 +35,8 @@ import com.autoever.apay_user_app.data.model.api.RefundDoRequest;
 import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
+import com.autoever.apay_user_app.data.model.api.ResetPasswordRequest;
+import com.autoever.apay_user_app.data.model.api.ResetPasswordResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
@@ -136,4 +138,8 @@ public interface RepoService {
     @POST("api/v2/user/findLoginId")
     @Headers("No-Authentication: true")
     Single<FindLoginIdResponse> doFindLoginIdCall(@Body FindLoginIdRequest findLoginIdRequest);
+
+    @PUT("api/v2/user/resetPassword")
+    @Headers("No-Authentication: true")
+    Single<ResetPasswordResponse> doResetPasswordCall(@Body ResetPasswordRequest resetPasswordRequest);
 }

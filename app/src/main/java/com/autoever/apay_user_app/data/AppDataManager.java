@@ -40,6 +40,8 @@ import com.autoever.apay_user_app.data.model.api.RefundDoRequest;
 import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
+import com.autoever.apay_user_app.data.model.api.ResetPasswordRequest;
+import com.autoever.apay_user_app.data.model.api.ResetPasswordResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
@@ -274,5 +276,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<FindLoginIdResponse> doFindLoginIdCall(FindLoginIdRequest findLoginIdRequest) {
         return mRepoService.doFindLoginIdCall(findLoginIdRequest);
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> doResetPasswordCall(ResetPasswordRequest resetPasswordRequest) {
+        return mRepoService.doResetPasswordCall(resetPasswordRequest);
     }
 }
