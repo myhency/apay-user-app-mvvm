@@ -20,7 +20,7 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doChargeReadyCall(new ChargeReadyRequest(
-                4L,
+                getDataManager().getCurrentUserId(),
                 1L,
                 amount
         ))

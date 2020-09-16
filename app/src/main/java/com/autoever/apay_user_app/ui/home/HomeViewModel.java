@@ -20,13 +20,14 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
 
     public void loadUserBalance() {
         setIsLoading(true);
+
         getCompositeDisposable().add(getDataManager()
                 //TODO. subscriberId 는 어떤걸 쓸지??
-                .doGetBalanceCall(1,4)
+                .doGetBalanceCall(1, getDataManager().getCurrentUserId())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(balanceResponse -> {
-                    if(balanceResponse != null && balanceResponse.getData() != null) {
+                    if (balanceResponse != null && balanceResponse.getData() != null) {
                         balanceKRWLiveData.setValue(CommonUtils.formatToKRW(balanceResponse.getData().getBalance().toString()));
                     }
                     setIsLoading(false);
@@ -36,5 +37,7 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
                 }));
     }
 
-    public LiveData<String> getBalanceKRWLiveData() { return balanceKRWLiveData; }
+    public LiveData<String> getBalanceKRWLiveData() {
+        return balanceKRWLiveData;
+    }
 }

@@ -234,7 +234,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<BalanceResponse> doGetBalanceCall(int tokenSystemId, int subscriberId) {
+    public Single<BalanceResponse> doGetBalanceCall(int tokenSystemId, Long subscriberId) {
         return mRepoService.doGetBalanceCall(tokenSystemId, subscriberId);
     }
 

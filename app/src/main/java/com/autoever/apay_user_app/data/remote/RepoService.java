@@ -108,7 +108,7 @@ public interface RepoService {
     @GET("api/v2/tokenSystem/{tokenSystemId}/balance")
     Single<BalanceResponse> doGetBalanceCall(
             @Path("tokenSystemId") int tokenSystemId,
-            @Query("subscriberId") int subscriberId
+            @Query("subscriberId") Long subscriberId
     );
 
     @POST("api/v2/settleBank/list/account")
