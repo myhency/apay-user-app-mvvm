@@ -184,6 +184,11 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     }
 
     @Override
+    public void setupLoginIdTextFieldHelperText(boolean result) {
+
+    }
+
+    @Override
     public void openLoginActivity() {
         Log.d("debug", "LoginActivity Open");
         Intent intent = LoginActivity.newIntent(RegisterActivity.this);

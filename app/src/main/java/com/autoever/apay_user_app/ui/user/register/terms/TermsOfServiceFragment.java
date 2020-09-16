@@ -150,6 +150,11 @@ public class TermsOfServiceFragment extends BaseFragment<FragmentTermsOfServiceB
 
     }
 
+    @Override
+    public void setupLoginIdTextFieldHelperText(boolean result) {
+
+    }
+
     class CheckBoxListener implements CheckBox.OnCheckedChangeListener {
         CheckBox agreeAll = mFragmentTermsOfServiceBinding.agreeAllCheckbox,
                 agreeTerm01 = mFragmentTermsOfServiceBinding.agreeTerm01Checkbox,

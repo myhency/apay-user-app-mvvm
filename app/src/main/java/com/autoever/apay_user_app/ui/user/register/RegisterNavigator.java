@@ -14,4 +14,6 @@ public interface RegisterNavigator {
 
     void openPasswordFragment();
 
+    void setupLoginIdTextFieldHelperText(boolean result);
+
 }

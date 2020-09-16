@@ -79,6 +79,7 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentRegisterFormBinding = getViewDataBinding();
+        mRegisterFormViewModel.setNavigator(this);
 
         setup();
     }
@@ -97,10 +98,8 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
         //사용자 아이디 중복체크
         mFragmentRegisterFormBinding.userId.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                if (mRegisterFormViewModel.isUserIdDuplicated(mFragmentRegisterFormBinding.userId.getText().toString())) {
-                    mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
-                    mFragmentRegisterFormBinding.userIdTextInputLayout.setError("중복된 아이디가 있습니다.");
-                } else if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()) {
+                mRegisterFormViewModel.isUserIdDuplicated(mFragmentRegisterFormBinding.userId.getText().toString());
+                if (mFragmentRegisterFormBinding.userId.getText().toString().isEmpty()) {
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
                     mFragmentRegisterFormBinding.userIdTextInputLayout.setError("아이디를 입력해 주세요.");
                 }
@@ -176,6 +175,8 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
         });
     }
 
+
+
     @Override
     public void openTermsOfServiceFragment() {
 
@@ -204,5 +205,13 @@ public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBindi
     @Override
     public void openPasswordFragment() {
 
+    }
+
+    @Override
+    public void setupLoginIdTextFieldHelperText(boolean result) {
+        if (result) { //중복된 아이디가 존재함.
+            mFragmentRegisterFormBinding.userIdTextInputLayout.setErrorEnabled(true);
+            mFragmentRegisterFormBinding.userIdTextInputLayout.setError("중복된 아이디가 있습니다.");
+        }
     }
 }

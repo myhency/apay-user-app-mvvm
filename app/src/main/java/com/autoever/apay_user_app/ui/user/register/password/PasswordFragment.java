@@ -289,4 +289,9 @@ public class PasswordFragment extends BaseFragment<FragmentPasswordBinding, Regi
 
     }
 
+    @Override
+    public void setupLoginIdTextFieldHelperText(boolean result) {
+
+    }
+
 }

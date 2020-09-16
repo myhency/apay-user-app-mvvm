@@ -21,6 +21,7 @@ import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.IdentityCheckRequest;
 import com.autoever.apay_user_app.data.model.api.IdentityCheckResponse;
+import com.autoever.apay_user_app.data.model.api.LoginIdDuplicationCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
@@ -261,5 +262,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<RefundDoResponse> doRefundDoCall(RefundDoRequest refundDoRequest) {
         return mRepoService.doRefundDoCall(refundDoRequest);
+    }
+
+    @Override
+    public Single<LoginIdDuplicationCheckResponse> doLoginIdDuplicationCheckCall(String loginId) {
+        return mRepoService.doLoginIdDuplicationCheckCall(loginId);
     }
 }

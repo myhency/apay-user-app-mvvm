@@ -16,6 +16,7 @@ import com.autoever.apay_user_app.data.model.api.ChargeReadyRequest;
 import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.data.model.api.IdentityCheckRequest;
 import com.autoever.apay_user_app.data.model.api.IdentityCheckResponse;
+import com.autoever.apay_user_app.data.model.api.LoginIdDuplicationCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
@@ -123,4 +124,10 @@ public interface RepoService {
 
     @PUT("api/v2/tokenSystem/refund/do")
     Single<RefundDoResponse> doRefundDoCall(@Body RefundDoRequest refundDoRequest);
+
+    @GET("api/v2/user/loginId/{loginId}")
+    @Headers("No-Authentication: true")
+    Single<LoginIdDuplicationCheckResponse> doLoginIdDuplicationCheckCall(
+            @Path("loginId") String loginId
+    );
 }

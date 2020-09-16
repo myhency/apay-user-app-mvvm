@@ -43,8 +43,19 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         getDataManager().setEasyPassword(password);
     }
 
-    public boolean isUserIdDuplicated(String userId) {
+    public void isUserIdDuplicated(String userId) {
         //TODO. 아이디 중복체크 api 호출 필요
-        return false;
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+        .doLoginIdDuplicationCheckCall(userId)
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(loginIdDuplicationCheckResponse -> {
+            setIsLoading(false);
+            getNavigator().setupLoginIdTextFieldHelperText(loginIdDuplicationCheckResponse.isData());
+        }, throwable -> {
+            setIsLoading(false);
+            getNavigator().handleError(throwable);
+        }));
     }
 }
