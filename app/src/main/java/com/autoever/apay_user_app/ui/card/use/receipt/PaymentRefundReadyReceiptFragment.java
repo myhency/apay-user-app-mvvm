@@ -89,7 +89,7 @@ public class PaymentRefundReadyReceiptFragment extends BaseFragment<FragmentPaym
         mFragmentPaymentRefundReadyReceiptBinding.cancelDate.setText(getArguments().getString("createdDate"));
 //        mFragmentPaymentRefundReadyReceiptBinding.expectedBalance.setText(getArguments().getString("balanceLeft"));
         mFragmentPaymentRefundReadyReceiptBinding.purchaseAmount.setText(getArguments().getString("amount"));
-        mFragmentPaymentRefundReadyReceiptBinding.shopName.setText(getArguments().getString("storeId"));
+        mFragmentPaymentRefundReadyReceiptBinding.shopName.setText(getArguments().getString("shopName"));
         mFragmentPaymentRefundReadyReceiptBinding.finishTextview.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
     }
 }
