@@ -101,17 +101,6 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
 
     }
 
-//    private void callCardUseHistoryContents(int pageNo) {
-//        mCardUseHistoryViewModel.fetchUseHistoryContents(
-//                1,
-//                4,
-//                pageNo,
-//                PAGE_SIZE,
-//                null,
-//                null
-//        );
-//    }
-
     private void setup() {
         //통신사 선택 dropdown 박스 세팅
         String[] FILTERS = new String[]{"전체","충전", "결제", "결제취소"};
@@ -120,7 +109,6 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
                 R.layout.dropdown_menu_popup_item,
                 FILTERS
         );
-//        mFragmentCardUseHistoryBinding.filledExposedDropdown.setAdapter(adapter);
 
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentCardUseHistoryBinding.useHistoryList.setLayoutManager(mLayoutManager);
@@ -152,25 +140,6 @@ public class CardUseHistoryFragment extends BaseFragment<FragmentCardUseHistoryB
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-//                int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager())
-//                        .findLastCompletelyVisibleItemPosition();
-//                int itemTotalCount = recyclerView.getAdapter().getItemCount();
-//
-//                int firstVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-//
-////                Log.d("debug", "firstVisibleItemPosition: " + firstVisibleItemPosition);
-////                Log.d("debug", "lastVisibleItemPosition: " + lastVisibleItemPosition);
-////                Log.d("debug", "itemTotalCount: " + itemTotalCount);
-////                Log.d("debug", "dx:" + dx);
-////                Log.d("debug", "dy:" + dy);
-//
-//
-////                if (lastVisibleItemPosition + 1 == itemTotalCount) {
-////                    Log.d("debug","lastVisibleItemPosition + 1 == itemTotalCount :"+ lastVisibleItemPosition + "   " + itemTotalCount);
-////                    PAGE_NO = PAGE_NO + 1;
-////                    callCardUseHistoryContentsByFilterAndMonth(PAGE_NO, date, null);
-////                }
             }
         });
 

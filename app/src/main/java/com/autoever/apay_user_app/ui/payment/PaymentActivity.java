@@ -3,9 +3,11 @@ package com.autoever.apay_user_app.ui.payment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -209,6 +211,8 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
             case QR_CODE_SCANNED: {
                 switch (resultCode) {
                     case RESULT_OK:
+                        Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(20);
                         staticQrData = new Gson().fromJson(data.getExtras().getString("shopCode"), JsonObject.class);
                         storeName = staticQrData.get("storeName").getAsString();
                         showPriceFragment(storeName);

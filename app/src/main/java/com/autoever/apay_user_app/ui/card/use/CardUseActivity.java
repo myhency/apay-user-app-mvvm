@@ -131,6 +131,7 @@ public class CardUseActivity extends BaseActivity<ActivityCardUseBinding, CardUs
         super.onFragmentDetached(tag);
         switch (tag) {
             case "PaymentRefundReadyReceiptFragment":
+                Log.d("debug", "PaymentRefundReadyReceiptFragment detached");
                 removeFragment("CardUseDetailFragment");
                 removeFragment(tag);
                 mActivityCardUseBinding.toolbar.setVisibility(View.VISIBLE);

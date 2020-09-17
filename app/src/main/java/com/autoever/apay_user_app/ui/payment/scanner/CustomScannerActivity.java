@@ -8,11 +8,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +58,7 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
     private BarcodeDetector mBarcodeDetector;
     private CameraSource mCameraSource;
     private CountDownTimer countDownTimer;
+    private Handler mHandler;
 
     final int RequestCameraPermissionID = 1001;
 
@@ -163,17 +168,29 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 if (qrCodes.size() != 0) {
                     Intent data = new Intent();
                     JsonObject convertedObject = new Gson().fromJson(qrCodes.valueAt(0).displayValue, JsonObject.class);
-                    Log.d("debug", "shopCode:" + qrCodes.valueAt(0).displayValue);
-                    data.putExtra("shopCode", qrCodes.valueAt(0).displayValue);
-                    setResult(RESULT_OK, data);
-                    finish();
-                    Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(20);
+//                    Log.d("debug", "shopCode:" + qrCodes.valueAt(0).displayValue);
+                    if (convertedObject.has("storeName")) {
+                        data.putExtra("shopCode", qrCodes.valueAt(0).displayValue);
+                        setResult(RESULT_OK, data);
+                        finish();
+                    } else {
+                        mHandler = new Handler(Looper.getMainLooper()) {
+                            @Override
+                            public void handleMessage(Message message) {
+                                // This is where you do your work in the UI thread.
+                                // Your worker tells you in the message what to do.
+//                                handleQrError();
+                                Log.d("debug",message.toString());
+                            }
+                        };
+                    }
                 }
             }
         });
+    }
 
-
+    private void handleQrError() {
+        Toast.makeText(getBaseContext(), "인증된 QR 코드가 아닙니다.", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -87,7 +87,7 @@ public class PaymentRefundReadyReceiptFragment extends BaseFragment<FragmentPaym
 
     private void setup() {
         mFragmentPaymentRefundReadyReceiptBinding.cancelDate.setText(getArguments().getString("createdDate"));
-        mFragmentPaymentRefundReadyReceiptBinding.postChargeBalance.setText(getArguments().getString("balanceLeft"));
+//        mFragmentPaymentRefundReadyReceiptBinding.expectedBalance.setText(getArguments().getString("balanceLeft"));
         mFragmentPaymentRefundReadyReceiptBinding.purchaseAmount.setText(getArguments().getString("amount"));
         mFragmentPaymentRefundReadyReceiptBinding.shopName.setText(getArguments().getString("storeId"));
         mFragmentPaymentRefundReadyReceiptBinding.finishTextview.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
