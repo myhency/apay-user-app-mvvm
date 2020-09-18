@@ -9,4 +9,6 @@ public interface AmountNavigator {
     void goNext();
 
     void setBankCode(String bankCode);
+
+    void handleNoAccount();
 }

@@ -25,4 +25,6 @@ public interface HomeNavigator {
     void openFaqActivity();
 
     void openUserProfileActivity();
+
+    void openAccountActivity();
 }

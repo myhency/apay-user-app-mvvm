@@ -196,9 +196,14 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
         try {
             switch (tag) {
                 case "AmountFragment":
-                    amount = (long) CommonUtils.parseToInt(message.getString("amount"));
-                    bankCode = message.getString("bankCode");
-                    bankInfo = message.getString("bankInfo");
+                    if (message.has("hasNoAccount")) { //계좌등록이 되지 않은 경우 계좌등록화면으로 이동한다.
+                        setResult(RESULT_FIRST_USER);
+                        finish();
+                    } else {
+                        amount = (long) CommonUtils.parseToInt(message.getString("amount"));
+                        bankCode = message.getString("bankCode");
+                        bankInfo = message.getString("bankInfo");
+                    }
                     break;
                 default:
                     break;

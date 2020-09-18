@@ -14,16 +14,24 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentHomeBinding;
+import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
+import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 
 import javax.inject.Inject;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_FIRST_USER;
+import static android.app.Activity.RESULT_OK;
+
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> implements HomeNavigator {
 
     public static final String TAG = HomeFragment.class.getSimpleName();
+    public static final int CARD_CHARGE_ACTIVITY = 0;
+    private static final int ACCOUNT_ACTIVITY_RESULT = 101;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -106,7 +114,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     public void openCardChargeActivity() {
         Log.d("debug", "openCardChargeActivity");
         Intent intent = ChargeActivity.newIntent(getActivity());
-        startActivity(intent);
+        startActivityForResult(intent, CARD_CHARGE_ACTIVITY);
     }
 
     @Override
@@ -114,6 +122,38 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         Log.d("debug", "openCardInfoActivity");
         Intent intent = CardInfoActivity.newIntent(getActivity());
         startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CARD_CHARGE_ACTIVITY:
+                switch (resultCode) {
+                    case RESULT_FIRST_USER:
+                        openAccountActivity();
+                        break;
+                    case RESULT_OK:
+                    default:
+                        break;
+                }
+                break;
+            case ACCOUNT_ACTIVITY_RESULT:
+                switch (resultCode) {
+                    case RESULT_FIRST_USER:
+                        openCardChargeActivity();
+                        break;
+                    default:
+                        break;
+                }
+        }
+    }
+
+    @Override
+    public void openAccountActivity() {
+        Log.d("debug", "openAccountActivity");
+        Intent intent = AccountActivity.newIntent(getBaseActivity());
+        startActivityForResult(intent, ACCOUNT_ACTIVITY_RESULT);
     }
 
     @Override

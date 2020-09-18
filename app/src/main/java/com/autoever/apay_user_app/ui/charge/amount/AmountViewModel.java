@@ -52,21 +52,25 @@ public class AmountViewModel extends BaseViewModel<AmountNavigator> {
         .observeOn(getSchedulerProvider().ui())
         .subscribe(bankAccountListResponse -> {
             setIsLoading(false);
-            String bankName = Bank.find(bankAccountListResponse
-                    .getData()
-                    .get(0)
-                    .getBankCode())
-                    .getBankName();
-            String accountNumber = bankAccountListResponse.getData()
-                    .get(0)
-                    .getAccountNumber();
-            accountNumber = accountNumber.substring(accountNumber.length() - 4);
-            Log.d("debug", bankName + " " + accountNumber);
-            accountInfoLiveData.setValue(bankName + " " + accountNumber);
-            getNavigator().setBankCode(bankAccountListResponse
-                    .getData()
-                    .get(0)
-                    .getBankCode());
+            if(bankAccountListResponse.getData().size() > 0) {
+                String bankName = Bank.find(bankAccountListResponse
+                        .getData()
+                        .get(0)
+                        .getBankCode())
+                        .getBankName();
+                String accountNumber = bankAccountListResponse.getData()
+                        .get(0)
+                        .getAccountNumber();
+                accountNumber = accountNumber.substring(accountNumber.length() - 4);
+                Log.d("debug", bankName + " " + accountNumber);
+                accountInfoLiveData.setValue(bankName + " " + accountNumber);
+                getNavigator().setBankCode(bankAccountListResponse
+                        .getData()
+                        .get(0)
+                        .getBankCode());
+            } else {
+                getNavigator().handleNoAccount();
+            }
         }, throwable -> {
             setIsLoading(false);
             getNavigator().handleError(throwable);

@@ -1,11 +1,13 @@
 package com.autoever.apay_user_app.ui.charge.amount;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -199,5 +201,32 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
         this.bankCode = bankCode;
     }
 
+    @Override
+    public void handleNoAccount() {
+        //여기서 다이얼로그를 띄워준다.
+        // custom dialog
+        final Dialog dialog = new Dialog(getBaseActivity());
+        dialog.setContentView(R.layout.has_no_account_dialog);
 
+        Button okButton = dialog.findViewById(R.id.ok_button);
+        Button cancelButton = dialog.findViewById(R.id.cancel_button);
+
+        okButton.setOnClickListener(v1 -> {
+            dialog.dismiss();
+            JSONObject data = new JSONObject();
+            try {
+                data.put("hasNoAccount", "hasNoAccount");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            getBaseActivity().onReceivedMessageFromFragment(TAG, data);
+        });
+
+        cancelButton.setOnClickListener(v2 -> {
+            dialog.dismiss();
+            getBaseActivity().finish();
+        });
+
+        dialog.show();
+    }
 }
