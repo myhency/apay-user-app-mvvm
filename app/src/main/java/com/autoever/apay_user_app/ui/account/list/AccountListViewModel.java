@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
+import com.autoever.apay_user_app.data.model.api.AccountTerminationRequest;
 import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.ui.common.Bank;
@@ -14,20 +15,12 @@ import java.util.Date;
 
 public class AccountListViewModel extends BaseViewModel<AccountListNavigator> {
 
-    private final MutableLiveData<String> registerDateTimeLiveData;
-    private final MutableLiveData<String> bankNameLiveData;
-    private final MutableLiveData<String> maskingAccountNumberLiveData;
-
     public AccountListViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
         super(mDataManager, schedulerProvider);
-        registerDateTimeLiveData = new MutableLiveData<>();
-        bankNameLiveData = new MutableLiveData<>();
-        maskingAccountNumberLiveData = new MutableLiveData<>();
     }
 
 
-    public void doListAccountCall(Long subscriberId) {
-
+    public void doListAccountCall() {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doGetAccountListCall(getDataManager().getCurrentUserId())
@@ -35,21 +28,29 @@ public class AccountListViewModel extends BaseViewModel<AccountListNavigator> {
         .observeOn(getSchedulerProvider().ui())
         .subscribe(bankAccountListResponse -> {
             setIsLoading(false);
-//            Date registerDateTime = new SimpleDateFormat("yyyyMMddHHmmss")
-//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-//            String registerDateTimeString = "등록일시 " + simpleDateFormat.format(registerDateTime);
-//            String bankName = Bank.find(bankAccountListResponse.getData().getAccountList().get(0).getBankCode()).getBankName();
-//            String maskingAccountNumber = bankAccountListResponse.getData().getAccountList().get(0).getMaskingAccountNumber();
-//            registerDateTimeLiveData.setValue(registerDateTimeString);
-//            bankNameLiveData.setValue(bankName);
-//            maskingAccountNumberLiveData.setValue(maskingAccountNumber);
+            getNavigator().setAccountInfo(bankAccountListResponse);
         }, throwable -> {
             setIsLoading(false);
+            getNavigator().handleError(throwable);
         }));
 
     }
 
-    public LiveData<String> getRegisterDateTimeLiveData() { return registerDateTimeLiveData; }
-    public LiveData<String> getBankNameLiveData() { return bankNameLiveData; }
-    public LiveData<String> getMaskingAccountNumberLiveData() { return maskingAccountNumberLiveData; }
+    public void deleteBankAccountCall(String bankCode) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+        .doAccountTerminationCall(new AccountTerminationRequest(
+                bankCode,
+                getDataManager().getCurrentUserId()
+        ))
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(accountTerminationResponse -> {
+            setIsLoading(false);
+            getNavigator().resetScreen();
+        }, throwable -> {
+            setIsLoading(false);
+            getNavigator().handleError(throwable);
+        }));
+    }
 }

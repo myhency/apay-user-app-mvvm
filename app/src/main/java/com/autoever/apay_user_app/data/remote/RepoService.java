@@ -2,6 +2,8 @@ package com.autoever.apay_user_app.data.remote;
 
 import com.autoever.apay_user_app.data.model.api.AccountRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.AccountRegisterResponse;
+import com.autoever.apay_user_app.data.model.api.AccountTerminationRequest;
+import com.autoever.apay_user_app.data.model.api.AccountTerminationResponse;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
@@ -149,4 +151,7 @@ public interface RepoService {
     @PUT("api/v2/user/resetPassword")
     @Headers("No-Authentication: true")
     Single<ResetPasswordResponse> doResetPasswordCall(@Body ResetPasswordRequest resetPasswordRequest);
+
+    @POST("api/v2/settleBank/account/termination")
+    Single<AccountTerminationResponse> doAccountTerminationCall(@Body AccountTerminationRequest accountTerminationRequest);
 }

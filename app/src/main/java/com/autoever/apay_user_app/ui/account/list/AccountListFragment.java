@@ -13,9 +13,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.databinding.FragmentAccountListBinding;
 import com.autoever.apay_user_app.ui.account.register.AccountRegisterActivity;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.common.Bank;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -30,6 +35,8 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
     private static final int ACCOUNT_REGISTER_ACTIVITY_RESULT = 102;
 
     private FragmentAccountListBinding mFragmentAccountListBinding;
+
+    private String bankCode;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -75,12 +82,16 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentAccountListBinding = getViewDataBinding();
+        mAccountListViewModel.setNavigator(this);
         setup();
-        mAccountListViewModel.doListAccountCall(4L);
+        mAccountListViewModel.doListAccountCall();
     }
 
     private void setup() {
         mFragmentAccountListBinding.addBankAccountText.setOnClickListener(v -> openAccountRegisterActivity());
+        mFragmentAccountListBinding.delBankAccountButton.setOnClickListener(v -> {
+            mAccountListViewModel.deleteBankAccountCall(bankCode);
+        });
     }
 
     @Override
@@ -88,6 +99,62 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
         Log.d("debug", "openAccountRegisterActivity");
         Intent intent = AccountRegisterActivity.newIntent(getBaseActivity());
         startActivityForResult(intent, ACCOUNT_REGISTER_ACTIVITY_RESULT);
+    }
+
+    @Override
+    public void setAccountInfo(BankAccountListResponse bankAccountListResponse) {
+        if (bankAccountListResponse.getData().size() == 0) { //등록된 계좌가 없을 때
+            mFragmentAccountListBinding.addBankAccountText.setVisibility(View.VISIBLE);
+            mFragmentAccountListBinding.noAccountLayout.setVisibility(View.VISIBLE);
+            mFragmentAccountListBinding.accountInfoLayout.setVisibility(View.GONE);
+            mFragmentAccountListBinding.accountDeleteLayout.setVisibility(View.GONE);
+        } else {
+            //계좌삭제를 위해서 bankCode 를 로컬변수에 저장
+            this.bankCode = bankAccountListResponse.getData().get(0).getBankCode();
+            //계좌추가하기 텍스트를 가림(계좌를 하나만 추가할 수 있고 추후 버젼에서는 은행당 하나를 등록할 수 있게 해야함.
+            mFragmentAccountListBinding.addBankAccountText.setVisibility(View.GONE);
+            mFragmentAccountListBinding.noAccountLayout.setVisibility(View.GONE);
+            mFragmentAccountListBinding.accountInfoLayout.setVisibility(View.VISIBLE);
+            mFragmentAccountListBinding.accountDeleteLayout.setVisibility(View.VISIBLE);
+            String bankName = Bank.find(bankAccountListResponse
+                    .getData()
+                    .get(0)
+                    .getBankCode())
+                    .getBankName();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+            String registerDate = simpleDateFormat
+                    .format(bankAccountListResponse
+                    .getData()
+                    .get(0)
+                    .getRegisterDatetime());
+            String bankAccountNumber = bankAccountListResponse
+                    .getData()
+                    .get(0)
+                    .getAccountNumber();
+            int bankLogo = Bank.find(bankAccountListResponse
+            .getData()
+            .get(0)
+            .getBankCode()).getLogo();
+            mFragmentAccountListBinding.bankNameText.setText(bankName);
+            mFragmentAccountListBinding.bankAccountAddedDate.setText("등록일시 " + registerDate);
+            mFragmentAccountListBinding.bankAccountNumber.setText(
+                    "******" +
+                    bankAccountNumber.substring(bankAccountNumber.length() - 4));
+            mFragmentAccountListBinding.bankLogo.setBackgroundResource(bankLogo);
+        }
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void resetScreen() {
+        mFragmentAccountListBinding.addBankAccountText.setVisibility(View.VISIBLE);
+        mFragmentAccountListBinding.noAccountLayout.setVisibility(View.VISIBLE);
+        mFragmentAccountListBinding.accountInfoLayout.setVisibility(View.GONE);
+        mFragmentAccountListBinding.accountDeleteLayout.setVisibility(View.GONE);
     }
 
     @Override

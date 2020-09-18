@@ -6,6 +6,8 @@ import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
 import com.autoever.apay_user_app.data.model.api.AccountRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.AccountRegisterResponse;
+import com.autoever.apay_user_app.data.model.api.AccountTerminationRequest;
+import com.autoever.apay_user_app.data.model.api.AccountTerminationResponse;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
@@ -288,5 +290,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<ResetPasswordResponse> doResetPasswordCall(ResetPasswordRequest resetPasswordRequest) {
         return mRepoService.doResetPasswordCall(resetPasswordRequest);
+    }
+
+    @Override
+    public Single<AccountTerminationResponse> doAccountTerminationCall(AccountTerminationRequest accountTerminationRequest) {
+        return mRepoService.doAccountTerminationCall(accountTerminationRequest);
     }
 }

@@ -99,6 +99,11 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
     }
 
     @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("debug", "onOptionsItemSelected:" + item.toString());
         switch (item.getItemId()) {
