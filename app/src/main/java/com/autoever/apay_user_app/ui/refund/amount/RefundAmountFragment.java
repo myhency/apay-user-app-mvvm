@@ -27,6 +27,8 @@ public class RefundAmountFragment extends BaseFragment<FragmentRefundAmountBindi
     
     private FragmentRefundAmountBinding mFragmentRefundAmountBinding;
 
+    private String bankCode;
+
     @Inject
     ViewModelProviderFactory factory;
     
@@ -92,11 +94,17 @@ public class RefundAmountFragment extends BaseFragment<FragmentRefundAmountBindi
         Log.d("debug", "Price confirmed");
         JSONObject data = new JSONObject();
         try {
+            data.put("bankCode", bankCode);
             data.put("price", mFragmentRefundAmountBinding.cardPaymentEdittext.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         getBaseActivity().onReceivedMessageFromFragment(TAG, data);
         getBaseActivity().onFragmentDetached(TAG);
+    }
+
+    @Override
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
     }
 }

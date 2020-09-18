@@ -10,7 +10,7 @@ public interface RefundNavigator {
 
     void openAuthFragment();
 
-    void doRefundReady();
+    void doRefundReady(String bankCode);
 
     void openRefundReceiptFragment(RefundDoResponse refundDoResponse);
 

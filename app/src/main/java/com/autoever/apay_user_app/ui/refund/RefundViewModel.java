@@ -15,7 +15,7 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
         super(mDataManager, schedulerProvider);
     }
 
-    public void doRefundReadyCall() {
+    public void doRefundReadyCall(String bankCode) {
         Log.d("debug", "doRefundReadyCall started");
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
@@ -25,21 +25,22 @@ public class RefundViewModel extends BaseViewModel<RefundNavigator> {
         .subscribe(refundReadyResponse -> {
             setIsLoading(false);
             Log.d("debug", "amount" + refundReadyResponse.getData().getAmount());
-            doRefundDoCall(refundReadyResponse);
+            doRefundDoCall(refundReadyResponse, bankCode);
         }, throwable -> {
             setIsLoading(false);
             getNavigator().handleError(throwable);
         }));
     }
 
-    private void doRefundDoCall(RefundReadyResponse refundReadyResponse) {
+    private void doRefundDoCall(RefundReadyResponse refundReadyResponse, String bankCode) {
         Log.d("debug", "doRefundDoCall started");
         Log.d("debug", "amount" + refundReadyResponse.getData().getAmount());
+        Log.d("debug", "bankCode" + bankCode);
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doRefundDoCall(new RefundDoRequest(
                 refundReadyResponse.getData().getChargeId(),
-                "002",
+                bankCode,
                 refundReadyResponse.getData().getSubscriberId(),
                 refundReadyResponse.getData().getTokenSystemId(),
                 refundReadyResponse.getData().getAmount()

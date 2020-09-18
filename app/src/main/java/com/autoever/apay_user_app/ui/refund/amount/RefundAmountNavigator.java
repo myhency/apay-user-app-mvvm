@@ -5,4 +5,6 @@ public interface RefundAmountNavigator {
     void handleError(Throwable throwable);
 
     void goNext();
+
+    void setBankCode(String bankCode);
 }

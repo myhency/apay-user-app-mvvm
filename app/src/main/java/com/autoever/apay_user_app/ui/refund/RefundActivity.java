@@ -41,6 +41,7 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
     private FragmentManager mFragmentManager;
 
     private String amount = "";
+    private String bankCode;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -128,9 +129,9 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
     }
 
     @Override
-    public void doRefundReady() {
+    public void doRefundReady(String bankCode) {
         Log.d("debug", "doRefundReady");
-        mRefundViewModel.doRefundReadyCall();
+        mRefundViewModel.doRefundReadyCall(bankCode);
     }
 
     @Override
@@ -181,7 +182,7 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
                 openAuthFragment();
                 break;
             case "AuthFragment":
-                doRefundReady();
+                doRefundReady(bankCode);
                 break;
             case "RefundFailFragment":
                 finish();
@@ -206,6 +207,7 @@ public class RefundActivity extends BaseActivity<ActivityRefundBinding, RefundVi
         try {
             switch (tag) {
                 case "RefundAmountFragment":
+                    bankCode = message.getString("bankCode");
                     amount = message.getString("price");
                     break;
                 default:
