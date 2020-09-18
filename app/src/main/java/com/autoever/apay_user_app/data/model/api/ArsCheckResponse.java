@@ -3,6 +3,18 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+/**
+ * {
+ *    "authenticationCode":"123456",
+ *    "phoneNumber":"01093577050",
+ *    "settleBankUniqueId":"uniqueId",
+ *    "subscriberId":4,
+ *    "subscriberName":"홍길동",
+ *    "withdrawAccountNumber":"011234567890",
+ *    "withdrawBankCode":"020"
+ * }
+ */
 public class ArsCheckResponse {
 
     @Expose

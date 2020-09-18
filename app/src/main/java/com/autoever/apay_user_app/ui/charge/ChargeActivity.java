@@ -51,6 +51,8 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     private FragmentManager mFragmentManager;
 
     private Long amount = 0L;
+    private String bankCode;
+    private String bankInfo;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, ChargeActivity.class);
@@ -132,24 +134,18 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
     @Override
     public void doChargeReady() {
         Log.d("debug", "doChargeReady");
-        mChargeViewModel.doChargeReady(amount);
+        mChargeViewModel.doChargeReady(amount, bankCode, bankInfo);
     }
 
     @Override
-    public void doChargeDo(ChargeReadyResponse chargeReadyResponse) {
-        Log.d("debug", "doChargeDo");
-        mChargeViewModel.doChargeDo(chargeReadyResponse);
-    }
-
-    @Override
-    public void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse) {
+    public void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse, String bankInfo) {
         //충전금액 영수증 화면으로 이동.
         Log.d("debug", "openChargeReceiptFragment");
         mActivityChargeBinding.toolbar.setVisibility(View.INVISIBLE);
         mActivityChargeBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.receiptBackgroundColor, null));
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, ChargeReceiptFragment.newInstance(chargeDoResponse), ChargeReceiptFragment.TAG)
+                .add(R.id.clRootView, ChargeReceiptFragment.newInstance(chargeDoResponse, bankInfo), ChargeReceiptFragment.TAG)
                 .addToBackStack(ChargeReceiptFragment.TAG)
                 .commit();
     }
@@ -201,6 +197,8 @@ public class ChargeActivity extends BaseActivity<ActivityChargeBinding, ChargeVi
             switch (tag) {
                 case "AmountFragment":
                     amount = (long) CommonUtils.parseToInt(message.getString("amount"));
+                    bankCode = message.getString("bankCode");
+                    bankInfo = message.getString("bankInfo");
                     break;
                 default:
                     break;

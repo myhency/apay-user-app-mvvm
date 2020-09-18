@@ -17,6 +17,7 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
+import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
 import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
 import com.autoever.apay_user_app.ui.account.register.ars.ArsAuthFragment;
@@ -51,14 +52,13 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
     private FragmentManager mFragmentManager;
 
     //TODO. 확정되면 preference 에서 관리하는 것이 좋을 것 같음.
-    private String settleBankUniqueId = "uniqueId";
+    private String settleBankUniqueId;
     private String phoneNumber;
     private String subscriberName;
     private String withdrawBankCode;
     private String withdrawAccountNumber;
     private String authenticationCode;
     private String identificationNumber;
-    private Long subscriberId;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, AccountRegisterActivity.class);
@@ -260,12 +260,12 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
     }
 
     @Override
-    public void openArsAuthFragment(ArsCheckResponse arsCheckResponse) {
+    public void openArsAuthFragment(ArsRequestResponse arsRequestResponse) {
         //ARS 인증화면으로 이동.
         Log.d("debug", "openCellPhoneAuthFragment");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, ArsAuthFragment.newInstance(), ArsAuthFragment.TAG)
+                .add(R.id.clRootView, ArsAuthFragment.newInstance(arsRequestResponse), ArsAuthFragment.TAG)
                 .addToBackStack(ArsAuthFragment.TAG)
                 .commit();
         layoutInitiate(5);
@@ -337,26 +337,25 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 break;
             case "BankAccountNumberFragment":
                 removeFragment(tag);
-                mAccountRegisterViewModel.doArsCheckCall(
-                        settleBankUniqueId,
-                        phoneNumber,
-                        subscriberName,
-                        withdrawBankCode,
-                        withdrawAccountNumber,
-                        authenticationCode,
-                        4L
-                );
-                break;
-            case "ArsAuthFragment":
-                removeFragment(tag);
                 mAccountRegisterViewModel.doArsRequestCall(
                         phoneNumber,
                         subscriberName,
                         withdrawBankCode,
                         withdrawAccountNumber,
                         identificationNumber,
-                        authenticationCode,
-                        4L
+                        authenticationCode
+                );
+
+                break;
+            case "ArsAuthFragment":
+                removeFragment(tag);
+                mAccountRegisterViewModel.doArsCheckCall(
+                        settleBankUniqueId,
+                        phoneNumber,
+                        subscriberName,
+                        withdrawBankCode,
+                        withdrawAccountNumber,
+                        authenticationCode
                 );
                 break;
             default:
@@ -395,7 +394,7 @@ public class AccountRegisterActivity extends BaseActivity<ActivityAccountRegiste
                 break;
             case "ArsAuthFragment":
                 try {
-                    authenticationCode = message.getString("authenticationCode");
+                    settleBankUniqueId = message.getString("settleBankUniqueId");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

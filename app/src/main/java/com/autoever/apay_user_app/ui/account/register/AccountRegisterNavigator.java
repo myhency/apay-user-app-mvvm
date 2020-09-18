@@ -1,6 +1,7 @@
 package com.autoever.apay_user_app.ui.account.register;
 
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
+import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 
 public interface AccountRegisterNavigator {
 
@@ -12,7 +13,7 @@ public interface AccountRegisterNavigator {
 
     void openBankAccountNumberFragment(String selectedBankId, String selectedBankName);
 
-    void openArsAuthFragment(ArsCheckResponse arsCheckResponse);
+    void openArsAuthFragment(ArsRequestResponse arsRequestResponse);
 
     void openDialog();
 

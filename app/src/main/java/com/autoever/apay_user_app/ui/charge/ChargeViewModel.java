@@ -15,7 +15,7 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         super(mDataManager, schedulerProvider);
     }
 
-    public void doChargeReady(Long amount) {
+    public void doChargeReady(Long amount, String bankCode, String bankInfo) {
         Log.d("debug", "doChargeReady started");
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
@@ -29,20 +29,20 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         .subscribe(chargeReadyResponse -> {
             setIsLoading(false);
             Log.d("debug", "chargeReadyResponse: " + chargeReadyResponse.getData().getChargeStatus());
-            getNavigator().doChargeDo(chargeReadyResponse);
+            doChargeDo(chargeReadyResponse, bankCode, bankInfo);
         }, throwable -> {
             setIsLoading(false);
             getNavigator().handleError(throwable);
         }));
     }
 
-    public void doChargeDo(ChargeReadyResponse chargeReadyResponse) {
+    public void doChargeDo(ChargeReadyResponse chargeReadyResponse, String bankCode, String bankInfo) {
         Log.d("debug", "doChargeDo started");
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
         .doChargeDoCall(new ChargeDoRequest(
                 chargeReadyResponse.getData().getChargeId(),
-                "002",
+                bankCode,
                 chargeReadyResponse.getData().getSubscriberId(),
                 chargeReadyResponse.getData().getTokenSystemId(),
                 chargeReadyResponse.getData().getAmount()
@@ -51,7 +51,7 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator> {
         .observeOn(getSchedulerProvider().ui())
         .subscribe(chargeDoResponse -> {
             setIsLoading(false);
-            getNavigator().openChargeReceiptFragment(chargeDoResponse);
+            getNavigator().openChargeReceiptFragment(chargeDoResponse, bankInfo);
         }, throwable -> {
             setIsLoading(false);
             getNavigator().handleError(throwable);

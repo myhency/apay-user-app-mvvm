@@ -1,5 +1,7 @@
 package com.autoever.apay_user_app.data.remote;
 
+import com.autoever.apay_user_app.data.model.api.AccountRegisterRequest;
+import com.autoever.apay_user_app.data.model.api.AccountRegisterResponse;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
@@ -111,8 +113,10 @@ public interface RepoService {
             @Query("subscriberId") Long subscriberId
     );
 
-    @POST("api/v2/settleBank/list/account")
-    Single<BankAccountListResponse> doGetAccountListCall(@Body BankAccountListRequest bankAccountListRequest);
+    @GET("api/v2/user/{userId}/accountList")
+    Single<BankAccountListResponse> doGetAccountListCall(
+            @Path("userId") Long userId
+    );
 
     @POST("api/v2/settleBank/identity/check")
     Single<IdentityCheckResponse> doIdentityCheckCall(@Body IdentityCheckRequest identityCheckRequest);
@@ -122,6 +126,9 @@ public interface RepoService {
 
     @POST("api/v2/settleBank/ars/request")
     Single<ArsRequestResponse> doArsRequestCall(@Body ArsRequestRequest arsRequestRequest);
+
+    @POST("api/v2/settleBank/account/register")
+    Single<AccountRegisterResponse> doAccountRegisterCall(@Body AccountRegisterRequest accountRegisterRequest);
 
     @PUT("api/v2/tokenSystem/refund/ready")
     Single<RefundReadyResponse> doRefundReadyCall(@Body RefundReadyRequest refundReadyRequest);

@@ -13,9 +13,7 @@ public interface ChargeNavigator {
 
     void doChargeReady();
 
-    void doChargeDo(ChargeReadyResponse chargeReadyResponse);
-
-    void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse);
+    void openChargeReceiptFragment(ChargeDoResponse chargeDoResponse, String bankInfo);
 
     void openChargeFailFragment();
 }

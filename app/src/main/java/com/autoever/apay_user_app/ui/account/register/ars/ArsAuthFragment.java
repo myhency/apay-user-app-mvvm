@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.databinding.FragmentArsAuthBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 
@@ -35,8 +36,9 @@ public class ArsAuthFragment extends BaseFragment<FragmentArsAuthBinding, ArsAut
 
     private ArsAuthViewModel mArsAuthViewModel;
 
-    public static ArsAuthFragment newInstance() {
+    public static ArsAuthFragment newInstance(ArsRequestResponse arsRequestResponse) {
         Bundle args = new Bundle();
+        args.putString("settleBankUniqueId", arsRequestResponse.getData().getSettleBankUniqueId());
         ArsAuthFragment fragment = new ArsAuthFragment();
         fragment.setArguments(args);
         return fragment;
@@ -105,7 +107,7 @@ public class ArsAuthFragment extends BaseFragment<FragmentArsAuthBinding, ArsAut
         mFragmentArsAuthBinding.finishTextview.setOnClickListener(v -> {
             try {
                 JSONObject data = new JSONObject();
-                data.put("authenticationCode", "123456");
+                data.put("settleBankUniqueId", getArguments().get("settleBankUniqueId"));
                 getBaseActivity().onReceivedMessageFromFragment(TAG, data);
             } catch (JSONException e) {
                 e.printStackTrace();

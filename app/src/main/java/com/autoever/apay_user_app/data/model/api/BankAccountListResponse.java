@@ -4,112 +4,66 @@ package com.autoever.apay_user_app.data.model.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- *   "date": {
- *     "settleBankUniqueId": "uniqueId",
- *     "subscriberId": "4",
- *     "accountCnt": "0",
- *     "accountList": [
- *       {
- *         "registerDatetime": "20200901101000",
- *         "bankCode": "002",
- *         "maskingAccountNumber": "0010******1123",
- *         "settleAccountKey": "settleAccountKey",
- *         "terminationDatetime": "20200901101000"
- *       }
- *     ]
- *   }
+ * {
+ * "data": [
+ * {
+ * "registerDatetime": "2020-09-18T04:11:44",
+ * "bankCode": "003",
+ * "accountNumber": "001000100001002"
+ * },
+ * {
+ * "registerDatetime": "2020-09-18T04:23:41",
+ * "bankCode": "002",
+ * "accountNumber": "001000100001001"
+ * }
+ * ]
  * }
  */
+
 public class BankAccountListResponse {
 
     @Expose
     @SerializedName("data")
-    private AccountList data;
+    private List<Account> data;
 
-    public AccountList getData() { return data; }
+    public List<Account> getData() {
+        return data;
+    }
 
-    public static class AccountList {
-        @Expose
-        @SerializedName("settleBankUniqueId")
-        private String settleBankUniqueId;
-
-        @Expose
-        @SerializedName("subscriberId")
-        private Long subscriberId;
+    public static class Account {
 
         @Expose
-        @SerializedName("accountCnt")
-        private Long accountCnt;
+        @SerializedName("registerDatetime")
+        private Date registerDatetime;
 
         @Expose
-        @SerializedName("accountList")
-        List<Account> accountList;
+        @SerializedName("bankCode")
+        private String bankCode;
 
-        public List<Account> getAccountList() { return accountList; }
+        @Expose
+        @SerializedName("accountNumber")
+        private String accountNumber;
 
-        public static class Account {
-
-            @Expose
-            @SerializedName("registerDatetime")
-            private String registerDatetime;
-
-            @Expose
-            @SerializedName("bankCode")
-            private String bankCode;
-
-            @Expose
-            @SerializedName("maskingAccountNumber")
-            private String maskingAccountNumber;
-
-            @Expose
-            @SerializedName("settleAccountKey")
-            private String settleAccountKey;
-
-            @Expose
-            @SerializedName("terminationDatetime")
-            private String terminationDatetime;
-
-            public String getRegisterDatetime() {
-                return registerDatetime;
-            }
-
-            public String getBankCode() {
-                return bankCode;
-            }
-
-            public String getMaskingAccountNumber() {
-                return maskingAccountNumber;
-            }
-
-            public String getSettleAccountKey() {
-                return settleAccountKey;
-            }
-
-            public String getTerminationDatetime() {
-                return terminationDatetime;
-            }
+        public Account(Date registerDatetime, String bankCode, String accountNumber) {
+            this.registerDatetime = registerDatetime;
+            this.bankCode = bankCode;
+            this.accountNumber = accountNumber;
         }
 
-        public AccountList(String settleBankUniqueId, Long subscriberId, Long accountCnt, List<Account> accountList) {
-            this.settleBankUniqueId = settleBankUniqueId;
-            this.subscriberId = subscriberId;
-            this.accountCnt = accountCnt;
-            this.accountList = accountList;
+        public Date getRegisterDatetime() {
+            return registerDatetime;
         }
 
-        public String getSettleBankUniqueId() {
-            return settleBankUniqueId;
+        public String getBankCode() {
+            return bankCode;
         }
 
-        public Long getSubscriberId() {
-            return subscriberId;
-        }
-
-        public Long getAccountCnt() {
-            return accountCnt;
+        public String getAccountNumber() {
+            return accountNumber;
         }
     }
 }

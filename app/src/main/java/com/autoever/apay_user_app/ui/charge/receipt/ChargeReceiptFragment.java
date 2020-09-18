@@ -31,12 +31,13 @@ public class ChargeReceiptFragment extends BaseFragment<FragmentChargeReceiptBin
     
     private ChargeReceiptViewModel mChargeReceiptViewModel;
     
-    public static ChargeReceiptFragment newInstance(ChargeDoResponse chargeDoResponse) {
+    public static ChargeReceiptFragment newInstance(ChargeDoResponse chargeDoResponse, String bankInfo) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         Bundle args = new Bundle();
         args.putLong("amount",chargeDoResponse.getData().getAmount());
         args.putLong("balance", chargeDoResponse.getData().getBalance());
         args.putString("createdDate", simpleDateFormat.format(chargeDoResponse.getData().getCreatedDate()));
+        args.putString("bankInfo", bankInfo);
         ChargeReceiptFragment fragment = new ChargeReceiptFragment();
         fragment.setArguments(args);
         return fragment;
@@ -83,5 +84,6 @@ public class ChargeReceiptFragment extends BaseFragment<FragmentChargeReceiptBin
         mFragmentChargeReceiptBinding.purchaseAmount.setText(CommonUtils.formatToKRW(String.valueOf(getArguments().getLong("amount"))) + " P");
         mFragmentChargeReceiptBinding.createdDate.setText(getArguments().getString("createdDate"));
         mFragmentChargeReceiptBinding.userBalanceAfter.setText(CommonUtils.formatToKRW(String.valueOf(getArguments().getLong("balance")))+ " P");
+        mFragmentChargeReceiptBinding.bankInfo.setText(getArguments().getString("bankInfo"));
     }
 }

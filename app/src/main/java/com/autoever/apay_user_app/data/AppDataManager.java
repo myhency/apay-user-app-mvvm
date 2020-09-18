@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.autoever.apay_user_app.data.local.db.DbHelper;
 import com.autoever.apay_user_app.data.local.prefs.PreferencesHelper;
+import com.autoever.apay_user_app.data.model.api.AccountRegisterRequest;
+import com.autoever.apay_user_app.data.model.api.AccountRegisterResponse;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
@@ -239,8 +241,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<BankAccountListResponse> doGetAccountListCall(BankAccountListRequest bankAccountListRequest) {
-        return mRepoService.doGetAccountListCall(bankAccountListRequest);
+    public Single<BankAccountListResponse> doGetAccountListCall(Long userId) {
+        return mRepoService.doGetAccountListCall(userId);
     }
 
     @Override
@@ -256,6 +258,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<ArsRequestResponse> doArsRequestCall(ArsRequestRequest arsRequestRequest) {
         return mRepoService.doArsRequestCall(arsRequestRequest);
+    }
+
+    @Override
+    public Single<AccountRegisterResponse> doAccountRegisterCall(AccountRegisterRequest accountRegisterRequest) {
+        return mRepoService.doAccountRegisterCall(accountRegisterRequest);
     }
 
     @Override

@@ -7,16 +7,22 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
+import com.autoever.apay_user_app.ui.common.Bank;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
 public class AmountViewModel extends BaseViewModel<AmountNavigator> {
 
     private final MutableLiveData<String> balanceKRWLiveData;
+    private final MutableLiveData<String> accountInfoLiveData;
 
     public AmountViewModel(DataManager mDataManager, SchedulerProvider schedulerProvider) {
         super(mDataManager, schedulerProvider);
         balanceKRWLiveData = new MutableLiveData<>();
+        accountInfoLiveData = new MutableLiveData<>();
+
+        loadUserBalance();
+        getBankAccount();
     }
 
     public void loadUserBalance() {
@@ -38,7 +44,39 @@ public class AmountViewModel extends BaseViewModel<AmountNavigator> {
                 }));
     }
 
+    public void getBankAccount() {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+        .doGetAccountListCall(getDataManager().getCurrentUserId())
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(bankAccountListResponse -> {
+            setIsLoading(false);
+            String bankName = Bank.find(bankAccountListResponse
+                    .getData()
+                    .get(0)
+                    .getBankCode())
+                    .getBankName();
+            String accountNumber = bankAccountListResponse.getData()
+                    .get(0)
+                    .getAccountNumber();
+            accountNumber = accountNumber.substring(accountNumber.length() - 4);
+            Log.d("debug", bankName + " " + accountNumber);
+            accountInfoLiveData.setValue(bankName + " " + accountNumber);
+            getNavigator().setBankCode(bankAccountListResponse
+                    .getData()
+                    .get(0)
+                    .getBankCode());
+        }, throwable -> {
+            setIsLoading(false);
+            getNavigator().handleError(throwable);
+        }));
+    }
+
     public LiveData<String> getBalanceKRWLiveData() {
         return balanceKRWLiveData;
+    }
+    public LiveData<String> getAccountInfoLiveData() {
+        return accountInfoLiveData;
     }
 }

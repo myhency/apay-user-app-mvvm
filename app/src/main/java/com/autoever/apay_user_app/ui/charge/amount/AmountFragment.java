@@ -28,6 +28,8 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
 
     public static final String TAG = AmountFragment.class.getSimpleName();
 
+    private String bankCode;
+
     private FragmentAmountBinding mFragmentAmountBinding;
 
     @Inject
@@ -75,7 +77,7 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentAmountBinding = getViewDataBinding();
-        mAmountViewModel.loadUserBalance();
+        mAmountViewModel.setNavigator(this);
         setup();
     }
 
@@ -174,7 +176,7 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
 
     @Override
     public void handleError(Throwable throwable) {
-
+        Log.d("debug", throwable.toString());
     }
 
     @Override
@@ -182,12 +184,19 @@ public class AmountFragment extends BaseFragment<FragmentAmountBinding, AmountVi
         Log.d("debug", "Amount confirmed");
         JSONObject data = new JSONObject();
         try {
+            data.put("bankCode", this.bankCode);
+            data.put("bankInfo", mFragmentAmountBinding.bankInfo.getText().toString());
             data.put("amount", mFragmentAmountBinding.cardChargeEdittext.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         getBaseActivity().onReceivedMessageFromFragment(TAG, data);
         getBaseActivity().onFragmentDetached(TAG);
+    }
+
+    @Override
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
     }
 
 
