@@ -1,9 +1,11 @@
 package com.autoever.apay_user_app.ui.account.list;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -90,7 +92,25 @@ public class AccountListFragment extends BaseFragment<FragmentAccountListBinding
     private void setup() {
         mFragmentAccountListBinding.addBankAccountText.setOnClickListener(v -> openAccountRegisterActivity());
         mFragmentAccountListBinding.delBankAccountButton.setOnClickListener(v -> {
-            mAccountListViewModel.deleteBankAccountCall(bankCode);
+            //여기서 다이얼로그를 띄워준다.
+            // custom dialog
+            final Dialog dialog = new Dialog(getBaseActivity());
+            dialog.setContentView(R.layout.delete_account_dialog);
+
+            Button okButton = dialog.findViewById(R.id.ok_button);
+            Button cancelButton = dialog.findViewById(R.id.cancel_button);
+
+            okButton.setOnClickListener(v1 -> {
+                dialog.dismiss();
+                mAccountListViewModel.deleteBankAccountCall(bankCode);
+            });
+
+            cancelButton.setOnClickListener(v2 -> {
+                dialog.dismiss();
+            });
+
+            dialog.show();
+
         });
     }
 
