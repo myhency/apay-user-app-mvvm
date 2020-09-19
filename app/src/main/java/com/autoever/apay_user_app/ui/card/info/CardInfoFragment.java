@@ -224,7 +224,7 @@ public class CardInfoFragment extends BaseFragment<FragmentCardInfoBinding, Card
     public void onResume() {
         super.onResume();
         Log.d("debug", "CardInfoFragment onResume");
-
+        mCardInfoFragmentViewModel.loadUserBalance();
     }
 
     @Override

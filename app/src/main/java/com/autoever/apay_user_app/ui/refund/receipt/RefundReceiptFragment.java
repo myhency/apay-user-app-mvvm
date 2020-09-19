@@ -24,6 +24,8 @@ public class RefundReceiptFragment extends BaseFragment<FragmentRefundReceiptBin
 
     public static final String TAG = RefundReceiptFragment.class.getSimpleName();
 
+    private String bankCode;
+
     private FragmentRefundReceiptBinding mFragmentRefundReceiptBinding;
 
     @Inject
@@ -84,5 +86,20 @@ public class RefundReceiptFragment extends BaseFragment<FragmentRefundReceiptBin
 
         mFragmentRefundReceiptBinding.refundDate.setText(getArguments().getString("createdDate"));
         mFragmentRefundReceiptBinding.refundAmount.setText(getArguments().getString("amount"));
+    }
+
+    @Override
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
+    }
+
+    @Override
+    public void handleNoAccount() {
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
     }
 }
