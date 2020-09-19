@@ -21,7 +21,9 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
+import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
+import com.autoever.apay_user_app.ui.payment.fail.PaymentFailFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.ui.payment.receipt.ReceiptFragment;
 import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
@@ -41,6 +43,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import retrofit2.HttpException;
 
 public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> implements PaymentNavigator, HasSupportFragmentInjector {
 
@@ -107,9 +110,25 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
 
     @Override
     public void handleError(Throwable throwable) {
-        ANError anError = (ANError) throwable;
-        Log.d("debug", "anError.getErrorBody():" + anError.getErrorBody());
-        Log.d("debug", "throwable message: " + throwable.getMessage());
+        HttpException httpException = (HttpException) throwable;
+
+        switch (httpException.code()) {
+            default:
+                openPaymentFailFragment();
+                break;
+        }
+    }
+
+    public void openPaymentFailFragment() {
+        //충전실패 화면으로 이동.
+        Log.d("debug", "openPaymentFailFragment");
+        mActivityPaymentBinding.toolbar.setVisibility(View.INVISIBLE);
+        mActivityPaymentBinding.appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorWhite, null));
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.clRootView, PaymentFailFragment.newInstance(), PaymentFailFragment.TAG)
+                .addToBackStack(PaymentFailFragment.TAG)
+                .commit();
     }
 
     @Override
@@ -242,6 +261,9 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                 break;
             case "AuthFragment":
                 doPaymentReady();
+                break;
+            case "PaymentFailFragment":
+                finish();
                 break;
         }
     }

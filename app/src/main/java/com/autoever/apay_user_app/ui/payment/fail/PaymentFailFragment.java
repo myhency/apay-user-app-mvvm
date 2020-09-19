@@ -1,64 +1,137 @@
 package com.autoever.apay_user_app.ui.payment.fail;
 
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
+import com.autoever.apay_user_app.ViewModelProviderFactory;
+import com.autoever.apay_user_app.databinding.FragmentPaymentFailBinding;
+import com.autoever.apay_user_app.ui.base.BaseFragment;
+import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
+import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
+import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PaymentFailFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
-public class PaymentFailFragment extends Fragment {
+import java.util.Date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import javax.inject.Inject;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaymentFailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaymentFailFragment newInstance(String param1, String param2) {
-        PaymentFailFragment fragment = new PaymentFailFragment();
+public class PaymentFailFragment extends BaseFragment<FragmentPaymentFailBinding, PaymentViewModel> implements PaymentNavigator {
+
+    public static final String TAG = PaymentFailFragment.class.getSimpleName();
+
+    private FragmentPaymentFailBinding mFragmentPaymentFailBinding;
+    private PaymentViewModel mPaymentFailViewModel;
+
+    @Inject
+    ViewModelProviderFactory factory;
+
+    public static PaymentFailFragment newInstance() {
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        PaymentFailFragment fragment = new PaymentFailFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public PaymentFailFragment() {
-        // Required empty public constructor
+    @Override
+    public int getBindingVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_payment_fail;
+    }
+
+    @Override
+    public PaymentViewModel getViewModel() {
+        mPaymentFailViewModel = ViewModelProviders.of(this, factory)
+                .get(PaymentViewModel.class);
+        return mPaymentFailViewModel;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //back button 을 눌렀을 경우 Activity 를 종료한다.
+        getBaseActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getBaseActivity().finish();
+            }
+        });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_fail, container, false);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragmentPaymentFailBinding = getViewDataBinding();
+        mPaymentFailViewModel.setNavigator(this);
+
+        setup();
+    }
+
+    private void setup() {
+
+        mFragmentPaymentFailBinding.finishTextview.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openCustomScannerActivity() {
+
+    }
+
+    @Override
+    public void showPriceFragment(String shopCode) {
+
+    }
+
+    @Override
+    public void showPriceConfirmFragment(String shopCode, int price) {
+
+    }
+
+    @Override
+    public void openAuthFragment() {
+
+    }
+
+    @Override
+    public void showReceiptFragment(String storeName, Date createdDate, int amount, int userBalance) {
+
+    }
+
+    @Override
+    public void doPaymentReady() {
+
+    }
+
+    @Override
+    public void doPaymentDo(String userId, String storeId, String tokenSystemId, int amount, String paymentId, String identifier) {
+
+    }
+
+    @Override
+    public void goNext() {
+
+    }
+
+    @Override
+    public void getQrUserDynamicData(String parsedQrString) {
+
     }
 }

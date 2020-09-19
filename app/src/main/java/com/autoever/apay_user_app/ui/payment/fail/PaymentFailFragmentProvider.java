@@ -1,4 +1,11 @@
 package com.autoever.apay_user_app.ui.payment.fail;
 
-public class PaymentFailFragmentProvider {
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
+
+@Module
+public abstract class PaymentFailFragmentProvider {
+
+    @ContributesAndroidInjector
+    abstract PaymentFailFragment providePaymentFailFragmentFactory();
 }

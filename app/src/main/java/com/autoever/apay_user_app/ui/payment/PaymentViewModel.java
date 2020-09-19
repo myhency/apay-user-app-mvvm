@@ -80,7 +80,7 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                 .doPaymentQrReadyCall(new PaymentQrReadyRequest(
                         Long.valueOf(amount),
                         identifier,
-                        4L,
+                        getDataManager().getCurrentUserId(),
                         new PaymentQrReadyRequest.StoreStaticQrInfo(
                                 staticQrData.get("qrType").getAsLong(),
                                 staticQrData.get("storeId").getAsString(),

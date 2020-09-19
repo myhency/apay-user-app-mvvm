@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -78,6 +79,15 @@ public class CellPhoneAuthFragment extends BaseFragment<FragmentCellPhoneAuthBin
     }
 
     private void setup() {
+        //통신사 선택 dropdown 박스 세팅
+        String[] TELECOM_FIRMS = new String[]{"SKT", "KT", "LGT", "알뜰폰"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getBaseActivity(),
+                R.layout.dropdown_menu_popup_item,
+                TELECOM_FIRMS
+        );
+        mFragmentCellPhoneAuthBinding.filledExposedDropdown.setAdapter(adapter);
+
         mFragmentCellPhoneAuthBinding.finishTextview.setOnClickListener(v -> {
             String identificationNumber = mFragmentCellPhoneAuthBinding.ssnf01.getText().toString()
                     + mFragmentCellPhoneAuthBinding.ssnf02.getText().toString()
