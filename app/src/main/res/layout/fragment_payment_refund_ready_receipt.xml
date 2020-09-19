@@ -112,22 +112,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/spoqa_han_sans_bold"
-                            android:text="입금계좌"
-                            android:textColor="#000000"
-                            android:textSize="16dp" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:fontFamily="@font/spoqa_han_sans_bold"-->
+<!--                            android:text="입금계좌"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="16dp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/spoqa_han_sans_regular"
-                            android:text="신한은행 1234"
-                            android:textColor="#000000"
-                            android:textSize="16dp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/account_info"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/spoqa_han_sans_regular"-->
+<!--                            android:text="@{viewModel.accountInfoLiveData}"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="16dp" />-->
 
                     </LinearLayout>
 

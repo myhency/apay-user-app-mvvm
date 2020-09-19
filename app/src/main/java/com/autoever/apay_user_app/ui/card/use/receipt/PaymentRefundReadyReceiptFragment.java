@@ -24,6 +24,8 @@ public class PaymentRefundReadyReceiptFragment extends BaseFragment<FragmentPaym
 
     public static final String TAG = PaymentRefundReadyReceiptFragment.class.getSimpleName();
 
+    private String bankCode;
+
     private FragmentPaymentRefundReadyReceiptBinding mFragmentPaymentRefundReadyReceiptBinding;
 
     private PaymentRefundReadyResponse mPaymentRefundReadyResponse;
@@ -91,5 +93,20 @@ public class PaymentRefundReadyReceiptFragment extends BaseFragment<FragmentPaym
         mFragmentPaymentRefundReadyReceiptBinding.purchaseAmount.setText(getArguments().getString("amount"));
         mFragmentPaymentRefundReadyReceiptBinding.shopName.setText(getArguments().getString("shopName"));
         mFragmentPaymentRefundReadyReceiptBinding.finishTextview.setOnClickListener(v -> getBaseActivity().onFragmentDetached(TAG));
+    }
+
+    @Override
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
+    }
+
+    @Override
+    public void handleNoAccount() {
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
     }
 }

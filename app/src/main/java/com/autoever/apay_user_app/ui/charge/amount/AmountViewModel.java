@@ -80,6 +80,7 @@ public class AmountViewModel extends BaseViewModel<AmountNavigator> {
     public LiveData<String> getBalanceKRWLiveData() {
         return balanceKRWLiveData;
     }
+
     public LiveData<String> getAccountInfoLiveData() {
         return accountInfoLiveData;
     }
