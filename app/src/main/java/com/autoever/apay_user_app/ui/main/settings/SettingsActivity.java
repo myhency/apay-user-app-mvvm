@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.main.settings.modify.ModifyEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.main.settings.register.RegisterEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
@@ -55,7 +56,9 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         private void openModifyEasyPasswordActivity() {
-
+            Log.d("debug", "openModifyEasyPasswordActivity");
+            Intent intent = ModifyEasyPasswordActivity.newIntent(getContext());
+            startActivity(intent);
         }
 
         private void openRegisterEasyPasswordActivity() {

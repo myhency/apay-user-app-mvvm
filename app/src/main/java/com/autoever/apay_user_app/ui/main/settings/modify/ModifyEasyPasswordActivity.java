@@ -17,9 +17,11 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityModifyEasyPasswordBinding;
+import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
 import com.autoever.apay_user_app.ui.main.settings.register.RegisterEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragment;
+import com.google.android.gms.auth.api.Auth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +74,8 @@ public class ModifyEasyPasswordActivity extends BaseActivity<ActivityModifyEasyP
         mActivityModifyEasyPasswordBinding = getViewDataBinding();
 
         setup();
+
+        openAuthFragment();
     }
 
     private void setup() {
@@ -85,12 +89,35 @@ public class ModifyEasyPasswordActivity extends BaseActivity<ActivityModifyEasyP
     }
 
     @Override
-    public void openPasswordFragment() {
+    public void openAuthFragment() {
         Log.d("debug", "openPasswordFragment");
         mActivityModifyEasyPasswordBinding.toolbarTitle.setText("기존 간편비밀번호 입력");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, PasswordFragment.newInstance("check"), PasswordFragment.TAG)
+                .add(R.id.clRootView, AuthFragment.newInstance(), AuthFragment.TAG)
+                .addToBackStack(AuthFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+        Log.d("debug", "onFragmentDetached: " + tag);
+
+        switch (tag) {
+            case "AuthFragment":
+                openPasswordRegisterFragment();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void openPasswordRegisterFragment() {
+        Log.d("debug", "openPasswordRegisterFragment");
+        mActivityModifyEasyPasswordBinding.toolbarTitle.setText("변경할 간편비밀번호 입력");
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.clRootView, PasswordFragment.newInstance("check"), PasswordFragment.TAG)
                 .addToBackStack(PasswordFragment.TAG)
                 .commit();
     }
@@ -101,7 +128,7 @@ public class ModifyEasyPasswordActivity extends BaseActivity<ActivityModifyEasyP
         switch (tag) {
             case "PasswordFragment":
                 //건너뛰기 버튼을 눌렀을 때는 종료한다.
-                if(message.has("whatToDo")) {
+                if (message.has("whatToDo")) {
                     //여기서 다이얼로그를 띄워준다.
                     // custom dialog
                     final Dialog dialog = new Dialog(this);

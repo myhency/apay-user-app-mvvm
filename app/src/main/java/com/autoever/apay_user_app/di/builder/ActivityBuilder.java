@@ -23,6 +23,7 @@ import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragmentProvider;
 import com.autoever.apay_user_app.ui.charge.receipt.ChargeReceiptFragmentProvider;
 import com.autoever.apay_user_app.ui.home.HomeFragmentProvider;
 import com.autoever.apay_user_app.ui.main.MainActivity;
+import com.autoever.apay_user_app.ui.main.settings.modify.ModifyEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.main.settings.register.RegisterEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragmentProvider;
@@ -44,6 +45,7 @@ import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordAct
 import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragmentProvider;
+import com.autoever.apay_user_app.ui.user.register.password.PasswordFragment;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragmentProvider;
 
@@ -146,4 +148,10 @@ public abstract class ActivityBuilder {
             ChangeLoginPasswordFragmentProvider.class
     })
     abstract ChangeLoginPasswordActivity bindChangeLoginPasswordActivity();
+
+    @ContributesAndroidInjector(modules = {
+            PasswordFragmentProvider.class,
+            AuthFragmentProvider.class
+    })
+    abstract ModifyEasyPasswordActivity bindModifyEasyPasswordActivity();
 }
