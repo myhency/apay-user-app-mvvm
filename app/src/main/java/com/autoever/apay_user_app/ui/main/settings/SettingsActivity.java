@@ -1,8 +1,5 @@
 package com.autoever.apay_user_app.ui.main.settings;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +7,12 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.util.Log;
-import android.view.ViewTreeObserver;
+
+import androidx.annotation.Nullable;
 
 import com.autoever.apay_user_app.R;
-import com.autoever.apay_user_app.data.DataManager;
-import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.main.settings.modify.ModifyEasyPasswordActivity;
 import com.autoever.apay_user_app.ui.main.settings.register.RegisterEasyPasswordActivity;
-import com.autoever.apay_user_app.ui.user.login.LoginActivity;
-import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 
 public class SettingsActivity extends PreferenceActivity {
 

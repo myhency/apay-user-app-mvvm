@@ -18,7 +18,6 @@ import com.autoever.apay_user_app.data.model.api.RefundDoResponse;
 import com.autoever.apay_user_app.databinding.ActivityRefundBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.refund.amount.RefundAmountFragment;
 import com.autoever.apay_user_app.ui.refund.fail.RefundFailFragment;
 import com.autoever.apay_user_app.ui.refund.receipt.RefundReceiptFragment;

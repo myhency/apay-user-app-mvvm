@@ -1,22 +1,17 @@
 package com.autoever.apay_user_app.ui.payment.fail;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentPaymentFailBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.payment.PaymentNavigator;
 import com.autoever.apay_user_app.ui.payment.PaymentViewModel;
 

@@ -5,7 +5,6 @@ import com.autoever.apay_user_app.data.model.api.AccountRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckRequest;
 import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestRequest;
-import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 

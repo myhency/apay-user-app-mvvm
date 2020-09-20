@@ -7,21 +7,18 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.androidnetworking.error.ANError;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityPaymentBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 import com.autoever.apay_user_app.ui.payment.confirm.PriceConfirmFragment;
 import com.autoever.apay_user_app.ui.payment.fail.PaymentFailFragment;
 import com.autoever.apay_user_app.ui.payment.price.PriceFragment;

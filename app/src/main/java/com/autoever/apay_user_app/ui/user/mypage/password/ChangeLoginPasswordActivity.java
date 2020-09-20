@@ -1,15 +1,14 @@
 package com.autoever.apay_user_app.ui.user.mypage.password;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
@@ -17,11 +16,6 @@ import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityChangeLoginPasswordBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.autoever.apay_user_app.utils.CommonUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 

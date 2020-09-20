@@ -1,8 +1,5 @@
 package com.autoever.apay_user_app.ui.user.login.find;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,15 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProviders;
+
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityFindMyIdBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.inject.Inject;
 

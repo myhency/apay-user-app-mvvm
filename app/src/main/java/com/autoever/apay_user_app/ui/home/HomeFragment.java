@@ -18,12 +18,10 @@ import com.autoever.apay_user_app.ui.account.AccountActivity;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.CardInfoActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
-import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.payment.PaymentActivity;
 
 import javax.inject.Inject;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_FIRST_USER;
 import static android.app.Activity.RESULT_OK;
 

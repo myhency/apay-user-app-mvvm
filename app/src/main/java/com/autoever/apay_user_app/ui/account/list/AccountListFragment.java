@@ -22,7 +22,6 @@ import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.common.Bank;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 

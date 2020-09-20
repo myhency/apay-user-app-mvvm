@@ -45,7 +45,6 @@ import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordAct
 import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragmentProvider;
-import com.autoever.apay_user_app.ui.user.register.password.PasswordFragment;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.terms.TermsOfServiceFragmentProvider;
 

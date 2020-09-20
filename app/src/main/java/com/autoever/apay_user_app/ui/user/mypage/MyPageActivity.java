@@ -1,21 +1,17 @@
 package com.autoever.apay_user_app.ui.user.mypage;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.ActivityMyPageBinding;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.main.settings.modify.ModifyEasyPasswordActivity;
-import com.autoever.apay_user_app.ui.payment.PaymentActivity;
-import com.autoever.apay_user_app.ui.payment.scanner.CustomScannerActivity;
 import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordActivity;
 
 import javax.inject.Inject;

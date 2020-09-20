@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
-import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.databinding.ActivityAccountRegisterBinding;
 import com.autoever.apay_user_app.ui.account.register.account.BankAccountNumberFragment;
@@ -26,7 +25,6 @@ import com.autoever.apay_user_app.ui.account.register.bank.BankSelectFragment;
 import com.autoever.apay_user_app.ui.account.register.fail.RegisterAccountFailFragment;
 import com.autoever.apay_user_app.ui.account.register.terms.AccountRegisterTermsFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;
-import com.autoever.apay_user_app.ui.charge.fail.ChargeFailFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;

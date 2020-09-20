@@ -2,29 +2,21 @@ package com.autoever.apay_user_app.ui.user.mypage.password;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.databinding.FragmentChangeLoginPasswordBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
-import com.autoever.apay_user_app.ui.payment.price.PriceFragment;
 import com.autoever.apay_user_app.utils.CommonUtils;
 
 import javax.inject.Inject;
-
-import retrofit2.HttpException;
 
 
 public class ChangeLoginPasswordFragment extends BaseFragment<FragmentChangeLoginPasswordBinding, ChangeLoginPasswordViewModel>

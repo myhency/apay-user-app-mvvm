@@ -1,11 +1,8 @@
 package com.autoever.apay_user_app.ui.user.register.form;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -25,8 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
-
-import retrofit2.HttpException;
 
 public class RegisterFormFragment extends BaseFragment<FragmentRegisterFormBinding, RegisterViewModel> implements RegisterNavigator {
 

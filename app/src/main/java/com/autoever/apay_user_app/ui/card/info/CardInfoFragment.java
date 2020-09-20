@@ -22,7 +22,6 @@ import com.autoever.apay_user_app.databinding.FragmentCardInfoBinding;
 import com.autoever.apay_user_app.ui.base.BaseFragment;
 import com.autoever.apay_user_app.ui.card.use.CardUseActivity;
 import com.autoever.apay_user_app.ui.charge.ChargeActivity;
-import com.autoever.apay_user_app.ui.main.MainActivity;
 import com.autoever.apay_user_app.ui.refund.RefundActivity;
 
 import java.util.List;

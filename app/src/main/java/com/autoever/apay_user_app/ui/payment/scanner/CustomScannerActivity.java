@@ -11,7 +11,6 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;

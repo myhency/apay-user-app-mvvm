@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
-import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;

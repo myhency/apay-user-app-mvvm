@@ -15,7 +15,6 @@ import com.autoever.apay_user_app.BR;
 import com.autoever.apay_user_app.R;
 import com.autoever.apay_user_app.ViewModelProviderFactory;
 import com.autoever.apay_user_app.data.model.api.ChargeDoResponse;
-import com.autoever.apay_user_app.data.model.api.ChargeReadyResponse;
 import com.autoever.apay_user_app.databinding.ActivityChargeBinding;
 import com.autoever.apay_user_app.ui.auth.AuthFragment;
 import com.autoever.apay_user_app.ui.base.BaseActivity;

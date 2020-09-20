@@ -1,6 +1,5 @@
 package com.autoever.apay_user_app.ui.account.register;
 
-import com.autoever.apay_user_app.data.model.api.ArsCheckResponse;
 import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 
 public interface AccountRegisterNavigator {

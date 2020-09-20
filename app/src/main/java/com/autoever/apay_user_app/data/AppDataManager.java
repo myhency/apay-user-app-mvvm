@@ -15,7 +15,6 @@ import com.autoever.apay_user_app.data.model.api.ArsRequestResponse;
 import com.autoever.apay_user_app.data.model.api.AuthTestResponse;
 import com.autoever.apay_user_app.data.model.api.BalanceRequest;
 import com.autoever.apay_user_app.data.model.api.BalanceResponse;
-import com.autoever.apay_user_app.data.model.api.BankAccountListRequest;
 import com.autoever.apay_user_app.data.model.api.BankAccountListResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseDetailResponse;
 import com.autoever.apay_user_app.data.model.api.CardUseHistoryResponse;
