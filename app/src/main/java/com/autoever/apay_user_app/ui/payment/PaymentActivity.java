@@ -51,6 +51,7 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     private final static int QR_CODE_SCANNED = 1;
     private FragmentManager mFragmentManager;
     private String storeName = "";
+    private String hashedStoreId;
     private int price = 0;
     private JsonObject staticQrData;
 
@@ -165,12 +166,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
     }
 
     @Override
-    public void showPriceFragment(String storeName) {
+    public void showPriceFragment(String hashedStoreId) {
         //금액입력화면으로 이동.
         Log.d("debug", "showPaymentFragment");
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.clRootView, PriceFragment.newInstance(storeName), PriceFragment.TAG)
+                .add(R.id.clRootView, PriceFragment.newInstance(hashedStoreId), PriceFragment.TAG)
                 .addToBackStack(PriceFragment.TAG)
                 .commitAllowingStateLoss();
     }
@@ -233,8 +234,12 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
                         Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                         vibrator.vibrate(20);
                         staticQrData = new Gson().fromJson(data.getExtras().getString("shopCode"), JsonObject.class);
-                        storeName = staticQrData.get("storeName").getAsString();
-                        showPriceFragment(storeName);
+                        if (staticQrData.has("storeId")) {
+                            hashedStoreId = staticQrData.get("storeId").getAsString();
+                        } else if (staticQrData.has("hashedStoreId")) {
+                            hashedStoreId = staticQrData.get("hashedStoreId").getAsString();
+                        }
+                        showPriceFragment(hashedStoreId);
                         break;
                     case RESULT_CANCELED:
                         finish();

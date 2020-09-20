@@ -32,6 +32,7 @@ import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentQrDynamicReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
@@ -46,6 +47,8 @@ import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.ResetPasswordRequest;
 import com.autoever.apay_user_app.data.model.api.ResetPasswordResponse;
+import com.autoever.apay_user_app.data.model.api.StoreHashRequest;
+import com.autoever.apay_user_app.data.model.api.StoreHashResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 import com.autoever.apay_user_app.data.model.db.User;
@@ -233,6 +236,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<PaymentReadyResponse> doPaymentQrDynamicReadyCall(PaymentQrDynamicReadyRequest paymentQrDynamicReadyRequest) {
+        return mRepoService.doPaymentQrDynamicReadyCall(paymentQrDynamicReadyRequest);
+    }
+
+    @Override
     public Single<QrUserDynamicResponse> doQrUserDynamicCall(QrUserDynamicRequest qrUserDynamicRequest) {
         return mRepoService.doQrUserDynamicCall(qrUserDynamicRequest);
     }
@@ -295,5 +303,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<AccountTerminationResponse> doAccountTerminationCall(AccountTerminationRequest accountTerminationRequest) {
         return mRepoService.doAccountTerminationCall(accountTerminationRequest);
+    }
+
+    @Override
+    public Single<StoreHashResponse> doGetStoreNameCall(StoreHashRequest storeHashRequest) {
+        return mRepoService.doGetStoreNameCall(storeHashRequest);
     }
 }

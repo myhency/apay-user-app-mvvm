@@ -38,9 +38,9 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     ViewModelProviderFactory factory;
     private PaymentViewModel mPriceViewModel;
 
-    public static PriceFragment newInstance(String shopName) {
+    public static PriceFragment newInstance(String hashedStoreId) {
         Bundle args = new Bundle();
-        args.putString("shopName", shopName);
+        args.putString("hashedStoreId", hashedStoreId);
         PriceFragment fragment = new PriceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -78,8 +78,11 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentPriceBinding = getViewDataBinding();
+        mPriceViewModel.setNavigator(this);
         setup();
 
+        //가맹점 명 출력
+        mPriceViewModel.setStoreName(getArguments().getString("hashedStoreId"));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -94,8 +97,8 @@ public class PriceFragment extends BaseFragment<FragmentPriceBinding, PaymentVie
         mFragmentPriceBinding.cardPaymentEdittext.setOnTouchListener((v, event) -> true);
 
         //가맹점 명 출력.
-        String shopName = getArguments().getString("shopName");
-        mFragmentPriceBinding.shopName.setText(shopName);
+//        String hashedStoreId = getArguments().getString("hashedStoreId");
+//        mFragmentPriceBinding.shopName.setText(hashedStoreId);
 
         mFragmentPriceBinding.buttonDelete.setOnClickListener(v -> {
             int length = mFragmentPriceBinding.cardPaymentEdittext.getText().length();

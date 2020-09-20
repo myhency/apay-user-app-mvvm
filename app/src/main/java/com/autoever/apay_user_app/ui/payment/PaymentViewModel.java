@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.autoever.apay_user_app.data.DataManager;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
+import com.autoever.apay_user_app.data.model.api.PaymentQrDynamicReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.QrUserDynamicRequest;
+import com.autoever.apay_user_app.data.model.api.StoreHashRequest;
 import com.autoever.apay_user_app.ui.base.BaseViewModel;
 import com.autoever.apay_user_app.utils.CommonUtils;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
@@ -76,35 +78,70 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
     public void loadPaymentId(int amount, String identifier, JsonObject staticQrData) {
         Log.d("debug", "loadPaymentId started");
         setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .doPaymentQrReadyCall(new PaymentQrReadyRequest(
-                        Long.valueOf(amount),
-                        identifier,
-                        getDataManager().getCurrentUserId(),
-                        new PaymentQrReadyRequest.StoreStaticQrInfo(
-                                staticQrData.get("qrType").getAsLong(),
-                                staticQrData.get("storeId").getAsString(),
-                                staticQrData.get("storeName").getAsString(),
-                                staticQrData.get("paymentSystemId").getAsString(),
-                                staticQrData.get("paymentDeviceId").getAsString(),
-                                staticQrData.get("signature").getAsString()
-                        )
-                ))
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(paymentReadyResponse -> {
-                    setIsLoading(false);
-                    getNavigator().doPaymentDo(
-                            paymentReadyResponse.getData().getUserId(),
-                            paymentReadyResponse.getData().getStoreId(),
-                            paymentReadyResponse.getData().getTokenSystemId(),
-                            paymentReadyResponse.getData().getAmount(),
-                            paymentReadyResponse.getData().getPaymentId(),
-                            paymentReadyResponse.getData().getIdentifier());
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
+
+        if(staticQrData.has("storeId")) {
+            //가맹점 static
+            getCompositeDisposable().add(getDataManager()
+                    .doPaymentQrReadyCall(new PaymentQrReadyRequest(
+                            Long.valueOf(amount),
+                            identifier,
+                            getDataManager().getCurrentUserId(),
+                            new PaymentQrReadyRequest.StoreStaticQrInfo(
+                                    staticQrData.get("qrType").getAsLong(),
+                                    staticQrData.get("storeId").getAsString(),
+                                    staticQrData.get("storeName").getAsString(),
+                                    staticQrData.get("paymentSystemId").getAsString(),
+                                    staticQrData.get("paymentDeviceId").getAsString(),
+                                    staticQrData.get("signature").getAsString()
+                            )
+                    ))
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(paymentReadyResponse -> {
+                        setIsLoading(false);
+                        getNavigator().doPaymentDo(
+                                paymentReadyResponse.getData().getUserId(),
+                                paymentReadyResponse.getData().getStoreId(),
+                                paymentReadyResponse.getData().getTokenSystemId(),
+                                paymentReadyResponse.getData().getAmount(),
+                                paymentReadyResponse.getData().getPaymentId(),
+                                paymentReadyResponse.getData().getIdentifier());
+                    }, throwable -> {
+                        setIsLoading(false);
+                        getNavigator().handleError(throwable);
+                    }));
+        } else if (staticQrData.has("hashedStoreId")) {
+            //가맹점 dynamic
+            getCompositeDisposable().add(getDataManager()
+                    .doPaymentQrDynamicReadyCall(new PaymentQrDynamicReadyRequest(
+                            Long.valueOf(amount),
+                            identifier,
+                            getDataManager().getCurrentUserId(),
+                            new PaymentQrDynamicReadyRequest.StoreDynamicQrInfo(
+                                    staticQrData.get("qrType").getAsLong(),
+                                    staticQrData.get("hashedStoreId").getAsString(),
+                                    staticQrData.get("hashedPaymentSystemId").getAsString(),
+                                    staticQrData.get("token").getAsString(),
+                                    staticQrData.get("signature").getAsString()
+                            )
+                    ))
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(paymentReadyResponse -> {
+                        setIsLoading(false);
+                        getNavigator().doPaymentDo(
+                                paymentReadyResponse.getData().getUserId(),
+                                paymentReadyResponse.getData().getStoreId(),
+                                paymentReadyResponse.getData().getTokenSystemId(),
+                                paymentReadyResponse.getData().getAmount(),
+                                paymentReadyResponse.getData().getPaymentId(),
+                                paymentReadyResponse.getData().getIdentifier());
+                    }, throwable -> {
+                        setIsLoading(false);
+                        getNavigator().handleError(throwable);
+                    }));
+        }
+
     }
 
     /**
@@ -169,6 +206,20 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
                 }));
     }
 
+    public void setStoreName(String hashedStoreId) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+        .doGetStoreNameCall(new StoreHashRequest(hashedStoreId))
+        .subscribeOn(getSchedulerProvider().io())
+        .observeOn(getSchedulerProvider().ui())
+        .subscribe(storeHashResponse -> {
+            setIsLoading(false);
+            storeNameLiveData.setValue(storeHashResponse.getData().getStoreName());
+        }, throwable -> {
+            setIsLoading(false);
+        }));
+    }
+
     public LiveData<String> getBalanceKRWLiveData() {
         return balanceKRWLiveData;
     }
@@ -192,5 +243,6 @@ public class PaymentViewModel extends BaseViewModel<PaymentNavigator> {
     public LiveData<String> getBalanceLeftKWRLiveData() {
         return balanceLeftKWRLiveData;
     }
+
 
 }

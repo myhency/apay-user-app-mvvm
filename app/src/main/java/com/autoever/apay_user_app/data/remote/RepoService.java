@@ -27,6 +27,8 @@ import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
+import com.autoever.apay_user_app.data.model.api.PaymentQrDynamicReadyRequest;
+import com.autoever.apay_user_app.data.model.api.PaymentQrDynamicReadyResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentReadyResponse;
@@ -41,6 +43,8 @@ import com.autoever.apay_user_app.data.model.api.RefundReadyRequest;
 import com.autoever.apay_user_app.data.model.api.RefundReadyResponse;
 import com.autoever.apay_user_app.data.model.api.ResetPasswordRequest;
 import com.autoever.apay_user_app.data.model.api.ResetPasswordResponse;
+import com.autoever.apay_user_app.data.model.api.StoreHashRequest;
+import com.autoever.apay_user_app.data.model.api.StoreHashResponse;
 import com.autoever.apay_user_app.data.model.api.UserRegisterRequest;
 import com.autoever.apay_user_app.data.model.api.UserRegisterResponse;
 
@@ -106,6 +110,9 @@ public interface RepoService {
     @POST("api/v2/payment/ready/storeStatic")
     Single<PaymentReadyResponse> doPaymentQrReadyCall(@Body PaymentQrReadyRequest paymentQrReadyRequest);
 
+    @POST("api/v2/payment/ready/storeDynamic")
+    Single<PaymentReadyResponse> doPaymentQrDynamicReadyCall(@Body PaymentQrDynamicReadyRequest paymentQrDynamicReadyRequest);
+
     @POST("qr/userDynamic")
     Single<QrUserDynamicResponse> doQrUserDynamicCall(@Body QrUserDynamicRequest qrUserDynamicRequest);
 
@@ -154,4 +161,7 @@ public interface RepoService {
 
     @POST("api/v2/settleBank/account/termination")
     Single<AccountTerminationResponse> doAccountTerminationCall(@Body AccountTerminationRequest accountTerminationRequest);
+
+    @POST("api/v2/storeHash")
+    Single<StoreHashResponse> doGetStoreNameCall(@Body StoreHashRequest storeHashRequest);
 }

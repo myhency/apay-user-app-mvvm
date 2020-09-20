@@ -168,8 +168,8 @@ public class CustomScannerActivity extends BaseActivity<ActivityCustomScannerBin
                 if (qrCodes.size() != 0) {
                     Intent data = new Intent();
                     JsonObject convertedObject = new Gson().fromJson(qrCodes.valueAt(0).displayValue, JsonObject.class);
-//                    Log.d("debug", "shopCode:" + qrCodes.valueAt(0).displayValue);
-                    if (convertedObject.has("storeName")) {
+                    Log.d("debug", "shopCode:" + qrCodes.valueAt(0).displayValue);
+                    if (convertedObject.has("hashedStoreId") || convertedObject.has("storeId")) {
                         data.putExtra("shopCode", qrCodes.valueAt(0).displayValue);
                         setResult(RESULT_OK, data);
                         finish();
