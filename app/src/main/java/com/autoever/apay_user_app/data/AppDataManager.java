@@ -30,6 +30,8 @@ import com.autoever.apay_user_app.data.model.api.IdentityCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginIdDuplicationCheckResponse;
 import com.autoever.apay_user_app.data.model.api.LoginRequest;
 import com.autoever.apay_user_app.data.model.api.LoginResponse;
+import com.autoever.apay_user_app.data.model.api.ModifyPasswordRequest;
+import com.autoever.apay_user_app.data.model.api.ModifyPasswordResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentDoRequest;
 import com.autoever.apay_user_app.data.model.api.PaymentDoResponse;
 import com.autoever.apay_user_app.data.model.api.PaymentQrDynamicReadyRequest;
@@ -308,5 +310,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<StoreHashResponse> doGetStoreNameCall(StoreHashRequest storeHashRequest) {
         return mRepoService.doGetStoreNameCall(storeHashRequest);
+    }
+
+    @Override
+    public Single<ModifyPasswordResponse> doModifyPasswordCall(Long userId, ModifyPasswordRequest modifyPasswordRequest) {
+        return mRepoService.doModifyPasswordCall(userId, modifyPasswordRequest);
     }
 }

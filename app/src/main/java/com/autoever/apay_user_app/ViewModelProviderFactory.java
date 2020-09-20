@@ -39,6 +39,7 @@ import com.autoever.apay_user_app.ui.user.login.LoginViewModel;
 import com.autoever.apay_user_app.ui.user.login.find.FindMyIdViewModel;
 import com.autoever.apay_user_app.ui.user.login.init.InitMyPasswordViewModel;
 import com.autoever.apay_user_app.ui.user.mypage.MyPageViewModel;
+import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordViewModel;
 import com.autoever.apay_user_app.ui.user.register.RegisterViewModel;
 import com.autoever.apay_user_app.utils.rx.SchedulerProvider;
 
@@ -129,6 +130,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new RegisterAccountFailViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(MyPageViewModel.class)) {
             return (T) new MyPageViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(ChangeLoginPasswordViewModel.class)) {
+            return (T) new ChangeLoginPasswordViewModel(dataManager, schedulerProvider);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class " + modelClass.getName());

@@ -52,4 +52,5 @@
     <string name="payment_shop_name_title_text"><b>가맹점</b></string>
     <string name="input_user_name_for_register_account">이름 입력 <font fgcolor="#FF0000">*</font></string>
     <string name="ssn">주민번호 앞자리(예. 990101 - 1) <font fgcolor="#FF0000">*</font></string>
+    <string name="current_input_password_for_change">기존 비밀번호 입력 <font fgcolor="#FF0000">*</font></string>
 </resources>

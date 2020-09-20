@@ -40,6 +40,8 @@ import com.autoever.apay_user_app.ui.user.login.LoginActivity;
 import com.autoever.apay_user_app.ui.user.login.find.FindMyIdActivity;
 import com.autoever.apay_user_app.ui.user.login.init.InitMyPasswordActivity;
 import com.autoever.apay_user_app.ui.user.mypage.MyPageActivity;
+import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordActivity;
+import com.autoever.apay_user_app.ui.user.mypage.password.ChangeLoginPasswordFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.RegisterActivity;
 import com.autoever.apay_user_app.ui.user.register.form.RegisterFormFragmentProvider;
 import com.autoever.apay_user_app.ui.user.register.password.PasswordFragmentProvider;
@@ -138,4 +140,10 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract MyPageActivity bindMyPageActivity();
+
+    @ContributesAndroidInjector(modules = {
+            AuthFragmentProvider.class,
+            ChangeLoginPasswordFragmentProvider.class
+    })
+    abstract ChangeLoginPasswordActivity bindChangeLoginPasswordActivity();
 }
